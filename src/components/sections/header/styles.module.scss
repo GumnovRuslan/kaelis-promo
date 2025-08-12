@@ -1,0 +1,12 @@
+@use '@/styles/mixins' as *;
+
+.header {
+
+  @include media-up('md') {
+    background: green;
+  }
+
+  @include media-down('md') {
+    background: blue;
+  }
+}
