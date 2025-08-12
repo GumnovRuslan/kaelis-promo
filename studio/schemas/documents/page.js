@@ -10,8 +10,8 @@ export default {
   i18n: {
     fieldNames: {
       lang: "i18n_lang",
-      baseReference: "i18n_base",
-      references: "i18n_refs",
+      // baseReference: "i18n_base",
+      // references: "i18n_refs",
     },
   },
 
@@ -20,25 +20,25 @@ export default {
       type: "string",
       hidden: true,
     },
-    {
-      name: "i18n_base",
-      type: "reference",
-      to: [{
-        type: "page"
-      }],
-      hidden: true,
-    },
-    {
-      name: "i18n_refs",
-      type: "array",
-      hidden: true,
-      of: [{
-        type: "reference",
-        to: [{
-          type: "page"
-        }],
-      }, ],
-    },
+    // {
+    //   name: "i18n_base",
+    //   type: "reference",
+    //   to: [{
+    //     type: "page"
+    //   }],
+    //   hidden: false,
+    // },
+    // {
+    //   name: "i18n_refs",
+    //   type: "array",
+    //   hidden: false,
+    //   of: [{
+    //     type: "reference",
+    //     to: [{
+    //       type: "page"
+    //     }],
+    //   }, ],
+    // },
     {
       name: "title",
       title: "Title",
