@@ -1,0 +1,60 @@
+@use 'sass:map';
+
+$breakpoints: (
+  'xs': 375px,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px,
+  'xxxl': 1920px,
+);
+
+@mixin media-up($name) {
+  $min: map.get($breakpoints, $name);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-down($name) {
+  $max: map.get($breakpoints, $name);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-between($lower, $upper) {
+  $min: map.get($breakpoints, $lower);
+  $max: map.get($breakpoints, $upper);
+
+  @if $min and $max {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// STYLES
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+@mixin color-scheme($bg, $text) {
+  background-color: $bg;
+  color: $text;
+}
