@@ -1,12 +1,8 @@
 @use '@/styles/mixins' as *;
 
 .header {
-
-  @include media-up('md') {
-    background: green;
-  }
-
-  @include media-down('md') {
-    background: blue;
+  &__logo {
+    font-family: 'GarciaMarquez', sans-serif;
+    color: $color-text-white;
   }
 }
