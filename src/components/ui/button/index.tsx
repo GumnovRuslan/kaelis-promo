@@ -11,7 +11,7 @@ type IProps = {
 
 const Button = ({children, type, href = '#', className}: IProps) => {
 
-  if (type === "link") {
+  if (href) {
     return (
       <Link href={href} className={`${styles.button} ${styles.button__link} ${className}`}>
         {children}

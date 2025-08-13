@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Header, Footer } from "@/components/sections";
 import "@/styles/index.scss";
+import { PintogramIcon } from "@/components/icons";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -19,14 +19,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body className={`${geistInter.variable}`}>
-        <Header />
-        <main>
-          {children}
-        </main>
-        <Footer />
+        <span className='body_icon'>
+          <PintogramIcon/>
+        </span>
+        {children}
       </body>
     </html>
   );

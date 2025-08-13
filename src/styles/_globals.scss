@@ -1,4 +1,5 @@
 body {
+  position: relative;
   font-family: var(--font-geist-sans), sans-serif;
   display: flex;
   flex-direction: column;
@@ -8,5 +9,15 @@ body {
 
 main {
   flex: 1 0 auto;
-  
+}
+
+.body_icon {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 160px;
+  transform: translateX(50%);
+  display: flex;
+  width: 1000px;
+  height: 1000px;
 }

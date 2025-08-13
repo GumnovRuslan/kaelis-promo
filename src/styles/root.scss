@@ -4,17 +4,19 @@
     --color-primary-900: #1A1927;
     --color-primary-800: #272639;
     --color-primary-700: #20293D;
-    --color-primary-300: #9A9FDA;
+    --color-primary-300: #959FD8;
     --color-primary-200: #BAA1E7;
     --color-secondary: #F9DBAC;
 
     --color-text-white: var(--color-white);
     --color-text-black: var(--color-black);
     --color-text-primary-700: var(--color-primary-700);
+    --color-text-primary-300: var(--color-primary-300);
     --color-text-primary: var(--color-primary-200);
     --color-text-secondary: var(--color-secondary);
 
     --color-bg-primary: var(--color-primary);
+    --color-bg-primary-900: var(--color-primary-900);
     --color-bg-secondary: var(--color-secondary);
 
     --gradient-main: linear-gradient(180deg, #05040B 0%, #272639 16.83%, #35334B 62.5%, #494766 100%);

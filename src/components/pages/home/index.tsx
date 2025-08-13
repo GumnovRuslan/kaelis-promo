@@ -1,9 +1,15 @@
-import { Hero } from "@/components/sections";
+import { 
+  Hero,
+  Subscribe, 
+} from "@/components/sections";
 
-const Home = () => {
+const HomePage = () => {
   return (
-    <Hero />
+    <>
+      <Hero />
+      <Subscribe/>
+    </>
   )
 }
 
-export default Home;
+export default HomePage;

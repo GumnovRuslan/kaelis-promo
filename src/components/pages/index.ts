@@ -1,3 +1,4 @@
-import Home from "@/app/page";
+import HomePage from "./home";
+import NotFoundPage from "./404";
 
-export { Home };
+export { HomePage, NotFoundPage };
