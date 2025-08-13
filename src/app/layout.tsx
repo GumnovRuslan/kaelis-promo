@@ -6,6 +6,7 @@ import "@/styles/index.scss";
 const geistInter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {

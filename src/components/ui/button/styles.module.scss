@@ -1,0 +1,10 @@
+.button {
+  border: none;
+  border-radius: 30px;
+  background: var(--gradient-btn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+}

@@ -3,9 +3,10 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #000;
+  background: var(--gradient-main);
 }
 
 main {
   flex: 1 0 auto;
+  
 }

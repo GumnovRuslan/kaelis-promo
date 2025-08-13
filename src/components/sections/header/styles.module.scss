@@ -1,8 +1,36 @@
 @use '@/styles/mixins' as *;
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 120px;
+  padding: 0 130px;
+
   &__logo {
+    position: relative;
     font-family: 'GarciaMarquez', sans-serif;
-    color: $color-text-white;
+    color: var(--color-text-white);
+    width: 87px;
+    height: 65px;
+
+    img {
+      object-fit: contain;
+    }
   }
+
+  &__menu {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__link {
+      color: var(--color-text-primary);
+      font-size: fluid-size(14, 16);
+      text-decoration: none;
+      padding: 8px;
+    }
 }

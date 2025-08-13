@@ -1,0 +1,29 @@
+import styles from "./styles.module.scss";
+
+import Link from "next/link";
+
+type IProps = {
+  children?: React.ReactNode;
+  type?: "button" | "link";
+  href?: string;
+  className?: string;
+}
+
+const Button = ({children, type, href = '#', className}: IProps) => {
+
+  if (type === "link") {
+    return (
+      <Link href={href} className={`${styles.button} ${styles.button__link} ${className}`}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <button  className={`${styles.button} ${className}`}>
+      {children}
+    </button>
+  );
+}
+
+export default Button;

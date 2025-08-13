@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
     prependData: `
       @use "@/styles/root" as *;
       @use "@/styles/_mixins" as *;
+      @use "@/styles/_functions" as *;
     `,
   },
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],

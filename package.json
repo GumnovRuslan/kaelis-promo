@@ -28,6 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "gray-matter": "^4.0.3",
+    "prettier": "^3.6.2",
     "sass": "^1.90.0",
     "typescript": "^5"
   }

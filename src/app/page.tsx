@@ -1,7 +1,11 @@
-export default function Home() {
+import { Home } from "@/components/pages";
+import { Hero } from "@/components/sections";
+
+const HomePage = () => {
   return (
-    <div style={{backgroundColor: "lightblue"}}>
-      Home Page
-    </div>
+    <Hero />
+    // <div></div>
   );
 }
+
+export default HomePage;
