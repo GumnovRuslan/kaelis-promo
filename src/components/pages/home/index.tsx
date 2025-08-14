@@ -2,6 +2,7 @@ import {
   Hero,
   Subscribe, 
   ArticlesPopular,
+  AboutApp,
 } from "@/components/sections";
 
 const HomePage = () => {
@@ -10,6 +11,7 @@ const HomePage = () => {
       <Hero />
       <Subscribe />
       <ArticlesPopular />
+      <AboutApp />
     </>
   )
 }

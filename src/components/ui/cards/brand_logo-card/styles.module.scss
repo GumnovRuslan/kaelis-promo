@@ -1,0 +1,19 @@
+.card {
+  position: relative;
+  height: 100%;
+  border-radius: 60px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #26233E 0%, #655DA4 100%);
+
+  &__logo {
+    z-index: 1;
+    object-fit: contain;
+  }
+
+  &__stars {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    margin: 8% 0 0 15%;
+  }
+}

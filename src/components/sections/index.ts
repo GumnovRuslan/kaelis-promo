@@ -4,5 +4,14 @@ import Hero from "./hero";
 import Footer from "./footer";
 import Subscribe from "./subscribe";
 import ArticlesPopular from "./articlesPopular";
+import AboutApp from "./aboutApp";
 
-export { Wrapper, Header, Hero, Footer, Subscribe, ArticlesPopular };
+export { 
+  Wrapper, 
+  Header, 
+  Hero, 
+  Footer, 
+  Subscribe, 
+  ArticlesPopular, 
+  AboutApp 
+};

@@ -33,13 +33,14 @@ const BUTTONS_DATA: Record<StoreType, TButton> = {
 
 type TProps = {
   type: StoreType;
+  className?: string;
 };
 
-const ButtonStore = ({ type }: TProps) => {
+const ButtonStore = ({ type, className }: TProps) => {
   const button = BUTTONS_DATA[type];
 
   return (
-    <Button type={button.type} href={button.href} className={styles.button}>
+    <Button type={button.type} href={button.href} className={`${styles.button} ${className}`}>
       <div className={styles.button__inner}>
         <span className={styles.button__icon}>{button.icon}</span>
         <div className={styles.button__content}>
