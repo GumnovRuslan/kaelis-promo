@@ -6,15 +6,19 @@ type IProps = {
   children?: React.ReactNode;
   type?: "button" | "link";
   href?: string;
+  text?: string;
   className?: string;
 }
 
-const Button = ({children, type, href = '#', className}: IProps) => {
+const Button = ({children, type, href = '#', className, text}: IProps) => {
 
   if (href) {
     return (
-      <Link href={href} className={`${styles.button} ${styles.button__link} ${className}`}>
-        {children}
+      <Link href={href} className={`${styles.button} ${styles.button_text} ${className}`}>
+        {text 
+          ? (<span className={styles.text}>{text}</span>) 
+          : children
+        }
       </Link>
     );
   }

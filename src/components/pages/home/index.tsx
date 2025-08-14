@@ -1,13 +1,15 @@
 import { 
   Hero,
   Subscribe, 
+  ArticlesPopular,
 } from "@/components/sections";
 
 const HomePage = () => {
   return (
     <>
       <Hero />
-      <Subscribe/>
+      <Subscribe />
+      <ArticlesPopular />
     </>
   )
 }

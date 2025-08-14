@@ -7,4 +7,15 @@
   justify-content: center;
   cursor: pointer;
   text-decoration: none;
+
+  &_text {
+    min-width: 240px;
+    height: 60px;
+
+    & .text {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-text-primary-700)
+    }
+  }
 }
