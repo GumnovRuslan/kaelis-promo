@@ -5,7 +5,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background: var(--gradient-main);
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 main {
@@ -21,5 +21,6 @@ main {
   display: flex;
   width: 1000px;
   height: 1000px;
+  color: #646095;
 }
 

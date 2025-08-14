@@ -6,7 +6,18 @@
   }
 
   &__content {
+    position: relative;
     max-width: 1000px;
+  }
+
+  &__icon_bg {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 450px;
+    height: 300px;
+    transform: translate(-58%, -15%);
   }
 
   &__title {

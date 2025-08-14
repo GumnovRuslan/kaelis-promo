@@ -45,6 +45,16 @@
     margin-bottom: 33px;
   }
 
+  &__network {
+    display: flex;
+    gap: 19px;
+  }
+
+  &__network_link {
+    width: 44px;
+    color: var(--color-primary-300);
+  }
+
   &__nav {
     display: flex;
     flex-direction: column;

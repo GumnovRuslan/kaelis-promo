@@ -5,6 +5,7 @@ import Footer from "./footer";
 import Subscribe from "./subscribe";
 import ArticlesPopular from "./articlesPopular";
 import AboutApp from "./aboutApp";
+import Message from "./message";
 
 export { 
   Wrapper, 
@@ -13,5 +14,6 @@ export {
   Footer, 
   Subscribe, 
   ArticlesPopular, 
-  AboutApp 
+  AboutApp,
+  Message
 };

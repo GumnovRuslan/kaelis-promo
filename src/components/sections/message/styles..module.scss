@@ -1,0 +1,31 @@
+.message {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  
+  &__bg {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    z-index: -1;
+    object-fit: cover;
+    transform: translateY(73%) translateX(-50%);
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__text {
+    max-width: 83%;
+    text-transform: uppercase;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 140%;
+    text-align: center;
+    color: var(--color-text-secondary);
+  }
+}

@@ -2,6 +2,7 @@ import styles from './styles.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ButtonStore } from '@/components/ui';
+import { InstagramIcon, TikTokIcon, TwitterIcon } from '@/components/icons';
 
 const NAVIGATION = {
   title: 'Navigation',
@@ -29,6 +30,21 @@ const NAVIGATION = {
   ]
 }
 
+const NETWORK = [
+  {
+    href: '#',
+    icon: InstagramIcon,
+  },
+  {
+    href: '#',
+    icon: TikTokIcon,
+  },
+  {
+    href: '#',
+    icon: TwitterIcon,
+  },
+]
+
 const Footer = () => {
   return (
     <footer className={styles.footer}>
@@ -43,6 +59,13 @@ const Footer = () => {
           <div className={styles.footer__buttons}>
             <ButtonStore type='app'/>
             <ButtonStore type='google'/>
+          </div>
+          <div className={styles.footer__network}>
+            {NETWORK.map((item, i) => (
+              <Link className={styles.footer__network_link} href={item.href} key={i} >
+                <item.icon/>
+              </Link>
+            ))}
           </div>
         </div>
         <div className={styles.footer__column}>
