@@ -1,7 +1,11 @@
+'use client'
+
 import styles from './styles.module.scss'
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { Burger } from '@/components/ui';
+import { useState } from 'react';
 
 const MENU_ITEMS = [
   { name: 'Home', href: '/' },
@@ -10,18 +14,28 @@ const MENU_ITEMS = [
 ]
 
 const Header = () => {
+  const [menuIsActive, setMenuIsActive] = useState<boolean>(false);
+
   return (
     <header className={styles.header}>
       <Link href='/' className={styles.header__logo}>
         <Image src="/images/logo.webp" alt="Logo" fill />
       </Link>
-      <nav className={styles.header__menu}>
-        {MENU_ITEMS.map((item) => (
-          <li key={item.name} className={styles.header__item}>
-            <Link href={item.href} className={styles.header__link}>{item.name}</Link>
-          </li>
-        ))}
-      </nav>
+      <div className={styles.header__menu_wrapper}>
+        <nav className={`${styles.header__menu} ${menuIsActive ? styles['header__menu--active'] : ''}`}>
+          {MENU_ITEMS.map((item, i) => (
+            <Link 
+              href={item.href} 
+              className={styles.header__link} 
+              key={i}
+              onClick={() => setMenuIsActive(false)}
+              >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+        <Burger isActive={menuIsActive} setIsActive={setMenuIsActive}/>
+      </div>
     </header>
   )
 }

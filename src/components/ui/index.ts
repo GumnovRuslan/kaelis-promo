@@ -7,6 +7,8 @@ import BrandLogoCard from "./cards/brand_logo-card";
 import SubscribeCard from "./cards/subscribe_card";
 import VideoCard from "./cards/video_card";
 import PurposeCard from "./cards/purpose_card";
+import Burger from "./burger";
+import Background from "./background";
 
 export { 
   Button, 
@@ -18,4 +20,6 @@ export {
   SubscribeCard,
   VideoCard,
   PurposeCard,
+  Burger,
+  Background
 };

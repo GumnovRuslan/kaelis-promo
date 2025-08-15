@@ -22,7 +22,7 @@ export const GooglePlayIcon = () =>
     </defs>
   </svg>
 
-export const PintogramIcon = () => 
+export const PictogramIcon = () => 
 <svg xmlns="http://www.w3.org/2000/svg" width="677" height="677" viewBox="0 0 677 677" fill="none">
   <circle cx="338.123" cy="338.123" r="337.623" stroke="currentColor" strokeOpacity="0.5"/>
   <circle cx="338.123" cy="334.214" r="286.807" stroke="currentColor" strokeOpacity="0.5"/>

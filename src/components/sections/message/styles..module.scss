@@ -1,19 +1,43 @@
 .message {
   position: relative;
-  height: 100vh;
   display: flex;
   align-items: center;
-  
+
+  @include media-up('lg') {
+    height: 100vh;
+  }
+
+  @include media-between('md', 'lg') {
+    height: 60vh;
+  }
+
+  @include media-between('sm', 'md') {
+    height: 45vh;
+  }
+
+  @include media-down('sm') {
+    height: 30vh;
+  }
+
   &__bg {
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    z-index: -1;
-    object-fit: cover;
-    transform: translateY(73%) translateX(-50%);
+    align-self: flex-end;
+    width: 100%;
+
+    @include media-up('lg') {
+      transform: translateY(31%);
+    }
+
+    @include media-between('sm','lg') {
+      transform: translateY(40%);
+    }
+
+    @include media-down('sm') {
+      transform: translateY(43%);
+    }
   }
 
   &__inner {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +46,7 @@
   &__text {
     max-width: 83%;
     text-transform: uppercase;
-    font-size: 64px;
+    font-size: fluid-size(12, 64); 
     font-weight: 700;
     line-height: 140%;
     text-align: center;

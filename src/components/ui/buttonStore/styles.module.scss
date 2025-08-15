@@ -1,19 +1,18 @@
 .button {
-  min-width: 200px;
-  padding: 0 15px;
-  height: 60px;
+  min-width: fluid-size(137, 200); 
+  padding: 0 fluid-size(13, 15);
 
   &__inner {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: fluid-size(5, 12); 
   }
 
   &__icon {
     display: inline-flex;
-    width: 26px;
-    height: 32px;
+    min-width: fluid-size(21, 26); 
+    height: fluid-size(26, 32); 
     color: var(--color-text-primary-700);
   }
 
@@ -27,15 +26,15 @@
   &__text {
     font-size: 11.25px;
     font-weight: 600;
-    line-height: 16px;
+    line-height: fluid-size(14, 16); 
     opacity: 0.3;
     color: var(--color-text-primary-700);
   }
 
   &__title {
     font-weight: 600;
-    font-size: 19px;
-    line-height: 24px;
+    font-size: fluid-size(13, 19);
+    line-height: 120%;
     color: var(--color-text-primary-700);
   }
 }

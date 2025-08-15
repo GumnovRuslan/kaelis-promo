@@ -14,9 +14,9 @@ const Button = ({children, type, href = '#', className, text}: IProps) => {
 
   if (href) {
     return (
-      <Link href={href} className={`${styles.button} ${styles.button_text} ${className}`}>
+      <Link href={href} className={`${styles.button} ${styles['button--text']} ${className}`}>
         {text 
-          ? (<span className={styles.text}>{text}</span>) 
+          ? <span className={styles.button__text}>{text}</span>
           : children
         }
       </Link>

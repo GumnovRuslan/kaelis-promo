@@ -1,13 +1,15 @@
+@use '@/styles/mixins' as *;
+
 .hero {
   margin-bottom: 100px;
   
   &__container {
-    padding: 0 130px;
+    padding: 0 fluid-size(20, 130);
   }
 
   &__content {
     position: relative;
-    max-width: 1000px;
+    max-width: fluid-size(300, 1000); 
   }
 
   &__icon_bg {
@@ -15,31 +17,38 @@
     position: absolute;
     top: 0;
     left: 50%;
-    width: 450px;
-    height: 300px;
-    transform: translate(-58%, -15%);
+    width: fluid-size(100, 450);
+    height: fluid-size(64, 300);
+
+    @include media_up('md') {
+      transform: translate(-58%, -15%);
+    }
+
+    @include media_down('md') {
+      transform: translate(-94%, -12%);
+    }
   }
 
   &__title {
-    font-size: 96px;
+    font-size: fluid-size(24, 96); 
     font-weight: 700;
-    line-height: 108px;
+    line-height: fluid-size(29, 108);
     color: var(--color-text-white);
-    margin-bottom: 55px;
+    margin-bottom: fluid-size(22, 55);
   }
 
   &__subtitle {
-    font-size: 64px;
+    font-size: fluid-size(16, 64);
     font-weight: 700;
     color: var(--color-text-white);
-    margin-bottom: 80px;
+    margin-bottom: fluid-size(20, 80);
   }
 
   &__description {
-    font-size: 36px;
-    line-height: 43px;
+    font-size: fluid-size(12, 36);
+    line-height: fluid-size(17, 43);
     color: var(--color-text-white);
-    margin-bottom: 28px;
+    margin-bottom: fluid-size(15, 28);
   }
 
   &__buttons {

@@ -27,7 +27,6 @@ const Card = ({ title, desc, img_num = 1}: TProps) => {
             <p className={styles.card__description}>{desc}</p>
           </div>
         </div>  
-        
       </div>
     </div>
   )

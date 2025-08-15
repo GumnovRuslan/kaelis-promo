@@ -17,14 +17,14 @@ type TButton = {
 const BUTTONS_DATA: Record<StoreType, TButton> = {
   app: {
     type: 'link',
-    href: '#', // сюда можно вставить ссылку на App Store
+    href: '#',
     icon: <AppleStoreIcon />,
     text: 'Download on',
     title: 'App Store',
   },
   google: {
     type: 'link',
-    href: '#', // сюда можно вставить ссылку на Google Play
+    href: '#',
     icon: <GooglePlayIcon />,
     text: 'Get on',
     title: 'Google Play',

@@ -32,7 +32,9 @@ const Subscribe = () => {
           </p>
         </div>
         <div className={styles.subscribe__content}>
-          {CARDS_DATA.map((card, i) => <Card {...card} img_num={i+1} key={i}/>)}
+          {CARDS_DATA.map((card, i) => 
+            <Card {...card} img_num={i+1} key={i}/>
+          )}
         </div>
       </div>
     </section>

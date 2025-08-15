@@ -1,9 +1,19 @@
 .card {
   position: relative;
-  height: 100%;
-  border-radius: 60px;
+  width: 100%;
   background: linear-gradient(180deg, #5B5495 0%, #B06382 100%);
-  padding: 0 35px;
+  overflow: hidden;
+  flex: 50%;
+
+  @include media-up('lg') {
+    border-radius: 60px;
+    padding: 0 35px;
+  }
+
+  @include media-down('lg') {
+    flex: 50%;
+    border-radius: fluid-size(20, 30, 415, 991);
+  }
 
   &__inner {
     position: relative;
@@ -12,33 +22,64 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 40px;
+
+    @include media-down('lg') {
+      gap: fluid-size(20, 40, 991);
+    }
+
+    @include media-down('lg') {
+      gap: fluid-size(20, 40, 415, 991);
+    }
   }
 
   &__bg {
-    margin: 10px;
-    max-width: 95%;
-    max-height: 90%;
+    @include media-up('lg') {
+      margin: 10px;
+      max-width: 95%;
+      max-height: 90%;
+    }
   }
 
   &__title {
-    font-size: 36px;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--color-title-secondary);
+
+    @include media-up('lg') {
+      font-size: fluid-size(24, 36, 992); 
+    }
+
+    @include media-down('lg') {
+      font-size: fluid-size(24, 38, 415, 991); 
+    }
   }
 
   &__network {
     display: flex;
+    justify-content: center;
     width: 100%;
-    gap: 10px;
-    justify-content: space-between;
+
+    @include media-up('lg') {
+      gap: 40px;
+    }
+
+    @include media-down('lg') {
+      gap: fluid-size(15, 30, 415, 991);;
+    }
   }
 
   &__link {
-    width: 95px;
-    height: 95px;
     color: var(--color-text-primary-700);
     cursor: pointer;
+
+    @include media-up('lg') {
+      width: 95px;
+      height: 95px;
+    }
+
+    @include media-down('lg') {
+      min-width: fluid-size(35, 80, 415, 991);
+      height: fluid-size(35, 80, 415, 991);
+    }
   }
 }

@@ -18,7 +18,7 @@ const AboutApp = () => {
             <BrandLogoCard />
             <SubscribeCard />
           </div>
-          <div className={styles.card}/>
+          <VideoCard />
           <PurposeCard />
         </div>
       </div>

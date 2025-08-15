@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/index.scss";
-import { PintogramIcon } from "@/components/icons";
+import { Background } from "@/components/ui";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -23,9 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistInter.variable}`}>
-        <span className='body_icon'>
-          <PintogramIcon/>
-        </span>
+        <Background/>
         {children}
       </body>
     </html>

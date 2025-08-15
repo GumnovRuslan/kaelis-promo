@@ -8,14 +8,15 @@
   cursor: pointer;
   text-decoration: none;
 
-  &_text {
-    min-width: 240px;
-    height: 60px;
+  &--text {
+    min-width: fluid-size(160, 240);
+    height: fluid-size(41, 60);
+    padding: 5px 19px;
+  }
 
-    & .text {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--color-text-primary-700)
-    }
+  &__text {
+    font-size: fluid-size(16, 20);
+    font-weight: 600;
+    color: var(--color-text-primary-700)
   }
 }

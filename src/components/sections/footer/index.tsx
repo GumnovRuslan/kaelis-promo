@@ -9,23 +9,23 @@ const NAVIGATION = {
   links: [
     {
       text: 'Home',
-      href: '#',
+      href: '/',
     },
     {
       text: 'Articles',
-      href: '#',
+      href: '/articles',
     },
     {
       text: 'Contacts',
-      href: '#',
+      href: '/contacts',
     },
     {
       text: 'FAQ',
-      href: '#',
+      href: '/faq',
     },
     {
       text: 'Privacy Policy',
-      href: '#',
+      href: '/privacy-policy',
     },
   ]
 }
@@ -60,13 +60,6 @@ const Footer = () => {
             <ButtonStore type='app'/>
             <ButtonStore type='google'/>
           </div>
-          <div className={styles.footer__network}>
-            {NETWORK.map((item, i) => (
-              <Link className={styles.footer__network_link} href={item.href} key={i} >
-                <item.icon/>
-              </Link>
-            ))}
-          </div>
         </div>
         <div className={styles.footer__column}>
           <nav className={styles.footer__nav}>
@@ -76,6 +69,13 @@ const Footer = () => {
             ))}
           </nav>
         </div>
+      </div>
+      <div className={styles.footer__network}>
+        {NETWORK.map((item, i) => (
+          <Link className={styles.footer__network_link} href={item.href} key={i} >
+            <item.icon/>
+          </Link>
+        ))}
       </div>
     </footer>
   )

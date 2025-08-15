@@ -1,14 +1,25 @@
 .articles {
   display: grid;
-  grid-template-columns: repeat(3, 435px);
-  grid-template-rows: 490px 700px;
-  gap: 70px;
+  width: 100%;
+  justify-content: center;
+  padding: 20px;
+
+  @include media-up('md') {
+    grid-template-columns: repeat(3, fluid-size(200, 435, 769, 1920));
+    grid-template-rows: 
+    fluid-size(230, 490, 769, 1920)
+    fluid-size(330, 700, 769, 1920);
+    gap: fluid-size(20, 70, 769, 1920);
+  }
+
+  @include media-down('md') {
+    grid-template-columns: repeat(auto-fill, fluid-size(270, 470, 415, 769));
+    gap: 30px;
+  }
 }
 
 .article {
   position: relative;
-  padding: 33px 33px 25px;
-  border-radius: 60px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -16,8 +27,22 @@
   gap: 20px;
   text-decoration: none;
 
-  &:nth-child(1) {
-    grid-column: 1/3;
+  @include media-up('md') {
+    border-radius: fluid-size(30, 60, 769, 1920);
+    padding: 
+    fluid-size(25, 33, 769, 1920) 
+    fluid-size(25, 33, 769, 1920) 
+    fluid-size(20, 25, 769, 1920);
+
+    &:nth-child(1) {
+      grid-column: 1/3;
+    }
+  }
+
+  @include media-down('md') {
+    padding: 20px;
+    border-radius: 20px;
+    min-height: fluid-size(320, 520, 415, 769);
   }
 
   &__image {
@@ -28,7 +53,7 @@
   }
 
   &__title {
-    font-size: 36px;
+    font-size: fluid-size(16, 36); 
     font-weight: 700;
     line-height: 110%;
     color: var(--color-title-white);
@@ -37,8 +62,8 @@
   &__bottom {
     display: flex;
     align-items: center;
-    gap: 21px;
-    font-size: 20px;
+    gap: fluid-size(10, 20);
+    font-size: fluid-size(12, 20);
     color: var(--color-text-white)
   }
 
