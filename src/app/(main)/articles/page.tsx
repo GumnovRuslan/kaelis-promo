@@ -1,7 +1,5 @@
 import { ArticlesPage } from "@/components/pages"
 
-const Articles = () => {
-  return <ArticlesPage />
-}
+const Articles = () => <ArticlesPage />
 
 export default Articles;

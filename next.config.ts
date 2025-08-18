@@ -14,11 +14,17 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles/scss')],
-    prependData: `
-      @use "@/styles/root" as *;
+    additionalData: `
       @use "@/styles/_mixins" as *;
       @use "@/styles/_functions" as *;
     `,
+  },
+  webpack(config) {
+    config.experiments = {
+      ...config.experiments,
+      asyncWebAssembly: true,
+    };
+    return config;
   },
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 };

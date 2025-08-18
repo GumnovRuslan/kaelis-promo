@@ -2,11 +2,11 @@ import styles from './styles.module.scss';
 
 type TProps = {
   isActive: boolean;
-  setIsActive: (value: boolean) => void;
+  setIsActive?: (value: boolean) => void;
   className?: string;
 }
 
-const Burger = ({ isActive, setIsActive, className = '' }: TProps) => {
+const Burger = ({ isActive, setIsActive = () =>{}, className = '' }: TProps) => {
   return (
     <button 
       className={`${styles.burger} ${isActive ? styles['burger--active'] : ''} ${className}`}

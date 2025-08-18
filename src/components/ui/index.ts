@@ -9,6 +9,9 @@ import VideoCard from "./cards/video_card";
 import PurposeCard from "./cards/purpose_card";
 import Burger from "./burger";
 import Background from "./background";
+import Input from "./input";
+import Tag from './tag';
+import Modal from "./modal";
 
 export { 
   Button, 
@@ -21,5 +24,8 @@ export {
   VideoCard,
   PurposeCard,
   Burger,
-  Background
+  Background,
+  Input,
+  Tag,
+  Modal,
 };

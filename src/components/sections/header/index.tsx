@@ -34,7 +34,11 @@ const Header = () => {
             </Link>
           ))}
         </nav>
-        <Burger isActive={menuIsActive} setIsActive={setMenuIsActive}/>
+        <Burger 
+          className={styles.header__burger} 
+          isActive={menuIsActive} 
+          setIsActive={setMenuIsActive}
+        />
       </div>
     </header>
   )

@@ -9,15 +9,17 @@ type TArticle = {
   date: string;
   views: string;
   href: string;
+  
 }
 
 type TProps = {
   articles: TArticle[];
+  mirror?: boolean
 };
 
-const Articles = ({ articles }: TProps) => {
+const Articles = ({ articles, mirror = false}: TProps) => {
   return (
-    <div className={styles.articles}>
+    <div className={`${styles.articles} ${mirror ? styles['articles--mirrored'] : ''}`}>
       {articles.map((article, i) => (
         <Link href={article.href} className={styles.article} key={i}>
           <h3 className={styles.article__title}>{article.title}</h3>

@@ -1,5 +1,5 @@
-import { PrivacyPolicyPage } from "@/components/pages";
+import { PolicyPage } from "@/components/pages";
 
-const PrivacyPolicy = () => <PrivacyPolicyPage />
+const PrivacyPolicy = () => <PolicyPage/>
 
 export default PrivacyPolicy;

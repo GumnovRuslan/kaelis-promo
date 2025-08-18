@@ -4,6 +4,13 @@
   justify-content: center;
   padding: 20px;
 
+  &--mirrored {
+    transform: scaleX(-1);
+    & > * {
+      transform: scaleX(-1);
+    }
+  }
+
   @include media-up('md') {
     grid-template-columns: repeat(3, fluid-size(200, 435, 769, 1920));
     grid-template-rows: 

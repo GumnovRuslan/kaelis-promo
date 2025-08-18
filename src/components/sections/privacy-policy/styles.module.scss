@@ -1,0 +1,48 @@
+.privacy {
+  &__inner {
+    max-width: 85%;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: fluid-size(24, 96);
+    font-weight: 700;
+    margin-bottom: fluid-size(15, 75);
+    color:var(--color-title-white);
+
+    & > span {
+      display: block;
+    }
+  }
+
+  &__published {
+    font-size: fluid-size(16, 64);
+    font-weight: 700;
+    margin-bottom: fluid-size(15, 65);
+    color:var(--color-title-white);
+  }
+
+  &__content {
+    color:var(--color-text-white);
+
+    & {
+      div {
+        margin-bottom: fluid-size(20, 50);
+      }
+
+      h3 {
+        font-size: fluid-size(16, 48);
+        line-height: 170%;
+      }
+      
+      p, li, span {
+        font-size: fluid-size(12, 36);
+        line-height: 170%;
+      }
+
+      ul {
+        list-style: inside;
+      }
+    } 
+  }
+}

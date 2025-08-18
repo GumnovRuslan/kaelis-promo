@@ -1,0 +1,39 @@
+.articles {
+  margin-bottom: 300px;
+
+  &__header {
+    text-align: center;
+    max-width: fluid-size(335, 890);
+    margin: 0 auto fluid-size(22, 90);
+  }
+
+  &__title {
+    font-size: fluid-size(24, 96);
+    font-weight: 700;
+    color: var(--color-title-white);
+    margin-bottom: fluid-size(14, 30);
+  }
+
+  &__description {
+    font-size: fluid-size(12, 36);
+    font-weight: 700;
+    line-height: 140%;
+    color: var(--color-title-white);
+  }
+
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: fluid-size(21, 55);
+    max-width: 85%;
+    margin: 0 auto fluid-size(55, 190);
+  }
+
+  &__tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: fluid-size(9, 23); 
+    row-gap: fluid-size(14, 40);
+  }
+}

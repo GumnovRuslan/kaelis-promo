@@ -13,8 +13,7 @@ const HomePage = () => {
       <Subscribe />
       <ArticlesPopular />
       <AboutApp />
-      <Message />
-      
+      <Message textIsShow/>
     </>
   )
 }

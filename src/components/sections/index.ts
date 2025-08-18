@@ -4,8 +4,10 @@ import Hero from "./hero";
 import Footer from "./footer";
 import Subscribe from "./subscribe";
 import ArticlesPopular from "./articlesPopular";
+import ArticlesList from "./articles_list";
 import AboutApp from "./aboutApp";
 import Message from "./message";
+import PrivacyPolicy from "./privacy-policy";
 
 export { 
   Wrapper, 
@@ -13,7 +15,9 @@ export {
   Hero, 
   Footer, 
   Subscribe, 
-  ArticlesPopular, 
+  ArticlesPopular,
+  ArticlesList, 
   AboutApp,
-  Message
+  Message,
+  PrivacyPolicy,
 };
