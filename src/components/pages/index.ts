@@ -1,4 +1,11 @@
 import HomePage from "./home";
 import NotFoundPage from "./404";
+import PrivacyPolicyPage from "./privacy-policy";
+import ArticlesPage from "./articles";
 
-export { HomePage, NotFoundPage };
+export { 
+  HomePage, 
+  NotFoundPage, 
+  PrivacyPolicyPage,
+  ArticlesPage,
+};

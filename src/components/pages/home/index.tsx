@@ -3,7 +3,7 @@ import {
   Subscribe, 
   ArticlesPopular,
   AboutApp,
-  Message
+  Message,
 } from "@/components/sections";
 
 const HomePage = () => {
@@ -14,6 +14,7 @@ const HomePage = () => {
       <ArticlesPopular />
       <AboutApp />
       <Message />
+      
     </>
   )
 }

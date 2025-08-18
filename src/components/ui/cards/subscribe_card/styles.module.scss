@@ -6,7 +6,7 @@
   flex: 50%;
 
   @include media-up('lg') {
-    border-radius: 60px;
+    border-radius: fluid-size(30, 60, 991);
     padding: 0 35px;
   }
 
@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: center;
 
-    @include media-down('lg') {
+    @include media-up('lg') {
       gap: fluid-size(20, 40, 991);
     }
 
@@ -46,7 +46,7 @@
     color: var(--color-title-secondary);
 
     @include media-up('lg') {
-      font-size: fluid-size(24, 36, 992); 
+      font-size: fluid-size(24, 36, 991); 
     }
 
     @include media-down('lg') {
@@ -60,11 +60,11 @@
     width: 100%;
 
     @include media-up('lg') {
-      gap: 40px;
+      gap: fluid-size(15, 40, 992);
     }
 
     @include media-down('lg') {
-      gap: fluid-size(15, 30, 415, 991);;
+      gap: fluid-size(15, 30, 415, 991);
     }
   }
 
@@ -73,8 +73,8 @@
     cursor: pointer;
 
     @include media-up('lg') {
-      width: 95px;
-      height: 95px;
+      width: fluid-size(60, 95, 991);
+      height: fluid-size(60, 95, 991);
     }
 
     @include media-down('lg') {

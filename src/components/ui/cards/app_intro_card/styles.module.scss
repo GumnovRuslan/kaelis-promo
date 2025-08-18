@@ -3,7 +3,7 @@
   overflow: hidden;
 
   @include media-up('lg') {
-    border-radius: 60px;
+    border-radius: fluid-size(30, 60, 991);
   }
 
   @include media-down('lg') {

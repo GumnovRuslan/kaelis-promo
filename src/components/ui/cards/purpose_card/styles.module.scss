@@ -31,7 +31,7 @@
     text-align: center;
 
     @include media-up('lg') {
-      font-size: 36px;
+      font-size: fluid-size(20, 36, 991);
     }
 
     @include media-down('lg') {
@@ -50,7 +50,7 @@
     @include media-up('lg') {
       row-gap: 10px;
       max-width: 90%;
-      grid-template-columns: repeat(2, 370px);
+      grid-template-columns: repeat(2, 1fr);
     }
 
     @include media-down('lg') {
@@ -69,8 +69,8 @@
       flex: 1 0 auto;
 
       @include media-up('lg') {
-        max-width: 52px;
-        max-height: 52px;
+        max-width: fluid-size(30, 52, 991);
+        max-height: fluid-size(30, 52, 991);
       }
 
       @include media-down('lg') {
@@ -85,8 +85,8 @@
       color: var(--color-text-white);
 
       @include media-up('lg') {
-        padding-top: 15px;
-        font-size: 20px;
+        padding-top: fluid-size(8, 15, 991);
+        font-size: fluid-size(14, 20, 991);
       }
 
       @include media-down('lg') {
