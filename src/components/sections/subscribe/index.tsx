@@ -25,18 +25,18 @@ const CARDS_DATA = [
 ]
 
 const Subscribe = () => {
-  const { openModalJoin } = useModalContext()
+  const { openModal, setContent } = useModalContext()
 
-  const openModal = () => {
-    console.log('open modal');
-    openModalJoin()
+  const handlerOpenModal = () => {
+    setContent('join')
+    openModal()
   }
 
   return (
     <section className={styles.subscribe}>
       <div className={styles.subscribe__inner}>
         <div className={styles.subscribe__header}>
-          <Button text='Try it first' as='button' onClick={() => openModal()}/>
+          <Button text='Try it first' as='button' onClick={handlerOpenModal}/>
           <p className={styles.subscribe__description}>
             Subscribe now and get premium access for a week after the launch
           </p>

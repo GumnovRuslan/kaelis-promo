@@ -6,6 +6,32 @@ import { StarIcon } from '@/components/icons';
 import { Modal, Input, Button } from '@/components/ui';
 import Link from 'next/link';
 import { useModalContext } from '@/context/modal';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { sendEmail, checkEmail } from '@/utils/localStorageEmail';
+
+type ModalContentType = 'join' | 'full';
+
+interface ModalData {
+  title: string;
+  button: {
+    text: string;
+  };
+}
+
+const DATA: Record<ModalContentType, ModalData> = {
+  'join': {
+    title: 'Join Kaelis',
+    button: {
+      text: 'Get access'
+    },
+  },
+  'full': {
+    title: 'Get the full interpretation',
+    button: {
+      text: 'Send'
+    },
+  },
+};
 
 const items = [
   'No hidden fees',
@@ -14,28 +40,50 @@ const items = [
 ];
 
 const ModalJoin = () => {
-  const { isOpenModalJoin, closeModalJoin } = useModalContext()
+  const { isOpenModal, closeModal, content } = useModalContext()
+  const {value, isTrue} = checkEmail()
+  const [ inputValue, setInputValue ] = useState(isTrue ? value : '')
+  const data = DATA[content as ModalContentType];
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handlerSendEmail = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if(inputValue) {
+      sendEmail(inputValue);
+    }
+    closeModal()
+  }
+
   return (
-    <Modal isShow={isOpenModalJoin} handlerClose={closeModalJoin}>
-      <div className={styles.join}>
-        <h3 className={styles.join__title}>Join Kaelis</h3>
-        <ul className={styles.join__items}>
-          {items.map((text, i) => (
-            <li className={styles.join__item} key={i}>
-              <span className={styles.join__item_icon}>
-                <StarIcon />
-              </span>
-              <span className={styles.join__item_text}>{text}</span>
-            </li>
-          ))}
-        </ul>
-        <div className={styles.join__input}>
-          <span className={styles.join__input_text}>Enter your email to receive the complete prediction</span>
-          <Input type='email' placeholder='Enter your email'/>
+    <Modal isShow={isOpenModal} handlerClose={closeModal}>
+      <form className={styles.content} onSubmit={handlerSendEmail}>
+        <h3 className={styles.content__title}>{data.title}</h3>
+        {content === 'join' && (
+          <ul className={styles.content__items}>
+            {items.map((text, i) => (
+              <li className={styles.content__item} key={i}>
+                <span className={styles.content__item_icon}>
+                  <StarIcon />
+                </span>
+                <span className={styles.content__item_text}>{text}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <div className={styles.content__input}>
+          <span className={styles.content__input_text}>Enter your email to receive the complete prediction</span>
+          <Input type='email' placeholder='Enter your email' value={inputValue || ''} onChange={handleInputChange}/>
         </div>
-        <Button className={styles.join__button} text='Get access'/>
-        <p className={styles.join__policy}>By clicking “Send”, you agree to the <Link className={styles.join__policy_link} href={'#'}>Privacy Policy</Link></p>
-      </div>
+        <Button 
+          type='submit'
+          className={styles.content__button} 
+          text={data.button.text} 
+        />
+        <p className={styles.content__policy}>By clicking “Send”, you agree to the <Link className={styles.content__policy_link} href={'/privacy-policy'} target='_blank'>Privacy Policy</Link></p>
+      </form>
     </Modal>
   )
 }

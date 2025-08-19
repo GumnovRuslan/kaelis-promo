@@ -67,7 +67,6 @@ const ArticlesList = async () => {
         </div>
         <div className={styles.articles__content}>
           <Articles articles={ARTICLES}/>
-          <Articles articles={ARTICLES} mirror={true}/>
         </div>
       </div>
     </div>

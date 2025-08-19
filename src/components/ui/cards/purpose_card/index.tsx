@@ -22,7 +22,7 @@ const PurposeCard = () => {
           {items.map((text, i) => (
             <div className={styles.card__item} key={i}>
               <span className={styles.card__item_icon}>
-                <StarIcon/>
+                <StarIcon />
               </span>
               <span className={styles.card__item_text}>
                 {text}

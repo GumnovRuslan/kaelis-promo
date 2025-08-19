@@ -2,37 +2,37 @@
 
 import { ReactNode, createContext, useContext, useState } from 'react';
 
+type ModalContentType = 'join' | 'full' | string;
 
 type TPopupContext = {
-  isOpenModalJoin: boolean;
-  openModalJoin: () => void;
-  closeModalJoin: () => void;
-  toggleModalJoin: () => void;
-  isOpenModalEmail: boolean;
-  closeModalEmail: () => void;
+  isOpenModal: boolean;
+  openModal: () => void;
+  closeModal: () => void;
+  toggleModal: () => void;
+  content: ModalContentType;
+  setContent: (value: ModalContentType) => void;
 };
 
 const ModalContext = createContext<TPopupContext | undefined>(undefined);
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
-  const [isOpenModalJoin, setIsOpenModalJoin] = useState(false);
-  const [isOpenModalEmail, setIsOpenModalEmail] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [content, setContent] = useState<ModalContentType>('join');
 
-  const openModalJoin = () => setIsOpenModalJoin(true);
-  const closeModalJoin = () => setIsOpenModalJoin(false);
-  const toggleModalJoin = () => setIsOpenModalJoin((prev) => !prev);
+  const openModal = () => setIsOpenModal(true);
+  const closeModal = () => setIsOpenModal(false);
+  const toggleModal = () => setIsOpenModal((prev) => !prev);
 
-  const closeModalEmail = () => setIsOpenModalEmail(false);
   
   return (
     <ModalContext
       value={{
-        isOpenModalJoin,
-        openModalJoin,
-        closeModalJoin,
-        toggleModalJoin,
-        isOpenModalEmail,
-        closeModalEmail,
+        isOpenModal,
+        openModal,
+        closeModal,
+        toggleModal,
+        content,
+        setContent,
       }}
     >
       {children}
