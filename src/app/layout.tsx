@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "@/styles/index.scss";
 import '@/styles/root.scss';
 import { Background } from "@/components/ui";
-import {Modal} from "@/components/ui";
+import { ModalProvider } from "@/context/modal";
+import { ModalJoin } from "@/components/sections";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -25,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistInter.variable}`}>
-        <Modal/>
-        <Background/>
-        {children}
+        <ModalProvider>
+          <ModalJoin />
+          <Background/>
+          {children}
+        </ModalProvider>
       </body>
     </html>
   );

@@ -1,6 +1,9 @@
+'use client'
+
 import styles from './styles.module.scss';
 
 import { Button, Card } from '@/components/ui';
+import { useModalContext } from '@/context/modal';
 
 const CARDS_DATA = [
   {
@@ -22,11 +25,18 @@ const CARDS_DATA = [
 ]
 
 const Subscribe = () => {
+  const { openModalJoin } = useModalContext()
+
+  const openModal = () => {
+    console.log('open modal');
+    openModalJoin()
+  }
+
   return (
     <section className={styles.subscribe}>
       <div className={styles.subscribe__inner}>
         <div className={styles.subscribe__header}>
-          <Button text='Try it first' />
+          <Button text='Try it first' as='button' onClick={() => openModal()}/>
           <p className={styles.subscribe__description}>
             Subscribe now and get premium access for a week after the launch
           </p>

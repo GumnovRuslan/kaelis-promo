@@ -47,8 +47,10 @@ const ArticlesPopular = () => {
         </div>
         <Articles articles={ARTICLES}/>
         <Button 
-        className={styles.button} 
-        href='/articles' text='Read all articles' />
+          as='link'
+          className={styles.button} 
+          href='/articles' text='Read all articles' 
+        />
       </div>
     </section>
   )

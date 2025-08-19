@@ -16,7 +16,6 @@ const Input = ({
     <div className={`${styles.input_wrapper} ${wrapperClassName}`}>
       <input 
       className={`${styles.input} ${inputClassName}`}  
-      defaultValue='Search articles...'
       {...inputProps}
       />
       {children}

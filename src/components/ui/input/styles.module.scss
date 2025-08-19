@@ -11,6 +11,10 @@
   border-radius: 30px;
   outline: 1px solid #D4A2F2;
   font-size: fluid-size(12, 20);
-  color: #646095;
+  color: var(--color-text-white);
   background: #1F1D2E;
+
+  &::placeholder {
+    color: #646095;
+  }
 }

@@ -8,7 +8,7 @@ const NotFoundPage = () => {
         <h1 className={styles.page__title}>404</h1>
         <span className={styles.page__text}>Page Not Found</span>
         <p className={styles.page__text}>The page you're looking for doesn't exist or has been moved</p>
-        <Button href='/' className={styles.button}>
+        <Button as='link' href='/' className={styles.button}>
           <span className={styles.button__text}>Return to home</span>
         </Button>
       </div>

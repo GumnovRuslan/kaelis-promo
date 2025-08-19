@@ -2,19 +2,32 @@ import styles from "./styles.module.scss";
 
 import Link from "next/link";
 
-type IProps = {
+type TButton = {
   children?: React.ReactNode;
-  type?: "button" | "link";
-  href?: string;
   text?: string;
   className?: string;
 }
 
-const Button = ({children, type, href = '#', className, text}: IProps) => {
+type ButtonAsButton = TButton &
+  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof TButton> & {
+    as?: 'button';
+    href?: never;
+  };
 
-  if (href) {
+type ButtonAsLink = TButton &
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof TButton> & {
+    as: 'link';
+    href: string;
+  };
+
+type ButtonProps = ButtonAsButton | ButtonAsLink;
+
+const Button = ({children, className, text, as, ...props}: ButtonProps) => {
+
+  if (as === 'link') {
+    const { href, ...rest } = props as ButtonAsLink;
     return (
-      <Link href={href} className={`${styles.button} ${styles['button--text']} ${className}`}>
+      <Link href={href} className={`${styles.button} ${styles['button--text']} ${className}`} {...rest}>
         {text 
           ? <span className={styles.button__text}>{text}</span>
           : children
@@ -23,9 +36,13 @@ const Button = ({children, type, href = '#', className, text}: IProps) => {
     );
   }
 
+  const { disabled, ...buttonProps } = props as ButtonAsButton;
   return (
-    <button  className={`${styles.button} ${className}`}>
-      {children}
+    <button className={`${styles.button} ${styles['button--text']} ${className}`} {...buttonProps}>
+      {text 
+        ? <span className={styles.button__text}>{text}</span>
+        : children
+      }
     </button>
   );
 }
