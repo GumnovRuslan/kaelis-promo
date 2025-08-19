@@ -1,20 +1,20 @@
 .share {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: fluid-size(5, 9);
     background: var(--gradient-btn);
     border: none;
     border-radius: 30px;
-    padding: 7px 30px;
+    padding: fluid-size(2, 7) fluid-size(10, 30);
     cursor: pointer;
 
     &__icon {
-      width: 25px;
-      height: 25px;
+      width: fluid-size(11, 25);
+      height: fluid-size(13, 25);
     }
 
     &__text {
-      font-size: 20px;
+      font-size: fluid-size(12, 20);
       font-weight: 600;
       color: var(--color-text-primary-700);
     }

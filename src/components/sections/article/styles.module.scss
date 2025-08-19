@@ -6,19 +6,21 @@
   }
 
   &__header {
-    margin-bottom: 135px
+    margin-bottom: fluid-size(65, 135)
   }
 
   &__title {
-    margin-bottom: 35px;
-    font-size: 96px;
+    margin-bottom: fluid-size(12, 35); 
+    font-size: fluid-size(24, 96);
+    line-height: fluid-size(29, 108);
     font-weight: 700;
     color: var(--color-title-white);
   }
 
   &__desc {
     margin-bottom: 45px;
-    font-size: 36px;
+    font-size: fluid-size(12, 36);
+    line-height: fluid-size(17, 48);
     color: var(--color-text-white);
   }
 
@@ -30,11 +32,15 @@
   }
 
   &__date {
-    font-size: 20px;
+    font-size: fluid-size(12, 20);
     color: var(--color-text-white);
   }
 
   &__breadcrumbs {
-    margin-bottom: 130px;
+    margin-bottom: fluid-size(30, 130);
+
+    @include media-down('md') {
+      display: none;
+    }
   }
 }
