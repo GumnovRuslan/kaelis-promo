@@ -6,8 +6,8 @@ interface PageProps {
   }
 }
 
-const Article = ({params}: PageProps) =>  {
-  const { slug } = params;
+const Article = async ({params}: PageProps) =>  {
+  const { slug } = await params;
   return (
     <ArticlePage slug={slug}/>
   )

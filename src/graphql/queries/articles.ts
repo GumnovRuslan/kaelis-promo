@@ -30,9 +30,11 @@ export const getArticle = (slug: string) => `
     allArticlesItem(where: { slug: { current: { eq: "${slug}" } } }) {
      _id
     title
+    desc
     i18n_lang
     date
     slug {current}
+    contentRaw
     breadcrumbs {
       title
       linkInternal {

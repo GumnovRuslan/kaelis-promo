@@ -12,6 +12,8 @@ import Background from "./background";
 import Input from "./input";
 import Tag from './tag';
 import Modal from "./modal";
+import Breadcrumbs from "./breadcrumbs";
+import ButtonShare from "./button_share";
 
 export { 
   Button, 
@@ -28,4 +30,6 @@ export {
   Input,
   Tag,
   Modal,
+  Breadcrumbs,
+  ButtonShare,
 };

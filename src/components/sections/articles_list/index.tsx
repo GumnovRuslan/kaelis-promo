@@ -14,7 +14,8 @@ const TAGS = [
 
 const ArticlesList = async () => {
   const { data, errors } = await fetchGraphQL(ALL_ARTICLES);
-  const articles = data.allArticlesItem
+  const articles = data?.allArticlesItem
+  console.log()
 
   return (
     <div className={styles.articles}>
@@ -32,7 +33,9 @@ const ArticlesList = async () => {
           </div>
         </div>
         <div className={styles.articles__content}>
-          <Articles articles={articles}/>
+          {articles && articles.length && (
+            <Articles articles={articles}/>
+          )}
         </div>
       </div>
     </div>

@@ -1,7 +1,40 @@
 .article {
+  max-width: 90%;
+  margin: 0 auto;
+
+  &__inner {
+  }
+
+  &__header {
+    margin-bottom: 135px
+  }
 
   &__title {
+    margin-bottom: 35px;
     font-size: 96px;
-    color: red;
+    font-weight: 700;
+    color: var(--color-title-white);
+  }
+
+  &__desc {
+    margin-bottom: 45px;
+    font-size: 36px;
+    color: var(--color-text-white);
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+  }
+
+  &__date {
+    font-size: 20px;
+    color: var(--color-text-white);
+  }
+
+  &__breadcrumbs {
+    margin-bottom: 130px;
   }
 }

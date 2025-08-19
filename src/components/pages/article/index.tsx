@@ -1,4 +1,4 @@
-import { Article } from "@/components/sections";
+import { Article, Message } from "@/components/sections";
 import { getArticle } from "@/graphql/queries/articles";
 import { fetchGraphQL } from "@/lib/graphql";
 
@@ -13,7 +13,10 @@ const ArticlePage = async ({slug}: TProps) => {
   console.log('data', article)
   
   return (
+    <>
     <Article {...article}/>
+    <Message/>
+    </>
   )
 }
 
