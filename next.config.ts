@@ -12,6 +12,9 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ['localhost:3000', 'cdn.sanity.io'],
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles/scss')],
     additionalData: `

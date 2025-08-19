@@ -1,5 +1,5 @@
 import { fetchGraphQL } from "@/lib/graphql";
-import { ALL_PAGES } from "@/graphql/queries/pages";
+import { ALL_ARTICLES } from "@/graphql/queries/articles";
 import styles from './styles.module.scss'
 import { Input, Tag, Articles } from "@/components/ui";
 
@@ -12,43 +12,9 @@ const TAGS = [
   'Practices',
 ]
 
-const ARTICLES = [
-  {
-    title: 'How to interpret Tarot cards for beginners',
-    date: '8 Aug 2025',
-    views: '1.8',
-    href: '/',
-  },
-  {
-    title: 'Numerology',
-    date: '8 Aug 2025',
-    views: '1.8',
-    href: '/',
-  },
-  {
-    title: 'Tarot Cards',
-    date: '8 Aug 2025',
-    views: '1.8',
-    href: '/',
-  },
-  {
-    title: 'Tarot Cards',
-    date: '8 Aug 2025',
-    views: '1.8',
-    href: '/',
-  },
-  {
-    title: 'Spread the "Celtic Cross"',
-    date: '8 Aug 2025',
-    views: '1.8',
-    href: '/',
-  },
-]
-
 const ArticlesList = async () => {
-  const { data, errors } = await fetchGraphQL(ALL_PAGES);
-
-  console.log("Fetched pages:", data);
+  const { data, errors } = await fetchGraphQL(ALL_ARTICLES);
+  const articles = data.allArticlesItem
 
   return (
     <div className={styles.articles}>
@@ -66,7 +32,7 @@ const ArticlesList = async () => {
           </div>
         </div>
         <div className={styles.articles__content}>
-          <Articles articles={ARTICLES}/>
+          <Articles articles={articles}/>
         </div>
       </div>
     </div>

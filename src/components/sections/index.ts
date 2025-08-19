@@ -10,6 +10,7 @@ import Message from "./message";
 import PrivacyPolicy from "./privacy-policy";
 import ModalJoin from "./modal_join";
 import DailyCard from "./daily_card";
+import Article from "./article";
 
 export { 
   Wrapper, 
@@ -24,4 +25,5 @@ export {
   PrivacyPolicy,
   ModalJoin,
   DailyCard,
+  Article,
 };

@@ -45,7 +45,7 @@ const ArticlesPopular = () => {
             Explore mystical practices and expand your knowledge with our expert materials
           </p>
         </div>
-        <Articles articles={ARTICLES}/>
+        {/* <Articles articles={ARTICLES}/> */}
         <Button 
           as='link'
           className={styles.button} 
