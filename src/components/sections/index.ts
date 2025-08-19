@@ -11,6 +11,7 @@ import PrivacyPolicy from "./privacy-policy";
 import ModalJoin from "./modal_join";
 import DailyCard from "./daily_card";
 import Article from "./article";
+import FAQ from "./faq";
 
 export { 
   Wrapper, 
@@ -26,4 +27,5 @@ export {
   ModalJoin,
   DailyCard,
   Article,
+  FAQ,
 };

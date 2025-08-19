@@ -1,0 +1,19 @@
+.faq {
+  width: 90%;
+  min-height: 100vh;
+  margin: 0 auto;
+
+  &__title {
+    text-align: center;
+    font-size: fluid-size(24, 96); 
+    font-weight: 700;
+    color: var(--color-title-white);
+    margin-bottom: fluid-size(50, 150);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+}
