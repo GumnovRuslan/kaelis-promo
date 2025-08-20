@@ -1,0 +1,22 @@
+.bread {
+  display: flex;
+  align-content: center;
+  gap: 10px;
+  color: var(--color-text-primary-100);
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    font-size: 12px;
+    line-height: 120%;
+
+    &:last-child {
+      pointer-events: none;
+    }
+  }
+
+  &__icon {
+    width: 13px;
+    height: 13px;
+  }
+}

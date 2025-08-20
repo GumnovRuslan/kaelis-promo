@@ -1,0 +1,56 @@
+.message {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  @include media-up('lg') {
+    height: 100vh;
+  }
+
+  @include media-between('md', 'lg') {
+    height: 60vh;
+  }
+
+  @include media-between('sm', 'md') {
+    height: 45vh;
+  }
+
+  @include media-down('sm') {
+    height: 30vh;
+  }
+
+  &__bg {
+    pointer-events: none;
+    align-self: flex-end;
+    width: 100%;
+
+    @include media-up('lg') {
+      transform: translateY(31%);
+    }
+
+    @include media-between('sm','lg') {
+      transform: translateY(40%);
+    }
+
+    @include media-down('sm') {
+      transform: translateY(43%);
+    }
+  }
+
+  &__inner {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__text {
+    max-width: 83%;
+    text-transform: uppercase;
+    font-size: fluid-size(12, 64); 
+    font-weight: 700;
+    line-height: 140%;
+    text-align: center;
+    color: var(--color-text-secondary);
+  }
+}

@@ -1,0 +1,31 @@
+.tag {
+  height: fluid-size(22, 60);
+  min-width: fluid-size(56, 155);
+  border-radius: 30px;
+  border: none;
+  transition: 0.3s;
+  padding: fluid-size(3, 10) fluid-size(8, 10);
+  cursor: pointer;
+
+  &--active {
+    background: linear-gradient(90deg, #FEBA74 0%, #F77377 100%);
+
+    & > span {
+      color:  var(--color-text-primary-700);
+    }
+  }
+
+  &--default {
+    background: linear-gradient(90deg, rgba(149, 159, 216, 0.34) 0%, rgba(213, 162, 242, 0.34) 100%);
+    outline: 1px solid #D4A2F2;
+
+    & > span {
+      color:  var(--color-text-white);
+    }
+  }
+
+  &__text {
+    font-size: fluid-size(16, 20);
+    font-weight: 600;
+  }
+}

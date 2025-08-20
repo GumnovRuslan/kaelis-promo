@@ -1,7 +1,11 @@
 body {
+  position: relative;
+  font-family: var(--font-geist-sans), sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: var(--gradient-main);
+  overflow: hidden;
 }
 
 main {
