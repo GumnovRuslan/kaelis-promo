@@ -53,7 +53,6 @@ const VideoCard = () => {
     <div className={styles.card}>
       <video 
         playsInline
-        // autoPlay={true}
         loop
         muted
         ref={videoRef}
