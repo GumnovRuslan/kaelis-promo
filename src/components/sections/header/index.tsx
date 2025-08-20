@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <Link href='/' className={styles.header__logo}>
-        <Image src="/images/logo.webp" alt="Logo" fill />
+        <Image src="/images/logo.svg" alt="Logo" fill />
       </Link>
       <div className={styles.header__menu_wrapper}>
         <nav className={`${styles.header__menu} ${menuIsActive ? styles['header__menu--active'] : ''}`}>
