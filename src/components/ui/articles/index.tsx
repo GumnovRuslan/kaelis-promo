@@ -21,6 +21,7 @@ const Articles = ({ articles, mirror = false}: TProps) => {
             src={article.coverImage.image.asset.url} 
             fill 
             alt={article.coverImage.altText}
+            unoptimized
           />
           <div className={styles.article__bottom}>
             <span>{article.date}</span>
