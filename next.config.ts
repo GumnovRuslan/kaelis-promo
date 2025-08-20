@@ -12,7 +12,9 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: 'export',
   images: {
+    formats: ['image/webp', 'image/avif'],
     domains: ['localhost:3000', 'cdn.sanity.io'],
   },
   sassOptions: {
