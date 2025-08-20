@@ -1,6 +1,12 @@
 [build]
   command = "next build"
-  publish = ".next"
+  publish = ".next" # Для `output: 'standalone'` или по умолчанию
 
+# Новая важная секция для миграции на v5 плагина
+[build.environment]
+  # Явно указываем, что статические файлы лежат в .next/static
+  NEXT_NETLIFY_STATIC_DIR = ".next/static"
+
+# Подключаем плагин
 [[plugins]]
   package = "@netlify/plugin-nextjs"
