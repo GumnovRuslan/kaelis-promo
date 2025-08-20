@@ -1,6 +1,11 @@
 [build]
   command = "next build"
-  publish = ".next"  # Это самая важная строка
+  publish = ".next"  # Стандартная папка сборки Next.js
+
+# ДОБАВЬТЕ ЭТУ СЕКЦИЮ - это ключ к решению
+[build.environment]
+  # Явно указываем путь к статическим активам
+  NEXT_NETLIFY_STATIC_DIR = ".next/static"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

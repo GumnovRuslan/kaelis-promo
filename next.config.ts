@@ -27,14 +27,11 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
-        port: '',
-        pathname: '/**',
       },
       // Для kaelis.netlify.app
       {
         protocol: 'https',
         hostname: 'kaelis.netlify.app',
-        port: '',
         pathname: '/**',
       },
     ],
