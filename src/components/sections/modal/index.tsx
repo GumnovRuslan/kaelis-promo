@@ -51,15 +51,23 @@ const Modal = () => {
 
   const handlerSendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if(inputValue) {
-      sendEmail(inputValue);
-    }
+    // if(inputValue) {
+    //   sendEmail(inputValue);
+    // }
     closeModal()
   }
 
   return (
     <ModalWrapper isShow={isOpenModal} handlerClose={closeModal}>
-      <form className={styles.content} onSubmit={handlerSendEmail}>
+      <form 
+        className={styles.content} 
+        onSubmit={handlerSendEmail}
+        name="modal" 
+        method="POST" 
+        data-netlify="true"
+        action="/?modal-submitted=true"
+      >
+        <input type="hidden" name="form-name" value="modal" />
         <h3 className={styles.content__title}>{data.title}</h3>
         {content === 'join' && (
           <ul className={styles.content__items}>
@@ -75,7 +83,13 @@ const Modal = () => {
         )}
         <div className={styles.content__input}>
           <span className={styles.content__input_text}>Enter your email to receive the complete prediction</span>
-          <Input type='email' placeholder='Enter your email' value={inputValue || ''} onChange={handleInputChange}/>
+          <Input 
+            name='email'
+            type='email' 
+            placeholder='Enter your email' 
+            value={inputValue || ''} 
+            onChange={handleInputChange}
+          />
         </div>
         <Button 
           type='submit'
