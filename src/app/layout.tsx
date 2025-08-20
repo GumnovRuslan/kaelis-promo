@@ -4,7 +4,7 @@ import "@/styles/index.scss";
 import '@/styles/root.scss';
 import { Background } from "@/components/ui";
 import { ModalProvider } from "@/context/modal";
-import { ModalJoin } from "@/components/sections";
+import { Modal } from "@/components/sections";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistInter.variable}`}>
         <ModalProvider>
-          <ModalJoin />
+          <Modal />
           <Background/>
           {children}
         </ModalProvider>

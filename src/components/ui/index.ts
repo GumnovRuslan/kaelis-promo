@@ -11,7 +11,7 @@ import Burger from "./burger";
 import Background from "./background";
 import Input from "./input";
 import Tag from './tag';
-import Modal from "./modal";
+import ModalWrapper from "./modal";
 import Breadcrumbs from "./breadcrumbs";
 import ButtonShare from "./button_share";
 import Question from "./question";
@@ -30,7 +30,7 @@ export {
   Background,
   Input,
   Tag,
-  Modal,
+  ModalWrapper,
   Breadcrumbs,
   ButtonShare,
   Question,

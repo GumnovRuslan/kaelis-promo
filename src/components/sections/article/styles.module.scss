@@ -43,4 +43,34 @@
       display: none;
     }
   }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    color: var(--color-text-white);
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      margin-bottom: fluid-size(15, 30); 
+    }
+
+    h3 {
+      font-size: fluid-size(16, 48);
+      line-height: 130%;
+    }
+
+    p, li {
+      font-size: fluid-size(12, 36);
+      line-height: 150%;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    ul {
+      list-style: inside;
+      padding-left: fluid-size(10, 30);
+    }
+  }
 }

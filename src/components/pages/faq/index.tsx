@@ -3,7 +3,7 @@ import { FAQ, Message } from "@/components/sections";
 const FAQPage = () => {
   return (<>
   <FAQ/>
-  <Message/>
+  {/* <Message/> */}
   </>)
 }
 

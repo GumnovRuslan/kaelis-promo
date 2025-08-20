@@ -33,7 +33,7 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    padding: 13px 15px 20px;
+    padding: fluid-size(10, 13) fluid-size(5, 15) fluid-size(10, 20);
   }
 
   &__content {

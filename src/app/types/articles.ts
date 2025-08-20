@@ -1,4 +1,5 @@
 import { TBreadcrumbs } from "./breadcrumbs";
+import { PortableTextBlock } from "@portabletext/react";
 
 export type TArticlePreview = {
   title: string;
@@ -20,7 +21,7 @@ export type TArticle = {
   title: string;
   desc: string;
   date: string;
-  contentRaw: JSON;
+  contentRaw: PortableTextBlock[];
   slug: {
     current: string
   };

@@ -1,0 +1,48 @@
+.page {
+  position: relative;
+  height: 100vh;
+
+  &__bg {
+    position: absolute;
+    bottom: 0;
+    pointer-events: none;
+    align-self: flex-end;
+    width: 100%;
+
+    @include media-up('lg') {
+      transform: translateY(31%);
+    }
+
+    @include media-between('sm','lg') {
+      transform: translateY(40%);
+    }
+
+    @include media-down('sm') {
+      transform: translateY(43%);
+    }
+  }
+
+  &__content {
+    position: absolute;
+    width: 100%;
+    padding: 0 20px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__title {
+    text-align: center;
+    text-transform: capitalize;
+    font-size: fluid-size(24, 96);
+    font-weight: 700; 
+    line-height: fluid-size(30, 108);
+    margin-bottom: fluid-size(20, 40);
+    color: var(--color-title-white);
+  }
+
+  &__button {
+    max-width: max-content;
+    margin: 0 auto;
+  }
+}

@@ -8,7 +8,7 @@ type TProps = {
   handlerClose: () => void;
 }
 
-const Modal = ({children, isShow = false, handlerClose} : TProps) => {
+const ModalWrapper = ({children, isShow = false, handlerClose} : TProps) => {
   return (
     <div className={`${styles.modal__background} ${!isShow ? styles['modal--hidden'] : styles['modal--show']}`}>
       <div className={styles.modal}>
@@ -30,4 +30,4 @@ const Modal = ({children, isShow = false, handlerClose} : TProps) => {
   )
 }
 
-export default Modal;
+export default ModalWrapper;

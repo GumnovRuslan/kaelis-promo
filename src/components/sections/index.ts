@@ -8,10 +8,11 @@ import ArticlesList from "./articles_list";
 import AboutApp from "./aboutApp";
 import Message from "./message";
 import PrivacyPolicy from "./privacy-policy";
-import ModalJoin from "./modal_join";
+import Modal from "./modal";
 import DailyCard from "./daily_card";
 import Article from "./article";
 import FAQ from "./faq";
+import ArticleNotFound from "./article_not_found";
 
 export { 
   Wrapper, 
@@ -24,8 +25,9 @@ export {
   AboutApp,
   Message,
   PrivacyPolicy,
-  ModalJoin,
+  Modal,
   DailyCard,
   Article,
   FAQ,
+  ArticleNotFound,
 };
