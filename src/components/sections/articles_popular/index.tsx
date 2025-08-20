@@ -1,6 +1,8 @@
+import { ALL_ARTICLES } from '@/graphql/queries/articles';
 import styles from './styles.module.scss';
 
 import { Button, Articles } from '@/components/ui';
+import { fetchGraphQL } from '@/lib/graphql';
 
 const ARTICLES = [
   {
@@ -35,7 +37,9 @@ const ARTICLES = [
   },
 ]
 
-const ArticlesPopular = () => {
+const ArticlesPopular = async () => {
+  const { data, errors } = await fetchGraphQL(ALL_ARTICLES);
+    const articles = data?.allArticlesItem.slice(0, 5)
   return (
     <section className={styles.articles}>
       <div className={styles.articles__inner}>
@@ -45,7 +49,7 @@ const ArticlesPopular = () => {
             Explore mystical practices and expand your knowledge with our expert materials
           </p>
         </div>
-        {/* <Articles articles={ARTICLES}/> */}
+        <Articles articles={articles}/>
         <Button 
           as='link'
           className={styles.button} 

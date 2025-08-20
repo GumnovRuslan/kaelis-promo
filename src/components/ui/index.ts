@@ -15,6 +15,7 @@ import ModalWrapper from "./modal";
 import Breadcrumbs from "./breadcrumbs";
 import ButtonShare from "./button_share";
 import Question from "./question";
+import ArticlesFilter from './articles_filter'
 
 export { 
   Button, 
@@ -34,4 +35,5 @@ export {
   Breadcrumbs,
   ButtonShare,
   Question,
+  ArticlesFilter,
 };
