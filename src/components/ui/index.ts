@@ -1,5 +1,5 @@
 import Button from "./button";
-import ButtonStore from "./buttonStore";
+import ButtonStore from "./button-store";
 import Card from "./card";
 import Articles from "./articles";
 import AppIntroCard from "./cards/app_intro_card";

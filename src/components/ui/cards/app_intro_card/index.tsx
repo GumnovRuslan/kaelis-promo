@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 
 import Image from 'next/image';
-import ButtonStore from '../../buttonStore';
+import ButtonStore from '../../button-store';
 
 const AppIntroCard = () => {
   return (

@@ -1,9 +1,7 @@
 import { ArticlePage } from "@/components/pages";
 
-interface PageProps {
-  params: {
-    slug: string;
-  }
+type PageProps = {
+  params: Promise<{ slug: string }>
 }
 
 const Article = async ({params}: PageProps) =>  {
