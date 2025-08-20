@@ -1,2 +1,5 @@
-@import './reset.scss';
-@import './globals.scss';
+@use './fonts.scss' as *;
+
+@use './reset.scss' as *;
+@use './globals.scss' as *;
+@use './functions.scss' as *;

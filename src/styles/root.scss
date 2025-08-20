@@ -1,0 +1,36 @@
+  :root {
+    --color-white: #fff;
+    --color-black: #000;
+    --color-primary-900: #1A1927;
+    --color-primary-800: #272639;
+    --color-primary-700: #20293D;
+    --color-primary-500: #646095;
+    --color-primary-300: #959FD8;
+    --color-primary-200: #BAA1E7;
+    --color-primary-100: #D4A2F2;
+    --color-secondary-400: #FFB975;
+    --color-secondary: #F9DBAC;
+    
+    --color-title-white: var(--color-white);
+    --color-title-primary: var(--color-primary-300);
+    --color-title-primary-100: var(--color-primary-100);
+    --color-title-secondary: var(--color-secondary);
+
+    --color-text-white: var(--color-white);
+    --color-text-black: var(--color-black);
+    --color-text-primary-700: var(--color-primary-700);
+    --color-text-primary-500: var(--color-primary-500);
+    --color-text-primary-300: var(--color-primary-300);
+    --color-text-primary: var(--color-primary-200);
+    --color-text-primary-100: var(--color-primary-100);
+    --color-text-secondary: var(--color-secondary);
+    --color-text-secondary-400: var(--color-secondary-400);
+
+    --color-bg-primary: var(--color-primary-200);
+    --color-bg-primary-900: var(--color-primary-900);
+    --color-bg-primary-800: var(--color-primary-800);
+    --color-bg-secondary: var(--color-secondary);
+
+    --gradient-main: linear-gradient(180deg, #05040B 0%, #272639 16.83%, #35334B 62.5%, #494766 100%);
+    --gradient-btn: linear-gradient(90deg, #959FD8 0%, #D5A2F2 100%);
+  }

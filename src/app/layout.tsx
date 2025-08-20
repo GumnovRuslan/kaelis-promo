@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Header, Footer } from "@/components/sections";
+import { Inter } from "next/font/google";
 import "@/styles/index.scss";
+import '@/styles/root.scss';
+import { Background } from "@/components/ui";
+import { ModalProvider } from "@/context/modal";
+import { Modal } from "@/components/sections";
 
-const geistSans = Geist({
+const geistInter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -23,14 +22,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header />
-        <main>
+      <body className={`${geistInter.variable}`}>
+        <ModalProvider>
+          <Modal />
+          <Background/>
           {children}
-        </main>
-        <Footer />
+        </ModalProvider>
       </body>
     </html>
   );

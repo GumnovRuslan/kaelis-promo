@@ -1,0 +1,99 @@
+.card {
+  position: relative;
+  border-radius: 30px;
+  background: linear-gradient(180deg, #26233E 0%, #655DA4 100%);
+  overflow: hidden;
+
+  &__inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 55px;
+    padding: 10px;
+
+    @include media-up('lg') {
+      gap: fluid-size(20, 55, 415, 991);
+    }
+
+    @include media-down('lg') {
+      gap: fluid-size(20, 55, 415, 991);
+    }
+  }
+
+  &__title {
+    line-height: 120%;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    text-align: center;
+
+    @include media-up('lg') {
+      font-size: fluid-size(20, 36, 991);
+    }
+
+    @include media-down('lg') {
+      font-size: fluid-size(12, 36, 415, 991);
+    }
+  }
+
+  &__items {
+    display: grid;
+    height: 50%;
+    width: 100%;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media-up('lg') {
+      row-gap: 10px;
+      max-width: 90%;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-down('lg') {
+      row-gap: 40px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__item {
+    display: flex;
+    gap: 5px;
+    height: 100%;
+
+    &_icon {
+      width: 100%;
+      height: 100%;
+      flex: 1 0 auto;
+
+      @include media-up('lg') {
+        max-width: fluid-size(30, 52, 991);
+        max-height: fluid-size(30, 52, 991);
+      }
+
+      @include media-down('lg') {
+        max-width: fluid-size(18, 52, 415, 991);
+        max-height: fluid-size(18, 52, 415, 991);
+      }
+    }
+
+    &_text {
+      font-weight: 700;
+      text-align: center;
+      color: var(--color-text-white);
+
+      @include media-up('lg') {
+        padding-top: fluid-size(8, 15, 991);
+        font-size: fluid-size(14, 20, 991);
+      }
+
+      @include media-down('lg') {
+        padding-top: 4px;
+        font-size: fluid-size(10, 20, 415, 991);
+      }
+    }
+  }
+}

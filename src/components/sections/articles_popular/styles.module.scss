@@ -1,0 +1,33 @@
+.articles {
+  margin: fluid-size(120, 190) 0 fluid-size(95, 240);
+  
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: fluid-size(62, 90);
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: fluid-size(15, 25);
+    text-align: center;
+  }
+
+  &__title {
+    font-size: fluid-size(24, 96); 
+    font-weight: 700;
+    color: var(--color-title-primary);
+  }
+
+  &__description {
+    max-width: fluid-size(266, 890);
+    font-size: fluid-size(12, 36);
+    font-weight: 700;
+    line-height: 130%;
+    color: var(--color-text-white);
+  }
+}

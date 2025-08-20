@@ -1,0 +1,58 @@
+@use '@/styles/mixins' as *;
+
+.hero {
+  margin-bottom: 100px;
+  
+  &__container {
+    padding: 0 fluid-size(20, 130);
+  }
+
+  &__content {
+    position: relative;
+    max-width: fluid-size(300, 1000); 
+  }
+
+  &__icon_bg {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: fluid-size(100, 450);
+    height: fluid-size(64, 300);
+
+    @include media_up('md') {
+      transform: translate(-58%, -15%);
+    }
+
+    @include media_down('md') {
+      transform: translate(-94%, -12%);
+    }
+  }
+
+  &__title {
+    font-size: fluid-size(24, 96); 
+    font-weight: 700;
+    line-height: fluid-size(29, 108);
+    color: var(--color-text-white);
+    margin-bottom: fluid-size(22, 55);
+  }
+
+  &__subtitle {
+    font-size: fluid-size(16, 64);
+    font-weight: 700;
+    color: var(--color-text-white);
+    margin-bottom: fluid-size(20, 80);
+  }
+
+  &__description {
+    font-size: fluid-size(12, 36);
+    line-height: fluid-size(17, 43);
+    color: var(--color-text-white);
+    margin-bottom: fluid-size(15, 28);
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 20px;
+  }
+}

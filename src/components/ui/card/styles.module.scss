@@ -1,0 +1,102 @@
+.cardWrapper {
+  perspective: 1000px;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(105%);
+  }
+
+  @include media-up('md') {
+    width: 300px;
+    height: 455px;
+  }
+
+  @include media-down('md') {
+    width: 215px;
+    height: 330px;
+  }
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s, box-shadow 0.5s ease-in-out;
+  border-radius: 10px;
+
+  &:hover {
+    box-shadow: 0 0 25px 10px #826393;
+  }
+
+  &__flipped {
+    transform: rotateY(180deg);
+  }
+
+  &__front, &__back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  &__background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__front {
+    transform: rotateY(180deg);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 25px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__title {
+    font-weight: 700;
+    text-transform: capitalize;
+    color: var(--color-text-white);
+
+    @include media-up('md') {
+      font-size: 36px;
+    }
+
+    @include media-down('md') {
+      font-size: 24px;
+    }
+  }
+
+  &__description {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: var(--color-text-white);
+
+    @include media-up('md') {
+      font-size: 20px;
+      max-width: 250px;
+    }
+
+    @include media-down('md') {
+      font-size: 12px;
+      max-width: 75%;
+    }
+  }
+}
+
+
+
