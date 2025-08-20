@@ -12,10 +12,32 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // output: 'export',
+  // output: 'standalone',
   images: {
     formats: ['image/webp', 'image/avif'],
-    domains: ['localhost:3000', 'cdn.sanity.io'],
+    remotePatterns: [
+      // Для localhost:3000
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/**',
+      },
+      // Для cdn.sanity.io
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '/**',
+      },
+      // Для kaelis.netlify.app
+      {
+        protocol: 'https',
+        hostname: 'kaelis.netlify.app',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles/scss')],
