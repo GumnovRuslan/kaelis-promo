@@ -22,7 +22,7 @@ const AppIntroCard = () => {
           </div>
         </div>
         <div className={styles.card__image}>
-          <Image src={'/images/mobile_image.webp'} fill alt='mobile app image'/>
+          <Image src={'/images/mobile_image.webp'} fill alt='mobile app image' unoptimized/>
         </div>
       </div>
     </div>
