@@ -51,7 +51,7 @@ const Footer = () => {
       <div className={styles.footer__inner}>
         <div className={styles.footer__column}>
           <Link href='/' className={styles.footer__logo}>
-            <Image src='/images/logo.webp' fill alt='logo' />
+            <Image src='/images/logo.svg' fill alt='logo' />
           </Link>
           <p className={styles.footer__text}>
             Mobile app for receiving personalized predictions from AI, studying Tarot and astrology. Unlock the secrets of the Universe right on your phone
