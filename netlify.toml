@@ -1,12 +1,17 @@
 [build]
   command = "next build"
-  publish = ".next" # Для `output: 'standalone'` или по умолчанию
+  publish = ".next"  # Для стандартного режима Next.js
 
-# Новая важная секция для миграции на v5 плагина
-[build.environment]
-  # Явно указываем, что статические файлы лежат в .next/static
-  NEXT_NETLIFY_STATIC_DIR = ".next/static"
-
-# Подключаем плагин
+# Критически важная секция для миграции на v5
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+  [plugins.inputs]
+    # Явно указываем пути к статическим файлам
+    static_dir = ".next/static"
+    # Если у вас есть другие папки со статикой (например, публичная), добавьте и их
+    # static_dir = "public" 
+
+# Если вы используете другие функции Netlify (например, Forms),
+# может потребоваться указать путь для функций
+[functions]
+  directory = ".next/functions"
