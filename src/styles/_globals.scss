@@ -11,7 +11,13 @@ body {
   min-height: 100vh;
   background: var(--gradient-main);
   overflow: hidden;
+
+  &.no-scroll {
+    position: fixed;
+  }
 }
+
+
 
 main {
   flex: 1 0 auto;

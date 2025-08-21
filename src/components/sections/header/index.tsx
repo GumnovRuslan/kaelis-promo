@@ -18,13 +18,13 @@ const Header = () => {
 
   useEffect(() => {
     if (menuIsActive) {
-      document.body.style.position = 'fixed';
+      document.body.classList.add('no-scroll');
     } else {
-      document.body.style.position = 'relative';
+      document.body.classList.remove('no-scroll');
     }
 
     return () => {
-      document.body.style.position = 'relative';
+      document.body.classList.remove('no-scroll');
     };
   }, [menuIsActive])
 
