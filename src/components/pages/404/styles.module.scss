@@ -1,4 +1,5 @@
 .page {
+  position: relative;
   font-family: var(--font-geist-sans), sans-serif;
   display: flex;
   align-items: center;
@@ -6,34 +7,54 @@
   min-height: 100vh;
 
   &__inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
   &__title {
-    font-size: 128px;
+    font-size: fluid-size(32, 128);
     font-weight: 700;
     line-height: 110%;
     color: var(--color-text-white);
+    margin-bottom: fluid-size(10, 0);
   }
 
   &__text {
-    font-size: 20px;
+    font-size: fluid-size(12, 20);
     line-height: 150%;
+    text-align: center;
     color: var(--color-text-white);
+
+    &:nth-last-child(2) {
+      margin-bottom: fluid-size(12, 0);
+    }
+
+    @include media-down('md') {
+      max-width: 220px;
+    }
   }
 
-}
+  &__bg {
+    position: absolute;
+    bottom: 0;
+    pointer-events: none;
+    align-self: flex-end;
+    width: 100%;
 
-.button {
-  width: 238px;
-  height: 60px;
-  margin-top: 40px;
+    @include media-up('lg') {
+      transform: translateY(31%);
+    }
 
-  &__text {
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--color-text-primary-700);
+    @include media-between('sm','lg') {
+      transform: translateY(40%);
+    }
+
+    @include media-down('sm') {
+      transform: translateY(43%);
+    }
   }
+
 }
