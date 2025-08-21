@@ -13,6 +13,7 @@ import DailyCard from "./daily_card";
 import Article from "./article";
 import FAQ from "./faq";
 import ArticleNotFound from "./article_not_found";
+import Contacts from "./contacts";
 
 export { 
   Wrapper, 
@@ -30,4 +31,5 @@ export {
   Article,
   FAQ,
   ArticleNotFound,
+  Contacts,
 };

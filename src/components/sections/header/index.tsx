@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 import Link from 'next/link';
 import Image from 'next/image';
 import { Burger } from '@/components/ui';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const MENU_ITEMS = [
   { name: 'Home', href: '/' },
@@ -15,6 +15,18 @@ const MENU_ITEMS = [
 
 const Header = () => {
   const [menuIsActive, setMenuIsActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (menuIsActive) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, [menuIsActive])
 
   return (
     <header className={styles.header}>

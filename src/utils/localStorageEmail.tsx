@@ -1,6 +1,6 @@
 export const checkEmail = () => {
   if (typeof window === 'undefined') {
-    return { value: null, isTrue: false };
+    return { value: '', isTrue: false };
   }
   
   const value = window.localStorage.getItem('userEmail');

@@ -5,6 +5,7 @@ import '@/styles/root.scss';
 import { Background } from "@/components/ui";
 import { ModalProvider } from "@/context/modal";
 import { Modal } from "@/components/sections";
+import NetlifyForm from "@/components/ui/netlify_form";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
           <Background/>
           {children}
         </ModalProvider>
+        <NetlifyForm/>
       </body>
     </html>
   );

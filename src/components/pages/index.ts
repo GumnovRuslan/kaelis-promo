@@ -3,6 +3,7 @@ import NotFoundPage from "./404";
 import ArticlesPage from "./articles";
 import PolicyPage from "./policy";
 import ArticlePage from "./article";
+import ContactsPage from "./contact";
 
 export { 
   HomePage, 
@@ -10,4 +11,5 @@ export {
   ArticlesPage,
   PolicyPage,
   ArticlePage,
+  ContactsPage,
 };

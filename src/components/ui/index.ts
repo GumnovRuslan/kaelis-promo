@@ -16,6 +16,7 @@ import Breadcrumbs from "./breadcrumbs";
 import ButtonShare from "./button_share";
 import Question from "./question";
 import ArticlesFilter from './articles_filter'
+import Contact from "./contact";
 
 export { 
   Button, 
@@ -36,4 +37,5 @@ export {
   ButtonShare,
   Question,
   ArticlesFilter,
+  Contact,
 };

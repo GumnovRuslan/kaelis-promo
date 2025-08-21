@@ -42,24 +42,42 @@ const items = [
 const Modal = () => {
   const { isOpenModal, closeModal, content } = useModalContext()
   const {value, isTrue} = checkEmail()
-  const [ inputValue, setInputValue ] = useState(isTrue ? value : '')
+  const [ inputValue, setInputValue ] = useState<string>('')
   const data = DATA[content as ModalContentType];
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const handlerSendEmail = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if(inputValue) {
-      sendEmail(inputValue);
+  const handlerSendEmail = async  (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('form-name', 'modal');
+    formData.append('email', inputValue);
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      console.log('Form successfully submitted to Netlify');
+      closeModal();
+    } catch (error) {
+      console.error('Form submission error:', error);
     }
-    closeModal()
   }
 
   return (
     <ModalWrapper isShow={isOpenModal} handlerClose={closeModal}>
-      <form className={styles.content} onSubmit={handlerSendEmail}>
+      <form 
+        className={styles.content} 
+        onSubmit={handlerSendEmail}
+        name="modal" 
+        method="POST" 
+        data-netlify="true"
+      >
+        <input type="hidden" name="form-name" value="modal" />
         <h3 className={styles.content__title}>{data.title}</h3>
         {content === 'join' && (
           <ul className={styles.content__items}>
@@ -75,7 +93,13 @@ const Modal = () => {
         )}
         <div className={styles.content__input}>
           <span className={styles.content__input_text}>Enter your email to receive the complete prediction</span>
-          <Input type='email' placeholder='Enter your email' value={inputValue || ''} onChange={handleInputChange}/>
+          <Input 
+            name='email'
+            type='email' 
+            placeholder='Enter your email' 
+            value={inputValue || ''} 
+            onChange={handleInputChange}
+          />
         </div>
         <Button 
           type='submit'

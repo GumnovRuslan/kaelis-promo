@@ -1,0 +1,17 @@
+.contact {
+  display: inline-flex;
+  align-items: center;
+  gap: fluid-size(5, 8);
+  text-decoration: none;
+  color: #969FD8;
+
+  &__icon {
+    width: fluid-size(27, 44);
+    height: fluid-size(27, 44);
+  }
+
+  &__text {
+    font-size: fluid-size(12, 20);
+    font-weight: 600;
+  }
+}
