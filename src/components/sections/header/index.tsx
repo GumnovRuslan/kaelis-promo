@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Burger } from '@/components/ui';
+import { Burger, LocalSelector } from '@/components/ui';
 import { useEffect, useState } from 'react';
 
 const MENU_ITEMS = [
@@ -46,6 +46,7 @@ const Header = () => {
             </Link>
           ))}
         </nav>
+        <LocalSelector/>
         <Burger 
           className={styles.header__burger} 
           isActive={menuIsActive} 
