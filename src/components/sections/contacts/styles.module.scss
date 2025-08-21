@@ -1,0 +1,21 @@
+.contacts {
+  position: relative;
+  z-index: 1;
+  max-width: 90%;
+  margin: 0 auto;
+  min-height: 10vh;
+  margin-bottom: fluid-size(50, 130);
+
+  &__title {
+    font-size: fluid-size(24, 96); 
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-title-white);
+    margin-bottom: fluid-size(50, 150);
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+  }
+}

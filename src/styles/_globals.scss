@@ -1,5 +1,10 @@
+html {
+  background: var(--gradient-main);
+}
+
 body {
   position: relative;
+  z-index: 1;
   font-family: var(--font-geist-sans), sans-serif;
   display: flex;
   flex-direction: column;
