@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { EyeIcon } from '@/components/icons';
-import { TArticlePreview } from '@/app/types/articles';
+import { TArticlePreview } from '@/types/articles';
 
 type TProps = {
   articles: TArticlePreview[];

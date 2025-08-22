@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 
 import Link from 'next/link';
-import { TBreadcrumbs } from '@/app/types/breadcrumbs';
+import { TBreadcrumbs } from '@/types/breadcrumbs';
 import { ArrowIcon } from '@/components/icons';
 import { Fragment } from 'react';
 
