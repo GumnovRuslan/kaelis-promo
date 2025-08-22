@@ -5,7 +5,7 @@ import Footer from "./footer";
 import Subscribe from "./subscribe";
 import ArticlesPopular from "./articles_popular";
 import ArticlesList from "./articles_list";
-import AboutApp from "./aboutApp";
+import AboutApp from "./about_app";
 import Message from "./message";
 import PrivacyPolicy from "./privacy-policy";
 import Modal from "./modal";

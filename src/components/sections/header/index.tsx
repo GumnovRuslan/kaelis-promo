@@ -6,15 +6,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Burger, LocalSelector } from '@/components/ui';
 import { useEffect, useState } from 'react';
-
-const MENU_ITEMS = [
-  { name: 'Home', href: '/' },
-  { name: 'Articles', href: '/articles' },
-  { name: 'Contacts', href: '/contacts' },
-]
+import { useTranslations } from 'next-intl';
 
 const Header = () => {
   const [menuIsActive, setMenuIsActive] = useState<boolean>(false);
+  const t = useTranslations('Header');
+
+  const MENU_ITEMS = [
+  { name: t('menu.home'), href: '/' },
+  { name: t('menu.articles'), href: '/articles' },
+  { name: t('menu.contacts'), href: '/contacts' },
+]
 
   useEffect(() => {
     if (menuIsActive) {

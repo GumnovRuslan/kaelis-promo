@@ -4,28 +4,17 @@ import styles from './styles.module.scss';
 
 import { Button, Card } from '@/components/ui';
 import { useModalContext } from '@/context/modal';
-
-const CARDS_DATA = [
-  {
-    title: 'Natal chart',
-    desc: 'Understand what is built into your personality'
-  },
-  {
-    title: 'Destiny Matrix',
-    desc: 'Get advice for important decisions'
-  },
-  {
-    title: 'Tarot based on your data',
-    desc: 'A mindful view of events'
-  },
-  {
-    title: 'Affirmations',
-    desc: 'set yourself on the right wavelength'
-  },
-]
+import { useTranslations } from 'next-intl';
 
 const Subscribe = () => {
+  const t = useTranslations('HomePage.subscribe')
   const { openModal, setContent } = useModalContext()
+  const cardKeys = ['natal', 'matrix', 'tarot', 'affirmations'] as const;
+
+  const cards = cardKeys.map((key) => ({
+    title: t(`cards.${key}.title`),
+    desc: t(`cards.${key}.text`)
+  }));
 
   const handlerOpenModal = () => {
     setContent('join')
@@ -36,13 +25,11 @@ const Subscribe = () => {
     <section className={styles.subscribe}>
       <div className={styles.subscribe__inner}>
         <div className={styles.subscribe__header}>
-          <Button text='Try it first' as='button' onClick={handlerOpenModal}/>
-          <p className={styles.subscribe__description}>
-            Subscribe now and get premium access for a week after the launch
-          </p>
+          <Button text={t('button')} as='button' onClick={handlerOpenModal}/>
+          <p className={styles.subscribe__description}>{t("text")}</p>
         </div>
         <div className={styles.subscribe__content}>
-          {CARDS_DATA.map((card, i) => 
+          {cards.map((card, i) => 
             <Card {...card} img_num={i+1} key={i}/>
           )}
         </div>

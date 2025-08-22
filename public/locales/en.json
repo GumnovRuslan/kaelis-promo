@@ -1,0 +1,88 @@
+{
+  "Header": {
+    "menu": {
+      "home": "Home",
+      "articles": "Articles",
+      "contacts": "Contacts"
+    }
+  },
+  "Modal": {
+    "join": {
+      "title": "Join Kaelis",
+      "subtitle": "Launching soon.",
+      "text": "Subscribe to be the first to know.",
+      "button": "Get access",
+      "policy": {
+        "text": "By clicking “Send”, you agree to the",
+        "link": "Privacy Policy"
+      } 
+
+    }
+  },
+  "HomePage": {
+    "hero": {
+      "title": "Understand yourself Change your life",
+      "subtitle": "Tools for conscious change",
+      "text": "Personalized recommendations based on astrology, Tarot, and proven methods — for mindful decisions and harmony in everyday life"
+    },
+    "subscribe": {
+      "button": "Try it first",
+      "text": "Subscribe now and get premium access for a week after the launch",
+      "cards": {
+        "natal": {
+          "title": "Natal chart",
+          "text": "Understand what is built into your personality"
+        },
+        "matrix": {
+          "title": "Destiny Matrix",
+          "text": "Get advice for important decisions"
+        },
+        "tarot": {
+          "title": "Tarot based on your data",
+          "text": "A mindful view of events"
+        },
+        "affirmations": {
+          "title": "Affirmations",
+          "text": "Set yourself on the right wavelength"
+        }
+      }
+    },
+    "articles": {
+      "title": "Popular articles",
+      "desc": "Explore mystical practices and expand your knowledge with our expert materials",
+      "button": "Read all articles"
+    },
+    "aboutApp": {
+      "title": "About the app",
+      "cards": {
+        "appInto": {
+          "title": "AI Daily Card",
+          "desc": "Personal predictions from AI. Ancient wisdom of Tarot cards, and astrological forecasts in one app"
+        },
+        "subscribe": {
+          "title": "Subscribe"
+        },
+        "purpose": {
+          "title": "What is the purpose of using the app?",
+          "items": {
+            "item1": "Improve relationships",
+            "item2": "Find the right career path",
+            "item3": "Understand your strengths and weaknesses",
+            "item4": "Get an action plan"
+          }
+        }
+      }
+    },
+    "message": "We believe that everyone has the right to a mindful and harmonious life. Our goal is to provide you with tools for deep self-discovery and decision-making based on ancient wisdom and modern technologies"
+  },
+  "footer": {
+    "desc": "Mobile app for receiving personalized predictions from AI, studying Tarot and astrology. Unlock the secrets of the Universe right on your phone",
+    "nav": {
+      "home": "Home",
+      "articles": "Articles",
+      "contacts": "Contacts",
+      "faq": "FAQ",
+      "privacy-policy": "Privacy Policy"
+    }
+  }
+}
