@@ -61,7 +61,7 @@ const VideoCard = () => {
         width="100%"
         controls={!userPaused}
       >
-          <source src="/video/test_video.mp4" type="video/mp4" />
+        <source src="/video/Kaelis_Web.mov" type="video/mp4" />
       </video>
     </div>
   )

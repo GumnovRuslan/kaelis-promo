@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Burger, LocalSelector } from '@/components/ui';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import disableBodyScroll from '@/utils/disableBodyScroll';
 
 const Header = () => {
   const [menuIsActive, setMenuIsActive] = useState<boolean>(false);
@@ -19,15 +20,8 @@ const Header = () => {
 ]
 
   useEffect(() => {
-    if (menuIsActive) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
-
-    return () => {
-      document.body.classList.remove('no-scroll');
-    };
+    disableBodyScroll({isDisabled: menuIsActive})
+    return () => disableBodyScroll({remove: true})
   }, [menuIsActive])
 
   return (

@@ -2,12 +2,13 @@
 
 import styles from './styles.module.scss';
 
-import { StarIcon } from '@/components/icons';
 import { ModalWrapper, Input, Button } from '@/components/ui';
 import Link from 'next/link';
 import { useModalContext } from '@/context/modal';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
+import disableBodyScroll from '@/utils/disableBodyScroll';
 
 type ModalContentType = 'join' | 'full';
 
@@ -18,21 +19,6 @@ interface ModalData {
   };
   texts?: string[];
 }
-
-// const DATA: Record<ModalContentType, ModalData> = {
-//   'join': {
-//     title: 'Join Kaelis',
-//     button: {
-//       text: 'Get access'
-//     },
-//   },
-//   'full': {
-//     title: 'Get the full interpretation',
-//     button: {
-//       text: 'Send'
-//     },
-//   },
-// };
 
 const items = [
   'No hidden fees',
@@ -65,6 +51,11 @@ const Modal = () => {
   };
 
   const data = DATA[content as ModalContentType];
+
+  useEffect(() => {
+    disableBodyScroll({isDisabled: isOpenModal, target: 'html'})
+    return () => disableBodyScroll({remove: true})
+  }, [isOpenModal])
 
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

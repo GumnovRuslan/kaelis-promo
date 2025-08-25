@@ -1,5 +1,9 @@
 html {
   background: var(--gradient-main);
+
+  &.no-scroll {
+    overflow: hidden;
+  }
 }
 
 body {
