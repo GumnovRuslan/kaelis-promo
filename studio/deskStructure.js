@@ -1,16 +1,8 @@
 import S from "@sanity/desk-tool/structure-builder";
-import {
-  pages
-} from "./desk/pages";
-import {
-  articles
-} from "./desk/articles";
-import {
-  blogCategory
-} from "./desk/blogCategory";
-import {
-  redirect
-} from "./desk/redirect";
+import {pages} from "./desk/pages";
+import {articles} from "./desk/articles";
+import {blogCategory} from "./desk/blogCategory";
+import {redirect} from "./desk/redirect";
 
 
 export default () => {

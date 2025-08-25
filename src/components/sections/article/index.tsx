@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { TArticle } from '@/app/types/articles';
+import { TArticle } from '@/types/articles';
 import { ButtonShare, Breadcrumbs } from '@/components/ui';
 import { ptComponents } from '@/utils/portableTextComponents';
 import { PortableText } from '@portabletext/react';

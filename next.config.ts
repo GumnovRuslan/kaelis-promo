@@ -1,14 +1,15 @@
 import type { NextConfig } from "next";
-import createMDX from "@next/mdx";
+// import createMDX from "@next/mdx";
 import path from 'path';
+import createNextIntlPlugin from "next-intl/plugin";
 
-const withMDX = createMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-  },
-});
+// const withMDX = createMDX({
+//   extension: /\.mdx?$/,
+//   options: {
+//     remarkPlugins: [],
+//     rehypePlugins: [],
+//   },
+// });
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -53,4 +54,6 @@ const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 };
 
-export default withMDX(nextConfig);
+const withNextIntl = createNextIntlPlugin();
+
+export default withNextIntl(nextConfig);

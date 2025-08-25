@@ -4,6 +4,10 @@
   background: linear-gradient(180deg, #26233E 0%, #655DA4 100%);
   overflow: hidden;
 
+  & > img {
+    object-fit: cover;
+  }
+
   &__inner {
     position: relative;
     height: 100%;
