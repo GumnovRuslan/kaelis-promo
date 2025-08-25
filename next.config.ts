@@ -35,6 +35,11 @@ const nextConfig: NextConfig = {
         hostname: 'kaelis.netlify.app',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'https://kaelisai.com',
+        pathname: '/**',
+      },
     ],
   },
   sassOptions: {
