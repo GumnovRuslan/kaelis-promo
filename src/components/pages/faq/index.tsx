@@ -3,13 +3,13 @@ import { getLocale } from "next-intl/server";
 import Head from "next/head";
 import FaqSeo from "@/seo/faq";
 
-const FAQPage = async () => {
-  const locale = await getLocale();
+const FAQPage = () => {
+  // const locale = await getLocale();
   return (
   <>
-    <Head>
+    {/* <Head>
       <FaqSeo lang={locale || 'en'}/>
-    </Head>
+    </Head> */}
     <FAQ/>
   </>
   )
