@@ -75,6 +75,62 @@
     },
     "message": "We believe that everyone has the right to a mindful and harmonious life. Our goal is to provide you with tools for deep self-discovery and decision-making based on ancient wisdom and modern technologies"
   },
+  "ArticlesPage": {
+    "title": "Articles",
+    "desc": "Explore mystical practices and expand your knowledge with our expert materials"
+  },
+  "ContactsPage": {
+    "title": "Contact us"
+  },
+  "PrivacyPolicyPage": {
+    "title": "Privacy Policy",
+    "published": "Published: June 14, 2025",
+    "subtitle": "The Mystical Connection Between the Moon and Humans",
+    "intro": "Since ancient times, people have noticed a connection between lunar cycles and changes in behavior, emotions, and physical states. Modern science confirms some of these observations, showing the real influence of the Moon on biological processes.",
+    "sections": {
+      "lunarPhases": {
+        "title": "Lunar Phases and Their Meaning",
+        "items": {
+          "newMoon": "New Moon — a time for new beginnings and planning",
+          "waxingMoon": "Waxing Moon — a period of growth and project development",
+          "fullMoon": "Full Moon — a peak of emotions and completion of cycles",
+          "waningMoon": "Waning Moon — a time for release and cleansing"
+        }
+      },
+      "emotions": {
+        "title": "Influence on Emotions"
+      }
+    }
+  },
+  "FaqPage": {
+    "title": "F.A.Q.",
+    "items": {
+      "item1": {
+        "question": "What is Kaelis AI and how is it different from other Tarot and astrology apps?",
+        "answer": "Kaelis AI is a self-discovery app that combines Tarot, natal chart, and destiny matrix. Unlike traditional apps, Kaelis uses artificial intelligence to provide personalized readings and astrological insights tailored to your question and life context."
+      },
+      "item2": {
+        "question": "Can I get a free daily card online?",
+        "answer": "Yes, Kaelis AI offers a free Daily Card. Each day you can draw a personal Tarot card with an AI-powered interpretation — a quick insight to guide your day."
+      },
+      "item3": {
+        "question": "How does the destiny matrix work in Kaelis AI?",
+        "answer": "The destiny matrix is calculated from your birth date and highlights strengths, life lessons, and karmic tasks. In Kaelis AI you get the numbers plus a clear, detailed interpretation."
+      },
+      "item4": {
+        "question": "How can I build a natal chart?",
+        "answer": "Enter your birth date, time, and place — Kaelis AI automatically generates your natal chart with planets and houses, and provides a personalized interpretation in your preferred style."
+      },
+      "item5": {
+        "question": "Does Kaelis AI provide relationship compatibility?",
+        "answer": "Yes. The Compatibility feature analyzes your and your partner’s data using Tarot, natal chart, and destiny matrix to reveal relationship dynamics and offer practical advice."
+      },
+      "item6": {
+        "question": "What languages is Kaelis AI available in?",
+        "answer": "At launch Kaelis AI supports English, Ukrainian, and Russian. Spanish, French, and additional languages are planned."
+      }
+    }
+  },
   "footer": {
     "desc": "Mobile app for receiving personalized predictions from AI, studying Tarot and astrology. Unlock the secrets of the Universe right on your phone",
     "nav": {

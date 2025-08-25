@@ -1,9 +1,9 @@
 import S from "@sanity/desk-tool/structure-builder";
 
-export const deLocale = S.listItem()
-  .title("DE Pages")
+export const ukLocale = S.listItem()
+  .title("UK Pages")
   .child(
     S.documentTypeList("page")
       .filter('_type == "page" && i18n_lang == $baseLanguage')
-      .params({ baseLanguage: `de` }),
+      .params({ baseLanguage: `uk` }),
   );

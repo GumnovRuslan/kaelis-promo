@@ -113,9 +113,8 @@ const Modal = () => {
             ))}
           </ul>
         )} */}
-        {data.texts?.map((text, i) => <span className={styles.content__input_text}>{text}</span>)}
+        {data.texts?.map((text, i) => <span className={styles.content__input_text} key={i}>{text}</span>)}
         <div className={styles.content__input}>
-          {/* <span className={styles.content__input_text}>Enter your email to receive the complete prediction</span> */}
           <Input 
             name='email'
             type='email' 

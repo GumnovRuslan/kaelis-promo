@@ -1,6 +1,6 @@
-export const ALL_ARTICLES = `
+export const getArticles = (lang: string = 'en') => `
   query {
-  allArticlesItem {
+  allArticlesItem(where: { i18n_lang: { eq: "${lang}" } }) {
   	_id
     title
     i18n_lang

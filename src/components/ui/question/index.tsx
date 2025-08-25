@@ -27,7 +27,7 @@ const Question = ({data, isOpen, setIsOpen}: TProps) => {
           ? { height: itemRef.current.scrollHeight } 
           : { height: '0px' }
       }>
-        <div 
+        <p 
           className={styles.question__content_inner} 
           ref={itemRef} 
           dangerouslySetInnerHTML={{__html: data.answer}}

@@ -1,13 +1,14 @@
-import { ALL_ARTICLES } from '@/graphql/queries/articles';
+import { getArticles } from '@/graphql/queries/articles';
 import styles from './styles.module.scss';
 
 import { Button, Articles } from '@/components/ui';
 import { fetchGraphQL } from '@/lib/graphql';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, getLocale } from 'next-intl/server';
 
 const ArticlesPopular = async () => {
   const t = await getTranslations('HomePage.articles')
-  const { data, errors } = await fetchGraphQL(ALL_ARTICLES);
+  const locale = await getLocale();
+  const { data, errors } = await fetchGraphQL(getArticles(locale || 'en'));
   const articles = data?.allArticlesItem.slice(0, 5)
 
   return (
