@@ -2,11 +2,11 @@
   position: absolute;
   z-index: -1;
   right: 0;
-  top: 160px;
+  top: fluid-size(50, 160);
   transform: translateX(50%);
   display: flex;
-  width: 1000px;
-  height: 1000px;
+  width: fluid-size(240, 1000);
+  height: fluid-size(240, 1000); 
   color: #646095;
   opacity: 0.3;
 }

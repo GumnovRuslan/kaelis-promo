@@ -1,14 +1,15 @@
+'use client'
+
 import styles from './styles.module.scss';
 
 import Button from '../button';
 import { AppleStoreIcon, GooglePlayIcon } from '@/components/icons';
 import React from 'react';
+import { useModalContext } from '@/context/modal';
 
 type StoreType = 'app' | 'google';
 
 type TButton = {
-  type: 'link';
-  href: string;
   icon: React.ReactNode;
   text: string;
   title: string;
@@ -16,15 +17,11 @@ type TButton = {
 
 const BUTTONS_DATA: Record<StoreType, TButton> = {
   app: {
-    type: 'link',
-    href: '#',
     icon: <AppleStoreIcon />,
     text: 'Download on',
     title: 'App Store',
   },
   google: {
-    type: 'link',
-    href: '#',
     icon: <GooglePlayIcon />,
     text: 'Get on',
     title: 'Google Play',
@@ -37,10 +34,11 @@ type TProps = {
 };
 
 const ButtonStore = ({ type, className }: TProps) => {
+  const {openModal} = useModalContext()
   const button = BUTTONS_DATA[type];
 
   return (
-    <Button as='link' type={button.type} href={button.href} className={`${styles.button} ${className}`}>
+    <Button as='button' className={`${styles.button} ${className}`} onClick={openModal}>
       <div className={styles.button__inner}>
         <span className={styles.button__icon}>{button.icon}</span>
         <div className={styles.button__content}>

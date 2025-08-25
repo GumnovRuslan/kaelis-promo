@@ -97,7 +97,6 @@ export default createSchema({
     cookiesItem,
 
     // blocks
-
     imageWithAlt,
   ]),
 });

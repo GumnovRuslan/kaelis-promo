@@ -37,7 +37,7 @@ export default {
         list: [
           { title: "English", value: "en" },
           { title: "Polish", value: "pl" },
-          { title: "Deutch", value: "de" },
+          { title: "Russian", value: "ru" },
         ],
       },
       validation: (Rule) => Rule.required(),

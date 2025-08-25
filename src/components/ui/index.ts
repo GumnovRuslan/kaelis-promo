@@ -17,6 +17,7 @@ import ButtonShare from "./button_share";
 import Question from "./question";
 import ArticlesFilter from './articles_filter'
 import Contact from "./contact";
+import LocalSelector from "./lang_selector";
 
 export { 
   Button, 
@@ -38,4 +39,5 @@ export {
   Question,
   ArticlesFilter,
   Contact,
+  LocalSelector,
 };

@@ -1,7 +1,7 @@
 import { Article, Message, ArticleNotFound } from "@/components/sections";
 import { getArticle } from "@/graphql/queries/articles";
 import { fetchGraphQL } from "@/lib/graphql";
-import { TArticle } from "@/app/types/articles";
+import { TArticle } from "@/types/articles";
 
 type TProps = {
   slug: string;

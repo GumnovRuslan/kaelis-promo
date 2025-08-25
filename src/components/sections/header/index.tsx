@@ -4,28 +4,24 @@ import styles from './styles.module.scss'
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Burger } from '@/components/ui';
+import { Burger, LocalSelector } from '@/components/ui';
 import { useEffect, useState } from 'react';
-
-const MENU_ITEMS = [
-  { name: 'Home', href: '/' },
-  { name: 'Articles', href: '/articles' },
-  { name: 'Contacts', href: '/contacts' },
-]
+import { useTranslations } from 'next-intl';
+import disableBodyScroll from '@/utils/disableBodyScroll';
 
 const Header = () => {
   const [menuIsActive, setMenuIsActive] = useState<boolean>(false);
+  const t = useTranslations('Header');
+
+  const MENU_ITEMS = [
+  { name: t('menu.home'), href: '/' },
+  { name: t('menu.articles'), href: '/articles' },
+  { name: t('menu.contacts'), href: '/contacts' },
+]
 
   useEffect(() => {
-    if (menuIsActive) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
-
-    return () => {
-      document.body.classList.remove('no-scroll');
-    };
+    disableBodyScroll({isDisabled: menuIsActive})
+    return () => disableBodyScroll({remove: true})
   }, [menuIsActive])
 
   return (
@@ -46,6 +42,7 @@ const Header = () => {
             </Link>
           ))}
         </nav>
+        <LocalSelector/>
         <Burger 
           className={styles.header__burger} 
           isActive={menuIsActive} 
