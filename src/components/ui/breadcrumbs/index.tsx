@@ -15,8 +15,8 @@ const Breadcrumbs = ({data, className}: TProps) => {
     <div className={`${styles.bread} ${className}`}>
       {data.map((item, i) => (
         <Fragment key={i}>
-          <Link href={item.linkInternal?.label || ''} className={styles.bread__link} >
-            {item.title}
+          <Link href={item?.url || ''} className={styles.bread__link} >
+            {item?.label}
           </Link>
           {i+1 < data.length && (
             <span className={styles.bread__icon}><ArrowIcon/></span>

@@ -1,5 +1,6 @@
 import { TBreadcrumbs } from "./breadcrumbs";
 import { PortableTextBlock } from "@portabletext/react";
+import { TCategory } from "./category";
 
 export type TArticlePreview = {
   title: string;
@@ -7,6 +8,7 @@ export type TArticlePreview = {
   slug: {
     current: string
   };
+  category: TCategory[];
   coverImage: {
     image: {
       asset: {

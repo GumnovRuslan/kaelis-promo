@@ -1,6 +1,4 @@
 export type TBreadcrumbs = {
-  title: string;
-  linkInternal: {
-    label: string;
-  }
+  label: string;
+  url: string;
 }
