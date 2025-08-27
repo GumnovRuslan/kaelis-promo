@@ -18,6 +18,7 @@ import Question from "./question";
 import ArticlesFilter from './articles_filter'
 import Contact from "./contact";
 import LocalSelector from "./lang_selector";
+import Pagination from "./pagination";
 
 export { 
   Button, 
@@ -40,4 +41,5 @@ export {
   ArticlesFilter,
   Contact,
   LocalSelector,
+  Pagination,
 };
