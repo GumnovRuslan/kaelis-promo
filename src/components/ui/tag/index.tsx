@@ -1,14 +1,17 @@
 import styles from './styles.module.scss';
 
+import { TCategory } from '@/types/category';
+
 type TProps = {
-  text: string;
+  category: TCategory;
   isActive?: boolean;
+  selectCategory: () => void;
 }
 
-const Tag = ({text, isActive = false}: TProps) => {
+const Tag = ({category, isActive = false, selectCategory}: TProps) => {
   return (
-    <button className={`${styles.tag} ${isActive ? styles['tag--active'] : styles['tag--default']}`}>
-      <span className={styles.tag__text}>{text}</span>
+    <button className={`${styles.tag} ${isActive ? styles['tag--active'] : styles['tag--default']}`} onClick={selectCategory}>
+      <span className={styles.tag__text}>{category.title}</span>
     </button>
   )
 }

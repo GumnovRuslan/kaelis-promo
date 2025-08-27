@@ -6,13 +6,7 @@ export const getArticles = (lang: string = 'en') => `
     i18n_lang
     date
     slug {current}
-    breadcrumbs {
-      title
-      linkInternal {
-        label
-        
-      }
-    }
+    category { title }
     coverImage {
       image {
         asset {
@@ -36,11 +30,8 @@ export const getArticle = (slug: string) => `
     slug {current}
     contentRaw
     breadcrumbs {
-      title
-      linkInternal {
-        label
-        
-      }
+      label
+      url
     }
     coverImage {
       image {

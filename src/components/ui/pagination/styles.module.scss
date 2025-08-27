@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: fluid-size(50, 100);
+
+  &__btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    color: var(--color-text-primary-100);
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &--active {
+      pointer-events: none;
+      color: var(--color-text-primary-500);
+    }
+
+    &--disable {
+      pointer-events: none;
+    }
+  }
+
+  &__number {
+    font-size: fluid-size(12, 20);
+    font-weight: 700;
+  }
+}

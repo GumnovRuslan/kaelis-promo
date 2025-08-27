@@ -9,22 +9,27 @@ type TProps = {
 } 
 
 const Article = async ({data}: TProps) => {
-  console.log('contentRaw', data.contentRaw)
   return (
     <section className={styles.article}>
       <div className={styles.article__inner}>
         <div className={styles.article__header}>
           <h1 className={styles.article__title}>{data.title}</h1>
-          <p className={styles.article__desc}>{data.desc}</p>
+          {data?.desc && (
+            <p className={styles.article__desc}>{data.desc}</p>
+          )}
           <div className={styles.article__info}>
             <span className={styles.article__date}>{data.date}</span>
             <ButtonShare />
           </div>
         </div>
-        <Breadcrumbs data={data.breadcrumbs} className={styles.article__breadcrumbs}/>
-        <div className={styles.article__content}>
-          <PortableText value={data.contentRaw} components={ptComponents}/>
-        </div>
+        {data?.breadcrumbs && (
+          <Breadcrumbs data={data.breadcrumbs} className={styles.article__breadcrumbs}/>
+        )}
+        {data?.contentRaw && (
+          <div className={styles.article__content}>
+            <PortableText value={data.contentRaw} components={ptComponents}/>
+          </div>
+        )}
       </div>
     </section>
   )
