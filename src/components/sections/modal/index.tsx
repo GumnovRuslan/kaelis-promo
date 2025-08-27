@@ -29,7 +29,7 @@ const items = [
 const Modal = () => {
   const t = useTranslations('Modal')
   const { isOpenModal, closeModal, content } = useModalContext()
-  const [ inputValue, setInputValue ] = useState<string>('')
+  const [ email, setEmail ] = useState<string>('')
 
   const DATA: Record<ModalContentType, ModalData> = {
     'join': {
@@ -59,14 +59,14 @@ const Modal = () => {
 
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+    setEmail(e.target.value);
   };
 
   const handlerSendEmail = async  (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('form-name', 'modal');
-    formData.append('email', inputValue);
+    formData.append('email', email);
 
     try {
       await fetch('/', {
@@ -81,11 +81,31 @@ const Modal = () => {
     }
   }
 
+  const handlerSendEmailToVercel = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // setStatus("Загрузка...");
+
+    const res = await fetch("api/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+
+    if (res.ok) {
+      console.log('Успешно отправлено');
+      // setStatus("Успешно отправлено!");
+      setEmail("");
+    } else {
+      console.log('Ошибка при отправке');
+      // setStatus("Ошибка при отправке.");
+    }
+  }
+
   return (
     <ModalWrapper isShow={isOpenModal} handlerClose={closeModal}>
       <form 
         className={styles.content} 
-        onSubmit={handlerSendEmail}
+        onSubmit={handlerSendEmailToVercel}
         name="modal" 
         method="POST" 
         data-netlify="true"
@@ -110,7 +130,7 @@ const Modal = () => {
             name='email'
             type='email' 
             placeholder='Enter your email' 
-            value={inputValue || ''} 
+            value={email || ''} 
             onChange={handleInputChange}
           />
         </div>
