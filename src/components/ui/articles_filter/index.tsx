@@ -4,15 +4,6 @@ import Input from '../input';
 import Tag from '../tag';
 import { TCategory } from '@/types/category';
 
-const TAGS = [
-  'All',
-  'Training',
-  'Astrology',
-  'Numerology',
-  'Spreads',
-  'Practices',
-]
-
 type TProps = {
   categories: TCategory[];
   selectedCategories: TCategory[];
@@ -21,8 +12,13 @@ type TProps = {
   setInputValue: (value: string) => void;
 }
 
-const ArticlesFilter = ({categories, selectedCategories, handleCategorySelect, inputValue, setInputValue}: TProps) => {
-
+const ArticlesFilter = ({
+  categories, 
+  selectedCategories, 
+  handleCategorySelect, 
+  inputValue, 
+  setInputValue
+}: TProps) => {
   const handleSetInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
@@ -31,7 +27,7 @@ const ArticlesFilter = ({categories, selectedCategories, handleCategorySelect, i
   return (
     <div className={styles.filters}>
       <Input type="text" value={inputValue} onChange={handleSetInputValue}/>
-      {categories && categories.length && (
+      {categories.length ? (
         <div className={styles.filters__tags}>
           {categories.map((category, i) => (
             <Tag 
@@ -42,7 +38,7 @@ const ArticlesFilter = ({categories, selectedCategories, handleCategorySelect, i
             />
             ))}
         </div>
-      )}
+      ): null}
     </div>
   )
 }

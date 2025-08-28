@@ -77,7 +77,12 @@
   },
   "ArticlesPage": {
     "title": "Articles",
-    "desc": "Explore mystical practices and expand your knowledge with our expert materials"
+    "desc": "Explore mystical practices and expand your knowledge with our expert materials",
+    "notFound": "No articles found"
+  },
+  "ArticlePage": {
+    "title": "Article not found",
+    "button": "Return to articles"
   },
   "ContactsPage": {
     "title": "Contact us"

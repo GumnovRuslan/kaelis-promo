@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { InstagramIcon, TikTokIcon, TwitterIcon } from '@/components/icons';
 import { useTranslations } from 'next-intl';

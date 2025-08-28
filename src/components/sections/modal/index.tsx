@@ -3,7 +3,7 @@
 import styles from './styles.module.scss';
 
 import { ModalWrapper, Input, Button } from '@/components/ui';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useModalContext } from '@/context/modal';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';

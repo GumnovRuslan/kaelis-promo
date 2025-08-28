@@ -4,9 +4,8 @@ import "@/styles/index.scss";
 import '@/styles/root.scss';
 import { Background } from "@/components/ui";
 import { ModalProvider } from "@/context/modal";
-import { Modal } from "@/components/sections";
+import { Header, Footer, Modal } from "@/components/sections";
 import NetlifyForm from "@/components/ui/netlify_form";
-import {Wrapper} from "@/components/sections";
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
@@ -39,7 +38,7 @@ export default async function RootLayout({
 }>) {
 
   const {locale} = await params;
-  console.log('locale',locale)
+
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -53,9 +52,11 @@ export default async function RootLayout({
           <ModalProvider>
             <Modal />
             <Background/>
-            <Wrapper>
-              {children}
-            </Wrapper>
+            <Header/>
+              <main>
+                {children}
+              </main>
+            <Footer/>
           </ModalProvider>
           <NetlifyForm/>
         </NextIntlClientProvider>

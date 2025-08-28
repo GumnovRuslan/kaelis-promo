@@ -14,10 +14,20 @@
     margin-bottom: fluid-size(14, 30);
   }
 
-  &__description {
+  &__description,
+  &__empty_text {
     font-size: fluid-size(12, 36);
     font-weight: 700;
     line-height: 140%;
     color: var(--color-title-white);
+  }
+
+  &__empty {
+    padding: 0 20px;
+  }
+
+  &__empty_text {
+    display: block;
+    text-align: center;
   }
 }

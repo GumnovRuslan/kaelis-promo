@@ -51,7 +51,12 @@
 
     h1, h2, h3, h4, h5, h6 {
       font-weight: 700;
-      margin-bottom: fluid-size(15, 30); 
+      margin: fluid-size(15, 30) 0; 
+    }
+
+    h2 {
+      font-size: fluid-size(20, 60);
+      line-height: 130%;
     }
 
     h3 {
@@ -59,9 +64,13 @@
       line-height: 130%;
     }
 
-    p, li {
+    p, li, blockquote {
       font-size: fluid-size(12, 36);
       line-height: 150%;
+    }
+
+    blockquote {
+      font-style: italic;
     }
 
     strong {

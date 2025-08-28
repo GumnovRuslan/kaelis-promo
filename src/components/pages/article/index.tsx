@@ -11,8 +11,6 @@ const ArticlePage = async ({slug}: TProps) => {
   const { data, errors } = await fetchGraphQL(getArticle('/'+slug));
   const article: TArticle | null = data?.allArticlesItem?.[0] || null
 
-  console.log('data', article)
-
   if(!article) return <ArticleNotFound/>
   else {
     return (

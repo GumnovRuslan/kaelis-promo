@@ -2,7 +2,7 @@
 
 import styles from './styles.module.scss'
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { Burger, LocalSelector } from '@/components/ui';
 import { useEffect, useState } from 'react';

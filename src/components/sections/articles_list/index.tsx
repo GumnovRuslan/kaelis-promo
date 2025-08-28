@@ -130,7 +130,7 @@ const ArticlesList = ({categories, articles}: TProps) => {
             </>
           ) : (
             <div className={styles.articles__empty}>
-              {t('noArticles')}
+              <span className={styles.articles__empty_text}>{t('notFound')}</span>
             </div>
           )}
         </div>
