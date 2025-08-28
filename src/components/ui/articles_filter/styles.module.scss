@@ -12,6 +12,41 @@
     column-gap: fluid-size(9, 23); 
     row-gap: fluid-size(14, 40);
   }
+  
+  &__search {
+    position: relative;
+  }
+
+  &__loupe {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: fluid-size(20, 27);
+    transform: translateY(-50%);
+    height: 100%;
+    max-width: fluid-size(11, 18);
+    color: var(--color-text-primary-500)
+  }
+
+  &__input {
+    padding: 0 fluid-size(45, 70);
+  }
+
+  &__clear_input {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: fluid-size(11, 18);
+    transform: translateY(-50%);
+    height: 100%;
+    max-width: fluid-size(28, 35);
+    max-height: fluid-size(28, 35);
+    border: none;
+    padding: 0;
+    background: none;
+    color: var(--color-text-primary-500);
+    cursor: pointer;
+  }
 }
 
   

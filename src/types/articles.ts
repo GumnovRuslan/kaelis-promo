@@ -24,6 +24,7 @@ export type TArticle = {
   desc: string;
   date: string;
   contentRaw: PortableTextBlock[];
+  category: TCategory[];
   slug: {
     current: string
   };

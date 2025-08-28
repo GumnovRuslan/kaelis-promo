@@ -1,0 +1,23 @@
+.categories {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  &__list {
+    bottom: 50%;
+    border-radius: 12px;
+    transition: 0.5s;
+  }
+
+  &__list_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__header {
+    overflow: hidden;
+  }
+}

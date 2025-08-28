@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import { TArticle } from '@/types/articles';
-import { ButtonShare, Breadcrumbs } from '@/components/ui';
+import { ButtonShare, Breadcrumbs, ArticleCategory } from '@/components/ui';
 import { ptComponents } from '@/utils/portableTextComponents';
 import { PortableText } from '@portabletext/react';
 
@@ -9,7 +9,7 @@ type TProps = {
 } 
 
 const Article = async ({data}: TProps) => {
-  console.log(data.contentRaw)
+  console.log(data)
   return (
     <section className={styles.article}>
       <div className={styles.article__inner}>
@@ -19,7 +19,16 @@ const Article = async ({data}: TProps) => {
             <p className={styles.article__desc}>{data.desc}</p>
           )}
           <div className={styles.article__info}>
-            <span className={styles.article__date}>{data.date}</span>
+            <div className={styles.article__info_left}>
+              {data?.category?.length && (
+                <div className={styles.article__categories}>
+                  {data.category.map((cat, i) => (
+                    <ArticleCategory label={cat.title} key={cat.title + i}/>
+                  ))}
+                </div>
+              )}
+              <span className={styles.article__date}>{data.date}</span>
+            </div>
             <ButtonShare />
           </div>
         </div>

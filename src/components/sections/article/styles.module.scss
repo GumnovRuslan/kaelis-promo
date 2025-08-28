@@ -31,6 +31,20 @@
     gap: 50px;
   }
 
+  &__info_left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__categories {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
   &__date {
     font-size: fluid-size(12, 20);
     color: var(--color-text-white);

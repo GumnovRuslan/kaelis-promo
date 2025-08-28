@@ -1,0 +1,38 @@
+.category {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: fluid-size(70, 155);
+  width: 100%;
+  max-width: max-content;
+  height: fluid-size(17, 38);
+  padding: 0 fluid-size(10, 15);
+  text-align: center;
+  border-radius: 30px;
+  border: 1px solid var(--color-bg-primary);
+  background: var(--gradient-btn);
+
+  &__text {
+    font-size: fluid-size(12, 20);
+    font-weight: 600;
+    color: var(--color-text-white);
+  }
+
+  &__more {
+    position: absolute;
+    right: 5px;
+    padding: 0;
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #28273A70;
+    
+  }
+
+  &__more_number {
+    font-size: 12px;
+    color: var(--color-text-white);
+  }
+}
