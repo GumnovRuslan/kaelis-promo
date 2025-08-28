@@ -7,9 +7,9 @@ import { ModalProvider } from "@/context/modal";
 import { Header, Footer, Modal } from "@/components/sections";
 import NetlifyForm from "@/components/ui/netlify_form";
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
-import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import { setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -36,13 +36,8 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{locale: string}>;
 }>) {
-
   const {locale} = await params;
-
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
+  
   setRequestLocale(locale);
   
   return (
