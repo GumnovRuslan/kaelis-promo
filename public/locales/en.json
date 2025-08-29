@@ -77,7 +77,12 @@
   },
   "ArticlesPage": {
     "title": "Articles",
-    "desc": "Explore mystical practices and expand your knowledge with our expert materials"
+    "desc": "Explore mystical practices and expand your knowledge with our expert materials",
+    "notFound": "No articles found"
+  },
+  "ArticlePage": {
+    "title": "Article not found",
+    "button": "Return to articles"
   },
   "ContactsPage": {
     "title": "Contact us"
@@ -130,6 +135,11 @@
         "answer": "At launch Kaelis AI supports English, Ukrainian, and Russian. Spanish, French, and additional languages are planned."
       }
     }
+  },
+  "NotFoundPage": {
+    "title": "Page not found",
+    "subtitle": "The page you're looking for doesn't exist or has been moved",
+    "button": "Return to home"
   },
   "footer": {
     "desc": "Mobile app for receiving personalized predictions from AI, studying Tarot and astrology. Unlock the secrets of the Universe right on your phone",

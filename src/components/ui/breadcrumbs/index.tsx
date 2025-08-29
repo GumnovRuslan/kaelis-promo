@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { TBreadcrumbs } from '@/types/breadcrumbs';
 import { ArrowIcon } from '@/components/icons';
 import { Fragment } from 'react';

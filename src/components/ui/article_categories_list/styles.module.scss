@@ -1,0 +1,30 @@
+.categories {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &__list {
+    bottom: 50%;
+    border-radius: 12px;
+    transition: height 0.5s, opacity 0.3s;
+
+    &--close {
+      opacity: 0;
+    }
+
+    &--open {
+      opacity: 1;
+    }
+  }
+
+  &__list_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 5;
+  }
+
+  &__header {
+    overflow: hidden;
+  }
+}

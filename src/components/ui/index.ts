@@ -19,6 +19,8 @@ import ArticlesFilter from './articles_filter'
 import Contact from "./contact";
 import LocalSelector from "./lang_selector";
 import Pagination from "./pagination";
+import ArticleCategory from "./article_category";
+import ArticleCategoriesList from "./article_categories_list";
 
 export { 
   Button, 
@@ -42,4 +44,6 @@ export {
   Contact,
   LocalSelector,
   Pagination,
+  ArticleCategory,
+  ArticleCategoriesList,
 };

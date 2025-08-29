@@ -1,4 +1,3 @@
-import Wrapper from "./wrapper";
 import Header from "./header";
 import Hero from "./hero";
 import Footer from "./footer";
@@ -16,7 +15,6 @@ import ArticleNotFound from "./article_not_found";
 import Contacts from "./contacts";
 
 export { 
-  Wrapper, 
   Header, 
   Hero, 
   Footer, 

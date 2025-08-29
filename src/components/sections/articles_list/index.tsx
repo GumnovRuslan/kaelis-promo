@@ -99,7 +99,6 @@ const ArticlesList = ({categories, articles}: TProps) => {
           <h1 className={styles.articles__title}>{t('title')}</h1>
           <p className={styles.articles__description}>{t('desc')}</p>
         </div>
-        
         <ArticlesFilter 
           categories={categories} 
           selectedCategories={selectedCategories} 
@@ -107,13 +106,12 @@ const ArticlesList = ({categories, articles}: TProps) => {
           inputValue={inputValue}
           setInputValue={setInputValue}
         />
-        
         <div className={styles.articles__content}>
           {paginationData.currentItems.length > 0 ? (
             <>
-              <Articles articles={paginationData.currentItems.slice(0, 5)}/>
+              <Articles categoryIsShow articles={paginationData.currentItems.slice(0, 5)}/>
               {paginationData.currentItems.length > 5 && (!isMobile) && (
-                <Articles mirror articles={paginationData.currentItems.slice(5)}/>
+                <Articles categoryIsShow mirror articles={paginationData.currentItems.slice(5)}/>
               )}
               
               {paginationData.totalPages > 1 && (
@@ -130,7 +128,7 @@ const ArticlesList = ({categories, articles}: TProps) => {
             </>
           ) : (
             <div className={styles.articles__empty}>
-              {t('noArticles')}
+              <span className={styles.articles__empty_text}>{t('notFound')}</span>
             </div>
           )}
         </div>

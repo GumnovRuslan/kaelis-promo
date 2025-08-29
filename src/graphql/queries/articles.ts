@@ -33,6 +33,7 @@ export const getArticle = (slug: string) => `
       label
       url
     }
+    category { title }
     coverImage {
       image {
         asset {

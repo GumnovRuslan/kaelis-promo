@@ -1,3 +1,35 @@
+.wrapper {
+  position: relative;
+}
+
+.message {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgb(67, 67, 67);
+  width: max-content;
+  padding: 10px 15px;
+  border-radius: 15px;
+  transition: 0.5s;
+
+  &--hidden {
+    opacity: 0;
+  }
+
+  &--visible {
+    opacity: 1;
+  }
+
+  &__text {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    font-size: fluid-size(10, 12);
+    color: var(--color-text-white);
+  }
+}
+
 .share {
     display: flex;
     align-items: center;
