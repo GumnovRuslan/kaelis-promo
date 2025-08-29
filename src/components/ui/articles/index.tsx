@@ -37,9 +37,11 @@ const Articles = ({ articles, mirror = false, categoryIsShow = false}: TProps) =
               <h3 className={styles.article__title}>{article.title}</h3>
               <div className={styles.article__bottom}>
                 <span>{article.date}</span>
-                {article?.category && categoryIsShow && (
-                  <ArticleCategoriesList categories={article?.category}/>
-                )}
+                <div className={styles.article__categories}>
+                  {article?.category && categoryIsShow && (
+                    <ArticleCategoriesList categories={article?.category} className={styles.article__category}/>
+                  )}
+                </div>
               </div>
             </div>
           </div>

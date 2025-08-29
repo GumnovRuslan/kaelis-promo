@@ -1,20 +1,27 @@
 .categories {
-  position: relative;
-  z-index: 1;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   &__list {
     bottom: 50%;
     border-radius: 12px;
-    transition: 0.5s;
+    transition: height 0.5s, opacity 0.3s;
+
+    &--close {
+      opacity: 0;
+    }
+
+    &--open {
+      opacity: 1;
+    }
   }
 
   &__list_inner {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 5;
   }
 
   &__header {

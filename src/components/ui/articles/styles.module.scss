@@ -108,21 +108,25 @@
   }
 
   &__bottom {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: fluid-size(10, 20);
     font-size: fluid-size(12, 20);
-    color: var(--color-text-white)
+    color: var(--color-text-white);
+    flex-wrap: wrap-reverse;
   }
 
-  &__views {
-    display: flex;
-    gap: 5px;
+  &__categories {
+    position: relative;
+    height: fluid-size(17, 25); 
+    width: fluid-size(86, 145);
   }
 
-  &__views_icon {
-    width: 18px;
-    height: 12px;
+  &__category {
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 }

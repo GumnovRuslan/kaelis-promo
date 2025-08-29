@@ -7,19 +7,24 @@ type TProps = {
     setIsOpen: (value: boolean) => void
     isOpen: boolean
   }
-  
 }
 
 const ArticleCategory = ({label, more}: TProps) => {
+  const handlerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if( more ) more.setIsOpen(!more.isOpen)
+  }
+
   return (
-    <div className={styles.category}>
+    <button type='button' className={`${styles.category} ${more && more?.num > 1 ? styles[`category--more`] : ''}`} onClick={more && handlerClick}>
       <span className={styles.category__text}>{label}</span>
-      {more && (
-        <button type='button' className={styles.category__more} onClick={() => more.setIsOpen(more.isOpen)}>
+      {more && more.num > 1 && (
+        <span  className={styles.category__more} >
           <span className={styles.category__more_number}>{more.num}</span>
-        </button>
+        </span>
       )}
-    </div>
+    </button>
   )
 }
 

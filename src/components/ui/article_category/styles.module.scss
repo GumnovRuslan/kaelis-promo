@@ -1,5 +1,6 @@
 .category {
   position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,6 +14,11 @@
   border: 1px solid var(--color-bg-primary);
   background: var(--gradient-btn);
 
+  &--more {
+    cursor: pointer;
+    padding-right: fluid-size(18, 35);
+  }
+
   &__text {
     font-size: fluid-size(12, 20);
     font-weight: 600;
@@ -21,18 +27,20 @@
 
   &__more {
     position: absolute;
-    right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: fluid-size(1, 5);
     padding: 0;
     border: none;
-    width: 26px;
-    height: 26px;
+    width: fluid-size(14, 26);
+    height: fluid-size(14, 26);
     border-radius: 50%;
     background: #28273A70;
-    
   }
 
   &__more_number {
-    font-size: 12px;
+    font-size: fluid-size(8, 12);
     color: var(--color-text-white);
   }
 }
