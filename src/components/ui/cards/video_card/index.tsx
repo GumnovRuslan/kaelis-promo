@@ -39,7 +39,7 @@ const VideoCard = () => {
         }
       },
       {
-        threshold: 0.6, // расстояние до попадание в зону видимости
+        threshold: 0.1, // расстояние до попадание в зону видимости
         rootMargin: '0px'
       }
     );
@@ -60,6 +60,7 @@ const VideoCard = () => {
         className={styles.card__video}
         width="100%"
         controls={!userPaused}
+        preload='none'
       >
         <source src="/video/Kaelis_Web.mov" type="video/mp4" />
       </video>

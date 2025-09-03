@@ -10,7 +10,7 @@ const ArticlesPage = async () => {
   const { data: categoriesData } = await fetchGraphQL(getArticlesCategory(locale || 'en'));
   const articles = articlesData?.allArticlesItem
   const categories = categoriesData?.allBlogCategory
-  
+
   return (
     <>
       <ArticlesList articles={articles} categories={categories}/>

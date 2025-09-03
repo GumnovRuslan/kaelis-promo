@@ -23,7 +23,7 @@ const Card = ({ title, desc, img_num = 1}: TProps) => {
         <div className={styles.card__front}>
           <Image className={styles.card__background} src={`/images/cards/card_astrology_${img_num}.svg`} fill alt="card background front"/>
           <div className={styles.card__content}>
-            <h3 className={styles.card__title}>{title}</h3>
+            <h2 className={styles.card__title}>{title}</h2>
             <p className={styles.card__description}>{desc}</p>
           </div>
         </div>  
