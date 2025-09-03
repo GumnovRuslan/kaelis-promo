@@ -4,16 +4,21 @@ import Image from "next/image";
 
 export const ptComponents: PortableTextComponents = {
   types: {
-    image: ({ value }) => (
-      <div datatype="image">
-        <Image
-          src={urlFor(value).url()}
-          alt={value.alt || "Image"}
-          width={800}
-          height={500}
-        />
-      </div>
-    ),
+    image: ({ value }) => { 
+      try {
+        return (
+          <div datatype="image">
+            <Image
+              src={urlFor(value)?.url() || ''}
+              alt={value.alt || "Image"}
+              width={800}
+              height={500}
+            />
+          </div>
+        )
+      } catch {
+        return null
+      }},
   },
   block: {
     h1: ({ children }) => <h1>{children}</h1>,

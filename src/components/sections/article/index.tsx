@@ -3,12 +3,18 @@ import { TArticle } from '@/types/articles';
 import { ButtonShare, Breadcrumbs, ArticleCategory } from '@/components/ui';
 import { ptComponents } from '@/utils/portableTextComponents';
 import { PortableText } from '@portabletext/react';
+import { useLocale } from 'next-intl';
 
 type TProps = {
   data: TArticle
 } 
 
-const Article = async ({data}: TProps) => {
+const Article = ({data}: TProps) => {
+  const locale = useLocale();
+  // useEffect(() => {
+  //   console.log(locale)
+  // }, [locale])
+
   return (
     <section className={styles.article}>
       <div className={styles.article__inner}>
