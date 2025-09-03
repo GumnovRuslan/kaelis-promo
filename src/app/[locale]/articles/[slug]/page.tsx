@@ -6,6 +6,7 @@ type PageProps = {
 
 const Article = async ({params}: PageProps) =>  {
   const { slug } = await params;
+  
   return (
     <ArticlePage slug={slug}/>
   )

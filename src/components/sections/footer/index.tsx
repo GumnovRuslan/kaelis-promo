@@ -1,83 +1,23 @@
 import styles from './styles.module.scss';
+
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { ButtonStore } from '@/components/ui';
-import { InstagramIcon, TikTokIcon, TwitterIcon } from '@/components/icons';
-import { useTranslations } from 'next-intl';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { getSocialData } from '@/lib/social_data';
 
-const NAVIGATION = [
-    {
-      text: 'Home',
-      href: '/',
-    },
-    {
-      text: 'Articles',
-      href: '/articles',
-    },
-    {
-      text: 'Contacts',
-      href: '/contacts',
-    },
-    {
-      text: 'FAQ',
-      href: '/faq',
-    },
-    {
-      text: 'Privacy Policy',
-      href: '/privacy-policy',
-    },
-]
+const Footer = async () => {
+  const locale = await getLocale()
+  const social = getSocialData({lang: locale as 'en' | 'ru' | 'uk'});
+  const t = await getTranslations('footer')
 
-const NETWORK = [
-  {
-    href: '#',
-    icon: InstagramIcon,
-  },
-  {
-    href: '#',
-    icon: TikTokIcon,
-  },
-  {
-    href: '#',
-    icon: TwitterIcon,
-  },
-]
-
-const Footer = () => {
-  const t = useTranslations('footer')
-
-    // ключи навигации
   const navKeys = ['home', 'articles', 'contacts', 'faq', 'privacy-policy'] as const;
 
-  // создаём массив из nav
   const navItems = navKeys.map((key) => ({
     key,
-    label: t(`nav.${key}`), // t('footer.nav.home') и т.д.
-    href: `/${key === 'home' ? '' : key}` // пример ссылки
+    label: t(`nav.${key}`),
+    href: `/${key === 'home' ? '' : key}`
   }));
-
-  const NAVIGATION = [
-    {
-      text: 'Home',
-      href: '/',
-    },
-    {
-      text: 'Articles',
-      href: '/articles',
-    },
-    {
-      text: 'Contacts',
-      href: '/contacts',
-    },
-    {
-      text: 'FAQ',
-      href: '/faq',
-    },
-    {
-      text: 'Privacy Policy',
-      href: '/privacy-policy',
-    },
-]
 
   return (
     <footer className={styles.footer}>
@@ -101,8 +41,8 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.footer__network}>
-        {NETWORK.map((item, i) => (
-          <Link className={styles.footer__network_link} href={item.href} key={i} >
+        {social.map((item, i) => (
+          <Link className={styles.footer__network_link} href={item.href} target='_blank' key={i} aria-label={item.name}>
             <item.icon/>
           </Link>
         ))}

@@ -1,7 +1,20 @@
 import { PortableTextComponents } from "@portabletext/react";
+import { urlFor } from "@/lib/sanity/sanityImage";
 import Image from "next/image";
 
 export const ptComponents: PortableTextComponents = {
+  types: {
+    image: ({ value }) => (
+      <div datatype="image">
+        <Image
+          src={urlFor(value).url()}
+          alt={value.alt || "Image"}
+          width={800}
+          height={500}
+        />
+      </div>
+    ),
+  },
   block: {
     h1: ({ children }) => <h1>{children}</h1>,
     h2: ({ children }) => <h2>{children}</h2>,

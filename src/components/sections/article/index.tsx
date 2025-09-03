@@ -9,7 +9,6 @@ type TProps = {
 } 
 
 const Article = async ({data}: TProps) => {
-  console.log(data)
   return (
     <section className={styles.article}>
       <div className={styles.article__inner}>

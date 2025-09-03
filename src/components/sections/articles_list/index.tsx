@@ -71,7 +71,6 @@ const ArticlesList = ({categories, articles}: TProps) => {
   }, [selectedCategories, inputValue, ITEMS_PER_PAGE]);
 
   const goToPage = useCallback((page: number) => {
-    console.log(page)
     setCurrentPage(page);
     window.requestAnimationFrame(() => {
       document

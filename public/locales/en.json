@@ -20,6 +20,11 @@
     }
   },
   "HomePage": {
+    "seo": {
+      "title": "",
+      "description": "",
+      "keywords": ""
+    },
     "hero": {
       "title": "Understand yourself Change your life",
       "subtitle": "Tools for conscious change",
@@ -76,6 +81,11 @@
     "message": "We believe that everyone has the right to a mindful and harmonious life. Our goal is to provide you with tools for deep self-discovery and decision-making based on ancient wisdom and modern technologies"
   },
   "ArticlesPage": {
+    "seo": {
+      "title": "Articles",
+      "description": "",
+      "keywords": ""
+    },
     "title": "Articles",
     "desc": "Explore mystical practices and expand your knowledge with our expert materials",
     "notFound": "No articles found"
@@ -85,9 +95,19 @@
     "button": "Return to articles"
   },
   "ContactsPage": {
+    "seo": {
+      "title": "Contacts",
+      "description": "",
+      "keywords": ""
+    },
     "title": "Contact us"
   },
   "PrivacyPolicyPage": {
+    "seo": {
+      "title": "Privacy policy",
+      "description": "",
+      "keywords": ""
+    },
     "title": "Privacy Policy",
     "published": "Published: June 14, 2025",
     "subtitle": "The Mystical Connection Between the Moon and Humans",
@@ -108,6 +128,11 @@
     }
   },
   "FaqPage": {
+    "seo": {
+      "title": "Frequently asked questions",
+      "description": "",
+      "keywords": ""
+    },
     "title": "F.A.Q.",
     "items": {
       "item1": {
