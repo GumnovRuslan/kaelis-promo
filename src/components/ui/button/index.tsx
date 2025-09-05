@@ -36,7 +36,7 @@ const Button = ({children, className, text, as, ...props}: ButtonProps) => {
     );
   }
 
-  const { disabled, ...buttonProps } = props as ButtonAsButton;
+  const { ...buttonProps } = props as ButtonAsButton;
   return (
     <button className={`${styles.button} ${text ? styles['button--text'] : ''} ${className}`} {...buttonProps}>
       {text 

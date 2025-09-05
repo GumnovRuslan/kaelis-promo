@@ -11,12 +11,20 @@
       "title": "Join Kaelis",
       "subtitle": "Launching soon.",
       "text": "Subscribe to be the first to know.",
-      "button": "Get access",
+      "error": {
+        "text": "Failed to send the message. Please try again."
+      },
+      "button": {
+        "text": "Get access",
+        "sending": "Sending..."
+      },
+      "successful": {
+        "text": "Дякуємо за підписку!"
+      },
       "policy": {
         "text": "By clicking “Send”, you agree to the",
         "link": "Privacy Policy"
       } 
-
     }
   },
   "HomePage": {
