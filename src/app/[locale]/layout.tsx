@@ -3,10 +3,9 @@ import { Inter } from "next/font/google";
 import { Background } from "@/components/ui";
 import { ModalProvider } from "@/context/modal";
 import { Header, Footer, Modal } from "@/components/sections";
-import NetlifyForm from "@/components/ui/netlify_form";
 import {NextIntlClientProvider} from 'next-intl';
 import {routing} from '@/i18n/routing';
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import "@/styles/index.scss";
 import '@/styles/root.scss';
 
@@ -18,23 +17,39 @@ const geistInter = Inter({
 
 export const generateMetadata = async ({ params }: {params: Promise<{locale: string}> }): Promise<Metadata> => {
   const { locale } = await params;
+  const t = await getTranslations('Seo')
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.kaelisai.com';
 
   return {
-    title: "Kaelis",
-    description: "",
-    keywords: "Kaelis",
+    title: {
+      default: 'Kaelis',
+      template: `%s | ${t('title')}`,
+    } ,
+    description: t('description'),
+    keywords: t('keywords').split(',').map(item => item.trim()),
     icons: {
       icon: "/images/favicon.svg",
     },
     openGraph: {
-      title: 'Kaelis',
-      description: '',
-      locale,
+      siteName: 'Kaelis',
+      locale: locale,
       type: 'website',
-      url: baseUrl,
+      url: `${baseUrl}/${locale}`,
     },
+    twitter: {
+      card: "summary_large_image",
+    },
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+      languages: {
+        "x-default": `${baseUrl}/`,
+        'en': `${baseUrl}/en`,
+        'uk': `${baseUrl}/uk`,
+        'ru': `${baseUrl}/ru`,
+      }
+    },
+    category: "Lifestyle"
   }
 }
 
@@ -66,7 +81,6 @@ export default async function RootLayout({
               </main>
             <Footer/>
           </ModalProvider>
-          <NetlifyForm/>
         </NextIntlClientProvider>
       </body>
     </html>

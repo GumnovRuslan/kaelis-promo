@@ -1,4 +1,9 @@
 {
+  "Seo": {
+    "title": "Kaelis — Personal Recommendations: Astrology, Tarot, Natal Chart",
+    "description": "Kaelis helps you understand yourself through astrology and Tarot: natal chart, destiny matrix, affirmations, and personalized daily recommendations.",
+    "keywords": "Kaelis, online astrology, natal chart, destiny matrix, online Tarot, daily forecasts, affirmations, self-discovery"
+  },
   "Header": {
     "menu": {
       "home": "Home",
@@ -29,9 +34,12 @@
   },
   "HomePage": {
     "seo": {
-      "title": "",
-      "description": "",
-      "keywords": ""
+      "title": "Online Natal Chart — Kaelis",
+      "description": "Calculate your natal chart with Kaelis: personality analysis, potential, and life aspects.",
+      "openGraph": {
+        "title": "Online Natal Chart — Kaelis",
+        "description": "Personality analysis, potential, and recommendations based on your birth date."
+      }
     },
     "hero": {
       "title": "Understand yourself Change your life",
@@ -90,9 +98,13 @@
   },
   "ArticlesPage": {
     "seo": {
-      "title": "Articles",
-      "description": "",
-      "keywords": ""
+      "title": "Articles on Tarot, Astrology, Numerology — Kaelis",
+      "description": "Read expert materials on Tarot, astrology, numerology, and mystical practices — articles, spreads, and tutorials on Kaelis.",
+      "keywords": "Tarot spreads, Astrology, Numerology, Mystical practices, Tarot learning, Spreads, Kaelis articles",
+      "openGraph": {
+          "title": "Articles on Tarot, Astrology, Numerology — Kaelis",
+          "description": "Explore mystical practices: Tarot spreads, astrology, numerology, and expert tutorials on Kaelis."
+      }
     },
     "title": "Articles",
     "desc": "Explore mystical practices and expand your knowledge with our expert materials",
@@ -104,18 +116,26 @@
   },
   "ContactsPage": {
     "seo": {
-      "title": "Contacts",
-      "description": "",
-      "keywords": ""
+      "title": "Contacts — Kaelis Support",
+      "description": "Get in touch — the Kaelis team is ready to help with questions about astrology, Tarot, and the mobile app. Write to info.kaelis@gmail.com",
+      "keywords": "Kaelis contacts, Kaelis support, contact Kaelis, astrology app support, Tarot help",
+      "openGraph": {
+        "title": "Contacts — Kaelis Support",
+        "description": "Have questions about the Kaelis app, astrology, or Tarot? Write to us — info.kaelis@gmail.com."
+      }
     },
     "title": "Contact us"
   },
   "PrivacyPolicyPage": {
     "seo": {
-      "title": "Privacy policy",
-      "description": "",
-      "keywords": ""
-    },
+      "title": "Privacy Policy — Kaelis",
+      "description": "Kaelis Privacy Policy: how we process and protect your personal data when using the app and service.",
+      "keywords": "Kaelis privacy policy, personal data Kaelis, Kaelis data security, data protection astrology Tarot",
+      "openGraph": {
+          "title": "Privacy Policy — Kaelis",
+          "description": "Learn how Kaelis protects your personal data and ensures privacy when using astrology, Tarot, and other app features."
+      }
+    },  
     "title": "Privacy Policy",
     "published": "Published: June 14, 2025",
     "subtitle": "The Mystical Connection Between the Moon and Humans",
@@ -137,9 +157,13 @@
   },
   "FaqPage": {
     "seo": {
-      "title": "Frequently asked questions",
-      "description": "",
-      "keywords": ""
+      "title": "Questions & Answers — Kaelis: Astrology, Tarot, App",
+      "description": "Frequently asked questions about the Kaelis app: astrology, Tarot, natal chart, destiny matrix, affirmations, subscription, and support.",
+      "keywords": "Kaelis FAQ, Kaelis questions and answers, Kaelis support, astrology questions, online Tarot help, natal chart app, Kaelis subscription",
+      "openGraph": {
+          "title": "Questions & Answers — Kaelis",
+          "description": "Answers to common questions about Kaelis: how to use the app, what Tarot, astrology, destiny matrix, and affirmations include."
+      }
     },
     "title": "F.A.Q.",
     "items": {
@@ -170,6 +194,14 @@
     }
   },
   "NotFoundPage": {
+    "seo": {
+      "title": "Page Not Found — Kaelis",
+      "description": "Unfortunately, the page was not found. Try going to the Kaelis homepage or use the menu.",
+      "openGraph": {
+          "title": "Page Not Found — Kaelis",
+          "description": "Error 404. Page not found. Return to the Kaelis website to continue."
+      }
+    },
     "title": "Page not found",
     "subtitle": "The page you're looking for doesn't exist or has been moved",
     "button": "Return to home"
