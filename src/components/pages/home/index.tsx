@@ -4,7 +4,6 @@ import {
   ArticlesPopular,
   AboutApp,
   Message,
-  DailyCard,
 } from "@/components/sections";
 
 const HomePage = () => {
@@ -12,7 +11,6 @@ const HomePage = () => {
     <>
       <Hero />
       <Subscribe />
-      {/* <DailyCard/> */}
       <ArticlesPopular />
       <AboutApp />
       <Message textIsShow/>

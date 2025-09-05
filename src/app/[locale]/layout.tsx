@@ -35,14 +35,6 @@ export const generateMetadata = async ({ params }: {params: Promise<{locale: str
       type: 'website',
       url: baseUrl,
     },
-    alternates: {
-      canonical: baseUrl,
-      languages: {
-        'en': `${baseUrl}/en`,
-        'uk': `${baseUrl}/uk`,
-        'ru': `${baseUrl}/ru`,
-      }
-    }
   }
 }
 

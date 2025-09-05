@@ -6,7 +6,7 @@
   }
 
   &__header {
-    margin-bottom: fluid-size(65, 135)
+    margin-bottom: fluid-size(65, 80)
   }
 
   &__title {
@@ -51,7 +51,7 @@
   }
 
   &__breadcrumbs {
-    margin-bottom: fluid-size(30, 130);
+    margin-bottom: fluid-size(30, 65);
 
     @include media-down('md') {
       display: none;
