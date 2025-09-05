@@ -19,6 +19,30 @@ export const getArticles = (lang: string = 'en') => `
 }
 `;
 
+// const seo = 
+
+export const getArticleSeo = (slug: string) => `
+  query {
+    allArticlesItem(where: { 
+    slug: { current: { eq: "${slug}" } } 
+    }) {
+    seo {
+      title
+      description
+      keywords
+      ogType
+      twitterCard
+      image {
+        image {
+          asset { url }
+        }
+        altText
+      }
+    }
+  }
+}
+`
+
 export const getArticle = (slug: string) => `
   query {
     allArticlesItem(where: { slug: { current: { eq: "${slug}" } } }) {

@@ -5,10 +5,11 @@ import styles from './styles.module.scss';
 import { ModalWrapper, Input, Button } from '@/components/ui';
 import { Link } from '@/i18n/navigation';
 import { useModalContext } from '@/context/modal';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import disableBodyScroll from '@/utils/disableBodyScroll';
+import { CheckMarkIcon } from '@/components/icons';
 
 type ModalContentType = 'join' | 'full';
 
@@ -16,37 +17,54 @@ interface ModalData {
   title: string;
   button: {
     text: string;
+    sending?: string,
+  };
+  error: {
+    text: string;
   };
   texts?: string[];
+  successful: {
+    text: string;
+  }
 }
-
-const items = [
-  'No hidden fees',
-  '24/7 support',
-  'Only proven methods'
-];
 
 const Modal = () => {
   const t = useTranslations('Modal')
   const { isOpenModal, closeModal, content } = useModalContext()
   const [ email, setEmail ] = useState<string>('')
+  const [ sendingEmail, setSendingEmail] = useState<boolean>(false)
+  const [ sendSuccessful, setSendSuccessful] = useState<boolean>(false)
+  const [ sendIsError, setSendIsError ] = useState<boolean>(false)
 
   const DATA: Record<ModalContentType, ModalData> = {
     'join': {
       title: t('join.title'),
+      error: {
+        text: t('join.error.text')
+      },
       button: {
-        text: t('join.button'),
+        text: t('join.button.text'),
+        sending: t('join.button.sending'),
       },
       texts: [
         t('join.subtitle'),
         t('join.text'),
       ],
+      successful: {
+        text: t('join.successful.text')
+      }
     },
     'full': {
       title: 'Get the full interpretation',
+      error: {
+        text: ''
+      },
       button: {
         text: 'Send'
       },
+      successful: {
+        text: ''
+      }
     },
   };
 
@@ -59,31 +77,14 @@ const Modal = () => {
 
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSendIsError(false)
     setEmail(e.target.value);
   };
 
-  const handlerSendEmail = async  (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('form-name', 'modal');
-    formData.append('email', email);
-
-    try {
-      await fetch('/', {
-        method: 'POST',
-        body: formData,
-      });
-      
-      console.log('Form successfully submitted to Netlify');
-      closeModal();
-    } catch (error) {
-      console.error('Form submission error:', error);
-    }
-  }
-
   const handlerSendEmailToVercel = async (e: React.FormEvent) => {
     e.preventDefault();
-    // setStatus("Загрузка...");
+    setSendingEmail(true)
+    setSendIsError(false)
 
     const res = await fetch("api/subscribe", {
       method: "POST",
@@ -92,55 +93,58 @@ const Modal = () => {
     });
 
     if (res.ok) {
-      console.log('Успешно отправлено');
-      // setStatus("Успешно отправлено!");
-      setEmail("");
+      setSendingEmail(false)
+      setEmail('')
+      setSendSuccessful(true)
     } else {
-      console.log('Ошибка при отправке');
-      // setStatus("Ошибка при отправке.");
+      setSendingEmail(false)
+      setSendIsError(true)
     }
   }
 
   return (
     <ModalWrapper isShow={isOpenModal} handlerClose={closeModal}>
-      <form 
-        className={styles.content} 
-        onSubmit={handlerSendEmailToVercel}
-        name="modal" 
-        method="POST" 
-        data-netlify="true"
-      >
-        <input type="hidden" name="form-name" value="modal" />
+      <div className={styles.content}>
         <h3 className={styles.content__title}>{data.title}</h3>
-        {/* {content === 'join' && (
-          <ul className={styles.content__items}>
-            {items.map((text, i) => (
-              <li className={styles.content__item} key={i}>
-                <span className={styles.content__item_icon}>
-                  <StarIcon />
-                </span>
-                <span className={styles.content__item_text}>{text}</span>
-              </li>
-            ))}
-          </ul>
-        )} */}
-        {data.texts?.map((text, i) => <span className={styles.content__input_text} key={i}>{text}</span>)}
-        <div className={styles.content__input}>
-          <Input 
-            name='email'
-            type='email' 
-            placeholder='Enter your email' 
-            value={email || ''} 
-            onChange={handleInputChange}
-          />
+        <div className={styles.content__inner}>
+          <div className={`${styles.successful} ${sendSuccessful ? styles['successful--visible'] : styles['successful--hidden']}`}>
+            <span className={styles.successful__icon}>
+              <CheckMarkIcon/>
+            </span>
+            <p className={styles.successful__text}>{data.successful.text}</p>
+          </div>
+          <form className={`${styles.content__form} ${sendSuccessful ? styles['content__form--hidden'] : ''}`}
+            onSubmit={handlerSendEmailToVercel}
+            name="modal" 
+            method="POST"
+          >
+            <input type="hidden" name="form-name" value="modal" />
+            {data.texts?.map((text, i) => <span className={styles.content__input_text} key={i}>{text}</span>)}
+            <div className={styles.content__input}>
+              <Input 
+                name='email'
+                type='email' 
+                placeholder='Enter your email' 
+                value={email || ''} 
+                onChange={handleInputChange}
+              />
+            </div>
+            <p className={`
+              ${styles.content__error} 
+              ${sendIsError ? styles['content__error--visible'] : styles['content__error--hidden']}`}
+              >
+                {data.error.text}
+              </p>
+            <Button 
+              disabled={sendingEmail}
+              type='submit'
+              className={styles.content__button} 
+              text={sendingEmail ? data.button.sending : data.button.text} 
+            />
+            <p className={styles.content__policy}>{t('join.policy.text')} <Link className={styles.content__policy_link} href={'/privacy-policy'} target='_blank'>{t('join.policy.link')}</Link></p>
+          </form>
         </div>
-        <Button 
-          type='submit'
-          className={styles.content__button} 
-          text={data.button.text} 
-        />
-        <p className={styles.content__policy}>{t('join.policy.text')} <Link className={styles.content__policy_link} href={'/privacy-policy'} target='_blank'>{t('join.policy.link')}</Link></p>
-      </form>
+      </div>
     </ModalWrapper>
   )
 }

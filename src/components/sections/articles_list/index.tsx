@@ -92,7 +92,7 @@ const ArticlesList = ({categories, articles}: TProps) => {
   }, [paginationData.hasPrev]);
 
   return (
-    <div className={styles.articles} id='articles-top'>
+    <section className={styles.articles} id='articles-top'>
       <div className={styles.articles__inner}>
         <div className={styles.articles__header}>
           <h1 className={styles.articles__title}>{t('title')}</h1>
@@ -132,7 +132,7 @@ const ArticlesList = ({categories, articles}: TProps) => {
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
