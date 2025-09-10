@@ -3,7 +3,6 @@
 import styles from './styles.module.scss'
 
 import { Question } from '@/components/ui';
-import { FAQ_DATA } from './data';
 import { useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
