@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
           <span>Privacy Policy</span>
         </h1>
         <h2 className={styles.privacy__published}>Last updated: September, 8, 2025</h2>
-        <div className={styles.privacy__content}>
+        <div className='style_guides'>
           <div>
             <p>This Privacy Policy explains how <strong>Maksim Shamkou</strong> (“Company,” “we,” “our,” or “us”) collects, uses, stores, and protects your personal information when you use our mobile application <strong>Kaelis AI: Tarot & Astrology</strong> (“App”).</p>
           </div>
