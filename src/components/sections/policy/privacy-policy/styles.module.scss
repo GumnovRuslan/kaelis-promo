@@ -1,0 +1,26 @@
+.privacy {
+  margin-bottom: fluid-size(50, 130);
+
+  &__inner {
+    max-width: 85%;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: fluid-size(24, 96);
+    font-weight: 700;
+    margin-bottom: fluid-size(15, 75);
+    color:var(--color-title-white);
+
+    & > span {
+      display: block;
+    }
+  }
+
+  &__published {
+    font-size: fluid-size(16, 64);
+    font-weight: 700;
+    margin-bottom: fluid-size(15, 65);
+    color:var(--color-title-white);
+  }
+}

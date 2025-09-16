@@ -11,7 +11,18 @@ const Footer = async () => {
   const social = getSocialData({lang: locale as 'en' | 'ru' | 'uk'});
   const t = await getTranslations('footer')
 
-  const navKeys = ['home', 'articles', 'contacts', 'faq', 'privacy-policy'] as const;
+  const navKeys = [
+    'home', 
+    'articles', 
+    'contacts', 
+    'faq', 
+    'privacy-policy',
+    'subscription-policy',
+    'end-user-license-agreement',
+    'content-policy',
+    'terms-of-use',
+    'children-privacy-policy'
+  ] as const;
 
   const navItems = navKeys.map((key) => ({
     key,
@@ -37,6 +48,11 @@ const Footer = async () => {
             {navItems.map((item, i) => (
               <Link href={item.href} className={styles.footer__nav_link} key={i}>{item.label}</Link>
             ))}
+            {/* <Link href={'/subscription-policy'} className={styles.footer__nav_link}>{'Subscription-policy'}</Link>
+            <Link href={'/license-agreement'} className={styles.footer__nav_link}>{'license_agreement'}</Link>
+            <Link href={'/content-policy'} className={styles.footer__nav_link}>{'content-policy'}</Link>
+            <Link href={'/terms-of-use'} className={styles.footer__nav_link}>{'terms-of-use'}</Link>
+            <Link href={'/children-privacy-policy'} className={styles.footer__nav_link}>{'children-privacy-policy'}</Link> */}
           </nav>
         </div>
       </div>

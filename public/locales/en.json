@@ -126,35 +126,6 @@
     },
     "title": "Contact us"
   },
-  "PrivacyPolicyPage": {
-    "seo": {
-      "title": "Privacy Policy — Kaelis",
-      "description": "Kaelis Privacy Policy: how we process and protect your personal data when using the app and service.",
-      "keywords": "Kaelis privacy policy, personal data Kaelis, Kaelis data security, data protection astrology Tarot",
-      "openGraph": {
-          "title": "Privacy Policy — Kaelis",
-          "description": "Learn how Kaelis protects your personal data and ensures privacy when using astrology, Tarot, and other app features."
-      }
-    },  
-    "title": "Privacy Policy",
-    "published": "Published: June 14, 2025",
-    "subtitle": "The Mystical Connection Between the Moon and Humans",
-    "intro": "Since ancient times, people have noticed a connection between lunar cycles and changes in behavior, emotions, and physical states. Modern science confirms some of these observations, showing the real influence of the Moon on biological processes.",
-    "sections": {
-      "lunarPhases": {
-        "title": "Lunar Phases and Their Meaning",
-        "items": {
-          "newMoon": "New Moon — a time for new beginnings and planning",
-          "waxingMoon": "Waxing Moon — a period of growth and project development",
-          "fullMoon": "Full Moon — a peak of emotions and completion of cycles",
-          "waningMoon": "Waning Moon — a time for release and cleansing"
-        }
-      },
-      "emotions": {
-        "title": "Influence on Emotions"
-      }
-    }
-  },
   "FaqPage": {
     "seo": {
       "title": "Questions & Answers — Kaelis: Astrology, Tarot, App",
@@ -213,7 +184,12 @@
       "articles": "Articles",
       "contacts": "Contacts",
       "faq": "FAQ",
-      "privacy-policy": "Privacy Policy"
+      "privacy-policy": "Privacy Policy",
+      "subscription-policy": "Refund & Subscription Policy",
+      "end-user-license-agreement": "End-User License Agreement",
+      "content-policy": "Content Policy",
+      "terms-of-use": "Terms of Use",
+      "children-privacy-policy": "Children’s Privacy Policy"
     }
   }
 }
