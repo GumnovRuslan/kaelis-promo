@@ -1,3 +1,5 @@
+@use './functions' as *;
+
 html {
   background: var(--gradient-main);
 
@@ -37,4 +39,70 @@ svg {
 button, a {
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
+}
+
+.style_guides {
+  color:var(--color-text-white);
+
+  div {
+    margin-bottom: fluid-size(20, 50);
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: fluid-size(18, 46);
+    line-height: 170%;
+  }
+
+  h3 {
+    font-size: fluid-size(16, 42);
+    line-height: 170%;
+  }
+      
+  strong {
+    font-weight: 700;
+  }
+
+  li {
+    font-size: fluid-size(12, 36);
+    line-height: 170%;
+  }
+
+  ul {
+    list-style: inside;
+  }
+
+  ul[data-margin-left] {
+    margin-left: fluid-size(20, 40);
+  }
+
+  ol {
+    list-style: counter-increment;
+
+    & > li {
+      margin-left: fluid-size(20, 50);
+    }
+  }
+
+  li[data-title] {
+    font-size: fluid-size(18, 46);
+    font-weight: 700;
+    margin-bottom: fluid-size(25, 50);
+  }
+
+  ol[data-style-a] {
+    list-style-type: lower-alpha;
+    & > li {
+      margin-bottom: fluid-size(20, 40);
+    }
+  }
+
+  p, span {
+    font-size: fluid-size(12, 36);
+    line-height: 170%;
+  }
+
+  p, span {
+    font-weight: 400;
+  }
 }
