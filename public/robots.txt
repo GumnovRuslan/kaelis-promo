@@ -4,4 +4,24 @@ Disallow: /en/privacy-policy
 Disallow: /ru/privacy-policy
 Disallow: /uk/privacy-policy
 
+Disallow: /en/children-privacy-policy
+Disallow: /ru/children-privacy-policy
+Disallow: /uk/children-privacy-policy
+
+Disallow: /en/content-policy
+Disallow: /ru/content-policy
+Disallow: /uk/content-policy
+
+Disallow: /en/license-agreement
+Disallow: /ru/license-agreement
+Disallow: /uk/license-agreement
+
+Disallow: /en/subscription-policy
+Disallow: /ru/subscription-policy
+Disallow: /uk/subscription-policy
+
+Disallow: /en/terms-of-use
+Disallow: /ru/terms-of-use
+Disallow: /uk/terms-of-use
+
 Sitemap: https://www.kaelisai.com
