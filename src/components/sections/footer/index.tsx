@@ -11,11 +11,14 @@ const Footer = async () => {
   const social = getSocialData({lang: locale as 'en' | 'ru' | 'uk'});
   const t = await getTranslations('footer')
 
-  const navKeys = [
+  const navKeysLeft = [
     'home', 
     'articles', 
     'contacts', 
     'faq', 
+  ] as const;
+
+  const navKeysRight = [
     'privacy-policy',
     'subscription-policy',
     'end-user-license-agreement',
@@ -24,10 +27,16 @@ const Footer = async () => {
     'children-privacy-policy'
   ] as const;
 
-  const navItems = navKeys.map((key) => ({
+  const navItemsLeft = navKeysLeft.map((key) => ({
     key,
     label: t(`nav.${key}`),
     href: `/${key === 'home' ? '' : key}`
+  }));
+
+  const navItemsRight = navKeysRight.map((key) => ({
+    key,
+    label: t(`nav.${key}`),
+    href: `/${key}`
   }));
 
   return (
@@ -43,16 +52,16 @@ const Footer = async () => {
             <ButtonStore type='google'/>
           </div>
         </div>
-        <div className={styles.footer__column}>
+        <div className={styles.footer__nav_columns}>
           <nav className={styles.footer__nav}>
-            {navItems.map((item, i) => (
+            {navItemsLeft.map((item, i) => (
               <Link href={item.href} className={styles.footer__nav_link} key={i}>{item.label}</Link>
             ))}
-            {/* <Link href={'/subscription-policy'} className={styles.footer__nav_link}>{'Subscription-policy'}</Link>
-            <Link href={'/license-agreement'} className={styles.footer__nav_link}>{'license_agreement'}</Link>
-            <Link href={'/content-policy'} className={styles.footer__nav_link}>{'content-policy'}</Link>
-            <Link href={'/terms-of-use'} className={styles.footer__nav_link}>{'terms-of-use'}</Link>
-            <Link href={'/children-privacy-policy'} className={styles.footer__nav_link}>{'children-privacy-policy'}</Link> */}
+          </nav>
+          <nav className={styles.footer__nav}>
+            {navItemsRight.map((item, i) => (
+              <Link href={item.href} className={styles.footer__nav_link} key={i}>{item.label}</Link>
+            ))}
           </nav>
         </div>
       </div>
