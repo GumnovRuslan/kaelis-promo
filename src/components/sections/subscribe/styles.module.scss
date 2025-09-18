@@ -18,8 +18,8 @@
   &__description {
     text-align: center;
     font-size: fluid-size(16, 20);
+    font-weight: 700;
     line-height: 140%;
-    text-transform: capitalize;
     color: var(--color-text-white);
 
     @include media-down('md') {
