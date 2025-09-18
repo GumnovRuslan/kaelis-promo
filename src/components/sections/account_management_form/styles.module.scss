@@ -1,0 +1,65 @@
+.section {
+  &__inner {
+    position: relative;
+    padding: 50px fluid-size(15, 100) fluid-size(50, 100);
+  }
+}
+
+.form {
+  margin: 0 auto;
+  max-width: fluid-size(280, 850);
+  transition: opacity 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: fluid-size(20, 30);
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: fluid-size(30, 50);
+
+    &--disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  &__name {
+    text-transform: capitalize;
+    font-size: fluid-size(32, 64);
+    font-weight: 700; 
+    line-height: 120%;
+    text-align: center;
+    color: var(--color-title-white);
+  }
+
+  &__button {
+    margin: 0 auto;
+    max-width: max-content;
+    margin-top: 30px;
+
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  &__message {
+    text-align: center;
+    font-size: fluid-size(14, 20);
+    line-height: 120%;
+    color: var(--color-text-white);
+    transition: 0.3s;
+    opacity: 0;
+    visibility: hidden;
+
+    &--error {
+      color: rgb(207, 58, 58);
+    }
+
+    &--visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

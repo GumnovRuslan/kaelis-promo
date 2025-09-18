@@ -2,13 +2,11 @@ import { Redis } from "@upstash/redis";
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-// инициализация Redis
 const redis = new Redis({
   url: process.env.KV_REST_API_URL!,
   token: process.env.KV_REST_API_TOKEN!,
 });
 
-// инициализация Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
