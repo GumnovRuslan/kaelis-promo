@@ -69,7 +69,6 @@
 
   &__title {
     font-weight: 700;
-    text-transform: capitalize;
     color: var(--color-text-white);
 
     @include media-up('md') {
@@ -84,7 +83,6 @@
   &__description {
     font-size: 20px;
     font-weight: 700;
-    text-transform: capitalize;
     color: var(--color-text-white);
 
     @include media-up('md') {
