@@ -18,6 +18,7 @@ import Article from "./article";
 import FAQ from "./faq";
 import ArticleNotFound from "./article_not_found";
 import Contacts from "./contacts";
+import AccountManagementForm from "./account_management_form";
 
 export { 
   Header, 
@@ -40,4 +41,5 @@ export {
   ContentPolicy,
   TermsOfUse,
   ChildrenPrivacyPolicy,
+  AccountManagementForm,
 };

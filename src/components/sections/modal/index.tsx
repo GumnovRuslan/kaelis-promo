@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 import { ModalWrapper, Input, Button } from '@/components/ui';
 import { Link } from '@/i18n/navigation';
 import { useModalContext } from '@/context/modal';
-import { ChangeEvent, FormEvent, useState, useRef } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import disableBodyScroll from '@/utils/disableBodyScroll';
@@ -125,6 +125,7 @@ const Modal = () => {
                 name='email'
                 type='email' 
                 placeholder='Enter your email' 
+                required
                 value={email || ''} 
                 onChange={handleInputChange}
               />

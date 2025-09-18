@@ -24,4 +24,10 @@ Disallow: /en/terms-of-use
 Disallow: /ru/terms-of-use
 Disallow: /uk/terms-of-use
 
+Disallow: /en/account-management
+Disallow: /ru/account-management
+Disallow: /uk/account-management
+
+
+
 Sitemap: https://www.kaelisai.com

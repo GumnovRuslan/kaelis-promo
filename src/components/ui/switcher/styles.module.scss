@@ -1,0 +1,36 @@
+.switcher {
+  &__inner {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button {
+    min-width: fluid-size(90, 190);
+    display: inline-block;
+    border: none;
+    font-size: fluid-size(12, 20);
+    font-weight: 700;
+    padding: fluid-size(5, 10) fluid-size(15, 25);
+    background: var(--gradient-btn);
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:first-child {
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 50px;
+      border-bottom-right-radius: 50px;
+    }
+
+    &--active {
+      box-shadow: 0 0 10px #D4A2F2;
+    }
+
+    &--disable {
+      opacity: 0.6;
+    }
+  }
+}
