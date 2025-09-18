@@ -177,6 +177,28 @@
     "subtitle": "The page you're looking for doesn't exist or has been moved",
     "button": "Return to home"
   },
+  "AccountManagementPage": {
+    "title": "Account Management Form",
+    "switcher": {
+      "delete": {
+        "text": "Delete Account"
+      },
+      "clear": {
+        "text": "Clear Data"
+      }
+    },
+    "input": {
+      "placeholder": "Enter your Email"
+    },
+    "button": {
+      "text": "Submit Data",
+      "loading": "Submitting..."
+    },
+    "message": {
+      "successful": "Data submitted successfully",
+      "error": "Data submission error"
+    }
+  },
   "footer": {
     "desc": "Mobile app for receiving personalized predictions from AI, studying Tarot and astrology. Unlock the secrets of the Universe right on your phone",
     "nav": {

@@ -21,6 +21,7 @@ import LocalSelector from "./lang_selector";
 import Pagination from "./pagination";
 import ArticleCategory from "./article_category";
 import ArticleCategoriesList from "./article_categories_list";
+import Switcher from "./switcher";
 
 export { 
   Button, 
@@ -46,4 +47,5 @@ export {
   Pagination,
   ArticleCategory,
   ArticleCategoriesList,
+  Switcher,
 };
