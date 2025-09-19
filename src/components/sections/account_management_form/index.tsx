@@ -23,10 +23,14 @@ type TData = {
     successful: string;
     error: string;
   };
-  button: {
-    text: string
-    loading: string
+  delete_message: {
+    title: string
+    list: string[]
   }
+  button: {
+    text: string;
+    loading: string;
+  };
 }
 
 const AccountManagementForm = () => {
@@ -35,6 +39,14 @@ const AccountManagementForm = () => {
   const [loadSend, setLoadSend] = useState<boolean>(false)
   const [sendSuccessful, setSendSuccessful] = useState<boolean>(false)
   const [sendError, setSendError] = useState<boolean>(false)
+  const [selectDeletionData, setSelectDeletionData] = useState<TSwitcher | null>(null)
+
+  const deleteKey = ['birth_date', 'birth_time', 'birth_timezone', 'birth_coordinates', 'name', 'email', 'social_ids']
+  const clearKey = ['birth_date', 'birth_time', 'birth_timezone', 'birth_coordinates', 'name']
+
+  const getDeleteItems = (keys: string[]) => {
+    return keys.map((key) => t(`delete_message.${key}`))
+  }
 
   const DATA: TData = {
     title: t('title'),
@@ -55,6 +67,10 @@ const AccountManagementForm = () => {
     input: {
       placeholder: t('input.placeholder'),
     },
+    delete_message: {
+      title: t('delete_message.title'),
+      list: selectDeletionData?.type == 'delete' ? getDeleteItems(deleteKey) : getDeleteItems(clearKey),
+    } ,
     message: {
       successful: t('message.successful'),
       error: t('message.error')
@@ -64,8 +80,6 @@ const AccountManagementForm = () => {
       loading: t('button.loading')
     }
   }
-
-  const [selectDeletionData, setSelectDeletionData] = useState<TSwitcher | null>(null)
 
   useEffect(() => {
     const hash = window.location.hash.replace('#', '')
@@ -140,6 +154,14 @@ const AccountManagementForm = () => {
           <div className={`${styles.form__inner} ${sendSuccessful ? styles[`form__inner--disabled`] : ''}`}>
             <h2 className={styles.form__name}>{DATA.title}</h2>
             <Switcher data={DATA.switcher} selectData={selectDeletionData} setSelectData={handleSelectionChange}/>
+            <div className={styles.delete}>
+              <h3 className={styles.delete__title}>{DATA.delete_message.title}</h3>
+              <ol className={styles.delete__list}>
+                {DATA.delete_message.list.map((text, i) => 
+                  <li className={styles.delete__item} key={i}>{text}</li>
+                )}
+              </ol>
+            </div>
             <Input type='email' required placeholder={DATA.input.placeholder} value={emailValue || ''} onChange={handleInputChange}/>
             <Button 
               as='button' 
