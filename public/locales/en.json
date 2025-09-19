@@ -197,6 +197,16 @@
     "message": {
       "successful": "Data submitted successfully",
       "error": "Data submission error"
+    },
+    "delete_message": {
+      "title": "Data to be deleted",
+      "birth_date": "Date of birth",
+      "birth_time": "Time of birth",
+      "birth_timezone": "Birth timezone",
+      "birth_coordinates": "Birth coordinates",
+      "name": "Name",
+      "email": "Email",
+      "social_ids": "Social IDs"
     }
   },
   "footer": {

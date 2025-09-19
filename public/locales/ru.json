@@ -197,6 +197,16 @@
     "message": {
       "successful": "Данные успешно отправлены",
       "error": "Ошибка отправки данных"
+    },
+    "delete_message": {
+      "title": "Удаляемые данные",
+      "birth_date": "Дата рождения",
+      "birth_time": "Время рождения",
+      "birth_timezone": "Часовой пояс места рождения",
+      "birth_coordinates": "Координаты места рождения",
+      "name": "Имя",
+      "email": "Email",
+      "social_ids": "Social IDs"
     }
   },
   "footer": {

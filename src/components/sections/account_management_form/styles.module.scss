@@ -5,6 +5,28 @@
   }
 }
 
+.delete {
+  &__title {
+    font-size: fluid-size(16, 36); 
+    font-weight: 700;
+    color: var(--color-title-white);
+    margin-bottom: fluid-size(15, 20);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: fluid-size(8, 10);
+    color: var(--color-text-white);
+    list-style: counter-increment;
+    margin-left: fluid-size(25, 35);
+  }
+
+  &__item {
+    font-size: fluid-size(12, 20);
+  }
+}
+
 .form {
   margin: 0 auto;
   max-width: fluid-size(280, 850);
