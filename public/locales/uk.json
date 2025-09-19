@@ -197,6 +197,16 @@
     "message": {
       "successful": "Дані успішно надіслані",
       "error": "Помилка відправлення даних"
+    },
+    "delete_message": {
+      "title": "Дані для видалення",
+      "birth_date": "Дата народження",
+      "birth_time": "Час народження",
+      "birth_timezone": "Часовий пояс місця народження",
+      "birth_coordinates": "Координати місця народження",
+      "name": "Ім'я",
+      "email": "Email",
+      "social_ids": "Social IDs"
     }
   },
   "footer": {
