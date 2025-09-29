@@ -11,15 +11,15 @@ type TNetworkItem = {
 }
 
 const NETWORK: TNetworkItem[] = [
-  // {
-  //   name: 'Instagram',
-  //   href: {
-  //     en: '/',
-  //     ru: '/',
-  //     uk: '/',
-  //   },
-  //   icon: InstagramIcon
-  // },
+  {
+    name: 'Instagram',
+    href: {
+      en: 'https://www.instagram.com/kaelis_ai_media?igsh=MXczMW5wajJ4ODgxdQ==',
+      ru: 'https://www.instagram.com/kaelis_ai_media?igsh=MXczMW5wajJ4ODgxdQ==',
+      uk: 'https://www.instagram.com/kaelis_ai?igsh=aGR3dXU1bHBqczAy',
+    },
+    icon: InstagramIcon
+  },
   {
     name: 'TikTok',
     href: {
