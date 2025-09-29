@@ -15,7 +15,7 @@ const NETWORK: TNetworkItem[] = [
     name: 'Instagram',
     href: {
       en: 'https://www.instagram.com/kaelis_ai_media?igsh=MXczMW5wajJ4ODgxdQ==',
-      ru: 'https://www.instagram.com/kaelis_ai_media?igsh=MXczMW5wajJ4ODgxdQ==',
+      ru: 'https://www.instagram.com/kaelisai_media?igsh=MW9kcmV0YXFzdGdqcg==',
       uk: 'https://www.instagram.com/kaelis_ai?igsh=aGR3dXU1bHBqczAy',
     },
     icon: InstagramIcon
