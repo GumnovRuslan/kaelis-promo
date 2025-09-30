@@ -11,10 +11,11 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.kaelisai.com';
       title: seo.title,
       description: seo.description,
       type: seo.ogType as "website" | "article",
+      
       images: [
         {
-          url: seo.image.image.asset.url,
-          alt: seo.image.altText,
+          url: seo.image?.image.asset.url ?? '',
+          alt: seo.image?.altText ?? '',
         },
       ],
     },
@@ -30,7 +31,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.kaelisai.com';
       card: seo.twitterCard as "summary" | "summary_large_image" | "app" | "player",
       title: seo.title,
       description: seo.description,
-      images: [seo.image.image.asset.url],
+      images: [seo.image?.image.asset.url ?? ''],
     },
   };
 }
