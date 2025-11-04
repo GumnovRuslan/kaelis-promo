@@ -8,6 +8,7 @@ import {routing} from '@/i18n/routing';
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import "@/styles/index.scss";
 import '@/styles/root.scss';
+import { Suspense } from "react";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -71,7 +72,9 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${geistInter.variable}`}>
-        <GoogleAnalytics/>
+        <Suspense>
+          <GoogleAnalytics/>
+        </Suspense>
         <NextIntlClientProvider>
           <ModalProvider>
             <Modal />
