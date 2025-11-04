@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Background } from "@/components/ui";
 import { ModalProvider } from "@/context/modal";
-import { Header, Footer, Modal } from "@/components/sections";
+import { Header, Footer, Modal, GoogleAnalytics } from "@/components/sections";
 import {NextIntlClientProvider} from 'next-intl';
 import {routing} from '@/i18n/routing';
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import "@/styles/index.scss";
 import '@/styles/root.scss';
+import { Suspense } from "react";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -71,6 +72,9 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${geistInter.variable}`}>
+        <Suspense>
+          <GoogleAnalytics/>
+        </Suspense>
         <NextIntlClientProvider>
           <ModalProvider>
             <Modal />

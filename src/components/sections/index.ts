@@ -19,8 +19,10 @@ import FAQ from "./faq";
 import ArticleNotFound from "./article_not_found";
 import Contacts from "./contacts";
 import AccountManagementForm from "./account_management_form";
+import GoogleAnalytics from "./analytics/GoogleAnalytics";
 
 export { 
+  GoogleAnalytics,
   Header, 
   Hero, 
   Footer, 
