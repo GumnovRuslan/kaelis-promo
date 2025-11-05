@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 type TButton = {
   children?: React.ReactNode;
@@ -11,7 +11,6 @@ type TButton = {
 type ButtonAsButton = TButton &
   Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof TButton> & {
     as?: 'button';
-    href?: never;
   };
 
 type ButtonAsLink = TButton &
@@ -22,7 +21,7 @@ type ButtonAsLink = TButton &
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
-const Button = ({children, className, text, as, ...props}: ButtonProps) => {
+const Button = ({children, className, text, as = 'button', ...props}: ButtonProps) => {
 
   if (as === 'link') {
     const { href, ...rest } = props as ButtonAsLink;
