@@ -5,7 +5,7 @@ import { ModalProvider } from "@/context/modal";
 import { Header, Footer, Modal, GoogleAnalytics } from "@/components/sections";
 import {NextIntlClientProvider} from 'next-intl';
 import {routing} from '@/i18n/routing';
-import { setRequestLocale, getTranslations } from "next-intl/server";
+import {getTranslations } from "next-intl/server";
 import "@/styles/index.scss";
 import '@/styles/root.scss';
 import { Suspense } from "react";
@@ -58,19 +58,14 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
-  params
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{locale: string}>;
 }>) {
-  const {locale} = await params;
-  
-  setRequestLocale(locale);
   
   return (
-    <html lang={locale}>
+    <html>
       <body className={`${geistInter.variable}`}>
         <Suspense>
           <GoogleAnalytics/>
