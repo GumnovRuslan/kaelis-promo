@@ -1,4 +1,4 @@
-export const GA_ID = process.env.GOOGLE_ANALYTICS_ID
+export const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
 
 export const pageview = (url: string) => {
   if (typeof window !== 'undefined' && (window as any).gtag) {
