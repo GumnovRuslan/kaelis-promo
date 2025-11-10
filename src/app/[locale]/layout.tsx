@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Background } from "@/components/ui";
 import { ModalProvider } from "@/context/modal";
-import { Header, Footer, Modal, GoogleAnalytics } from "@/components/sections";
+import { Header, Footer, Modal} from "@/components/sections";
+import Analytics from "@/components/sections/analytics/Analytics";
 import {NextIntlClientProvider} from 'next-intl';
 import {routing} from '@/i18n/routing';
 import {getTranslations } from "next-intl/server";
@@ -15,6 +16,10 @@ const geistInter = Inter({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 });
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({locale}));
+}
 
 export const generateMetadata = async ({ params }: {params: Promise<{locale: string}> }): Promise<Metadata> => {
   const { locale } = await params;
@@ -54,30 +59,30 @@ export const generateMetadata = async ({ params }: {params: Promise<{locale: str
   }
 }
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({locale}));
-}
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{locale: string}>;
 }>) {
+  const {locale} = await params;
   
   return (
-    <html>
+    <html lang={locale}>
       <body className={`${geistInter.variable}`}>
         <Suspense>
-          <GoogleAnalytics/>
+          <Analytics/>
         </Suspense>
+
         <NextIntlClientProvider>
           <ModalProvider>
             <Modal />
             <Background/>
             <Header/>
-              <main>
-                {children}
-              </main>
+            <main>
+              {children}
+            </main>
             <Footer/>
           </ModalProvider>
         </NextIntlClientProvider>

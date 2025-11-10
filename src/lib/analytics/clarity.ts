@@ -1,0 +1,1 @@
+export const CLARITY_ID = process.env.CLARITY_ID;
