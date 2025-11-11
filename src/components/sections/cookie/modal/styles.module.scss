@@ -1,0 +1,102 @@
+.cookie {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: var(--color-bg-primary-850);
+
+  @include media-up(xl) {
+    padding: 52px fluid-size(20, 100, 1200);
+  }
+
+  @include media-between(md, xl) {
+    padding: 45px fluid-size(20, 95, 768, 1200) 40px;
+  }
+
+  @include media-down(md) {
+    padding: 30px 15px;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+
+    @include media-up(xl) {
+      gap: 50px;
+      align-items: center;
+    }
+
+    @include media-between(md, xl) {
+      gap: 25px;
+    }
+
+    @include media-down(xl) {
+      flex-direction: column;
+    }
+
+    @include media-down(md) {
+      gap: 20px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__text {
+    line-height: 130%;
+    color: var(--color-text-primary);
+
+    @include media-up(md) {
+      font-size: 20px;
+    }
+
+    @include media-down(md) {
+      font-size: fluid-size(12, 20, 320, 768);
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    line-height: 130%;
+    color: var(--color-text-primary);
+
+    @include media-up(md) {
+      font-size: 15px;
+    }
+
+    @include media-down(md) {
+      font-size: fluid-size(10, 15, 320, 768);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+
+    @include media-up(xl) {
+      gap: 25px;
+    }
+
+    @include media-between(md, xl) {
+      gap: 20px;
+    }
+
+    @include media-down(md) {
+      flex-direction: column;
+      width: 70%;
+      gap: 10px;
+      margin: 0 auto;
+    }
+  }
+
+  &__button {
+    @include media-between(md, xl) {
+      flex: 1;
+    }
+  }
+}

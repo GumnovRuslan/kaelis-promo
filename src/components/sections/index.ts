@@ -19,6 +19,8 @@ import FAQ from "./faq";
 import ArticleNotFound from "./article_not_found";
 import Contacts from "./contacts";
 import AccountManagementForm from "./account_management_form";
+import CookieModal from "./cookie/modal";
+import CookieSettings from "./cookie/settings";
 
 export { 
   Header, 
@@ -42,4 +44,6 @@ export {
   TermsOfUse,
   ChildrenPrivacyPolicy,
   AccountManagementForm,
+  CookieModal,
+  CookieSettings,
 };

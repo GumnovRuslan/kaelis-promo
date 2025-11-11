@@ -22,6 +22,8 @@ import Pagination from "./pagination";
 import ArticleCategory from "./article_category";
 import ArticleCategoriesList from "./article_categories_list";
 import Switcher from "./switcher";
+import Checkbox from "./checkbox";
+import CloseButton from "./button_close";
 
 export { 
   Button, 
@@ -48,4 +50,6 @@ export {
   ArticleCategory,
   ArticleCategoriesList,
   Switcher,
+  Checkbox,
+  CloseButton,
 };

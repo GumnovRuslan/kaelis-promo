@@ -1,0 +1,29 @@
+.wrapper {
+
+}
+
+.input {
+  display: none;
+
+  &:checked + .checkbox {
+    background: var(--color-primary-100);
+  }
+
+  &:checked + .checkbox > svg {
+    opacity: 1;
+    color: white;
+  }
+}
+
+.checkbox {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-primary-100);
+  border-radius: 50px;
+  background: var(--color-bg-primary-850);
+
+  & > svg{
+    opacity: 0;
+  }
+}
