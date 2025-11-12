@@ -42,11 +42,8 @@
       min-height: fluid-size(30, 60, 320, 768);
     }
 
-    // .button__content {
-    //   min-width: 165px;
-    // }
-
     .button__text {
+      text-wrap: nowrap;
       font-weight: 600;
       color: var(--color-text-white);
 

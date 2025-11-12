@@ -1,7 +1,6 @@
 import styles from './styles.module.scss';
-
 import { Checkbox, Button, CloseButton } from '@/components/ui';
-import { SETTINGS } from '../data';
+import { useTranslations } from 'next-intl';
 
 type TProps = {
   analytics: boolean;
@@ -20,8 +19,9 @@ const CookieSettings = ({
   onSave,
   onBack,
 }: TProps) => {
+  const t = useTranslations('Cookie.settings')
 
-   const handleAcceptAll = () => {
+  const handleAcceptAll = () => {
     setAnalytics(true);
     setMarketing(true);
     onSave();
@@ -32,44 +32,45 @@ const CookieSettings = ({
     setMarketing(false);
     onSave();
   };
+
+
   return (
     <div className={styles.settings}>
       <div className={styles.settings__inner}>
         <CloseButton className={styles.settings__button_close} onClick={onBack}/>
+
         <div className={styles.settings__header}>
-          <span className={styles.settings__title}>Cookie Settings</span>
-          <span className={styles.settings__subtitle}>Select the categories of cookies that you want to allow</span>
+          <span className={styles.settings__title}>{t('title')}</span>
+          <span className={styles.settings__subtitle}>{t('subtitle')}</span>
         </div>
+
         <div className={styles.settings__content}>
-          {/* необходимые cookies всегда включены */}
           <ListItem
-            title="Necessary"
-            text="These cookies are required for the website to function properly and cannot be disabled."
+            title={t('settings.necessary.title')}
+            text={t('settings.necessary.text')}
             checked
             disabled
           />
-
-          {/* analytics */}
           <ListItem
-            title="Analytics"
-            text="They help us understand how visitors interact with the site by collecting and sharing information anonymously."
+            title={t('settings.analytics.title')}
+            text={t('settings.analytics.text')}
             checked={analytics}
             onChange={() => setAnalytics(!analytics)}
           />
-
-          {/* marketing */}
           <ListItem
-            title="Marketing"
-            text="These cookies are used to personalize advertising and measure its effectiveness."
+            title={t('settings.marketing.title')}
+            text={t('settings.marketing.text')}
             checked={marketing}
             onChange={() => setMarketing(!marketing)}
           />
         </div>
+
         <div className={styles.settings__buttons}>
-          <Button as='button' className={styles.settings__button} styleType='secondary' text='Accept all' onClick={handleAcceptAll}/>
-          <Button as='button' className={styles.settings__button} styleType='secondary' text='Decline all' onClick={handleRejectAll}/>
-          <Button as='button' className={styles.settings__button} styleType='secondary' text='Save settings' onClick={onSave}/>
+          <Button as='button' className={styles.settings__button} styleType='secondary' text={t('buttons.accept-all.label')} onClick={handleAcceptAll}/>
+          <Button as='button' className={styles.settings__button} styleType='secondary' text={t('buttons.decline-all.label')} onClick={handleRejectAll}/>
+          <Button as='button' className={styles.settings__button} styleType='secondary' text={t('buttons.save.label')} onClick={onSave}/>
         </div>
+        
       </div>
     </div>
   )

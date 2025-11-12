@@ -1,13 +1,9 @@
 .cookie {
-  position: fixed;
-  z-index: 100;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  border-top: 1px solid var(--color-primary-100);
   background: var(--color-bg-primary-850);
 
   @include media-up(xl) {
-    padding: 52px fluid-size(20, 100, 1200);
+    padding: 40px fluid-size(20, 100, 1200);
   }
 
   @include media-between(md, xl) {
@@ -79,7 +75,7 @@
     display: flex;
 
     @include media-up(xl) {
-      gap: 25px;
+      gap: fluid-size(0, 25);
     }
 
     @include media-between(md, xl) {
@@ -95,6 +91,7 @@
   }
 
   &__button {
+    flex: 1;
     @include media-between(md, xl) {
       flex: 1;
     }

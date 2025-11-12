@@ -1,4 +1,50 @@
 {
+  "Cookie": {
+    "modal": {
+      "description": "We use cookies to personalize content, analytics, and advertising.",
+      "link-policy": "Private Policy and Cookies",
+      "buttons": {
+        "accept": {
+          "label": "Accept"
+        },
+        "reject": {
+          "label": "Reject"
+        },
+        "settings": {
+          "label": "Configure"
+        }
+      }
+    },
+    "settings": {
+      "title": "Cookie Settings",
+      "subtitle": "Select the categories of cookies that you want to allow",
+      "settings": {
+        "necessary": {
+          "title": "Necessary",
+          "text": "These cookies are required for the website to function properly and cannot be disabled."
+        },
+        "analytics": {
+          "title": "Analytics",
+          "text": "They help us understand how visitors interact with the site by collecting and sharing information anonymously."
+        },
+        "marketing": {
+          "title": "Marketing",
+          "text": "These cookies are used to personalize advertising and measure its effectiveness."
+        }
+      },
+      "buttons": {
+        "accept-all": {
+          "label": "Accept all"
+        },
+        "decline-all": {
+          "label": "Decline all"
+        },
+        "save": {
+          "label": "Save settings"
+        }
+      }
+    }
+  },
   "Seo": {
     "title": "Kaelis — Personal Recommendations: Astrology, Tarot, Natal Chart",
     "description": "Kaelis helps you understand yourself through astrology and Tarot: natal chart, destiny matrix, affirmations, and personalized daily recommendations.",
