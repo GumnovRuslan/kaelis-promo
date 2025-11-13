@@ -6,12 +6,7 @@ import ArticlesPopular from "./articles_popular";
 import ArticlesList from "./articles_list";
 import AboutApp from "./about_app";
 import Message from "./message";
-import PrivacyPolicy from "./policy/privacy-policy";
-import SubscriptionPolicy from "./policy/subscription_policy";
-import LicenseAgreement from "./policy/license_agreement";
-import ContentPolicy from "./policy/content_policy";
-import TermsOfUse from "./policy/terms_of_use";
-import ChildrenPrivacyPolicy from "./policy/children_privacy_policy";
+import PrivacyPolicy from "./policy";
 import Modal from "./modal";
 import DailyCard from "./daily_card";
 import Article from "./article";
@@ -38,11 +33,6 @@ export {
   ArticleNotFound,
   Contacts,
   PrivacyPolicy,
-  SubscriptionPolicy,
-  LicenseAgreement,
-  ContentPolicy,
-  TermsOfUse,
-  ChildrenPrivacyPolicy,
   AccountManagementForm,
   CookieModal,
   CookieSettings,

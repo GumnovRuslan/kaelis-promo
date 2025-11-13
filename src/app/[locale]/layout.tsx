@@ -85,7 +85,7 @@ export default async function RootLayout({
               </main>
               <Footer/>
             </ModalProvider>
-            <Cookie />
+            <Cookie lang={locale}/>
             <AnalyticsManager/>
           </NextIntlClientProvider>
         </CookieConsentProvider>

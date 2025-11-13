@@ -5,11 +5,16 @@ import Image from 'next/image';
 import { ButtonStore } from '@/components/ui';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getSocialData } from '@/lib/social_data';
+import { TPolicy } from '@/types/policy';
+import { fetchGraphQL } from '@/lib/graphql';
+import { getPolicies } from '@/graphql/queries/policy';
 
 const Footer = async () => {
   const locale = await getLocale()
   const social = getSocialData({lang: locale as 'en' | 'ru' | 'uk'});
   const t = await getTranslations('footer')
+  const { data, errors } = await fetchGraphQL(getPolicies(locale));
+  const policies: TPolicy[] | null = data?.allPolicy || null
 
   const navKeysLeft = [
     'home', 
@@ -18,25 +23,10 @@ const Footer = async () => {
     'faq', 
   ] as const;
 
-  const navKeysRight = [
-    'privacy-policy',
-    'subscription-policy',
-    'end-user-license-agreement',
-    'content-policy',
-    'terms-of-use',
-    'children-privacy-policy'
-  ] as const;
-
   const navItemsLeft = navKeysLeft.map((key) => ({
     key,
     label: t(`nav.${key}`),
     href: `/${key === 'home' ? '' : key}`
-  }));
-
-  const navItemsRight = navKeysRight.map((key) => ({
-    key,
-    label: t(`nav.${key}`),
-    href: `/${key}`
   }));
 
   return (
@@ -58,11 +48,13 @@ const Footer = async () => {
               <Link href={item.href} className={styles.footer__nav_link} key={i}>{item.label}</Link>
             ))}
           </nav>
-          <nav className={styles.footer__nav}>
-            {navItemsRight.map((item, i) => (
-              <Link href={item.href} className={styles.footer__nav_link} key={i}>{item.label}</Link>
-            ))}
-          </nav>
+          {policies?.length && (
+            <nav className={styles.footer__nav}>
+              {policies.map(item => (
+                <Link href={'/policy/' + item.slug.current} className={styles.footer__nav_link} key={item._id}>{item.title}</Link>
+              ))}
+            </nav>
+          )}
         </div>
       </div>
       <div className={styles.footer__network}>

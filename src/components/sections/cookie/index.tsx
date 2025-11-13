@@ -7,7 +7,11 @@ import { useCookieConsent } from "@/context/CookieConsentContext";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./styles.module.scss";
 
-const Cookie = () => {
+type TProps = {
+  lang: string;
+}
+
+const Cookie = ({lang}: TProps) => {
   const { showBanner, acceptAll, rejectAll, saveConsent } = useCookieConsent();
   const [customOpen, setCustomOpen] = useState(false);
   const [analytics, setAnalytics] = useState(false);
@@ -31,6 +35,7 @@ const Cookie = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <CookieModal
+              lang={lang}
               acceptAll={acceptAll}
               rejectAll={rejectAll}
               openSettings={() => setCustomOpen(true)}
