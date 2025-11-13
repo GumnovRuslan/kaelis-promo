@@ -2,6 +2,7 @@
     --color-white: #fff;
     --color-black: #000;
     --color-primary-900: #1A1927;
+    --color-primary-850: #1F1D2E;
     --color-primary-800: #272639;
     --color-primary-700: #20293D;
     --color-primary-500: #646095;
@@ -30,9 +31,11 @@
 
     --color-bg-primary: var(--color-primary-200);
     --color-bg-primary-900: var(--color-primary-900);
+    --color-bg-primary-850: var(--color-primary-850);
     --color-bg-primary-800: var(--color-primary-800);
     --color-bg-secondary: var(--color-secondary);
 
     --gradient-main: linear-gradient(180deg, #05040B 0%, #272639 16.83%, #35334B 62.5%, #494766 100%);
     --gradient-btn: linear-gradient(90deg, #959FD8 0%, #D5A2F2 100%);
+    --gradient-btn-secondary: linear-gradient(90deg, #959fd857 0%, #d5a2f257 100%);
   }

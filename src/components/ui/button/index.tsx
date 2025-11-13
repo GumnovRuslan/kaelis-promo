@@ -6,6 +6,7 @@ type TButton = {
   children?: React.ReactNode;
   text?: string;
   className?: string;
+  styleType?: 'primary' | 'secondary';
 }
 
 type ButtonAsButton = TButton &
@@ -21,14 +22,24 @@ type ButtonAsLink = TButton &
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
-const Button = ({children, className, text, as = 'button', ...props}: ButtonProps) => {
+const Button = ({children, className, styleType = 'primary', text, as = 'button', ...props}: ButtonProps) => {
 
   if (as === 'link') {
     const { href, ...rest } = props as ButtonAsLink;
     return (
-      <Link href={href} className={`${styles.button} ${text ? styles['button--text'] : ''} ${className}`} {...rest}>
+      <Link 
+        href={href} 
+        className={`${styles.button} ${styles[`button--${styleType}`]} ${className}`} 
+        {...rest}
+      >
         {text 
-          ? <span className={styles.button__text}>{text}</span>
+          ? (
+            <span className={`${text ? styles['button__content'] : ''}`}>
+              <span className={styles.button__text}>
+                {text}
+              </span>
+            </span>
+          )
           : children
         }
       </Link>
@@ -37,9 +48,15 @@ const Button = ({children, className, text, as = 'button', ...props}: ButtonProp
 
   const { ...buttonProps } = props as ButtonAsButton;
   return (
-    <button className={`${styles.button} ${text ? styles['button--text'] : ''} ${className}`} {...buttonProps}>
+    <button className={`${styles.button} ${styles[`button--${styleType}`]} ${className}`} {...buttonProps}>
       {text 
-        ? <span className={styles.button__text}>{text}</span>
+        ? (
+          <span className={`${text ? styles['button__content'] : ''}`}>
+            <span className={styles.button__text}>
+              {text}
+            </span>
+          </span>
+        )
         : children
       }
     </button>

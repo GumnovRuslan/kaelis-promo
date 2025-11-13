@@ -2,6 +2,8 @@
 
 import styles from './styles.module.scss';
 
+import CloseButton from '../button_close';
+
 type TProps = {
   children?: React.ReactNode;
   isShow: boolean;
@@ -13,13 +15,7 @@ const ModalWrapper = ({children, isShow = false, handlerClose} : TProps) => {
     <div className={`${styles.modal__background} ${!isShow ? styles['modal--hidden'] : styles['modal--show']}`}>
       <div className={styles.modal}>
         <div className={styles.modal__head}>
-          <button 
-            className={styles.btn}
-            onClick={handlerClose}
-            aria-label={'Close modal'}
-          >
-            <span className={styles.btn__inner}/>
-          </button>
+          <CloseButton onClick={handlerClose} label={'Close modal'}/>
         </div>
         
         <div className={styles.modal__content}>
