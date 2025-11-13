@@ -1,9 +1,9 @@
 export const getArticles = (lang: string = 'en') => `
   query {
-  allArticlesItem(where: { i18n_lang: { eq: "${lang}" } }) {
+  allArticlesItem(where: { language: { eq: "${lang}" } }) {
   	_id
     title
-    i18n_lang
+    language
     date
     slug {current}
     category { title }
@@ -19,8 +19,6 @@ export const getArticles = (lang: string = 'en') => `
 }
 `;
 
-// const seo = 
-
 export const getArticleSeo = (slug: string) => `
   query {
     allArticlesItem(where: { 
@@ -33,9 +31,7 @@ export const getArticleSeo = (slug: string) => `
       ogType
       twitterCard
       image {
-        image {
-          asset { url }
-        }
+        image { asset { url } }
         altText
       }
     }
@@ -49,7 +45,7 @@ export const getArticle = (slug: string) => `
      _id
     title
     desc
-    i18n_lang
+    language
     date
     slug {current}
     contentRaw
@@ -59,11 +55,7 @@ export const getArticle = (slug: string) => `
     }
     category { title }
     coverImage {
-      image {
-        asset {
-          url
-        }
-      }
+      image { asset { url } }
       altText
     }
     }

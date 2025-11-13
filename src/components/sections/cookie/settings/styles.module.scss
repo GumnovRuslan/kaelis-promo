@@ -1,0 +1,148 @@
+.settings {
+  background: var(--color-bg-primary-850);
+  color: var(--color-text-primary);
+  border-top: 1px solid var(--color-primary-100);
+
+  &__inner {
+    position: relative;
+    padding: 50px 100px;
+
+    @include media-between(md, lg) {
+      padding: 58px fluid-size(15, 50, 320, 992) 45px;
+    }
+
+    @include media-down(md) {
+      padding: 35px fluid-size(15, 30, 320, 768) 30px;
+    }
+  }
+
+  &__button_close {
+    position: absolute;
+
+    @include media-up(md) {
+      top: 10px;
+      right: 15px;
+    }
+
+    @include media-down(md) {
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+
+    @include media-up(lg) {
+      margin-bottom: 37px;
+    }
+
+    @include media-between(md, lg) {
+      margin-bottom: 30px;
+    }
+
+    @include media-down(md) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__title, 
+  &__subtitle {
+    font-weight: 500;
+    line-height: 130%;
+  }
+
+  &__title, 
+  .item__title {
+    @include media-up(md) {
+      font-size: 20px;
+    }
+
+    @include media-down(md) {
+      font-size: fluid-size(12, 20, 320, 768);
+    }
+  }
+
+  &__subtitle, 
+  .item__text {
+    @include media-up(md) {
+      font-size: 15px;
+    }
+
+    @include media-down(md) {
+      font-size: fluid-size(10, 15, 320, 768);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    @include media-up(lg) {
+      gap: 30px;
+      margin-bottom: 47px;
+    }
+
+    @include media-between(md, lg) {
+      gap: 12px;
+      margin-bottom: 58px;
+    }
+
+    @include media-down(md) {
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+
+    @include media-up(lg) {
+      gap: 30px;
+      justify-content: end;
+    }
+
+    @include media-down(lg) {
+      gap: 20px;
+    }
+
+    @include media-down(md) {
+      gap: fluid-size(6, 15, 320, 768);
+      margin: 0 auto;
+      width: 75%;
+      flex-direction: column;
+    }
+  }
+
+  &__button {
+    @include media-down(lg) {
+      width: 100%;
+    }
+  }
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  cursor: pointer;
+  column-gap: 3px;
+  align-items: center;
+
+  @include media-down(md) {
+    row-gap: 5px;
+  }
+
+  &__title {
+    font-weight: 500;
+    line-height: 130%;
+  }
+
+  &__text {
+    text-align: justify;
+    line-height: 130%;
+    grid-column: 2/3;
+    grid-row: 2;
+  }
+}
