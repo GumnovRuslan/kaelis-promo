@@ -16,13 +16,14 @@
   &--primary {
     height: fluid-size(41, 60);
     background: var(--gradient-btn);
+    min-width: fluid-size(160, 240);
 
     .button__content {
-      min-width: fluid-size(160, 240);
       padding: 5px 19px;
     }
 
     .button__text {
+      position: relative;
       font-size: fluid-size(16, 20);
       font-weight: 600;
       color: var(--color-text-primary-700)

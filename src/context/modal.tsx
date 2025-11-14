@@ -2,7 +2,7 @@
 
 import { ReactNode, createContext, useContext, useState } from 'react';
 
-type ModalContentType = 'join' | 'full' | string;
+type ModalContentType = 'join' | 'test' | string;
 
 type TPopupContext = {
   isOpenModal: boolean;

@@ -16,6 +16,8 @@ import Contacts from "./contacts";
 import AccountManagementForm from "./account_management_form";
 import CookieModal from "./cookie/modal";
 import CookieSettings from "./cookie/settings";
+import Questionnaire from "./questionnaire";
+import Test from "./test";
 
 export { 
   Header, 
@@ -36,4 +38,6 @@ export {
   AccountManagementForm,
   CookieModal,
   CookieSettings,
+  Questionnaire,
+  Test,
 };

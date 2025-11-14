@@ -24,6 +24,8 @@ import ArticleCategoriesList from "./article_categories_list";
 import Switcher from "./switcher";
 import Checkbox from "./checkbox";
 import CloseButton from "./button_close";
+import Title from "./title";
+import Text from "./text";
 
 export { 
   Button, 
@@ -52,4 +54,6 @@ export {
   Switcher,
   Checkbox,
   CloseButton,
+  Title,
+  Text,
 };
