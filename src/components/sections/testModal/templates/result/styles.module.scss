@@ -1,0 +1,16 @@
+.result {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 50px;
+  max-height: 90vh;
+
+  &__inner {
+    overflow: auto;
+    padding: 0 fluid-size(25, 90);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

@@ -22,7 +22,6 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const openModal = () => setIsOpenModal(true);
   const closeModal = () => setIsOpenModal(false);
   const toggleModal = () => setIsOpenModal((prev) => !prev);
-
   
   return (
     <ModalContext

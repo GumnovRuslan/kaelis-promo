@@ -7,8 +7,6 @@ import { Link } from '@/i18n/navigation';
 import { useModalContext } from '@/context/modal';
 import { ChangeEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
-import disableBodyScroll from '@/utils/disableBodyScroll';
 import { CheckMarkIcon } from '@/components/icons';
 
 type ModalContentType = 'join' | 'full';
@@ -69,11 +67,6 @@ const Modal = () => {
   };
 
   const data = DATA[content as ModalContentType];
-
-  useEffect(() => {
-    disableBodyScroll({isDisabled: isOpenModal, target: 'html'})
-    return () => disableBodyScroll({remove: true})
-  }, [isOpenModal])
 
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

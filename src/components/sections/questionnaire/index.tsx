@@ -1,8 +1,13 @@
+'use client'
+
 import styles from './styles.module.scss'
 import { Button, Title, Text } from '@/components/ui'
 import Image from 'next/image'
+import { useTestModal } from '@/context/TestModalContext'
 
 const Questionnaire = () => {
+  const { openTest } = useTestModal();
+  
   return (
     <section className={styles.section}>
       <span className={styles.section__bg}>
@@ -13,7 +18,7 @@ const Questionnaire = () => {
           <Title className={styles.section__title} tag='h2' text='Open Your Soul Archetype'/>
           <Text className={styles.section__message} text='7 questions — 2 minutes. Results instantly, no email required'/>
         </div>
-        <Button as='button' text='Take the test'/>
+        <Button as='button' text='Take the test' onClick={openTest}/>
       </div>
     </section>
   )

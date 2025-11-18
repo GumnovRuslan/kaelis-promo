@@ -1,11 +1,12 @@
 import styles from './styles.module.scss'
 import AnswerItem from '../answer_item'
-import type { TData } from '../data'
+import type { TQuiz } from '../../quiz_schemas'
+import type { ArchetypeKey } from '@/types/ArchetypeKey';
 
-type TProps = TData & {
+type TProps = TQuiz & {
   currentStep: number;
   selected: string;
-  onSelect: (step: number, answerType: string) => void
+  onSelect: (answerType: ArchetypeKey) => void
 }
 
 const QuestionContent = ({ question, answers, selected, currentStep, onSelect }: TProps) => {
@@ -20,7 +21,12 @@ const QuestionContent = ({ question, answers, selected, currentStep, onSelect }:
       <ul className={styles.content__answers}>
         {answers.map((item, i) => 
           <li className={styles.content__answers_item} key={i}>
-            <AnswerItem item={item} currentStep={currentStep} active={selected === item.type} onSelect={onSelect}/>
+            <AnswerItem 
+              item={item} 
+              currentStep={currentStep} 
+              active={selected === item.type} 
+              onSelect={onSelect}
+            />
           </li>
         )}
       </ul>

@@ -5,20 +5,22 @@ import {
   AboutApp,
   Message,
   Questionnaire,
-  Test
+  TestModal,
 } from "@/components/sections";
+import { TestModalProvider } from "@/context/TestModalContext";
 
 const HomePage = () => {
   return (
-    <>
-      <Test/>
+    <TestModalProvider>
       <Hero />
       <Subscribe />
       <ArticlesPopular />
       <Questionnaire/>
       <AboutApp />
       <Message textIsShow/>
-    </>
+
+      <TestModal/>
+    </TestModalProvider>
   )
 }
 

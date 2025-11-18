@@ -1,17 +1,17 @@
 .content {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: hidden; 
   
   &__title {
     position: relative;
     z-index: 1;
     display: inline-block;
     margin: 0 auto;
-    max-width: 60%;
+    max-width: 65%;
     text-transform: uppercase;
     text-align: center;
-    font-size: 24px;
+    font-size: fluid-size(12, 24);
     line-height: 120%;
     font-weight: 700;
     color: var(--color-text-white);
@@ -25,20 +25,20 @@
     // background: red;
 
     &--top {
-      box-shadow: 0 10px 12px 23px #1F1D2E;
+      box-shadow: 0 fluid-size(5, 10) fluid-size(5, 12) fluid-size(10, 23) #1F1D2E;
     }
 
     &--bottom {
-      box-shadow: 0 -5px 12px 23px #1F1D2E;
+      box-shadow: 0 -5px fluid-size(5, 12) fluid-size(10, 23) #1F1D2E;
     }
   }
 
   &__answers {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: fluid-size(10, 20);
     overflow: auto;
-    padding: 50px 20px 40px;
+    padding: fluid-size(25, 50) 20px fluid-size(25, 40);
     
 
     &::-webkit-scrollbar {

@@ -26,6 +26,7 @@ import Checkbox from "./checkbox";
 import CloseButton from "./button_close";
 import Title from "./title";
 import Text from "./text";
+import Animation from "./animation";
 
 export { 
   Button, 
@@ -56,4 +57,5 @@ export {
   CloseButton,
   Title,
   Text,
+  Animation,
 };

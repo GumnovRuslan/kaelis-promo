@@ -32,16 +32,7 @@ const Button = ({children, className, styleType = 'primary', text, as = 'button'
         className={`${styles.button} ${styles[`button--${styleType}`]} ${className}`} 
         {...rest}
       >
-        {text 
-          ? (
-            <span className={`${text ? styles['button__content'] : ''}`}>
-              <span className={styles.button__text}>
-                {text}
-              </span>
-            </span>
-          )
-          : children
-        }
+        <ButtonInner text={text} children={children}/>
       </Link>
     );
   }
@@ -49,18 +40,20 @@ const Button = ({children, className, styleType = 'primary', text, as = 'button'
   const { ...buttonProps } = props as ButtonAsButton;
   return (
     <button className={`${styles.button} ${styles[`button--${styleType}`]} ${className}`} {...buttonProps}>
-      {text 
-        ? (
-          <span className={`${text ? styles['button__content'] : ''}`}>
-            <span className={styles.button__text}>
-              {text}
-            </span>
-          </span>
-        )
-        : children
-      }
+      <ButtonInner text={text} children={children}/>
     </button>
   );
 }
 
 export default Button;
+
+function ButtonInner({text, children}: {text?: string; children?:React.ReactNode}) {
+  return (
+    <span className={styles.button__content}>
+      {text 
+        ? <span className={styles.button__text}>{text}</span>
+        : children
+      }
+    </span>
+  )
+}

@@ -20,7 +20,7 @@
 
   &__text {
     display: block;
-    font-size: 20px;
+    font-size: fluid-size(10, 20);
     line-height: 130%;
     color: var(--color-text-white);
   }
