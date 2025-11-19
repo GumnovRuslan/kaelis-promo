@@ -13,6 +13,7 @@ import { Suspense } from "react";
 import { CookieConsentProvider } from "@/context/CookieConsentContext";
 import Cookie from "@/components/sections/cookie";
 import AnalyticsManager from "@/components/sections/analytics_manager/AnalyticsManager";
+import { SubscribeProvider } from "@/context/SubscribeContext";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -76,16 +77,19 @@ export default async function RootLayout({
       <body className={`${geistInter.variable}`}>
         <CookieConsentProvider>
           <NextIntlClientProvider>
-            <ModalProvider>
-              <Modal />
-              <Background/>
-              <Header/>
-              <main>
-                {children}
-              </main>
-              <Footer/>
-            </ModalProvider>
-            <Cookie lang={locale}/>
+            <SubscribeProvider>
+              <ModalProvider>
+                <Modal />
+                <Background/>
+                <Header/>
+                <main>
+                  {children}
+                </main>
+                <Footer/>
+              </ModalProvider>
+
+              <Cookie lang={locale}/>
+            </SubscribeProvider>
             <AnalyticsManager/>
           </NextIntlClientProvider>
         </CookieConsentProvider>

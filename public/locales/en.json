@@ -270,6 +270,121 @@
       "children-privacy-policy": "Children’s Privacy Policy"
     }
   },
+  "TestSection": {
+    "title": "Open Your Soul Archetype",
+    "subtitle": "7 questions — 2 minutes. Results instantly, no email required",
+    "result_additional_text": {
+      "text_1": "You can receive a personalized",
+      "text_2": "7-day",
+      "text_3": "practice tailored to your archetype by leaving",
+      "text_4": "your e-mail to get",
+      "text_5": "it all in one message."
+    },
+    "steps": {
+      "question": "Question",
+      "of": "of"
+    },
+    "buttons": {
+      "open": {
+        "label": "Take the test"
+      },
+      "next": {
+        "label": "Next",
+        "result": "Result"
+      },
+      "prev": {
+        "label": "Back"
+      }
+    }
+  },
+  "Quiz": {
+    "quests": {
+      "quest_1": {
+        "question": "When you face a challenge, the first thing you do is...",
+        "answers": {
+          "answer_a": "Listen to an internal signal, where the 'knot' of energy is.",
+          "answer_b": "Break the task down into steps and take action.",
+          "answer_c": "Gather facts and analyze the causes.",
+          "answer_d": "Seek support or connect with loved ones.",
+          "answer_e": "Look for a creative way to turn it into an opportunity.",
+          "answer_f": "See who else this might help and how to be of service.",
+          "answer_g": "Change the environment, experiment."
+        }
+      },
+      "quest_2": {
+        "question": "What is your main guiding principle in life?",
+        "answers": {
+          "answer_a": "Intuition.",
+          "answer_b": "Result.",
+          "answer_c": "Understanding.",
+          "answer_d": "Love.",
+          "answer_e": "Self-realization.",
+          "answer_f": "Service.",
+          "answer_g": "Freedom."
+        }
+      },
+      "quest_3": {
+        "question": "How do you make important decisions?",
+        "answers": {
+          "answer_a": "With the body: a 'yes/no' feeling.",
+          "answer_b": "The most direct path to the goal.",
+          "answer_c": "A logical model.",
+          "answer_d": "With the heart.",
+          "answer_e": "I visualize a picture and move towards it.",
+          "answer_f": "I check it against the benefit for others.",
+          "answer_g": "I try several different routes."
+        }
+      },
+      "quest_4": {
+        "question": "When things are hard, what pulls you together?",
+        "answers": {
+          "answer_a": "A mindfulness ritual.",
+          "answer_b": "Action / a workout.",
+          "answer_c": "Time for reflection.",
+          "answer_d": "A heart-to-heart conversation.",
+          "answer_e": "Creativity.",
+          "answer_f": "Helping someone.",
+          "answer_g": "A change of scenery."
+        }
+      },
+      "quest_5": {
+        "question": "What makes you feel fulfilled?",
+        "answers": {
+          "answer_a": "Insights.",
+          "answer_b": "Completed tasks.",
+          "answer_c": "Understanding.",
+          "answer_d": "Closeness.",
+          "answer_e": "Creating something new.",
+          "answer_f": "People's gratitude.",
+          "answer_g": "New horizons."
+        }
+      },
+      "quest_6": {
+        "question": "How do you perceive your mission?",
+        "answers": {
+          "answer_a": "To transform consciousness.",
+          "answer_b": "To lead and protect.",
+          "answer_c": "To pass on knowledge.",
+          "answer_d": "To heal with love.",
+          "answer_e": "To create forms for the world.",
+          "answer_f": "To be a conductor of meaning.",
+          "answer_g": "To expand the boundaries of the possible."
+        }
+      },
+      "quest_7": {
+        "question": "Which phrase is closest to you?",
+        "answers": {
+          "answer_a": "\"The world is a reflection of my energy.\"",
+          "answer_b": "\"Strength is in action.\"",
+          "answer_c": "\"Understanding sets you free.\"",
+          "answer_d": "\"Love is my language.\"",
+          "answer_e": "\"I create my own reality.\"",
+          "answer_f": "\"To serve is to shine.\"",
+          "answer_g": "\"The path opens up before the one who walks.\""
+        }
+      }
+    }
+  },
   "Archetypes": {
     "mage": {
       "title": "MAGE",

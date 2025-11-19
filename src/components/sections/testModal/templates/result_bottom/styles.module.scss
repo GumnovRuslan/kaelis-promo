@@ -8,12 +8,15 @@
   }
 
   &__affirmation {
+    display: flex;
+    justify-content: center;
     padding: 15px fluid-size(19, 50);
     border-radius: 30px;
     border: 1px solid #D4A2F2;
     box-shadow: 2px 1px 4px 8px #D3A1F145;
     background: #1F1D2E;
     margin-bottom: fluid-size(30, 45);
+
 
     &_text {
       text-transform: uppercase;

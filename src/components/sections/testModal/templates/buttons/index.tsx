@@ -1,5 +1,6 @@
 import styles from './styles.module.scss'
 import { Button } from '@/components/ui'
+import { useTranslations } from 'next-intl'
 
 type TProps = {
   isAnswered: boolean;
@@ -11,6 +12,7 @@ type TProps = {
 }
 
 const Buttons = ({isAnswered, currentStep, totalStep, showResult, next, prev}: TProps) => {
+  const t = useTranslations('TestSection')
   const isResult = currentStep === totalStep
 
   return (
@@ -20,7 +22,7 @@ const Buttons = ({isAnswered, currentStep, totalStep, showResult, next, prev}: T
           <Button 
             className={`${styles.button} ${styles['button--active']}`} 
             as='button' type='button' 
-            text='Back' 
+            text={t('buttons.prev.label')} 
             onClick={prev}
           />
         )}
@@ -30,7 +32,7 @@ const Buttons = ({isAnswered, currentStep, totalStep, showResult, next, prev}: T
           className={`${styles.button} ${isAnswered ? styles['button--active'] : styles['button--disabled']}`} 
           as='button' 
           type='button' 
-          text={isResult ? 'Result' : 'Next'}
+          text={isResult ? t('buttons.next.result') : t('buttons.next.label')}
           onClick={isResult ? showResult : next}
         />
       </div>

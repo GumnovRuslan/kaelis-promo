@@ -14,241 +14,241 @@ export type TAnswer = {
 export const QUIZ: TQuiz[] = [
   {
     step: 1,
-    question: "When you face a challenge, the first thing you do is…",
+    question: "quest_1.question",
     answers: [
       {
         type: 'A',
-        text: 'Listen to the inner signal where the "knot" of energy is.'
+        text: 'quest_1.answers.answer_a'
       },
       {
         type: 'B',
-        text: 'Break the task into steps and take action'
+        text: 'quest_1.answers.answer_b'
       },
       {
         type: 'C',
-        text: 'Gather facts and analyze the causes.'
+        text: 'quest_1.answers.answer_c'
       },
       {
         type: 'D',
-        text: 'Seek support or reach out to loved ones.'
+        text: 'quest_1.answers.answer_d'
       },
       {
         type: 'E',
-        text: 'Look for a creative way to turn it into an opportunity.'
+        text: 'quest_1.answers.answer_e'
       },
       {
         type: 'F',
-        text: 'See who else can benefit and how to be helpful.'
+        text: 'quest_1.answers.answer_f'
       },
       {
         type: 'G',
-        text: 'Change the environment, experiment.'
+        text: 'quest_1.answers.answer_g'
       },
     ]
   },
   {
     step: 2,
-    question: "What is the main guiding principle in your life?",
+    question: "quest_2.question",
     answers: [
       {
         type: 'A',
-        text: 'Intuition'
+        text: 'quest_2.answers.answer_a'
       },
       {
         type: 'B',
-        text: 'Result.'
+        text: 'quest_2.answers.answer_b'
       },
       {
         type: 'C',
-        text: 'Understanding.'
+        text: 'quest_2.answers.answer_c'
       },
       {
         type: 'D',
-        text: 'Love.'
+        text: 'quest_2.answers.answer_d'
       },
       {
         type: 'E',
-        text: 'Self-realization.'
+        text: 'quest_2.answers.answer_e'
       },
       {
         type: 'F',
-        text: 'Service.'
+        text: 'quest_2.answers.answer_f'
       },
       {
         type: 'G',
-        text: 'Freedom.'
+        text: 'quest_2.answers.answer_g'
       },
     ]
   },
   {
     step: 3,
-    question: "How do you make important decisions?",
+    question: "quest_3.question",
     answers: [
       {
         type: 'A',
-        text: 'Body: "yes/no."'
+        text: 'quest_3.answers.answer_a'
       },
       {
         type: 'B',
-        text: 'The most direct path to the goal.'
+        text: 'quest_3.answers.answer_b'
       },
       {
         type: 'C',
-        text: 'Logical model.'
+        text: 'quest_3.answers.answer_c'
       },
       {
         type: 'D',
-        text: 'Heart.'
+        text: 'quest_3.answers.answer_d'
       },
       {
         type: 'E',
-        text: 'Visualize the picture and move toward it.'
+        text: 'quest_3.answers.answer_e'
       },
       {
         type: 'F',
-        text: 'Check for benefit to others.'
+        text: 'quest_3.answers.answer_f'
       },
       {
         type: 'G',
-        text: 'Try several routes.'
+        text: 'quest_3.answers.answer_g'
       },
     ]
   },
   {
     step: 4,
-    question: "When it's tough, what pulls you together?",
+    question: "quest_4.question",
     answers: [
       {
         type: 'A',
-        text: 'Mindfulness ritual.'
+        text: 'quest_4.answers.answer_a'
       },
       {
         type: 'B',
-        text: 'Action/training.'
+        text: 'quest_4.answers.answer_b'
       },
       {
         type: 'C',
-        text: 'Time for reflection.'
+        text: 'quest_4.answers.answer_c'
       },
       {
         type: 'D',
-        text: 'Heartfelt conversation.'
+        text: 'quest_4.answers.answer_d'
       },
       {
         type: 'E',
-        text: 'Creativity.'
+        text: 'quest_4.answers.answer_e'
       },
       {
         type: 'F',
-        text: 'Helping someone.'
+        text: 'quest_4.answers.answer_f'
       },
       {
         type: 'G',
-        text: 'Change of scenery.'
+        text: 'quest_4.answers.answer_g'
       },
     ]
   },
   {
     step: 5,
-    question: "What makes you feel fulfilled?",
+    question: "quest_5.question",
     answers: [
       {
         type: 'A',
-        text: 'Insights.'
+        text: 'quest_5.answers.answer_a'
       },
       {
         type: 'B',
-        text: 'Completed tasks.'
+        text: 'quest_5.answers.answer_b'
       },
       {
         type: 'C',
-        text: 'Understanding.'
+        text: 'quest_5.answers.answer_c'
       },
       {
         type: 'D',
-        text: 'Closeness.'
+        text: 'quest_5.answers.answer_d'
       },
       {
         type: 'E',
-        text: 'Creating something new.'
+        text: 'quest_5.answers.answer_e'
       },
       {
         type: 'F',
-        text: 'Gratitude from people.'
+        text: 'quest_5.answers.answer_f'
       },
       {
         type: 'G',
-        text: 'New horizons.'
+        text: 'quest_5.answers.answer_g'
       },
     ]
   },
   {
     step: 6,
-    question: "How do you feel your mission?",
+    question: "quest_6.question",
     answers: [
       {
         type: 'A',
-        text: 'To transform consciousness.'
+        text: 'quest_6.answers.answer_a'
       },
       {
         type: 'B',
-        text: 'To lead and protect.'
+        text: 'quest_6.answers.answer_b'
       },
       {
         type: 'C',
-        text: 'To pass on knowledge.'
+        text: 'quest_6.answers.answer_c'
       },
       {
         type: 'D',
-        text: 'To heal with love.'
+        text: 'quest_6.answers.answer_d'
       },
       {
         type: 'E',
-        text: 'To create forms for the world.'
+        text: 'quest_6.answers.answer_e'
       },
       {
         type: 'F',
-        text: 'To be a guide of meaning.'
+        text: 'quest_6.answers.answer_f'
       },
       {
         type: 'G',
-        text: 'To expand the boundaries of possibility.'
+        text: 'quest_6.answers.answer_g'
       },
     ]
   },
   {
     step: 7,
-    question: "Which phrase is closest to you?",
+    question: "quest_7.question",
     answers: [
       {
         type: 'A',
-        text: 'The world is a reflection of my energy.'
+        text: 'quest_7.answers.answer_a'
       },
       {
         type: 'B',
-        text: 'Strength is in action.'
+        text: 'quest_7.answers.answer_b'
       },
       {
         type: 'C',
-        text: 'Understanding frees.'
+        text: 'quest_7.answers.answer_c'
       },
       {
         type: 'D',
-        text: 'Love is my language.'
+        text: 'quest_7.answers.answer_d'
       },
       {
         type: 'E',
-        text: 'I create my reality.'
+        text: 'quest_7.answers.answer_e'
       },
       {
         type: 'F',
-        text: 'To serve is to shine.'
+        text: 'quest_7.answers.answer_f'
       },
       {
         type: 'G',
-        text: 'The path opens before the one who walks.'
+        text: 'quest_7.answers.answer_g'
       },
     ]
-  }
+  },
 ]
 

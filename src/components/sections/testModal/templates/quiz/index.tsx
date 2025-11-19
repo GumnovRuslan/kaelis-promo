@@ -20,7 +20,7 @@ const Quiz = () => {
 
   return (
     <form className={styles.questions}>
-      <ProgressBar current={step} total={7}/>
+      <ProgressBar current={step} total={7} answers={answers}/>
       <QuestionContent 
         {...currentQuestion} 
         currentStep={step}

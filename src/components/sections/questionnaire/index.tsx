@@ -4,9 +4,11 @@ import styles from './styles.module.scss'
 import { Button, Title, Text } from '@/components/ui'
 import Image from 'next/image'
 import { useTestModal } from '@/context/TestModalContext'
+import { useTranslations } from 'next-intl'
 
 const Questionnaire = () => {
   const { openTest } = useTestModal();
+  const t = useTranslations('TestSection')
   
   return (
     <section className={styles.section}>
@@ -15,10 +17,10 @@ const Questionnaire = () => {
       </span>
       <div className={styles.section__inner}>
         <div className={styles.section__header}>
-          <Title className={styles.section__title} tag='h2' text='Open Your Soul Archetype'/>
-          <Text className={styles.section__message} text='7 questions — 2 minutes. Results instantly, no email required'/>
+          <Title className={styles.section__title} tag='h2' text={t('title')}/>
+          <Text className={styles.section__message} text={t('subtitle')}/>
         </div>
-        <Button as='button' text='Take the test' onClick={openTest}/>
+        <Button as='button' text={t('buttons.open.label')} onClick={openTest}/>
       </div>
     </section>
   )

@@ -2,6 +2,7 @@ import styles from './styles.module.scss'
 import AnswerItem from '../answer_item'
 import type { TQuiz } from '../../quiz_schemas'
 import type { ArchetypeKey } from '@/types/ArchetypeKey';
+import { useTranslations } from 'next-intl';
 
 type TProps = TQuiz & {
   currentStep: number;
@@ -10,11 +11,12 @@ type TProps = TQuiz & {
 }
 
 const QuestionContent = ({ question, answers, selected, currentStep, onSelect }: TProps) => {
+  const t = useTranslations('Quiz.quests')
   return (
     <div className={styles.content}>
 
       <span className={styles.content__title}>
-        {question}
+        {t(question)}
       </span>
       
       <span className={`${styles.content__shadow} ${styles['content__shadow--top']}`}/>
