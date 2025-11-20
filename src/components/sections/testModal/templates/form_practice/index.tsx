@@ -1,62 +1,78 @@
 "use client";
 import styles from './styles.module.scss'
-import { useState } from "react";
-import { useLocale } from 'next-intl';
 import { useSubscribe } from '@/context/SubscribeContext';
+import { Input, Checkbox, Button, ModalWrapper } from '@/components/ui';
+import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function SubscribeForm() {
-    const {
+  const t = useTranslations('Modal')
+  const {
     email,
-    release,
-    practices,
-    practiceType,
+    isUpdate,
+    isPractices,
+    archetypeType,
     status,
+    setStatus,
     setEmail,
-    setRelease,
-    setPractices,
-    setPracticeType,
+    setIsUpdate,
+    setArchetypeType,
     submit,
   } = useSubscribe();
 
-  // const submit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setStatus("loading");
+  console.log(status)
 
-  //   const res = await fetch("/api/subscribes", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       email,
-  //       receive_release: release,
-  //       receive_practices: practices,
-  //       practice_type: practiceType,
-  //       language: locale
-  //     })
-  //   });
+  const closeModalStatus = () => {
+    setStatus(null)
+  }
 
-  //   const data = await res.json();
-  //   console.log(data)
-  //   if (data.status === "already") setStatus("already");
-  //   else if (data.status === "updated") setStatus("updated");
-  //   else if (data.status === "success") setStatus("success");
-  //   else setStatus("error");
-  // };
+  // const fun = (e) => {
+  //   e.preventDefault()
+  //   setStatus('updated')
+  // }
 
   return (
-    <form onSubmit={submit} className={styles.form}>
-      <input value={email} onChange={e=>setEmail(e.target.value)} type="email" required />
-      <label>
-        <input type="checkbox" checked={release} onChange={e=>setRelease(e.target.checked)} />
-        Receive release emails
-      </label>
-      <label>
-        <input type="checkbox" checked={practices} onChange={e=>setPractices(e.target.checked)} />
-        Receive practices
-      </label>
+    <>
+      <div className={`${styles.section} ${status === 'loading' ? styles['section--loading'] : ''}`}>
+        <form className={styles.form} onSubmit={submit}>
+          <div className={styles.form__header}>
+            <span className={styles.form__title}>{t('subscription.title')}</span>
+          </div>
+          <div className={styles.form__description}>
+            <p className={styles.form__text}>{t('subscription.description.text_1')}</p>
+            <p className={styles.form__text}>{t('subscription.description.text_2')}</p>
+            <p className={styles.form__text}>{t('subscription.description.text_3')}</p>
+          </div>
 
-      <button type="submit">Subscribe</button>
-
-      <div>Status: {status}</div>
-    </form>
+          <div className={styles.form__content}>
+            <Input value={email} onChange={e=>setEmail(e.target.value)} type="email" required placeholder='Enter email'/>
+            <div className={styles.form__checkboxes}>
+              <label className={styles.form__checkbox_label}>
+                <Checkbox isChecked={isPractices} onChange={() => {}} />
+                <span className={styles.form__checkbox_text}>{t('subscription.checkboxes.checkbox_1')}</span>
+              </label>
+              <label className={styles.form__checkbox_label}>
+                <Checkbox isChecked={isUpdate} onChange={() => setIsUpdate(!isUpdate)} />
+                <span className={styles.form__checkbox_text}>{t('subscription.checkboxes.checkbox_2')}</span>
+              </label>
+            </div>
+            <Button as='button' type="submit" className={styles.form__button} text={status === 'loading' ? t('subscription.button.loading') : t('subscription.button.label')}/>
+            <p className={styles.form__police}>{t('join.policy.text')} <Link href={'/privacy-policy'} target='_blank'>{t('join.policy.link')}</Link></p>
+          </div>
+        </form>
+    </div>
+    <ModalWrapper isShow={!!status && status !== 'loading'} handlerClose={closeModalStatus}>
+      {status === 'updated' ? (
+        <div className={styles.message}>{t('subscription.status.updated')} 👍</div>
+      ) : status === 'already' ? (
+        <div className={styles.message}>{t('subscription.status.already')} ✨</div>
+      ) : status === 'success' ? (
+          <div className={styles.message}>{t('subscription.status.success')} 🚀</div>
+      ) : status === 'error' ? (
+          <div className={styles.message}>{t('subscription.status.error')}</div>
+      ) : null }
+    </ModalWrapper>
+  </>
+    
   );
 }

@@ -18,6 +18,7 @@ import CookieModal from "./cookie/modal";
 import CookieSettings from "./cookie/settings";
 import Questionnaire from "./questionnaire";
 import TestModal from "./testModal";
+import ModalSubscribe from "./modal_subscribe";
 
 export { 
   Header, 
@@ -40,4 +41,5 @@ export {
   CookieSettings,
   Questionnaire,
   TestModal,
+  ModalSubscribe,
 };

@@ -55,6 +55,7 @@ const Animation = ({
 
   return (
     <motion.div
+  
       key={animationKey}
       initial={initial ?? preset.initial}
       animate={animate ?? preset.animate}

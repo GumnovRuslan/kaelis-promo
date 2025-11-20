@@ -1,9 +1,91 @@
 .section {
-  border: 1px solid red;
-  height: 400px;
+  position: relative;
+  max-width: 700px;
+  width: 90vw;
+
+  &--loading {
+    pointer-events: none;
+  }
 }
 
 .form {
   display: flex;
   flex-direction: column;
+  padding: 0 fluid-size(20, 50) fluid-size(20, 50);  
+
+  &__header {
+    margin-bottom: fluid-size(15, 20);
+  }
+
+  &__title {
+    display: block;
+    font-size: fluid-size(16, 32);
+    font-weight: 700;
+    text-align: center;
+    line-height: 120%;
+    color: var(--color-text-primary-100);
+  }
+
+  &__description {
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    text-align: justify;
+    font-size: fluid-size(12, 16);
+    line-height: 130%;
+    color: #646095;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: fluid-size(10, 20);
+  }
+
+  &__checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__checkbox_label {
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  &__checkbox_text {
+    font-size: fluid-size(10, 15);
+    line-height: 130%;
+    color: #646095;
+  }
+
+  &__button {
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  &__police {
+    margin: 0 auto;
+    width: fit-content;
+    text-align: center;
+    font-size: fluid-size(10, 14);
+    line-height: 120%;
+    color: #646095;
+
+    & > a {
+      text-decoration: none;
+      color: var(--color-text-primary-100);
+    }
+  }
+}
+
+.message {
+  max-width: 450px;
+  width: 90vw;
+  padding: 0 fluid-size(20, 30) fluid-size(20, 30);
+  line-height: 150%;
+  text-align: center;
+  color: var(--color-text-white);
 }

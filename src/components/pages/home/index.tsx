@@ -6,20 +6,25 @@ import {
   Message,
   Questionnaire,
   TestModal,
+  ModalSubscribe,
 } from "@/components/sections";
 import { TestModalProvider } from "@/context/TestModalContext";
+import { ModalSubscribeProvider } from "@/context/modalSubscribe";
 
 const HomePage = () => {
   return (
     <TestModalProvider>
-      <Hero />
-      <Subscribe />
-      <ArticlesPopular />
-      <Questionnaire/>
-      <AboutApp />
-      <Message textIsShow/>
-
-      <TestModal/>
+      <ModalSubscribeProvider>
+        <Hero />
+        <Subscribe />
+        <ArticlesPopular />
+        <Questionnaire/>
+        <AboutApp />
+        <Message textIsShow/>
+        
+        <ModalSubscribe/>
+        <TestModal/>
+      </ModalSubscribeProvider>
     </TestModalProvider>
   )
 }

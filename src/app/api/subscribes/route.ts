@@ -7,7 +7,15 @@ const REVISION = "2024-06-15";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email, receive_release, receive_practices, practice_type, language } = body;
+    const { 
+      email, 
+      consent_site_updates, 
+      consent_release_promo, 
+      archetype_version,
+      archetype_key,
+      locale,
+      source,
+    } = body;
 
     if (!email) {
       return NextResponse.json({ status: "error", message: "Email is required" }, { status: 400 });
@@ -45,10 +53,12 @@ export async function POST(req: Request) {
     // ---------------------------------------------
     if (profileId && existingProps) {
       const isDuplicate =
-        existingProps.receive_release === !!receive_release &&
-        existingProps.receive_practices === !!receive_practices &&
-        (existingProps.practice_type ?? null) === (practice_type || null) &&
-        (existingProps.language ?? "en") === (language || "en");
+        existingProps.consent_site_updates === !!consent_site_updates &&
+        existingProps.consent_release_promo === !!consent_release_promo &&
+        (existingProps.archetype_version ?? null) === (archetype_version || null) &&
+        (existingProps.locale ?? "en") === (locale || "en") &&
+        existingProps.archetype_key === archetype_key &&
+        existingProps.source === source;
 
       if (isDuplicate) {
         return NextResponse.json({
@@ -138,10 +148,12 @@ export async function POST(req: Request) {
           id: profileId,
           attributes: {
             properties: {
-              receive_release: !!receive_release,
-              receive_practices: !!receive_practices,
-              practice_type: practice_type || null,
-              language: language || "en",
+              consent_site_updates: !!consent_site_updates,
+              consent_release_promo: !!consent_release_promo,
+              archetype_version: archetype_version || null,
+              archetype_key: archetype_key,
+              source: source,
+              locale: locale || "en",
             },
           },
         },

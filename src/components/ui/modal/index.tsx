@@ -6,6 +6,7 @@ import CloseButton from '../button_close';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect } from 'react';
 import disableBodyScroll from '@/utils/disableBodyScroll';
+import Animation from '../animation';
 
 type TProps = {
   children?: React.ReactNode;

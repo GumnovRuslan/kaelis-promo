@@ -2,20 +2,22 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 import { useLocale } from "next-intl";
+import type { ArchetypeKey } from "@/types/ArchetypeKey";
 
 type TSubscribeStatus = "loading" | "success" | "updated" | "already" | "error" | null;
 
 type TSubscribeContext = {
   email: string;
-  release: boolean;
-  practices: boolean;
-  practiceType: string;
+  isUpdate: boolean;
+  isPractices: boolean;
+  archetypeType: string;
   status: TSubscribeStatus;
 
+  setStatus: (v: TSubscribeStatus) => void;
   setEmail: (v: string) => void;
-  setRelease: (v: boolean) => void;
-  setPractices: (v: boolean) => void;
-  setPracticeType: (v: string) => void;
+  setIsUpdate: (v: boolean) => void;
+  setIsPractices: (v: boolean) => void;
+  setArchetypeType: (v: ArchetypeKey) => void;
 
   submit: (e: React.FormEvent) => Promise<void>;
 };
@@ -24,12 +26,21 @@ const SubscribeContext = createContext<TSubscribeContext | null>(null);
 
 export function SubscribeProvider({ children }: { children: ReactNode }) {
   const [email, setEmail] = useState("");
-  const [release, setRelease] = useState(false);
-  const [practices, setPractices] = useState(true);
-  const [practiceType, setPracticeType] = useState("A");
+  const [isPractices, setIsPractices] = useState(true);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [archetypeType, setArchetypeType] = useState<ArchetypeKey>('A');
   const [status, setStatus] = useState<TSubscribeStatus>(null);
-
   const locale = useLocale();
+
+  const archetypeKey: Record<ArchetypeKey, string> = {
+    A: "MAG",
+    B: "WAR",
+    C: "SAG",
+    D: "LOV",
+    E: "CRE",
+    F: "GUD",
+    G: "EXP",
+  }
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,10 +51,12 @@ export function SubscribeProvider({ children }: { children: ReactNode }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email,
-        receive_release: release,
-        receive_practices: practices,
-        practice_type: practiceType,
-        language: locale,
+        consent_site_updates: isUpdate,
+        consent_release_promo: isPractices,
+        archetype_key: archetypeKey[archetypeType] ?? null,
+        archetype_version: archetypeType,
+        locale: locale,
+        source: "archetype_test_v1"
       }),
     });
 
@@ -59,14 +72,15 @@ export function SubscribeProvider({ children }: { children: ReactNode }) {
     <SubscribeContext.Provider
       value={{
         email,
-        release,
-        practices,
-        practiceType,
+        isUpdate,
+        isPractices,
+        archetypeType,
         status,
+        setStatus,
         setEmail,
-        setRelease,
-        setPractices,
-        setPracticeType,
+        setIsUpdate,
+        setIsPractices,
+        setArchetypeType,
         submit,
       }}
     >
