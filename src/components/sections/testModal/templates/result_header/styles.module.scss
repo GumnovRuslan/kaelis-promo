@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: fluid-size(12, 35);
-  padding-top: 10px;
+  gap: 15px;
 
   &__gif {
     width: fluid-size(60, 106);
@@ -13,6 +13,10 @@
     border-radius: 50%;
     box-shadow: 0px 0px 9px 2px #D39DDF;
     margin-bottom: 15px;
+  }
+
+  &__video {
+    object-fit: cover;
   }
 
   &__info {

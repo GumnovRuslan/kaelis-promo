@@ -15,7 +15,7 @@ const Result = ({ result }: TProps) => {
   return (
     <div className={styles.result}>
       <div className={styles.result__inner}>
-        <ResultHeader title={data.title} subtitle={data.subtitle}/>
+        <ResultHeader title={data.title} subtitle={data.subtitle} gif={data.gif}/>
         <ResultContent blocks={data.blocks}/>
         <ResultsBottom affirmation={data.affirmation}/>
       </div>

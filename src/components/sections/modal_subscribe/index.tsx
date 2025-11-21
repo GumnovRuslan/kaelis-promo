@@ -1,6 +1,5 @@
 'use client'
 
-import styles from './styles.module.scss'
 import { ModalWrapper } from '@/components/ui'
 import SubscribeForm from '../testModal/templates/form_practice'
 import { useModalSubscribeContext } from '@/context/modalSubscribe'

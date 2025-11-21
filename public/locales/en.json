@@ -76,6 +76,31 @@
         "text": "By clicking “Send”, you agree to the",
         "link": "Privacy Policy"
       } 
+    },
+    "subscription": {
+      "title": "We'll send your 7-day practice and later — a promo code",
+      "description": {
+        "text_1": "Leave your e-mail — and we will send you a personal 7-day practice, created for your archetype.",
+        "text_2": "And when the Kaelis AI app is released on Google Play and App Store — you will receive your personal promo code for X days of premium.",
+        "text_3": "We don't send spam and never share your e-mail with third parties."
+      },
+      "input": {
+        "placeholder": "Enter your email"
+      },
+      "checkboxes": {
+        "checkbox_1": "I want to receive the 7-day practice and a notification about the app release + my promo code",
+        "checkbox_2": "I want to receive rare emails about new tests and practices on the website"
+      },
+      "button": {
+        "label": "Subscribe",
+        "loading": "Sending..."
+      },
+      "status": {
+        "updated": "Done! Settings updated",
+        "already": "You're already with us — just a little bit left. We'll send the news and promo code soon",
+        "success": "Done! We will send the practices and write to you when the app is released",
+        "error": "Failed to send. Please check your connection and try again."
+      }
     }
   },
   "HomePage": {

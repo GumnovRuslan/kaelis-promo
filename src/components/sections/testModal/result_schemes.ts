@@ -10,6 +10,9 @@ export type TResultScheme = {
     title: string;
     subtitle: string;
     affirmation: string;
+    gif?: {
+      src: string;
+    };
     blocks: TResultSchemesBlock[];
 }
 
@@ -17,6 +20,9 @@ const mage: TResultScheme = {
   title: 'mage.title',
   subtitle: 'mage.subtitle',
   affirmation: 'mage.affirmation',
+  gif: {
+    src: '/video/archetypes/mage.mp4'
+  },
   blocks: [
       {
         title: 'mage.content.who_are_you.title',
@@ -121,6 +127,9 @@ const warrior: TResultScheme = {
   title: 'warrior.title',
   subtitle: 'warrior.subtitle',
   affirmation: 'warrior.affirmation',
+  gif: {
+    src: '/video/archetypes/warrior.mp4'
+  },
   blocks: [
     {
       title: "warrior.content.who_are_you.title",
@@ -287,6 +296,9 @@ const sage: TResultScheme = {
   title: `sage.title`,
   subtitle: `sage.subtitle`,
   affirmation: `sage.affirmation`,
+  gif: {
+    src: '/video/archetypes/sage.mp4'
+  },
   blocks: [
     {
       title: `sage.content.who_are_you.title`,
@@ -418,6 +430,7 @@ const lover: TResultScheme = {
   title: `lover.title`,
   subtitle: `lover.subtitle`,
   affirmation: `lover.affirmation`,
+  gif: { src: '/video/archetypes/lovers.mp4' },
   blocks: [
     {
       title: `lover.content.who_are_you.title`,
@@ -568,6 +581,9 @@ const creator: TResultScheme = {
   title: `creator.title`,
   subtitle: `creator.subtitle`,
   affirmation: `creator.affirmation`,
+  gif: {
+    src: '/video/archetypes/creator.mp4'
+  },
   blocks: [
     {
       title: `creator.content.who_are_you.title`,
@@ -725,6 +741,9 @@ const guide: TResultScheme = {
   title: `guide.title`,
   subtitle: `guide.subtitle`,
   affirmation: `guide.affirmation`,
+  gif: {
+    src: '/video/archetypes/guide.mp4'
+  },
   blocks: [
     {
       title: `guide.content.who_are_you.title`,

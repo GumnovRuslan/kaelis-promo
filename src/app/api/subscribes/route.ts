@@ -118,7 +118,9 @@ export async function POST(req: Request) {
             },
             attributes: {
               profiles: {
-                data: [{ type: "profile", attributes: { email } }],
+                data: [
+                  { type: "profile", attributes: { email } },
+                ],
               },
             },
           },

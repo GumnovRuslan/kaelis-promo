@@ -27,6 +27,7 @@ import CloseButton from "./button_close";
 import Title from "./title";
 import Text from "./text";
 import Animation from "./animation";
+import LoopVideo from "./gif";
 
 export { 
   Button, 
@@ -58,4 +59,5 @@ export {
   Title,
   Text,
   Animation,
+  LoopVideo,
 };
