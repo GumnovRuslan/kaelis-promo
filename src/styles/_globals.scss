@@ -3,6 +3,16 @@
 html {
   background: var(--gradient-main);
 
+  &::-webkit-scrollbar {
+    // width: 2px;
+    // background: red;
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 2px;
+  }
+
   &.no-scroll {
     overflow: hidden;
   }

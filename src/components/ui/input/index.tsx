@@ -14,10 +14,7 @@ const Input = ({
 }: TProps) => {
   return (
     <div className={`${styles.input_wrapper} ${wrapperClassName}`}>
-      <input 
-      className={`${styles.input} ${inputClassName}`}  
-      {...inputProps}
-      />
+      <input className={`${styles.input} ${inputClassName}`} {...inputProps}/>
       {children}
     </div>
   )

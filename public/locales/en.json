@@ -76,6 +76,31 @@
         "text": "By clicking “Send”, you agree to the",
         "link": "Privacy Policy"
       } 
+    },
+    "subscription": {
+      "title": "We'll send your 7-day practice and later — a promo code",
+      "description": {
+        "text_1": "Leave your e-mail — and we will send you a personal 7-day practice, created for your archetype.",
+        "text_2": "And when the Kaelis AI app is released on Google Play and App Store — you will receive your personal promo code for X days of premium.",
+        "text_3": "We don't send spam and never share your e-mail with third parties."
+      },
+      "input": {
+        "placeholder": "Enter your email"
+      },
+      "checkboxes": {
+        "checkbox_1": "I want to receive the 7-day practice and a notification about the app release + my promo code",
+        "checkbox_2": "I want to receive rare emails about new tests and practices on the website"
+      },
+      "button": {
+        "label": "Subscribe",
+        "loading": "Sending..."
+      },
+      "status": {
+        "updated": "Done! Settings updated",
+        "already": "You're already with us — just a little bit left. We'll send the news and promo code soon",
+        "success": "Done! We will send the practices and write to you when the app is released",
+        "error": "Failed to send. Please check your connection and try again."
+      }
     }
   },
   "HomePage": {
@@ -268,6 +293,653 @@
       "content-policy": "Content Policy",
       "terms-of-use": "Terms of Use",
       "children-privacy-policy": "Children’s Privacy Policy"
+    }
+  },
+  "TestSection": {
+    "title": "Open Your Soul Archetype",
+    "subtitle": "7 questions — 2 minutes. Results instantly, no email required",
+    "result_additional_text": {
+      "text_1": "You can receive a personalized",
+      "text_2": "7-day",
+      "text_3": "practice tailored to your archetype by leaving",
+      "text_4": "your e-mail to get",
+      "text_5": "it all in one message."
+    },
+    "steps": {
+      "question": "Question",
+      "of": "of"
+    },
+    "buttons": {
+      "open": {
+        "label": "Take the test"
+      },
+      "next": {
+        "label": "Next",
+        "result": "Result"
+      },
+      "prev": {
+        "label": "Back"
+      },
+      "get_practice": {
+        "label": "Get practice"
+      }
+    }
+  },
+  "Quiz": {
+    "quests": {
+      "quest_1": {
+        "question": "When you face a challenge, the first thing you do is...",
+        "answers": {
+          "answer_a": "Listen to an internal signal, where the 'knot' of energy is.",
+          "answer_b": "Break the task down into steps and take action.",
+          "answer_c": "Gather facts and analyze the causes.",
+          "answer_d": "Seek support or connect with loved ones.",
+          "answer_e": "Look for a creative way to turn it into an opportunity.",
+          "answer_f": "See who else this might help and how to be of service.",
+          "answer_g": "Change the environment, experiment."
+        }
+      },
+      "quest_2": {
+        "question": "What is your main guiding principle in life?",
+        "answers": {
+          "answer_a": "Intuition.",
+          "answer_b": "Result.",
+          "answer_c": "Understanding.",
+          "answer_d": "Love.",
+          "answer_e": "Self-realization.",
+          "answer_f": "Service.",
+          "answer_g": "Freedom."
+        }
+      },
+      "quest_3": {
+        "question": "How do you make important decisions?",
+        "answers": {
+          "answer_a": "With the body: a 'yes/no' feeling.",
+          "answer_b": "The most direct path to the goal.",
+          "answer_c": "A logical model.",
+          "answer_d": "With the heart.",
+          "answer_e": "I visualize a picture and move towards it.",
+          "answer_f": "I check it against the benefit for others.",
+          "answer_g": "I try several different routes."
+        }
+      },
+      "quest_4": {
+        "question": "When things are hard, what pulls you together?",
+        "answers": {
+          "answer_a": "A mindfulness ritual.",
+          "answer_b": "Action / a workout.",
+          "answer_c": "Time for reflection.",
+          "answer_d": "A heart-to-heart conversation.",
+          "answer_e": "Creativity.",
+          "answer_f": "Helping someone.",
+          "answer_g": "A change of scenery."
+        }
+      },
+      "quest_5": {
+        "question": "What makes you feel fulfilled?",
+        "answers": {
+          "answer_a": "Insights.",
+          "answer_b": "Completed tasks.",
+          "answer_c": "Understanding.",
+          "answer_d": "Closeness.",
+          "answer_e": "Creating something new.",
+          "answer_f": "People's gratitude.",
+          "answer_g": "New horizons."
+        }
+      },
+      "quest_6": {
+        "question": "How do you perceive your mission?",
+        "answers": {
+          "answer_a": "To transform consciousness.",
+          "answer_b": "To lead and protect.",
+          "answer_c": "To pass on knowledge.",
+          "answer_d": "To heal with love.",
+          "answer_e": "To create forms for the world.",
+          "answer_f": "To be a conductor of meaning.",
+          "answer_g": "To expand the boundaries of the possible."
+        }
+      },
+      "quest_7": {
+        "question": "Which phrase is closest to you?",
+        "answers": {
+          "answer_a": "\"The world is a reflection of my energy.\"",
+          "answer_b": "\"Strength is in action.\"",
+          "answer_c": "\"Understanding sets you free.\"",
+          "answer_d": "\"Love is my language.\"",
+          "answer_e": "\"I create my own reality.\"",
+          "answer_f": "\"To serve is to shine.\"",
+          "answer_g": "\"The path opens up before the one who walks.\""
+        }
+      }
+    }
+  },
+  "Archetypes": {
+    "mage": {
+      "title": "MAGE",
+      "subtitle": "The Archetype of Intuition and Quiet Strength",
+      "affirmation": "I hear myself clearly. I choose my steps confidently",
+      "content": {
+        "who_are_you": {
+          "title": "Who You Are",
+          "inner": {
+            "text_1": "You belong to a rare type of person who perceives the world not only with the mind but with your entire being. Your perception is deeper than that of most people — you pick up on the atmosphere, details, subtexts, the energy of people and events, even when no one else notices any changes.",
+            "text_2": "Your main quality is clarity, which comes not through logic, but through direct inner knowing.",
+            "text_3": "You feel where the truth is and where there is noise. Where there is life, and where there is emptiness. What is important, and what is superfluous.",
+            "text_4": "Inside you lives the ability to navigate through chaos, as if through fog — without losing your inner footing. You see what is invisible to others: directions, meanings, sprouts of possibilities that have not even broken through to the surface yet.",
+            "text_5": "A Mage is not a wizard. This is a person for whom intuition is a real tool, not a coincidence.",
+            "text_6": "You can read a space, people, the dynamics of relationships, the atmosphere in a team, future trends — and turn this into decisions.",
+            "text_7": "You are the one who brings depth and clarity into the world."
+          }
+        },
+        "strengths": {
+          "title": "Strengths",
+          "inner": {
+            "item_1": "Subtle perception — you see beneath the surface of events.",
+            "item_2": "Intuition as a compass — you feel the right step even in uncertainty.",
+            "item_3": "Ability to transform — emotions, situations, yourself.",
+            "item_4": "Presence — people feel calmer around you.",
+            "item_5": "Meaning-making — you can connect the dots into a coherent picture."
+          }
+        },
+        "shadow": {
+          "title": "Shadow of the Archetype",
+          "inner": {
+            "text_1": "Even a strong quality can work against a person if the balance is disturbed.",
+            "item_1": "Retreating into mysticism instead of taking action.",
+            "item_2": "Waiting for a 'perfect sign' to start.",
+            "item_3": "Confusion between anxiety and intuition.",
+            "item_4": "Oversensitivity leading to exhaustion.",
+            "item_5": "Getting stuck in the inner world if the outer world seems too loud."
+          }
+        },
+        "where_you_thrive": {
+          "title": "Where You Thrive Best",
+          "inner": {
+            "text_1": "You shine when you can combine: depth, people, and meanings.",
+            "item_1": "psychology, coaching, mentoring",
+            "item_2": "deep research (UX, interviews, analytics of human behavior)",
+            "item_3": "working with creative processes",
+            "item_4": "projects where you need to feel the atmosphere, scenario, dynamics",
+            "item_5": "roles where 'subtle vision' is important — product manager, creative, media projects",
+            "text_2": "But most importantly — the Mage thrives where there is space for an intuitive approach."
+          }
+        },
+        "signs_of_imbalance": {
+          "title": "Signs of Imbalance",
+          "inner": {
+            "text_1": "If you see these symptoms — it's not a problem, but just a slight loss of center:",
+            "item_1": "a feeling of fog inside",
+            "item_2": "protracted waiting for the 'perfect moment'",
+            "item_3": "sudden fatigue from communication",
+            "item_4": "doubts that weren't there before",
+            "item_5": "constantly looking for signs everywhere",
+            "item_6": "difficulty with simple everyday decisions",
+            "text_2": "When this happens — a gentle return to yourself is needed."
+          }
+        }
+      }
+    },
+    "warrior": {
+      "title": "WARRIOR",
+      "subtitle": "The Archetype of Strength, Will, and Pure Directness",
+      "affirmation": "I move confidently. I choose strength that supports, not exhausts",
+      "content": {
+        "who_are_you": {
+          "title": "Who You Are",
+          "inner": {
+            "text_1": "You are a person of action.",
+            "text_2": "The one who can take a hit, pull yourself together in moments of chaos, make decisions when others are lost, and push through a path where it seems impossible to go further.",
+            "text_3": "Inside you is a rare combination:",
+            "text_4": "clarity → purpose → movement.",
+            "text_5": "You are not one to hesitate for long.",
+            "text_6": "You feel the direction — and you go.",
+            "text_7": "You know that movement itself brings strength.",
+            "text_8": "You have a strong inner core:",
+            "text_9": "if you believe in something, if you choose something — you go all the way. That's why people feel safe around you.",
+            "text_10": "You know how to keep your word, keep the pace, hold the space.",
+            "text_11": "You are capable of changing reality through will, discipline, and determination.",
+            "text_12": "This is not 'toughness' — it is a calm, confident strength that cannot be faked.",
+            "text_13": "You were not born for stagnation.",
+            "text_14": "You need a vector, movement, dynamics.",
+            "text_15": "That is where you unfold most powerfully."
+          }
+        },
+        "strengths": {
+          "title": "Strengths",
+          "inner": {
+            "item_1": "ability to start and finish things",
+            "item_2": "internal resilience",
+            "item_3": "ability to take responsibility",
+            "item_4": "courage, directness, honesty",
+            "item_5": "leadership impulse",
+            "item_6": "ability to act under pressure",
+            "text_1": "You are the person others rely on."
+          }
+        },
+        "shadow": {
+          "title": "Shadow of the Archetype",
+          "inner": {
+            "text_1": "'Strength without balance sometimes starts to press down instead of support.'",
+            "item_1": "excessive control",
+            "item_2": "irritability with 'slow' people",
+            "item_3": "habit of carrying everything yourself",
+            "item_4": "forgetting your own boundaries",
+            "item_5": "burnout that you hide from everyone",
+            "text_2": "The Warrior's shadow always manifests in two things:",
+            "text_3": "\"I'll handle it myself\" and \"I won't stop until I drop.\"",
+            "text_4": "But a true Warrior chooses strategy, not exhaustion."
+          }
+        },
+        "where_you_thrive": {
+          "title": "Where You Thrive Best",
+          "inner": {
+            "text_1": "You are strong where will and systematic action are needed:",
+            "item_1": "project management",
+            "item_2": "operational processes",
+            "item_3": "sports, events, movement, action",
+            "item_4": "any situation where deadlines and results matter",
+            "item_5": "crisis management tasks",
+            "item_6": "creating complex structures, teams, processes",
+            "text_2": "You are the person who can guide a situation through any turbulence and see it through to the end."
+          }
+        },
+        "signs_of_imbalance": {
+          "title": "Signs of Imbalance",
+          "inner": {
+            "text_1": "If you see this — it means you are tired and need not a feat, but a tune-up:",
+            "item_1": "sharp reactions",
+            "item_2": "irritation without reason",
+            "item_3": "worsening sleep",
+            "item_4": "internal tension, especially in the shoulders/neck",
+            "item_5": "loss of pleasure from achievements",
+            "item_6": "feeling that no one else is 'pulling their weight'",
+            "text_2": "This is not weakness. It is a sign that you have been in battle for too long."
+          }
+        }
+      }
+    },
+    "sage": {
+      "title": "SAGE",
+      "subtitle": "The Archetype of Understanding, Clarity, and Inner Logic",
+      "affirmation": "My understanding brings clarity, and my clarity leads to action",
+      "content": {
+        "who_are_you": {
+          "title": "Who You Are",
+          "inner": {
+            "text_1": "You are a person who sees structure where others see chaos.",
+            "text_2": "You sense the causality of the world, notice patterns, read between the lines, and gather disparate facts into a single picture.",
+            "text_3": "For you, understanding is not boring rationality.",
+            "text_4": "Understanding is a way to feel the world as safe.",
+            "text_5": "When everything is clear, everything becomes simpler, softer, calmer.",
+            "text_6": "You possess a rare quality: the ability to think deeply, not for a long time.",
+            "text_7": "You can find the essence, connect logical dots, ask the right questions.",
+            "text_8": "Where others need dozens of attempts, you just need to look deeper — and everything falls into place.",
+            "text_9": "Your presence brings structure and order to the lives of others.",
+            "text_10": "You are the person people come to for understanding, for meaning, for that very advice that puts everything in order."
+          }
+        },
+        "strengths": {
+          "title": "Strengths",
+          "inner": {
+            "item_1": "clarity of thought",
+            "item_2": "strategic vision",
+            "item_3": "ability to formulate complex things in simple words",
+            "item_4": "ability to understand people without judgment",
+            "item_5": "systematic approach",
+            "item_6": "intelligence that does not pressure, but facilitates"
+          }
+        },
+        "shadow": {
+          "title": "Shadow of the Archetype",
+          "inner": {
+            "text_1": "The Sage's shadow appears when the mind is tired, but the brain continues to 'work by inertia'.",
+            "item_1": "overanalysis",
+            "item_2": "endless contemplation before action",
+            "item_3": "emotional detachment",
+            "item_4": "rationalization of feelings",
+            "item_5": "missing out on pleasure due to 'correctness'",
+            "item_6": "avoiding decisions until full understanding is reached",
+            "text_2": "Sometimes your mind becomes too loud — and drowns out your feeling part."
+          }
+        },
+        "where_you_thrive": {
+          "title": "Where You Thrive Best",
+          "inner": {
+            "text_1": "You are strong where meaning and structure are needed:",
+            "item_1": "analytics, finance, research",
+            "item_2": "teaching, education, explaining complex topics",
+            "item_3": "consulting, strategy, systems thinking",
+            "item_4": "product roles where it's important to understand people",
+            "item_5": "working with big data, models, concepts",
+            "item_6": "deep reflection, intellectual creativity",
+            "text_2": "You are the person with whom all processes become clearer."
+          }
+        },
+        "signs_of_imbalance": {
+          "title": "Signs of Imbalance",
+          "inner": {
+            "text_1": "If you see this in your day — your brain is overheated:",
+            "item_1": "feeling of 'I'm tired of thinking'",
+            "item_2": "desire to control everything through understanding",
+            "item_3": "loss of emotional contact with loved ones",
+            "item_4": "information overload",
+            "item_5": "inability to relax",
+            "item_6": "mild irritation from lack of system",
+            "text_2": "This is not a mistake. It's a signal that your brain needs rest, and your soul needs attention."
+          }
+        }
+      }
+    },
+    "lover": {
+      "title": "LOVER",
+      "subtitle": "The Archetype of Warmth, Empathy, and Genuine Connection",
+      "affirmation": "I value others, but I don't forget about myself. My feelings also have a place",
+      "content": {
+        "who_are_you": {
+          "title": "Who You Are",
+          "inner": {
+            "text_1": "You are a person who experiences the world primarily through relationships.",
+            "text_2": "You subtly read people's moods, their state, changes in voice, gestures, pace of speech. This is not magic — it's a high emotional intelligence that you have developed naturally.",
+            "text_3": "When you are near, it becomes easier to speak openly.",
+            "text_4": "You know how to be the kind of interlocutor with whom one doesn't have to pretend or 'keep up appearances'.",
+            "text_5": "Your presence creates a sense of sincerity and safety because you react in a lively, attentive, and human way.",
+            "text_6": "You are a person who sees value in intimacy, trust, honest conversations, and emotions.",
+            "text_7": "You know how to support in a way that actually makes a person feel better, not just 'as a formality'.",
+            "text_8": "You are not afraid to feel deeply — and that is precisely what makes you authentic."
+          }
+        },
+        "strengths": {
+          "title": "Strengths",
+          "inner": {
+            "item_1": "ability to subtly sense the emotional states of others",
+            "item_2": "ability to listen so that a person feels attention, not judgment",
+            "item_3": "sincerity, softness, empathy",
+            "item_4": "ability to create trusting bonds",
+            "item_5": "emotional honesty",
+            "item_6": "natural warmth that calms, not pressures",
+            "text_1": "You are the person who makes relationships better."
+          }
+        },
+        "shadow": {
+          "title": "Shadow of the Archetype",
+          "inner": {
+            "text_1": "Your sensitivity is a gift.",
+            "text_2": "But if the balance is disturbed, it turns into overload.",
+            "item_1": "difficulty saying no",
+            "item_2": "attempt to 'maintain relationships' at any cost",
+            "item_3": "emotional overstrain",
+            "item_4": "fear that you will upset someone",
+            "item_5": "rapid burnout with excessive involvement",
+            "item_6": "tendency to take on others' emotions",
+            "text_3": "You are not obliged to be support all the time.",
+            "text_4": "Your own state is important too."
+          }
+        },
+        "where_you_thrive": {
+          "title": "Where You Thrive Best",
+          "inner": {
+            "text_1": "Where humanity is important:",
+            "item_1": "HR, people management, communications",
+            "item_2": "customer experience, service, support",
+            "item_3": "psychology, coaching, helping people",
+            "item_4": "working with teams, mediation",
+            "item_5": "creativity where emotional depth is important",
+            "item_6": "any field that requires trust and connection",
+            "text_2": "You are not just 'good with people'.",
+            "text_3": "You know how to build relationships that heal."
+          }
+        },
+        "signs_of_imbalance": {
+          "title": "Signs of Imbalance",
+          "inner": {
+            "text_1": "If you see this — it means you have been giving too much:",
+            "item_1": "fatigue without a cause",
+            "item_2": "feeling that 'no one hears me'",
+            "item_3": "unwillingness to communicate",
+            "item_4": "internal resentment that you keep silent about",
+            "item_5": "blurred personal boundaries",
+            "item_6": "loss of contact with your own desires",
+            "text_2": "This is not a crisis — it's a need to take a little more care of yourself."
+          }
+        }
+      }
+    },
+    "creator": {
+      "title": "CREATOR",
+      "subtitle": "The Archetype of Ideas, Self-Expression, and Inner Freedom",
+      "affirmation": "I create freely. What I do has value",
+      "content": {
+        "who_are_you": {
+          "title": "Who You Are",
+          "inner": {
+            "text_1": "You are a person who sees what does not yet exist.",
+            "text_2": "Inside you, images, meanings, options, solutions, new approaches are constantly being born.",
+            "text_3": "You notice the unusual in the ordinary, connect the unconnectable, and create forms that are pleasant for others to look at, listen to, or step into.",
+            "text_4": "For you, creativity is not a hobby or the domain of artists.",
+            "text_5": "It is a way of thinking.",
+            "text_6": "A way to react to the world.",
+            "text_7": "A way to feel alive.",
+            "text_8": "You have a rare quality — inner freedom.",
+            "text_9": "Even if external conditions are difficult, your imagination continues to work, seeking new paths, new meanings, new forms of expression.",
+            "text_10": "You know how to get inspired, and then inspire.",
+            "text_11": "People feel around you a space where 'it is possible', not 'it is forbidden'.",
+            "text_12": "Where there is room for experiment, lightness, play, ideas.",
+            "text_13": "You are not just a person who comes up with ideas.",
+            "text_14": "You are a person who brings them to life."
+          }
+        },
+        "strengths": {
+          "title": "Strengths",
+          "inner": {
+            "item_1": "ability to see opportunities where others see limitations",
+            "item_2": "natural sense of beauty, form, style",
+            "item_3": "ability to unite ideas into a single concept",
+            "item_4": "high visual literacy, interest in new approaches",
+            "item_5": "ease in creating new things",
+            "item_6": "ability to inspire others with your vision",
+            "item_7": "ability to come up with non-standard solutions",
+            "text_1": "Your strength is in freshness and originality."
+          }
+        },
+        "shadow": {
+          "title": "Shadow of the Archetype",
+          "inner": {
+            "text_1": "When the Creator's energy runs wild, typical signs appear:",
+            "item_1": "chaos in tasks",
+            "item_2": "switching from idea to idea",
+            "item_3": "unfinished projects",
+            "item_4": "inspiration spikes: 'on fire — burned out'",
+            "item_5": "irritation from routine",
+            "item_6": "procrastination under the guise of 'I'm waiting for inspiration'",
+            "text_2": "Sometimes your inner fire becomes too bright — and then it doesn't warm, but exhausts."
+          }
+        },
+        "where_you_thrive": {
+          "title": "Where You Thrive",
+          "inner": {
+            "text_1": "Everything related to form, atmosphere, ideas, style:",
+            "item_1": "product teams (UI/UX, concepts, ideas)",
+            "item_2": "content, design, video, music, text",
+            "item_3": "marketing, branding, visual solutions",
+            "item_4": "working with images, stories, narratives",
+            "item_5": "any field that requires originality and visual literacy",
+            "item_6": "creating new things — from services to art",
+            "text_2": "You bring any space you enter to life."
+          }
+        },
+        "signs_of_imbalance": {
+          "title": "Signs of Imbalance",
+          "inner": {
+            "text_1": "You feel like you've fallen out of the flow if:",
+            "item_1": "you have ideas, but no energy to implement them",
+            "item_2": "your thoughts are jumping around",
+            "item_3": "everything starts to irritate you",
+            "item_4": "inspiration seems to 'disappear'",
+            "item_5": "a feeling that 'I'm not good enough' appears",
+            "item_6": "routine causes resistance",
+            "text_2": "This is not a failure.",
+            "text_3": "This is a creative burnout — and it recovers faster than it seems."
+          }
+        }
+      }
+    },
+    "guide": {
+      "title": "GUIDE",
+      "subtitle": "The Archetype of Support, Mission, and Inner Light",
+      "affirmation": "I help others, but I don't forget about myself. My light is brighter when I am resourced",
+      "content": {
+        "who_are_you": {
+          "title": "Who You Are",
+          "inner": {
+            "text_1": "You are a person who can see where someone needs help and act in a way that makes it easier for others.",
+            "text_2": "You have a naturally developed sense of responsibility, empathy, and moral orientation.",
+            "text_3": "You intuitively understand how to support, how to explain, how to guide — and you do it without pressure and without pomp.",
+            "text_4": "There are people who say smart things.",
+            "text_5": "There are those who act.",
+            "text_6": "But you belong to the rare category of those who can make the complex understandable and accessible.",
+            "text_7": "You bring clarity where people get lost.",
+            "text_8": "You know how to 'hold space' in difficult moments, without devaluing or rescuing — but precisely helping.",
+            "text_9": "You have a quiet inner strength that many feel but no one can accurately describe.",
+            "text_10": "This is not leadership through pressure.",
+            "text_11": "This is leadership through presence, wisdom, the ability to be a support.",
+            "text_12": "You are one of those who are trusted with the most important things."
+          }
+        },
+        "strengths": {
+          "title": "Strengths",
+          "inner": {
+            "item_1": "ability to explain complex things in simple language",
+            "item_2": "ability to notice when someone is feeling bad and help appropriately",
+            "item_3": "responsibility that does not weigh down",
+            "item_4": "calm confidence",
+            "item_5": "ethicality, respect, maturity",
+            "item_6": "ability to inspire, not push",
+            "item_7": "natural mentorship",
+            "text_1": "You are the person next to whom one can exhale."
+          }
+        },
+        "shadow": {
+          "title": "Shadow of the Archetype",
+          "inner": {
+            "text_1": "When you take on too much, the following patterns appear:",
+            "item_1": "\"I am responsible for everything and everyone\"",
+            "item_2": "attempt to save people, even when not asked",
+            "item_3": "feeling guilty for resting",
+            "item_4": "resentment from not being appreciated",
+            "item_5": "burnout from constant support",
+            "item_6": "difficulty asking for help yourself",
+            "text_2": "A Guide becomes weak only in one case — when they forget that they are also human, not an endless resource."
+          }
+        },
+        "where_you_thrive": {
+          "title": "Where You Thrive",
+          "inner": {
+            "text_1": "Where it is important to guide, explain, support:",
+            "item_1": "teaching, mentoring",
+            "item_2": "facilitation, communications, mediation",
+            "item_3": "working with clients or teams",
+            "item_4": "NPOs, social and impact projects",
+            "item_5": "coaching, consulting, support",
+            "item_6": "any field that requires meaning and clarity",
+            "text_2": "Your best environment is where people need someone who can lead without pressure."
+          }
+        },
+        "signs_of_imbalance": {
+          "title": "Signs of Imbalance",
+          "inner": {
+            "text_1": "You may feel out of resources if:",
+            "item_1": "everyone around seems to 'hang' on you",
+            "item_2": "it's hard to stop and take care of yourself",
+            "item_3": "you get annoyed that you do a lot but receive little",
+            "item_4": "you start to covertly expect gratitude",
+            "item_5": "fatigue comes faster than before",
+            "item_6": "a feeling of inner emptiness arises",
+            "text_2": "This is not your fault.",
+            "text_3": "It is a sign that it's time to put yourself back on the priority list."
+          }
+        }
+      }
+    },
+    "investigator": {
+      "title": "INVESTIGATOR",
+      "subtitle": "The Archetype of Freedom, Novelty, and the Search for One's Path",
+      "affirmation": "I am free to choose my path, and I know how to finish what is important to me",
+      "content": {
+        "who_are_you": {
+          "title": "Who You Are",
+          "inner": {
+            "text_1": "You are a person who lives through movement.",
+            "text_2": "Not necessarily physical — sometimes it's the movement of thought, ideas, routes, a new perspective.",
+            "text_3": "It is important for you to feel that life continues, that horizons are open before you, that the world can be tasted.",
+            "text_4": "You perceive the world as a territory of opportunities.",
+            "text_5": "You know how to step into the new without fearing that 'it won't work out'.",
+            "text_6": "You are inspired by the process of search:",
+            "text_7": "what if we try differently?",
+            "text_8": "what if we turn here?",
+            "text_9": "what does the other option look like?",
+            "text_10": "You need air, space, freedom of choice, and the right to change direction.",
+            "text_11": "You don't get stuck because you internally feel: life is too big to walk the same route.",
+            "text_12": "Inner honesty is your main quality.",
+            "text_13": "If something is not for you — your body reacts first.",
+            "text_14": "You feel when it's time to change the environment, context, topic, or rhythm.",
+            "text_15": "And yes — it is you who brings inspiration, freshness, perspective, and unexpected solutions into the lives of others."
+          }
+        },
+        "strengths": {
+          "title": "Strengths",
+          "inner": {
+            "item_1": "flexibility and ability to adapt quickly",
+            "item_2": "openness to new things",
+            "item_3": "curiosity that moves forward",
+            "item_4": "ability to notice opportunities where others see limitations",
+            "item_5": "ease in learning new skills",
+            "item_6": "courage to try, make mistakes, learn",
+            "item_7": "ability to go beyond the familiar",
+            "text_1": "You are the person who expands the map of the world, your own and others'."
+          }
+        },
+        "shadow": {
+          "title": "Shadow of the Archetype",
+          "inner": {
+            "text_1": "The Investigator's strength is movement.",
+            "text_2": "The shadow — when movement turns into flight.",
+            "item_1": "quick burnout from monotony",
+            "item_2": "difficulty completing projects",
+            "item_3": "desire to bail when things get deep",
+            "item_4": "many started but unfinished tasks",
+            "item_5": "fear of commitments or loss of freedom",
+            "item_6": "difficulties with long-term goals",
+            "text_3": "Sometimes you feel that if you stop — you will lose yourself.",
+            "text_4": "But in reality, you only lose yourself when you stop listening to your own desires."
+          }
+        },
+        "where_you_thrive": {
+          "title": "Where You Thrive",
+          "inner": {
+            "text_1": "Where it is necessary to open paths, look for unusual solutions, work at the intersection of disciplines:",
+            "item_1": "startups, innovations, new directions",
+            "item_2": "travel, media, research",
+            "item_3": "product and creative teams",
+            "item_4": "professions where speed of learning is important",
+            "item_5": "roles that require searching and testing hypotheses",
+            "item_6": "everything related to search, testing, experiments",
+            "text_2": "You are the person who brings fresh air into any system."
+          }
+        },
+        "signs_of_imbalance": {
+          "title": "Signs of Imbalance",
+          "inner": {
+            "text_1": "When energy is scattered, the following markers appear:",
+            "item_1": "too many ideas, but none implemented",
+            "item_2": "feeling of anxiety or internal 'buzzing'",
+            "item_3": "desire to change everything at once",
+            "item_4": "boredom that comes too quickly",
+            "item_5": "feeling that you are 'losing direction'",
+            "item_6": "unwillingness to go deep",
+            "text_2": "This is not a mistake — it's a sign that you need to reformat your route."
+          }
+        }
+      }
     }
   }
 }
