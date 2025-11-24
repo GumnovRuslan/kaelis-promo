@@ -14,13 +14,13 @@ const TestModal = () => {
     <ModalWrapper isShow={isOpen} handlerClose={closeTest}>
       <div className={`${styles.content} ${!result ? styles['content--result'] : ''}`}>
         <AnimatePresence mode="wait">
-          {result ? (
+          {!result ? (
             <Animation key="test-quiz">
               <Quiz/>
             </Animation>
           ) : (
             <Animation key="test-result">
-              <Result result={"A"}/>
+              <Result result={result}/>
             </Animation>
           )}
         </AnimatePresence>

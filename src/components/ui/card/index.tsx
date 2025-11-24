@@ -18,7 +18,7 @@ const Card = ({ title, desc, img_num = 1}: TProps) => {
     <div className={styles.cardWrapper} onClick={() => setFlipped(!flipped)}>
       <div className={`${styles.card} ${flipped ? styles.card__flipped : ""}`}>
         <div className={styles.card__back}>
-          <Image className={styles.card__background} src='/images/cards/card_back.svg' fill alt="card background back"/>
+          <Image className={styles.card__background} src='/images/cards/card_back.png' fill alt="card background back"/>
         </div>
         <div className={styles.card__front}>
           <Image className={styles.card__background} src={`/images/cards/card_astrology_${img_num}.svg`} fill alt="card background front"/>

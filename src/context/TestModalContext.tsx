@@ -4,6 +4,7 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 import { QUIZ } from '@/components/sections/testModal/quiz_schemas';
 import { calculateResult } from '@/utils/calculateTestResult';
 import type { ArchetypeKey } from '@/types/ArchetypeKey';
+import { useSubscribe } from './SubscribeContext';
 
 type TestModalContextType = {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export const TestModalProvider = ({ children }: { children: ReactNode }) => {
   const [step, setStep] = useState(1);
   const [answers, setAnswers] = useState<Record<number, ArchetypeKey>>({});
   const [result, setResult] = useState<ArchetypeKey | null>(null)
+  const {setArchetypeType} = useSubscribe();
 
   const currentQuestion = QUIZ[step - 1];
 
@@ -55,7 +57,10 @@ export const TestModalProvider = ({ children }: { children: ReactNode }) => {
 
   const showResult = () => {
     console.log(calculateResult(answers))
-    setResult(calculateResult(answers).winner)
+    const result = calculateResult(answers).winner;
+    setArchetypeType(result);
+    setResult(result)
+    
   }
 
   return (

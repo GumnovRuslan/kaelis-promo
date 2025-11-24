@@ -12,7 +12,7 @@ const ModalSubscribe = () => {
   
   return (
     <ModalWrapper isShow={isOpenModal} handlerClose={closeModal}>
-      <SubscribeForm/>
+      <SubscribeForm />
     </ModalWrapper>
   )
 }

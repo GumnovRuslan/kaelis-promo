@@ -11,6 +11,7 @@ function ResultsBottom({affirmation}: {affirmation: string}) {
   const { closeTest } = useTestModal()
   const t = useTranslations('Archetypes');
   const tt = useTranslations('TestSection.result_additional_text')
+  const tb = useTranslations("TestSection.buttons")
 
   const handleOpenModalSubscribe = () => {
     closeTest()
@@ -22,7 +23,7 @@ function ResultsBottom({affirmation}: {affirmation: string}) {
       <div className={styles.bottom__affirmation}>
         <span className={styles.bottom__affirmation_text}>"{t(affirmation)}"</span>
       </div>
-      <Button as='button' type='button' text='Get Practice' className={styles.bottom__button} onClick={handleOpenModalSubscribe}/>
+      <Button as='button' type='button' text={tb('get_practice.label')} className={styles.bottom__button} onClick={handleOpenModalSubscribe}/>
       <p className={styles.bottom__message}>
         {tt('text_1')} <strong>{tt('text_2')}</strong> {tt('text_3')} <strong>{tt('text_4')}</strong> {tt('text_5')}
       </p>

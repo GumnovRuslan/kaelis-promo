@@ -8,8 +8,10 @@ import { useModalContext } from '@/context/modal';
 import { ChangeEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { CheckMarkIcon } from '@/components/icons';
+import { useSubscribe } from '@/context/SubscribeContext';
+import { text } from 'stream/consumers';
 
-type ModalContentType = 'join' | 'full';
+type ModalContentType = 'join';
 
 interface ModalData {
   title: string;
@@ -24,18 +26,24 @@ interface ModalData {
   successful: {
     text: string;
   }
+  already: {
+    text: string;
+  }
 }
 
 const Modal = () => {
   const t = useTranslations('Modal')
-  const { isOpenModal, closeModal, content } = useModalContext()
-  const [ email, setEmail ] = useState<string>('')
-  const [ sendingEmail, setSendingEmail] = useState<boolean>(false)
-  const [ sendSuccessful, setSendSuccessful] = useState<boolean>(false)
-  const [ sendIsError, setSendIsError ] = useState<boolean>(false)
+  const { isOpenModal, closeModal } = useModalContext()
 
-  const DATA: Record<ModalContentType, ModalData> = {
-    'join': {
+  const {
+      email,
+      status,
+      setEmail,
+      setStatus,
+      submit,
+    } = useSubscribe();
+  
+  const DATA: ModalData = {
       title: t('join.title'),
       error: {
         text: t('join.error.text')
@@ -50,69 +58,35 @@ const Modal = () => {
       ],
       successful: {
         text: t('join.successful.text')
-      }
-    },
-    'full': {
-      title: 'Get the full interpretation',
-      error: {
-        text: ''
       },
-      button: {
-        text: 'Send'
-      },
-      successful: {
-        text: ''
+      already: {
+        text: 'already subscribed 👍'
       }
-    },
   };
 
-  const data = DATA[content as ModalContentType];
-
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSendIsError(false)
-    setEmail(e.target.value);
-  };
-
-  const handlerSendEmailToVercel = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSendingEmail(true)
-    setSendIsError(false)
-
-    const res = await fetch("api/subscribe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-
-    if (res.ok) {
-      setSendingEmail(false)
-      setEmail('')
-      setSendSuccessful(true)
-    } else {
-      setSendingEmail(false)
-      setSendIsError(true)
-    }
+  const handlerClose = () => {
+    setStatus(null)
+    closeModal()
   }
 
   return (
-    <ModalWrapper isShow={isOpenModal} handlerClose={closeModal}>
+    <ModalWrapper isShow={isOpenModal} handlerClose={handlerClose}>
       <div className={styles.content}>
-        <h3 className={styles.content__title}>{data.title}</h3>
+        <h3 className={styles.content__title}>{DATA.title}</h3>
         <div className={styles.content__inner}>
-          <div className={`${styles.successful} ${sendSuccessful ? styles['successful--visible'] : styles['successful--hidden']}`}>
+          <div className={`${styles.successful} ${status == 'success' || status == 'already' ? styles['successful--visible'] : styles['successful--hidden']}`}>
             <span className={styles.successful__icon}>
               <CheckMarkIcon/>
             </span>
-            <p className={styles.successful__text}>{data.successful.text}</p>
+            <p className={styles.successful__text}>{status == 'success' ? DATA.successful.text : DATA.already.text}</p>
           </div>
-          <form className={`${styles.content__form} ${sendSuccessful ? styles['content__form--hidden'] : ''}`}
-            onSubmit={handlerSendEmailToVercel}
+          <form className={`${styles.content__form} ${status == 'success' || status == 'already' ? styles['content__form--hidden'] : ''}`}
+            onSubmit={(e) => submit(e, 'simple')}
             name="modal" 
             method="POST"
           >
             <input type="hidden" name="form-name" value="modal" />
-            {data.texts?.map((text, i) => <span className={styles.content__input_text} key={i}>{text}</span>)}
+            {DATA.texts?.map((text, i) => <span className={styles.content__input_text} key={i}>{text}</span>)}
             <div className={styles.content__input}>
               <Input 
                 name='email'
@@ -120,20 +94,20 @@ const Modal = () => {
                 placeholder='Enter your email' 
                 required
                 value={email || ''} 
-                onChange={handleInputChange}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
             <p className={`
               ${styles.content__error} 
-              ${sendIsError ? styles['content__error--visible'] : styles['content__error--hidden']}`}
+              ${status == 'error' ? styles['content__error--visible'] : styles['content__error--hidden']}`}
               >
-                {data.error.text}
+                {DATA.error.text}
               </p>
             <Button 
-              disabled={sendingEmail}
+              disabled={status == 'loading'}
               type='submit'
               className={styles.content__button} 
-              text={sendingEmail ? data.button.sending : data.button.text} 
+              text={status == 'loading' ? DATA.button.sending : DATA.button.text} 
             />
             <p className={styles.content__policy}>{t('join.policy.text')} <Link className={styles.content__policy_link} href={'/privacy-policy'} target='_blank'>{t('join.policy.link')}</Link></p>
           </form>

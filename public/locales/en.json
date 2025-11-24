@@ -319,6 +319,9 @@
       },
       "prev": {
         "label": "Back"
+      },
+      "get_practice": {
+        "label": "Get practice"
       }
     }
   },

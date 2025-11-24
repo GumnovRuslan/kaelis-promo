@@ -6,6 +6,8 @@ import type { ArchetypeKey } from "@/types/ArchetypeKey";
 
 type TSubscribeStatus = "loading" | "success" | "updated" | "already" | "error" | null;
 
+type TSubscribeMode = "full" | "simple";
+
 type TSubscribeContext = {
   email: string;
   isUpdate: boolean;
@@ -19,7 +21,7 @@ type TSubscribeContext = {
   setIsPractices: (v: boolean) => void;
   setArchetypeType: (v: ArchetypeKey) => void;
 
-  submit: (e: React.FormEvent) => Promise<void>;
+  submit: (e: React.FormEvent, mode?: TSubscribeMode) => Promise<void>;
 };
 
 const SubscribeContext = createContext<TSubscribeContext | null>(null);
@@ -28,9 +30,9 @@ export function SubscribeProvider({ children }: { children: ReactNode }) {
   const [email, setEmail] = useState("");
   const [isPractices, setIsPractices] = useState(true);
   const [isUpdate, setIsUpdate] = useState(false);
-  const [archetypeType, setArchetypeType] = useState<ArchetypeKey>('A');
+  const [archetypeType, setArchetypeType] = useState<ArchetypeKey>("A");
   const [status, setStatus] = useState<TSubscribeStatus>(null);
-  const locale = useLocale();
+  const language = useLocale();
 
   const archetypeKey: Record<ArchetypeKey, string> = {
     A: "MAG",
@@ -40,24 +42,34 @@ export function SubscribeProvider({ children }: { children: ReactNode }) {
     E: "CRE",
     F: "GUD",
     G: "EXP",
-  }
+  };
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent, mode: TSubscribeMode = "full") => {
     e.preventDefault();
     setStatus("loading");
+
+    const payload =
+      mode === "simple"
+        ? {
+            mode: "simple",
+            email,
+            language,
+          }
+        : {
+            mode: "full",
+            email,
+            consent_site_updates: isUpdate,
+            consent_release_promo: isPractices,
+            archetype_key: archetypeKey[archetypeType] ?? null,
+            archetype_version: archetypeType,
+            language,
+            source: "archetype_test_v1",
+          };
 
     const res = await fetch("/api/subscribes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        consent_site_updates: isUpdate,
-        consent_release_promo: isPractices,
-        archetype_key: archetypeKey[archetypeType] ?? null,
-        archetype_version: archetypeType,
-        locale: locale,
-        source: "archetype_test_v1"
-      }),
+      body: JSON.stringify(payload),
     });
 
     const data = await res.json();
@@ -89,7 +101,6 @@ export function SubscribeProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// Hook
 export function useSubscribe() {
   const ctx = useContext(SubscribeContext);
   if (!ctx) throw new Error("useSubscribe must be used inside <SubscribeProvider>");

@@ -11,12 +11,10 @@ export default function SubscribeForm() {
     email,
     isUpdate,
     isPractices,
-    archetypeType,
     status,
     setStatus,
     setEmail,
     setIsUpdate,
-    setArchetypeType,
     submit,
   } = useSubscribe();
 
@@ -26,15 +24,10 @@ export default function SubscribeForm() {
     setStatus(null)
   }
 
-  // const fun = (e) => {
-  //   e.preventDefault()
-  //   setStatus('updated')
-  // }
-
   return (
     <>
       <div className={`${styles.section} ${status === 'loading' ? styles['section--loading'] : ''}`}>
-        <form className={styles.form} onSubmit={submit}>
+        <form className={styles.form} onSubmit={(e) => submit(e, 'full')}>
           <div className={styles.form__header}>
             <span className={styles.form__title}>{t('subscription.title')}</span>
           </div>
