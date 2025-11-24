@@ -1,0 +1,27 @@
+.answer {
+  display: block;
+  cursor: pointer;
+
+  &__input {
+    display: none;
+
+    &:checked + .answer__content {
+      box-shadow: 0px 0px 4px 8px #D3A1F145;
+    }
+  }
+
+  &__content {
+    padding: 16px 27px;
+    border: 1px solid var(--color-primary-100);
+    border-radius: 50px;
+    background: #1F1D2E;
+    transition: box-shadow 0.3s;
+  }
+
+  &__text {
+    display: block;
+    font-size: fluid-size(10, 20);
+    line-height: 130%;
+    color: var(--color-text-white);
+  }
+}

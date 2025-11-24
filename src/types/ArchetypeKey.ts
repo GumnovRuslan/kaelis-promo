@@ -1,0 +1,1 @@
+export type ArchetypeKey = 'A'|'B'|'C'|'D'|'E'|'F'|'G';

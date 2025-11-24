@@ -1,0 +1,48 @@
+.bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__button {
+    margin: 0 auto;
+  }
+
+  &__affirmation {
+    display: flex;
+    justify-content: center;
+    padding: 15px fluid-size(19, 50);
+    border-radius: 30px;
+    border: 1px solid #D4A2F2;
+    box-shadow: 2px 1px 4px 8px #D3A1F145;
+    background: #1F1D2E;
+    margin-bottom: fluid-size(30, 45);
+
+
+    &_text {
+      text-transform: uppercase;
+      display: inline-block;
+      font-size: fluid-size(10, 20);
+      font-weight: 700;
+      line-height: 130%;
+      background: linear-gradient(90deg, #CDA2EF 0%, #F87A76 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      text-align: center;
+    }
+  }
+
+  &__message {
+    margin-top: fluid-size(25, 33);
+    text-align: center;
+    font-size: fluid-size(9, 14);
+    line-height: 130%;
+    font-weight: 600;
+    color: var(--color-text-primary-500);
+
+    strong {
+      color: var(--color-text-primary);
+    }
+  }
+}

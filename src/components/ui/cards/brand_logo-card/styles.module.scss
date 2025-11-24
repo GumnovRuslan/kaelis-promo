@@ -13,7 +13,6 @@
   }
 
   &__logo {
-    z-index: 1;
     object-fit: contain;
 
     @include media-down('lg') {

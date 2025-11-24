@@ -1,0 +1,25 @@
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  padding: 0 20px;
+}
+
+.button {
+  position: relative;
+  min-width: fluid-size(90, 132);
+  overflow: hidden;
+  padding: 5px 19px;
+  min-height: auto;
+  transition: opacity .3s;
+
+  & > span > span {
+    font-size: fluid-size(10, 20) !important;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

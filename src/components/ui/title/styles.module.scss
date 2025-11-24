@@ -1,0 +1,9 @@
+.title {
+
+  &--secondary {
+    font-size: fluid-size(24, 96); 
+    font-weight: 700;
+    line-height: 120%;
+    color: var(--color-title-primary);
+  }
+}
