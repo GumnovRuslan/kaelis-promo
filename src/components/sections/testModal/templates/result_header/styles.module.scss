@@ -25,10 +25,10 @@
     flex-direction: column;
   }
 
-  &__info_image {
-    object-fit: contain;
-    z-index: 0;
-  }
+  // &__info_image {
+  //   width: 100%;
+  //   object-fit: contain;
+  // }
 
   &__title {
     z-index: 1;
