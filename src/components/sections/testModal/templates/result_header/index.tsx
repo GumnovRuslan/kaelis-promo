@@ -15,7 +15,7 @@ const ResultHeader = ({title, subtitle, gif}: TProps) => {
   return (
     <div className={styles.header}>
       <div className={styles.header__info}>
-        <Image className={styles.header__info_image} src={'/images/bg/stars.png'} fill alt={'image'}/>
+        {/* <Image className={styles.header__info_image} src={'/images/bg/stars.png'} fill alt={'image'}/> */}
         <span className={styles.header__title}>{t(title)}</span>
         <span className={styles.header__subtitle}>{t(subtitle)}</span>
       </div>

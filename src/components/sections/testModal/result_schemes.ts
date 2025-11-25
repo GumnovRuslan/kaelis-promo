@@ -891,6 +891,9 @@ const investigator: TResultScheme = {
   title: `investigator.title`,
   subtitle: `investigator.subtitle`,
   affirmation: `investigator.affirmation`,
+  gif: {
+    src: '/video/archetypes/explorer.mp4'
+  },
   blocks: [
     {
       title: `investigator.content.who_are_you.title`,
