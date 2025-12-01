@@ -1,0 +1,25 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  min-height: 50vh;
+
+  &__text {
+    font-size: fluid-size(14, 24);
+    font-weight: 600;
+    line-height: 160%;
+    text-align: center;
+    max-width: 600px;
+    color: var(--color-text-white);
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+
+
