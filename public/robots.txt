@@ -28,6 +28,8 @@ Disallow: /en/account-management
 Disallow: /ru/account-management
 Disallow: /uk/account-management
 
-
+Disallow: /en/download-from-store
+Disallow: /ru/download-from-store
+Disallow: /uk/download-from-store
 
 Sitemap: https://www.kaelisai.com

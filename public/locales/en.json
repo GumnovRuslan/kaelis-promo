@@ -295,6 +295,9 @@
       "children-privacy-policy": "Children’s Privacy Policy"
     }
   },
+  "DownloadFromStore" : {
+    "text": "Hi, the Kaelis app is now available for download. You can download it here."
+  },
   "TestSection": {
     "title": "Open Your Soul Archetype",
     "subtitle": "7 questions — 2 minutes. Results instantly, no email required",
