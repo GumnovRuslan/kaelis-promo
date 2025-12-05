@@ -23,7 +23,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.kaelisai.com';
       canonical: `${baseUrl}/${url}`,
       languages: {
         'en': `${baseUrl}/en/${url}`,
-        'ua': `${baseUrl}/ua/${url}`,
+        'uk-UA': `${baseUrl}/ua/${url}`,
         'ru': `${baseUrl}/ru/${url}`,
       }
     },
