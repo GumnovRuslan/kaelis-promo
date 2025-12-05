@@ -32,7 +32,7 @@ import { getTranslations } from "next-intl/server"
 //       languages: {
 //         "x-default": `${baseUrl}/404`,
 //         'en': `${baseUrl}/en/404`,
-//         'uk': `${baseUrl}/uk/404`,
+//         'ua': `${baseUrl}/ua/404`,
 //         'ru': `${baseUrl}/ru/404`,
 //       }
 //     },

@@ -9,7 +9,7 @@ import { getSocialData } from '@/lib/social_data';
 const SubscribeCard = async () => {
   const t = useTranslations('HomePage.aboutApp.cards.subscribe');
   const locale = await getLocale();
-  const social = getSocialData({lang: locale as 'en' | 'ru' | 'uk'});
+  const social = getSocialData({lang: locale as 'en' | 'ru' | 'ua'});
 
   return (
     <div className={styles.card}>

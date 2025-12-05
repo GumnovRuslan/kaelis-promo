@@ -29,7 +29,7 @@ export const generateMetadata = async ({ params }: {params: Promise<{locale: str
       languages: {
         "x-default": `${baseUrl}/articles`,
         'en': `${baseUrl}/en/articles`,
-        'uk': `${baseUrl}/uk/articles`,
+        'ua': `${baseUrl}/ua/articles`,
         'ru': `${baseUrl}/ru/articles`,
       }
     },

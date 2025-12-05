@@ -5,7 +5,7 @@ type TNetworkItem = {
   href: {
     en: string;
     ru: string;
-    uk: string;
+    ua: string;
   };
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
@@ -16,7 +16,7 @@ const NETWORK: TNetworkItem[] = [
     href: {
       en: 'https://www.instagram.com/kaelis_ai_media?igsh=MXczMW5wajJ4ODgxdQ==',
       ru: 'https://www.instagram.com/kaelisai_media?igsh=MW9kcmV0YXFzdGdqcg==',
-      uk: 'https://www.instagram.com/kaelis_ai?igsh=aGR3dXU1bHBqczAy',
+      ua: 'https://www.instagram.com/kaelis_ai?igsh=aGR3dXU1bHBqczAy',
     },
     icon: InstagramIcon
   },
@@ -25,7 +25,7 @@ const NETWORK: TNetworkItem[] = [
     href: {
       en: 'https://www.tiktok.com/@kaelisai?_t=ZM-8zPlIGKEeAf',
       ru: 'https://www.tiktok.com/@kaelis_ai?_t=ZM-8zPlMOe2tGC',
-      uk: 'https://www.tiktok.com/@kaelis_ai_media?_t=ZM-8zPlJTkjIqE',
+      ua: 'https://www.tiktok.com/@kaelis_ai_media?_t=ZM-8zPlJTkjIqE',
     },
     icon: TikTokIcon
   },
@@ -34,14 +34,14 @@ const NETWORK: TNetworkItem[] = [
   //   href: {
   //     en: '/',
   //     ru: '/',
-  //     uk: '/',
+  //     ua: '/',
   //   },
   //   icon: TwitterIcon
   // }
 ]
 
 type TSocialProps = {
-  lang: 'en' | 'ru' | 'uk'
+  lang: 'en' | 'ru' | 'ua'
 }
 
 export const getSocialData = ({lang}: TSocialProps) => {
