@@ -2,34 +2,34 @@ User-agent: *
 Allow: /
 Disallow: /en/privacy-policy
 Disallow: /ru/privacy-policy
-Disallow: /uk/privacy-policy
+Disallow: /ua/privacy-policy
 
 Disallow: /en/children-privacy-policy
 Disallow: /ru/children-privacy-policy
-Disallow: /uk/children-privacy-policy
+Disallow: /ua/children-privacy-policy
 
 Disallow: /en/content-policy
 Disallow: /ru/content-policy
-Disallow: /uk/content-policy
+Disallow: /ua/content-policy
 
 Disallow: /en/license-agreement
 Disallow: /ru/license-agreement
-Disallow: /uk/license-agreement
+Disallow: /ua/license-agreement
 
 Disallow: /en/subscription-policy
 Disallow: /ru/subscription-policy
-Disallow: /uk/subscription-policy
+Disallow: /ua/subscription-policy
 
 Disallow: /en/terms-of-use
 Disallow: /ru/terms-of-use
-Disallow: /uk/terms-of-use
+Disallow: /ua/terms-of-use
 
 Disallow: /en/account-management
 Disallow: /ru/account-management
-Disallow: /uk/account-management
+Disallow: /ua/account-management
 
 Disallow: /en/download-from-store
 Disallow: /ru/download-from-store
-Disallow: /uk/download-from-store
+Disallow: /ua/download-from-store
 
 Sitemap: https://www.kaelisai.com

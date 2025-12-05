@@ -13,7 +13,7 @@ type TLanguages = {
 const LANGS: TLanguages = {
   en: 'English',
   ru: 'Русский',
-  uk: 'Українська',
+  ua: 'Українська',
 }
 
 const LocalSelector = () => {

@@ -11,7 +11,7 @@ import { getPolicies } from '@/graphql/queries/policy';
 
 const Footer = async () => {
   const locale = await getLocale()
-  const social = getSocialData({lang: locale as 'en' | 'ru' | 'uk'});
+  const social = getSocialData({lang: locale as 'en' | 'ru' | 'ua'});
   const t = await getTranslations('footer')
   const { data, errors } = await fetchGraphQL(getPolicies(locale));
   const policies: TPolicy[] | null = data?.allPolicy || null
