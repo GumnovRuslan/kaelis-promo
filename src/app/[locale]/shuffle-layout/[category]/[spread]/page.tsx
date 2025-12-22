@@ -2,17 +2,16 @@
 
 import { useEffect, useMemo } from 'react'
 import { useParams } from 'next/navigation'
-import { ReduxProvider } from '@/providers/redux-provider'
 import PreloadingContext from '@/contexts/animation'
 import { shuffleActions, useAppDispatch, useAppSelector } from '@/store'
 import { ReaderStyleSelector } from '@/components/shuffle/reader-style-selector'
 import { Chat } from '@/components/shuffle/chat'
 import { ChartCanvas } from '@/components/shuffle/chart-canvas'
+import { createSlug } from '@/utils/slug'
 import styles from './styles.module.scss'
 
 function ShufflePageContent() {
   const params = useParams()
-  const locale = params.locale as string
   const categoryId = params.category as string
   const spreadId = params.spread as string
 
@@ -38,6 +37,26 @@ function ShufflePageContent() {
   }, [response])
 
   useEffect(() => {
+    const initializeGuest = async () => {
+      const guestToken = typeof window !== 'undefined' ? localStorage.getItem('guestToken') : null
+      const guestId = typeof window !== 'undefined' ? localStorage.getItem('guestId') : null
+
+      if (!guestToken || !guestId) {
+        const result = await dispatch(shuffleActions.authenticateGuest())
+        if (shuffleActions.authenticateGuest.fulfilled.match(result)) {
+          if (result.payload) {
+            dispatch(shuffleActions.setGuestAuth(result.payload))
+          }
+        }
+      } else {
+        dispatch(shuffleActions.setGuestAuth({ guestId, token: guestToken }))
+      }
+    }
+
+    initializeGuest()
+  }, [dispatch])
+
+  useEffect(() => {
     const fetchCategories = async () => {
       if (categories && categories.length > 0) return
       await dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20 }))
@@ -47,7 +66,10 @@ function ShufflePageContent() {
 
   useEffect(() => {
     if (categories && categoryId && !selectedCategory) {
-      const category = categories.find(cat => cat.id === categoryId)
+      const category = categories.find(cat => {
+        const categorySlug = createSlug(cat.name)
+        return categorySlug === categoryId || cat.id === categoryId
+      })
       if (category) {
         dispatch(shuffleActions.setSelectedCategory(category))
       }
@@ -65,7 +87,10 @@ function ShufflePageContent() {
 
   useEffect(() => {
     if (spreads && spreadId && !selectedSpread) {
-      const spread = spreads.find(spr => spr.id === spreadId)
+      const spread = spreads.find(spr => {
+        const spreadSlug = createSlug(spr.name)
+        return spreadSlug === spreadId || spr.id === spreadId
+      })
       if (spread) {
         dispatch(shuffleActions.setSelectedSpread(spread))
       }
@@ -87,7 +112,7 @@ function ShufflePageContent() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Расклад Таро</h1>
-      
+
       {selectedCategory && selectedSpread && (
         <>
           <ReaderStyleSelector isVisible={showReaderStyle} />
@@ -128,11 +153,9 @@ function ShufflePageContent() {
 
 export default function ShufflePage() {
   return (
-    <ReduxProvider>
-      <PreloadingContext>
-        <ShufflePageContent />
-      </PreloadingContext>
-    </ReduxProvider>
+    <PreloadingContext>
+      <ShufflePageContent />
+    </PreloadingContext>
   )
 }
 

@@ -18,47 +18,6 @@ export function Chat({ isVisible = true }: ChatProps) {
   }
 
   const handleGetReading = () => {
-    const isTestPage = typeof window !== 'undefined' && window.location.pathname.includes('/shuffle-layout/test/test')
-    
-    if (isTestPage) {
-      const mockResponse = {
-        id: 1,
-        tarot: {
-          id: 1,
-          name: selectedSpread?.name || 'Тестовый расклад',
-          description: 'Тестовый расклад',
-          matrix: {
-            '0': [0, 0],
-            '1': [1, 0],
-            '2': [2, 0],
-            '3': [0, 1],
-            '4': [1, 1],
-          }
-        },
-        question: question || '',
-        cards: {
-          '0': { id: '0', name: 'Карта 1', image: '/images/cards/card_astrology_1.svg' },
-          '1': { id: '1', name: 'Карта 2', image: '/images/cards/card_astrology_2.svg' },
-          '2': { id: '2', name: 'Карта 3', image: '/images/cards/card_astrology_3.svg' },
-          '3': { id: '3', name: 'Карта 4', image: '/images/cards/card_astrology_4.svg' },
-          '4': { id: '4', name: 'Карта 5', image: '/images/cards/card_astrology_1.svg' },
-        },
-        back_card: '/images/cards/card_back.png',
-        chat_id: 1,
-        reading: {
-          status: 'ok',
-          final_question: question || '',
-          interpretation: {
-            intro: 'Это тестовая интерпретация. Введение в расклад.',
-            analysis: 'Анализ карт показывает тестовые результаты.',
-            final: 'Заключение: это тестовый расклад для проверки функциональности.'
-          }
-        }
-      }
-      dispatch({ type: 'shuffle/getTarotResponse/fulfilled', payload: mockResponse } as any)
-      return
-    }
-
     const fetchTarotCards = async () => {
       try {
         const data = {

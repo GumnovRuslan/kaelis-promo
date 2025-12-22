@@ -12,7 +12,7 @@ import styles from './styles.module.scss'
 
 const MIN_CARD_WIDTH = 60
 const MIN_CARD_HEIGHT = 110
-const CARD_PADDING = 20
+const CARD_PADDING = 80
 
 export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -143,7 +143,8 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
       }
 
       const cardTexture = await Assets.load(cardData.image)
-      const backTexture = Texture.WHITE
+      const backCardPath = '/images/cards/card_back.png'
+      const backTexture = await Assets.load(backCardPath)
 
       const cardSprite = new Sprite(cardTexture)
       const backSprite = new Sprite(backTexture)
@@ -152,10 +153,12 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
       const scaleY = MIN_CARD_HEIGHT / cardTexture.height
       const scale = Math.min(scaleX, scaleY)
 
+      const backScaleX = MIN_CARD_WIDTH / backTexture.width
+      const backScaleY = MIN_CARD_HEIGHT / backTexture.height
+      const backScale = Math.min(backScaleX, backScaleY)
+
       cardSprite.scale.set(scale)
-      backSprite.width = MIN_CARD_WIDTH
-      backSprite.height = MIN_CARD_HEIGHT
-      backSprite.tint = 0x4A4A4A
+      backSprite.scale.set(backScale)
 
       cardSprite.anchor.set(0.5)
       backSprite.anchor.set(0.5)
@@ -172,8 +175,8 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
 
         setSelectedCard({
           image: cardData.image,
-          label: selectedCard?.label || '',
-          description: selectedCard?.description || ''
+          label: selectedCard?.label || cardData.name || '',
+          description: cardData.description || selectedCard?.description || ''
         })
       }
 
@@ -183,15 +186,31 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
 
       return { container: cardGraphics, front: cardSprite, back: backSprite }
     } catch (error) {
-      const cardSprite = new Sprite(Texture.WHITE)
-      const backSprite = new Sprite(Texture.WHITE)
+      console.error(`Error creating card ${cardKey}:`, error)
+      
+      let backSprite: Sprite
+      try {
+        const backCardPath = '/images/cards/card_back.png'
+        const backTexture = await Assets.load(backCardPath)
+        backSprite = new Sprite(backTexture)
+        const backScaleX = MIN_CARD_WIDTH / backTexture.width
+        const backScaleY = MIN_CARD_HEIGHT / backTexture.height
+        const backScale = Math.min(backScaleX, backScaleY)
+        backSprite.scale.set(backScale)
+        backSprite.anchor.set(0.5)
+      } catch (backError) {
+        backSprite = new Sprite(Texture.WHITE)
+        backSprite.width = MIN_CARD_WIDTH
+        backSprite.height = MIN_CARD_HEIGHT
+        backSprite.tint = 0x4A4A4A
+        backSprite.anchor.set(0.5)
+      }
 
+      const cardSprite = new Sprite(Texture.WHITE)
       cardSprite.width = MIN_CARD_WIDTH
       cardSprite.height = MIN_CARD_HEIGHT
       cardSprite.tint = 0x8B4513
-      backSprite.width = MIN_CARD_WIDTH
-      backSprite.height = MIN_CARD_HEIGHT
-      backSprite.tint = 0x4A4A4A
+      cardSprite.anchor.set(0.5)
 
       cardGraphics.addChild(backSprite)
       cardGraphics.addChild(cardSprite)
@@ -603,6 +622,7 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+
   useEffect(() => {
     return () => {
       if (shuffleRef.current) {
@@ -672,8 +692,8 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
         <div className={styles.modal} onClick={handleCloseCard}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <button className={styles.close} onClick={handleCloseCard}>X</button>
-            <img src={selectedCard.image} alt={selectedCard.label} />
             <h3>{selectedCard.label}</h3>
+            <img src={selectedCard.image} alt={selectedCard.label} />
             <p>{selectedCard.description}</p>
           </div>
         </div>

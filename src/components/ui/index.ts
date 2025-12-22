@@ -28,6 +28,7 @@ import Title from "./title";
 import Text from "./text";
 import Animation from "./animation";
 import LoopVideo from "./gif";
+import { ShuffleSelector } from "./shuffle-selector";
 
 export { 
   Button, 
@@ -60,4 +61,5 @@ export {
   Text,
   Animation,
   LoopVideo,
+  ShuffleSelector,
 };

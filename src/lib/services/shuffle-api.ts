@@ -31,6 +31,11 @@ export const shuffleApiService = {
     const response = await api.get(`/tarot/reading/${lastTarotId}`)
     return response.data
   },
+
+  getTarotAnswerFromChat: async (urlMessage: string): Promise<ApiResponse<TarotRequest['response']>> => {
+    const response = await api.get(urlMessage)
+    return response.data
+  },
 }
 
 

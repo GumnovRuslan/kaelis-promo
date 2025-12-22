@@ -4,9 +4,11 @@ export interface CardInfo {
   description: string
 }
 
+import { TarotCard } from '@/lib/types/shuffle'
+
 export interface ChartCanvasProps {
   matrix: Array<{ x: number; y: number }>
-  cards: Record<string, { image: string; name: string }>
+  cards: Record<string, TarotCard>
 }
 
 

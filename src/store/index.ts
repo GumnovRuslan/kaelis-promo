@@ -12,7 +12,10 @@ import shuffleReducer, {
   getTarotSpreads,
   getTarotSpeaker,
   getTarotResponse,
-  clearError
+  clearError,
+  authenticateGuest,
+  setGuestAuth,
+  getTarotAnswerFromChat
 } from './slices/shuffle'
 
 export const reducer = {
@@ -42,6 +45,9 @@ export const shuffleActions = {
   getTarotSpreads,
   getTarotSpeaker,
   getTarotResponse,
-  clearError
+  clearError,
+  authenticateGuest,
+  setGuestAuth,
+  getTarotAnswerFromChat
 }
 

@@ -2,16 +2,18 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Background } from "@/components/ui";
 import { ModalProvider } from "@/context/modal";
-import { Header, Footer, Modal} from "@/components/sections";
-import {NextIntlClientProvider} from 'next-intl';
-import {routing} from '@/i18n/routing';
-import {getTranslations } from "next-intl/server";
+import { Header, Footer, Modal } from "@/components/sections";
+import { NextIntlClientProvider } from 'next-intl';
+import { routing } from '@/i18n/routing';
+import { getTranslations } from "next-intl/server";
 import "@/styles/index.scss";
 import '@/styles/root.scss';
 import { CookieConsentProvider } from "@/context/CookieConsentContext";
 import Cookie from "@/components/sections/cookie";
 import AnalyticsManager from "@/components/sections/analytics_manager/AnalyticsManager";
 import { SubscribeProvider } from "@/context/SubscribeContext";
+import { ReduxProvider } from "@/providers/redux-provider";
+import WebsocketProvider from "@/providers/websocket-provider";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -20,10 +22,10 @@ const geistInter = Inter({
 });
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({locale}));
+  return routing.locales.map((locale) => ({ locale }));
 }
 
-export const generateMetadata = async ({ params }: {params: Promise<{locale: string}> }): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> => {
   const { locale } = await params;
   const t = await getTranslations('Seo')
 
@@ -33,7 +35,7 @@ export const generateMetadata = async ({ params }: {params: Promise<{locale: str
     title: {
       default: 'Kaelis',
       template: `%s | ${t('title')}`,
-    } ,
+    },
     description: t('description'),
     keywords: t('keywords').split(',').map(item => item.trim()),
     icons: {
@@ -66,30 +68,34 @@ export default async function RootLayout({
   params
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 }>) {
-  const {locale} = await params;
-  
+  const { locale } = await params;
+
   return (
     <html lang={locale}>
       <body className={`${geistInter.variable}`}>
-        <CookieConsentProvider>
-          <NextIntlClientProvider>
-            <SubscribeProvider>
-              <ModalProvider>
-                <Modal />
-                <Background/>
-                <Header/>
-                <main>
-                  {children}
-                </main>
-                <Footer/>
-              </ModalProvider>
-              <Cookie lang={locale}/>
-            </SubscribeProvider>
-            <AnalyticsManager/>
-          </NextIntlClientProvider>
-        </CookieConsentProvider>
+        <ReduxProvider>
+          <WebsocketProvider>
+            <CookieConsentProvider>
+              <NextIntlClientProvider>
+                <SubscribeProvider>
+                  <ModalProvider>
+                    <Modal />
+                    <Background />
+                    <Header />
+                    <main>
+                      {children}
+                    </main>
+                    <Footer />
+                  </ModalProvider>
+                  <Cookie lang={locale} />
+                </SubscribeProvider>
+                <AnalyticsManager />
+              </NextIntlClientProvider>
+            </CookieConsentProvider>
+          </WebsocketProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

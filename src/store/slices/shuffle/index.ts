@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { shuffleApiService } from '@/lib/services/shuffle-api'
 import { TarotCategory, TarotCard, TarotSpeaker, TarotRequest, Matrix } from '@/lib/types/shuffle'
 import { Pagination } from './types'
+import { setGuestAuth as setGuestAuthStorage } from '@/lib/api'
 
 export const getTarotResponse = createAsyncThunk(
   'shuffle/getTarotResponse',
@@ -51,6 +52,50 @@ export const getTarotSpreads = createAsyncThunk(
   }
 )
 
+export const authenticateGuest = createAsyncThunk(
+  'shuffle/authenticateGuest',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch('/api/auth/guest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      
+      if (!response.ok) {
+        throw new Error('Failed to authenticate guest')
+      }
+      
+      const data = await response.json()
+      
+      const token = data.data?.access_token || data.access_token
+      const guestId = data.data?.guest?.id || data.guest?.id
+      
+      if (token && guestId) {
+        setGuestAuthStorage(token, String(guestId))
+        return { guestId: String(guestId), token }
+      }
+      
+      throw new Error('Invalid response format')
+    } catch (error: any) {
+      return rejectWithValue(error.message || 'Failed to authenticate guest')
+    }
+  }
+)
+
+export const getTarotAnswerFromChat = createAsyncThunk(
+  'shuffle/getTarotAnswerFromChat',
+  async (urlMessage: string, { rejectWithValue }) => {
+    try {
+      const response = await shuffleApiService.getTarotAnswerFromChat(urlMessage)
+      return response.data
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to get tarot answer')
+    }
+  }
+)
+
 export interface ShuffleState {
   layout: {
     matrix: Matrix
@@ -67,6 +112,8 @@ export interface ShuffleState {
   categories: TarotCategory[] | null
   response: TarotRequest['response'] | null
   error: string | null
+  guestId: string | null
+  guestToken: string | null
 }
 
 const initialState: ShuffleState = {
@@ -83,6 +130,8 @@ const initialState: ShuffleState = {
   categories: null,
   response: null,
   error: null,
+  guestId: null,
+  guestToken: null,
 }
 
 export const shuffleSlice = createSlice({
@@ -139,6 +188,10 @@ export const shuffleSlice = createSlice({
     },
     clearError: (state) => {
       state.error = null
+    },
+    setGuestAuth: (state, action: PayloadAction<{ guestId: string; token: string }>) => {
+      state.guestId = action.payload.guestId
+      state.guestToken = action.payload.token
     },
   },
   extraReducers: (builder) => {
@@ -204,6 +257,41 @@ export const shuffleSlice = createSlice({
         state.isLoading = false
         state.error = action.payload as string
       })
+      .addCase(authenticateGuest.fulfilled, (state, action) => {
+        state.guestId = action.payload.guestId
+        state.guestToken = action.payload.token
+      })
+      .addCase(authenticateGuest.rejected, (state, action) => {
+        state.error = action.payload as string
+      })
+      .addCase(getTarotAnswerFromChat.pending, (state) => {
+        state.isLoading = true
+        state.error = null
+      })
+      .addCase(getTarotAnswerFromChat.fulfilled, (state, action) => {
+        state.response = action.payload
+        state.isLoading = false
+
+        if (state.response?.tarot?.matrix) {
+          const matrixArray: Matrix = Object.keys(state.response.tarot.matrix).map(key => {
+            const [x, y] = state.response!.tarot.matrix[key]
+            return { x, y }
+          })
+          state.layout = { matrix: matrixArray }
+        }
+
+        if (state.response?.cards) {
+          Object.keys(state.response.cards).forEach(key => {
+            if (state.response?.cards?.[key]?.image) {
+              state.response.cards[key].image = state.response.cards[key].image
+            }
+          })
+        }
+      })
+      .addCase(getTarotAnswerFromChat.rejected, (state, action) => {
+        state.isLoading = false
+        state.error = action.payload as string
+      })
   }
 })
 
@@ -221,7 +309,8 @@ export const {
   resetShuffleResponse,
   resetShuffleState,
   clearError,
-  clearChart
+  clearChart,
+  setGuestAuth
 } = shuffleSlice.actions
 
 export default shuffleSlice.reducer
