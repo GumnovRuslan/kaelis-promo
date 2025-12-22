@@ -1,0 +1,52 @@
+.container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border:none !important;
+  flex: 1;
+  height: 66.666%;
+  min-height: 350px;
+}
+
+.grab {
+  cursor: grab;
+}
+
+.dragging {
+  cursor: grabbing;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 2rem;  
+  border-radius: 1rem;
+  max-width: 500px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
