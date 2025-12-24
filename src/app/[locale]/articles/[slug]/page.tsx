@@ -13,7 +13,7 @@ const LOCALES = ['ru', 'en', 'ua'] as const
 
 type Locale = typeof LOCALES[number]
 
-export const parseSlug = (slug: string) => {
+const parseSlug = (slug: string) => {
   const parts = slug.split('-')
   const lastPart = parts.at(-1)
 
@@ -30,27 +30,29 @@ export const parseSlug = (slug: string) => {
   }
 }
 
-export const generateMetadata = async ({params}: PageProps) => {
-  const { slug } = await params;
-  const url = `articles/${slug}`
-  const { data, errors } = await fetchGraphQL(getArticleSeo(`/${slug}`));
-  const seo: TArticleSeo | null = data?.allArticlesItem?.[0]?.seo || null
-  console.log(seo)
+export const generateMetadata = async ({ params }: PageProps) => {
+  const { slug, locale } = await params
+  const { lang } = parseSlug(slug)
 
-  if(seo) return seoToMetadata(seo, url)
+  if (lang && lang !== locale) return
+
+  const { data } = await fetchGraphQL(getArticleSeo(`/${slug}`));
+  const seo: TArticleSeo | null = data?.allArticlesItem?.[0]?.seo ?? null
+  if (seo) return seoToMetadata(seo, `articles/${slug}`)
 }
 
 const Article = async ({params}: PageProps) =>  {
   const { slug, locale } = await params;
   const {baseSlug, lang} = parseSlug(slug)
+  let article: TArticle | null = null
 
   if(lang !== locale) {
     redirect(`/articles/${baseSlug}-${locale}`)
+  } else {
+    const { data, errors } = await fetchGraphQL(getArticle(`/${baseSlug}-${locale}`));
+    article = data?.allArticlesItem?.[0] || null
   }
 
-  const { data, errors } = await fetchGraphQL(getArticle(`/${baseSlug}-${locale}`));
-  const article: TArticle | null = data?.allArticlesItem?.[0] || null
-  
   return (
     <ArticlePage article={article}/>
   )
