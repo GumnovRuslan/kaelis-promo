@@ -7,14 +7,13 @@ type TProps = {
 
 const ArticlePage = ({article}: TProps) => {
   if(!article) return <ArticleNotFound/>
-  else {
-    return (
+  else return (
       <>
       <Article data={article}/>
       <Message/>
       </>
     )
-  }
+  
 }
 
 export default ArticlePage;
