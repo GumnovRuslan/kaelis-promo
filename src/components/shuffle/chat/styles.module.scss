@@ -1,13 +1,28 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: fluid-size(0.75rem, 1rem, 375, 1920);
   transition: transform 0.3s;
+  width: 100%;
+  max-width: 100%;
+  margin-top: fluid-size(24, 60, 375, 1920);
+  box-sizing: border-box;
+
+  @include media-down('sm') {
+    gap: fluid-size(0.5rem, 0.75rem, 375, 576);
+    margin-top: fluid-size(16, 24, 375, 576);
+  }
 }
 
 .label {
   color: white;
-  font-size: 0.875rem;
+  font-size: fluid-size(14, 28, 375, 1920);
+  font-weight: 400;
+  margin-bottom: 12px;
+
+  @include media-down('sm') {
+    font-size: fluid-size(12, 14, 375, 576);
+  }
 }
 
 .modal {
@@ -17,44 +32,83 @@
   transform: translate(-50%, -50%);
   z-index: 50;
   background: rgba(0, 0, 0, 0.9);
-  padding: 2rem;
-  border-radius: 1rem;
+  padding: fluid-size(1rem, 2rem, 375, 1920);
+  border-radius: fluid-size(0.75rem, 1rem, 375, 1920);
   width: 90%;
   max-width: 500px;
+  box-sizing: border-box;
+
+  @include media-down('sm') {
+    width: 95%;
+    padding: fluid-size(0.75rem, 1rem, 375, 576);
+  }
 }
 
 .close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: fluid-size(0.75rem, 1rem, 375, 1920);
+  right: fluid-size(0.75rem, 1rem, 375, 1920);
   color: white;
   font-weight: bold;
-  font-size: 1.25rem;
+  font-size: fluid-size(1rem, 1.25rem, 375, 1920);
   cursor: pointer;
+
+  @include media-down('sm') {
+    font-size: fluid-size(0.875rem, 1rem, 375, 576);
+  }
 }
 
-.modalTextarea {
-  position: absolute;
-  width: 90%;
-  top: 3.5rem;
-  height: 35%;
-  max-height: 200px;
+.textarea {
+  background: #1F1D2E;
+  border: 2px solid #D4A2F240;
+  color: var(--color-text-white);
+  padding: fluid-size(16, 20, 375, 1920);
+  height: fluid-size(150, 250, 375, 1920);
+  max-height: 250px;
+  border-radius: fluid-size(12, 30, 375, 1920);
+  box-sizing: border-box;
+  width: 100%;
+  resize: vertical;
+  font-size: fluid-size(14, 16, 375, 1920);
+  line-height: 1.5;
+  font-family: inherit;
+
+  @include media-down('sm') {
+    height: fluid-size(120, 150, 375, 576);
+    padding: fluid-size(12, 16, 375, 576);
+    font-size: fluid-size(12, 14, 375, 576);
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .button {
   width: 100%;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  max-width: 100%;
+  padding: fluid-size(12, 20, 375, 1920) fluid-size(20, 40, 375, 1920);
+  background: linear-gradient(90deg, #959FD8 0%, #D5A2F2 100%);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: fluid-size(15, 30, 375, 1920);
   cursor: pointer;
   transition: all 0.3s;
   font-weight: 600;
+  font-size: fluid-size(14, 18, 375, 1920);
+  margin-top: fluid-size(12, 25, 375, 1920);
+  box-sizing: border-box;
+
+  @include media-down('sm') {
+    padding: fluid-size(10, 12, 375, 576) fluid-size(16, 20, 375, 576);
+    font-size: fluid-size(12, 14, 375, 576);
+    margin-top: fluid-size(10, 12, 375, 576);
+  }
 
   &:hover:not(.disabled) {
-    transform: scale(1.05);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(149, 159, 216, 0.4);
   }
 }
 
@@ -67,5 +121,3 @@
     box-shadow: none;
   }
 }
-
-

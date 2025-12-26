@@ -69,6 +69,8 @@ const WebsocketProvider = ({ children }: PropsWithChildren) => {
         broadcaster: 'reverb',
         key: config.key,
         wsHost: config.host,
+        withCredentials: true,
+        authEndpoint: config.auth,
         wsPort: wsPort,
         wssPort: wsPort,
         forceTLS: true,
@@ -82,7 +84,7 @@ const WebsocketProvider = ({ children }: PropsWithChildren) => {
 
       const echo = new Echo(options)
 
-      const channel = echo.channel(`guest.${currentGuestId}`)
+      const channel = echo.private(`guest.${currentGuestId}`)
 
       channel.listenToAll((event: DATA_TYPES_EVENTS, data: any) => {
         sendWebsocketMessages({ type: event, payload: data }, dispatch, router)

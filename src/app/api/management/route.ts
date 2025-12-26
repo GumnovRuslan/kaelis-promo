@@ -1,10 +1,16 @@
 import { Redis } from "@upstash/redis";
 import { NextResponse } from "next/server";
 
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL!,
-  token: process.env.KV_REST_API_TOKEN!,
-});
+function getRedis() {
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  
+  if (!url || !token) {
+    throw new Error("Redis configuration is missing: KV_REST_API_URL and KV_REST_API_TOKEN are required");
+  }
+  
+  return new Redis({ url, token });
+}
 
 export async function POST(req: Request) {
   try {
@@ -16,6 +22,8 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    const redis = getRedis();
 
     const userData = {
       type,

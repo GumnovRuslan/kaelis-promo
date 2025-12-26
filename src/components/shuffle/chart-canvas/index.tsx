@@ -10,11 +10,47 @@ import { ANIMATION_ALIASES } from '@/contexts/animation/helpers'
 import { ChartCanvasProps, CardInfo } from './types'
 import styles from './styles.module.scss'
 
-const MIN_CARD_WIDTH = 60
-const MIN_CARD_HEIGHT = 110
 const CARD_PADDING = 80
 
+const getCardSize = () => {
+  if (typeof window === 'undefined') {
+    return { width: 220, height: 320 }
+  }
+  
+  const minWidth = 415
+  const maxWidth = 1920
+  const minCardWidth = 100
+  const maxCardWidth = 220
+  const minCardHeight = 145
+  const maxCardHeight = 320
+  
+  const viewportWidth = window.innerWidth
+  const clampedWidth = Math.max(minWidth, Math.min(maxWidth, viewportWidth))
+  
+  const width = minCardWidth + (maxCardWidth - minCardWidth) * 
+    ((clampedWidth - minWidth) / (maxWidth - minWidth))
+  const height = minCardHeight + (maxCardHeight - minCardHeight) * 
+    ((clampedWidth - minWidth) / (maxWidth - minWidth))
+  
+  return { width: Math.round(width), height: Math.round(height) }
+}
+
 export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
+  const [cardSize, setCardSize] = useState(() => getCardSize())
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setCardSize(getCardSize())
+    }
+    
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+  
+  const MIN_CARD_WIDTH = cardSize.width
+  const MIN_CARD_HEIGHT = cardSize.height
   const containerRef = useRef<HTMLDivElement>(null)
   const appRef = useRef<Application | null>(null)
   const cardsContainerRef = useRef<Container | null>(null)
@@ -54,7 +90,7 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
       minY = Math.min(minY, cardPosY)
     })
     return { maxX, maxY, minX, minY }
-  }, [matrix])
+  }, [matrix, MIN_CARD_WIDTH, MIN_CARD_HEIGHT])
 
   const calculateOptimalView = useCallback(() => {
     if (!containerRef.current) return { scale: 1, offsetX: 0, offsetY: 0 }
@@ -129,7 +165,7 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
     const cardPosX = x * (MIN_CARD_WIDTH + CARD_PADDING)
     const cardPosY = y * (MIN_CARD_HEIGHT + CARD_PADDING)
     return { x: cardPosX, y: cardPosY }
-  }, [])
+  }, [MIN_CARD_WIDTH, MIN_CARD_HEIGHT])
 
   const createCard = useCallback(async (cardKey: string) => {
     if (!cardsContainerRef.current) return
@@ -220,7 +256,7 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
       cardsContainerRef.current.addChild(cardGraphics)
       return { container: cardGraphics, front: cardSprite, back: backSprite }
     }
-  }, [cards, reading])
+  }, [cards, reading, MIN_CARD_WIDTH, MIN_CARD_HEIGHT])
 
   const createAllCards = useCallback(async () => {
     if (!cardsContainerRef.current) return
@@ -447,10 +483,13 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
 
       if (!skeletonAlias || !atlasAlias) return
 
+      const shuffleScaleMultiplier = MIN_CARD_WIDTH / 60
+      const shuffleScale = scale * shuffleScaleMultiplier
+
       const spine = Spine.from({
         skeleton: skeletonAlias,
         atlas: atlasAlias,
-        scale: scale,
+        scale: shuffleScale,
       })
 
       shuffleRef.current = spine
@@ -463,7 +502,7 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
         const progress = Math.min(elapsed / duration, 1)
 
         if (shuffleRef.current) {
-          shuffleRef.current.scale.set(scale * progress)
+          shuffleRef.current.scale.set(shuffleScale * progress)
         }
 
         if (progress < 1) {
@@ -523,7 +562,7 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
         preloadCards()
       }
     }
-  }, [skeletonArray, atlasArray, dispatch, cards, calculateOptimalView])
+  }, [skeletonArray, atlasArray, dispatch, cards, calculateOptimalView, MIN_CARD_WIDTH])
 
   useEffect(() => {
     if (!isAppReady) {
@@ -538,6 +577,39 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
     setShowCards(false)
     setIsCardsLoading(true)
     setIsAppReady(false)
+
+    if (shuffleRef.current && appRef.current?.stage) {
+      try {
+        if (appRef.current.stage.children.includes(shuffleRef.current)) {
+          appRef.current.stage.removeChild(shuffleRef.current)
+        }
+        shuffleRef.current.destroy()
+        shuffleRef.current = null
+      } catch (err) {
+        console.error('Error cleaning up shuffle:', err)
+      }
+    }
+
+    if (cardsContainerRef.current) {
+      try {
+        cardsContainerRef.current.removeChildren()
+      } catch (err) {
+        console.error('Error cleaning up cards container:', err)
+      }
+    }
+
+    const pixiManager = PixiAppManager.getInstance()
+    if (containerIdRef.current) {
+      pixiManager.removeApp(containerIdRef.current)
+      containerIdRef.current = ''
+    }
+
+    if (containerRef.current) {
+      containerRef.current.innerHTML = ''
+    }
+
+    appRef.current = null
+    cardsContainerRef.current = null
 
     const initializeApp = async () => {
       await initPixiApp()
@@ -639,8 +711,10 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
 
       if (appRef.current) {
         try {
-          appRef.current.stage.removeChildren()
-          appRef.current.destroy()
+          if (appRef.current.stage) {
+            appRef.current.stage.removeChildren()
+          }
+          appRef.current.destroy(false)
         } catch (err) {
           console.error('Error destroying Pixi app', err)
         }
@@ -692,8 +766,8 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
         <div className={styles.modal} onClick={handleCloseCard}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <button className={styles.close} onClick={handleCloseCard}>X</button>
-            <h3>{selectedCard.label}</h3>
             <img src={selectedCard.image} alt={selectedCard.label} />
+            <h3>{selectedCard.label}</h3>
             <p>{selectedCard.description}</p>
           </div>
         </div>

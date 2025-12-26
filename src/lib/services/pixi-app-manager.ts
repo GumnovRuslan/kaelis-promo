@@ -31,14 +31,42 @@ export class PixiAppManager {
 
   removeApp(containerId: string): void {
     const app = this.appInstances.get(containerId)
+    const container = this.containerRefs.get(containerId)
+    
     if (app) {
       try {
-        app.destroy(true)
+        const canvas = (app as any).canvas || (app as any)?.view
+        
+        if (canvas && container && container.contains(canvas)) {
+          container.removeChild(canvas)
+        }
+        
+        if (app.stage) {
+          app.stage.destroy({ children: true })
+        }
+        
+        if ((app as any)._destroyed) {
+          return
+        }
+        
+        const appAny = app as any
+        if (appAny._cancelResize && typeof appAny._cancelResize === 'function') {
+          try {
+            appAny._cancelResize()
+          } catch (e) {
+            console.warn('Error canceling resize:', e)
+          }
+        }
+        
+        app.destroy({
+          removeView: false
+        })
       } catch (e) {
         console.error('Error destroying PIXI app:', e)
+      } finally {
+        this.appInstances.delete(containerId)
+        this.containerRefs.delete(containerId)
       }
-      this.appInstances.delete(containerId)
-      this.containerRefs.delete(containerId)
     }
   }
 

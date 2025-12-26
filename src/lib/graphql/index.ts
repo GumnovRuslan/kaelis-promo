@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, gql, HttpLink } from '@apollo/client';
 
-const client = new ApolloClient({
+const httpLink = new HttpLink({
   uri: process.env.SANITY_ENDPOINT,
-  cache: new InMemoryCache(),
   headers: {
     Authorization: `Bearer ${process.env.SANITY_TOKEN}`,
   },
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
 });
 
 export async function fetchGraphQL<T = any>(

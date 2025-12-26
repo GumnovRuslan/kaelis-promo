@@ -1,0 +1,20 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    max-width: fluid-size(380, 1660, 375, 1920);
+    gap: fluid-size(12, 24, 375, 1920);
+    margin-bottom: fluid-size(30, 60, 375, 1920);
+
+    @include media-down('xl') {
+        grid-template-columns: 1fr;
+    }
+
+    @include media-down('sm') {
+        gap: fluid-size(10, 12, 375, 576);
+        margin-bottom: fluid-size(20, 30, 375, 576);
+    }
+}
+

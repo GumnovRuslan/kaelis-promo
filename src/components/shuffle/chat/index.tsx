@@ -27,7 +27,6 @@ export function Chat({ isVisible = true }: ChatProps) {
           speaker_id: readerStyle?.id || '',
         }
 
-        console.log('Sending request with data:', data)
         const result = await dispatch(shuffleActions.getTarotResponse(data))
         console.log('Response received:', result)
       } catch (error) {
@@ -37,11 +36,9 @@ export function Chat({ isVisible = true }: ChatProps) {
     fetchTarotCards()
   }
 
-  if (!isVisible || !readerStyle) {
+  if (!isVisible) {
     return null
   }
-
-  const baseClassNameText = 'text-white gradient-dark-section disable-border w-full rounded-xl bg-transparent p-4 h-[270px] resize-none transition-all duration-300'
 
   return (
     <div className={styles.container}>
@@ -50,7 +47,7 @@ export function Chat({ isVisible = true }: ChatProps) {
         value={question || ''}
         onChange={handleQuestionChange}
         placeholder="Введите ваш вопрос..."
-        className={baseClassNameText}
+        className={styles.textarea}
         style={{ lineHeight: '1.5' }}
       />
       <button
@@ -58,7 +55,7 @@ export function Chat({ isVisible = true }: ChatProps) {
         disabled={isDisabled}
         className={`${styles.button} ${isDisabled ? styles.disabled : ''}`}
       >
-        Получить расклад
+        Get a Reading
       </button>
     </div>
   )

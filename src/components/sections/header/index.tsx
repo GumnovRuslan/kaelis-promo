@@ -4,16 +4,14 @@ import styles from './styles.module.scss'
 
 import { Link, useRouter } from '@/i18n/navigation';
 import Image from 'next/image';
-import { Burger, Button, LocalSelector, ShuffleSelector } from '@/components/ui';
+import { Burger, LocalSelector } from '@/components/ui';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import disableBodyScroll from '@/utils/disableBodyScroll';
-import { shuffleActions, useAppDispatch } from '@/store';
 
 const Header = () => {
   const [menuIsActive, setMenuIsActive] = useState<boolean>(false);
   const t = useTranslations('Header');
-  const dispatch = useAppDispatch()
   const router = useRouter();
 
   const MENU_ITEMS = [
@@ -27,14 +25,8 @@ const Header = () => {
     return () => disableBodyScroll({ remove: true })
   }, [menuIsActive])
 
-  const resetPropertiesShuffle = () => {
-    dispatch(shuffleActions.setSelectedCategory(null))
-    dispatch(shuffleActions.setSelectedSpread(null))
-  }
-
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    resetPropertiesShuffle()
     router.push('/')
   }
 
@@ -56,7 +48,6 @@ const Header = () => {
             </Link>
           ))}
         </nav>
-        <ShuffleSelector />
         <LocalSelector />
         <Burger
           className={styles.header__burger}

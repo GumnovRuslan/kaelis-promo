@@ -209,6 +209,7 @@ export const shuffleSlice = createSlice({
       })
       .addCase(getTarotSpreads.pending, (state) => {
         state.isLoading = true
+        state.spreads = null // Очищаем старые спреды при начале загрузки новых
       })
       .addCase(getTarotSpreads.fulfilled, (state, action) => {
         state.spreads = action.payload
