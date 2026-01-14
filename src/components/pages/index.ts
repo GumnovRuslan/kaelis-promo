@@ -4,6 +4,7 @@ import ArticlesPage from "./articles";
 import PolicyPage from "./policy";
 import ArticlePage from "./article";
 import ContactsPage from "./contact";
+import CategoriesPage from "./categories";
 
 export { 
   HomePage, 
@@ -12,4 +13,5 @@ export {
   PolicyPage,
   ArticlePage,
   ContactsPage,
+  CategoriesPage,
 };

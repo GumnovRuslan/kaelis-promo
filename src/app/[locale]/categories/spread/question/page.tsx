@@ -11,8 +11,10 @@ import { createSlug } from '@/utils/slug'
 import { Link } from '@/i18n/navigation'
 import styles from './styles.module.scss'
 import { ArrowLeftIcon } from '@/components/icons'
+import { useLocale } from 'next-intl'
 
 function SpreadDetailPageContent() {
+  const locale = useLocale()
   const params = useParams()
   const categoryName = params.name as string
   const spreadName = params.spread as string
@@ -85,32 +87,32 @@ function SpreadDetailPageContent() {
   }, [dispatch])
 
   useEffect(() => {
-    if (!categories || categories.length === 0) {
-      dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20 }))
+    if (!categories.data || categories.data.length === 0) {
+      dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20, lang: locale }))
     }
   }, [dispatch, categories])
 
   useEffect(() => {
     if (categories && categoryName && !selectedCategory) {
-      const category = categories.find(cat => {
+      const category = categories.data?.find(cat => {
         const categorySlug = createSlug(cat.name)
         return categorySlug === categoryName || cat.id === categoryName
       })
       if (category) {
-        dispatch(shuffleActions.setSelectedCategory(category))
+        dispatch(shuffleActions.setSelectedCategory({data: category, lang: locale}))
       }
     }
   }, [categories, categoryName, selectedCategory, dispatch])
 
   useEffect(() => {
-    if (selectedCategory && (!spreads || spreads.length === 0)) {
-      dispatch(shuffleActions.getTarotSpreads(selectedCategory))
+    if (selectedCategory.data && (!spreads.data || spreads.data.length === 0)) {
+      dispatch(shuffleActions.getTarotSpreads({selectedCategory: selectedCategory.data, lang: locale}))
     }
   }, [selectedCategory, spreads, dispatch])
 
   useEffect(() => {
     if (spreads && spreadName && !selectedSpread) {
-      const spread = spreads.find(spr => {
+      const spread = spreads.data?.find(spr => {
         const spreadSlug = createSlug(spr.name)
         return spreadSlug === spreadName || spr.id === spreadName
       })
@@ -151,7 +153,7 @@ function SpreadDetailPageContent() {
         </Link>
 
         <div className={styles.breadcrumb}>
-          {selectedCategory.name} {' > '} {selectedSpread.name}
+          {selectedCategory.data?.name} {' > '} {selectedSpread.name}
         </div>
 
         {question && response && (

@@ -1,7 +1,8 @@
-'use client'
-
 import { Link } from '@/i18n/navigation'
 import styles from './styles.module.scss'
+import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+import { Button } from '@/components/ui'
 
 type CategoryCardProps = {
   id: string
@@ -9,18 +10,17 @@ type CategoryCardProps = {
   description?: string
   image?: string
   href: string
+  onClick?: () => void
 }
 
-export function CategoryCard({ id, name, description, image, href }: CategoryCardProps) {
+export function CategoryCard({ id, name, description, image, href, onClick }: CategoryCardProps) {
+  const t = useTranslations('CategoriesPage')
+
   return (
-    <Link key={id} href={href} className={styles.card}>
+    <Link key={id} href={href} className={styles.card} onClick={onClick}>
       <div className={styles.card__content}>
         <div className={styles.card__image}>
-          {image ? (
-            <img src={image} alt={name} />
-          ) : (
-            <img src="/images/cards/card_astrology_1.svg" alt={name} />
-          )}
+          <Image width={150} height={150} src={image ?? "/images/cards/card_astrology_1.svg" } alt={name} />
         </div>
         <div className={styles.card__right}>
           <div className={styles.card__text}>
@@ -29,7 +29,7 @@ export function CategoryCard({ id, name, description, image, href }: CategoryCar
               <p className={styles.card__description}>{description}</p>
             )}
           </div>
-          <button className={styles.card__select}>Выбрать</button>
+          <Button className={styles.card__select} text={t('buttons.select')}/>
         </div>
       </div>
     </Link>

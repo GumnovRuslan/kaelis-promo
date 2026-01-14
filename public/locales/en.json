@@ -944,5 +944,9 @@
         }
       }
     }
+  },
+  "CategoriesPage": {
+    "title": "Tarot Categories",
+    "subtitle": "From love to career — let us guide you through your cosmic journey."
   }
 }

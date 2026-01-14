@@ -30,10 +30,14 @@ export const getTarotSpeaker = createAsyncThunk(
 
 export const getTarotCategories = createAsyncThunk(
   'shuffle/getTarotCategories',
-  async ({ page, per_page }: Pagination, { rejectWithValue }) => {
+  async ({ page, per_page, lang }: Pagination & {lang: string}, { rejectWithValue }) => {
     try {
       const response = await shuffleApiService.getTarotCategories({ params: { page: page || 1, per_page: per_page || 20 } })
-      return response.data
+      const data = {
+        data: response.data,
+        lang,
+      }
+      return data
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'Failed to get categories')
     }
@@ -42,10 +46,14 @@ export const getTarotCategories = createAsyncThunk(
 
 export const getTarotSpreads = createAsyncThunk(
   'shuffle/getTarotSpreads',
-  async (selectedCategory: TarotCategory | null, { rejectWithValue }) => {
+  async ({selectedCategory, lang}: {selectedCategory: TarotCategory | null, lang: string}, { rejectWithValue }) => {
     try {
       const response = await shuffleApiService.getTarotCards({ params: { page: 1, per_page: 20, category_id: selectedCategory?.id } })
-      return response.data
+      const data = {
+        data: response.data,
+        lang,
+      }
+      return data
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'Failed to get spreads')
     }
@@ -104,12 +112,21 @@ export interface ShuffleState {
   isLoading: boolean
   loadingProgress: number
   question: string | null
-  selectedCategory: TarotCategory | null
   selectedSpread: TarotCard | null
   speakers: TarotSpeaker[] | null
   readerStyle: TarotSpeaker | null
-  spreads: TarotCard[] | null
-  categories: TarotCategory[] | null
+  spreads: {
+    lang: string | null
+    data: TarotCard[] | null
+  }
+  categories: {
+    lang: string | null
+    data: TarotCategory[] | null
+  }
+  selectedCategory: {
+    lang: string | null
+    data: TarotCategory | null;
+  }
   response: TarotRequest['response'] | null
   error: string | null
   guestId: string | null
@@ -123,11 +140,20 @@ const initialState: ShuffleState = {
   speakers: null,
   loadingProgress: 0,
   question: null,
-  spreads: null,
-  selectedCategory: null,
+  spreads: {
+    lang: null,
+    data: null,
+  },
   selectedSpread: null,
   readerStyle: null,
-  categories: null,
+  categories: {
+    lang: null,
+    data: null,
+  },
+  selectedCategory: {
+    lang: null,
+    data: null,
+  },
   response: null,
   error: null,
   guestId: null,
@@ -142,16 +168,16 @@ export const shuffleSlice = createSlice({
       state.layout = { matrix: action.payload }
     },
     clearShuffleSpreads: (state) => {
-      state.spreads = []
+      state.spreads = { data: null, lang: null}
     },
-    setCategories: (state, action: PayloadAction<TarotCategory[]>) => {
+    setCategories: (state, action: PayloadAction<{data: TarotCategory[], lang: string}>) => {
       state.categories = action.payload
     },
     setIsFirstAnimationDone: (state, action: PayloadAction<boolean>) => {
       state.isFirstAnimationDone = action.payload
     },
     clearChart: (state) => {
-      state.selectedCategory = null
+      state.selectedCategory = { lang: null, data: null }
       state.question = ''
       state.readerStyle = null
       state.selectedSpread = null
@@ -166,8 +192,11 @@ export const shuffleSlice = createSlice({
     setQuestion: (state, action: PayloadAction<string | null>) => {
       state.question = action.payload
     },
-    setSelectedCategory: (state, action: PayloadAction<TarotCategory | null>) => {
+    setSelectedCategory: (state, action: PayloadAction<{data: TarotCategory | null; lang: string}>) => {
       state.selectedCategory = action.payload
+    },
+    clearSelectedCategory: (state) => {
+      state.selectedCategory = { lang: null, data: null }
     },
     setSelectedSpread: (state, action: PayloadAction<TarotCard | null>) => {
       state.selectedSpread = action.payload
@@ -199,9 +228,16 @@ export const shuffleSlice = createSlice({
       .addCase(getTarotCategories.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getTarotCategories.fulfilled, (state, action: PayloadAction<TarotCategory[]>) => {
+      .addCase(getTarotCategories.fulfilled, (state, action: PayloadAction<{data: TarotCategory[], lang: string}>) => {
         state.categories = action.payload
         state.isLoading = false
+
+        if(state.selectedCategory.data) {
+          const sameCategory = action.payload.data.find(category => category.id === state.selectedCategory.data!.id)
+          if (sameCategory) {
+            state.selectedCategory = {data: sameCategory, lang: action.payload.lang}
+          }
+        }
       })
       .addCase(getTarotCategories.rejected, (state, action) => {
         state.isLoading = false
@@ -209,9 +245,9 @@ export const shuffleSlice = createSlice({
       })
       .addCase(getTarotSpreads.pending, (state) => {
         state.isLoading = true
-        state.spreads = null // Очищаем старые спреды при начале загрузки новых
+        state.spreads = { data: null, lang: null}
       })
-      .addCase(getTarotSpreads.fulfilled, (state, action) => {
+      .addCase(getTarotSpreads.fulfilled, (state, action: PayloadAction<{data: TarotCard[], lang: string}>) => {
         state.spreads = action.payload
         state.isLoading = false
       })
@@ -305,6 +341,7 @@ export const {
   setLoadingProgress,
   setQuestion,
   setSelectedCategory,
+  clearSelectedCategory,
   setSelectedSpread,
   setReaderStyle,
   resetShuffleResponse,
