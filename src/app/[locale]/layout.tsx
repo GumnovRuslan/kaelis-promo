@@ -75,27 +75,23 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${geistInter.variable}`}>
-        {/* <ReduxProvider> */}
-          {/* <WebsocketProvider> */}
-            <CookieConsentProvider>
-              <NextIntlClientProvider>
-                <SubscribeProvider>
-                  <ModalProvider>
-                    <Modal />
-                    <Background />
-                    <Header />
-                    <main>
-                      {children}
-                    </main>
-                    <Footer />
-                  </ModalProvider>
-                  <Cookie lang={locale} />
-                </SubscribeProvider>
-                <AnalyticsManager />
-              </NextIntlClientProvider>
-            </CookieConsentProvider>
-          {/* </WebsocketProvider> */}
-        {/* </ReduxProvider> */}
+        <CookieConsentProvider>
+          <NextIntlClientProvider>
+            <SubscribeProvider>
+              <ModalProvider>
+                <Modal />
+                <Background />
+                <Header />
+                <main>
+                  {children}
+                </main>
+                <Footer />
+              </ModalProvider>
+              <Cookie lang={locale} />
+            </SubscribeProvider>
+            <AnalyticsManager />
+          </NextIntlClientProvider>
+        </CookieConsentProvider>
       </body>
     </html>
   );

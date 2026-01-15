@@ -29,6 +29,8 @@ import Text from "./text";
 import Animation from "./animation";
 import LoopVideo from "./gif";
 import { ShuffleSelector } from "./shuffle-selector";
+import ButtonBack from "./button_back";
+import SpeakerCard from "./cards/speaker_card";
 
 export { 
   Button, 
@@ -62,4 +64,6 @@ export {
   Animation,
   LoopVideo,
   ShuffleSelector,
+  ButtonBack,
+  SpeakerCard,
 };

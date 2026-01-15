@@ -9,20 +9,17 @@ import { Chat } from '@/components/shuffle/chat'
 import { ChartCanvas } from '@/components/shuffle/chart-canvas'
 import { createSlug } from '@/utils/slug'
 import styles from './styles.module.scss'
+import { useLocale } from 'next-intl'
+import { Loader } from '@/components/sections'
 
 function ShufflePageContent() {
   const params = useParams()
   const categoryId = params.category as string
   const spreadId = params.spread as string
+  const locale = useLocale()
 
   const dispatch = useAppDispatch()
-  const response = useAppSelector(state => state.shuffle.response)
-  const categories = useAppSelector(state => state.shuffle.categories)
-  const spreads = useAppSelector(state => state.shuffle.spreads)
-  const selectedCategory = useAppSelector(state => state.shuffle.selectedCategory)
-  const selectedSpread = useAppSelector(state => state.shuffle.selectedSpread)
-  const readerStyle = useAppSelector(state => state.shuffle.readerStyle)
-  const isLoading = useAppSelector(state => state.shuffle.isLoading)
+  const {response, categories, spreads, selectedCategory, selectedSpread, readerStyle, isLoading} = useAppSelector(state => state.shuffle)
 
   const matrix = useMemo(() => {
     if (!response?.tarot?.matrix) return null
@@ -58,20 +55,20 @@ function ShufflePageContent() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      if (categories && categories.length > 0) return
-      await dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20 }))
+      if (categories.data && categories.data.length > 0) return
+      await dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20, lang: locale }))
     }
     fetchCategories()
   }, [dispatch, categories])
 
   useEffect(() => {
     if (categories && categoryId && !selectedCategory) {
-      const category = categories.find(cat => {
+      const category = categories.data?.find(cat => {
         const categorySlug = createSlug(cat.name)
         return categorySlug === categoryId || cat.id === categoryId
       })
       if (category) {
-        dispatch(shuffleActions.setSelectedCategory(category))
+        dispatch(shuffleActions.setSelectedCategory({data: category, lang: locale}))
       }
     }
   }, [categories, categoryId, selectedCategory, dispatch])
@@ -79,7 +76,7 @@ function ShufflePageContent() {
   useEffect(() => {
     if (selectedCategory && spreadId && !selectedSpread) {
       const fetchSpreads = async () => {
-        await dispatch(shuffleActions.getTarotSpreads(selectedCategory))
+        await dispatch(shuffleActions.getTarotSpreads({selectedCategory: selectedCategory.data, lang: locale}))
       }
       fetchSpreads()
     }
@@ -87,21 +84,19 @@ function ShufflePageContent() {
 
   useEffect(() => {
     if (spreads && spreadId && !selectedSpread) {
-      const spread = spreads.find(spr => {
+      const spread = spreads.data?.find(spr => {
         const spreadSlug = createSlug(spr.name)
         return spreadSlug === spreadId || spr.id === spreadId
       })
-      if (spread) {
-        dispatch(shuffleActions.setSelectedSpread(spread))
+      if (spread && spreads.lang) {
+        dispatch(shuffleActions.setSelectedSpread({data: spread, lang: spreads.lang}))
       }
     }
   }, [spreads, spreadId, selectedSpread, dispatch])
 
   if (isLoading && !categories) {
     return (
-      <div className={styles.loading}>
-        <p>Загрузка...</p>
-      </div>
+      <Loader />
     )
   }
 

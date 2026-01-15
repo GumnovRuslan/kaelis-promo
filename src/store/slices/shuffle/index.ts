@@ -18,10 +18,13 @@ export const getTarotResponse = createAsyncThunk(
 
 export const getTarotSpeaker = createAsyncThunk(
   'shuffle/getTarotSpeaker',
-  async (_, { rejectWithValue }) => {
+  async ({lang}: {lang: string}, { rejectWithValue }) => {
     try {
       const response = await shuffleApiService.getTarotSpeaker()
-      return response.data
+      return {
+        data: response.data,
+        lang
+      }
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'Failed to get tarot speaker')
     }
@@ -112,12 +115,21 @@ export interface ShuffleState {
   isLoading: boolean
   loadingProgress: number
   question: string | null
-  selectedSpread: TarotCard | null
-  speakers: TarotSpeaker[] | null
-  readerStyle: TarotSpeaker | null
+  speakers: {
+    data: TarotSpeaker[] | null
+    lang: string | null
+  }
+  readerStyle: {
+    data: TarotSpeaker | null
+    lang: string | null
+  }
   spreads: {
     lang: string | null
     data: TarotCard[] | null
+  }
+  selectedSpread: {
+    data: TarotCard | null
+    lang: string | null
   }
   categories: {
     lang: string | null
@@ -137,15 +149,24 @@ const initialState: ShuffleState = {
   layout: null,
   isFirstAnimationDone: false,
   isLoading: true,
-  speakers: null,
+  speakers: {
+    data: null,
+    lang: null,
+  },
   loadingProgress: 0,
   question: null,
   spreads: {
     lang: null,
     data: null,
   },
-  selectedSpread: null,
-  readerStyle: null,
+  selectedSpread: {
+    data: null,
+    lang: null,
+  },
+  readerStyle: {
+    data: null,
+    lang: null
+  },
   categories: {
     lang: null,
     data: null,
@@ -179,8 +200,8 @@ export const shuffleSlice = createSlice({
     clearChart: (state) => {
       state.selectedCategory = { lang: null, data: null }
       state.question = ''
-      state.readerStyle = null
-      state.selectedSpread = null
+      state.readerStyle = { data: null, lang: null }
+      state.selectedSpread = { data: null, lang: null }
       state.response = null
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
@@ -198,10 +219,15 @@ export const shuffleSlice = createSlice({
     clearSelectedCategory: (state) => {
       state.selectedCategory = { lang: null, data: null }
     },
-    setSelectedSpread: (state, action: PayloadAction<TarotCard | null>) => {
+
+    setSelectedSpread: (state, action: PayloadAction<{data: TarotCard | null; lang: string}>) => {
       state.selectedSpread = action.payload
     },
-    setReaderStyle: (state, action: PayloadAction<TarotSpeaker | null>) => {
+    clearSelectedSpread: (state) => {
+      state.selectedSpread = { data: null, lang: null}
+    },
+
+    setReaderStyle: (state, action: PayloadAction<{data: TarotSpeaker | null, lang: string}>) => {
       state.readerStyle = action.payload
     },
     resetShuffleResponse: (state) => {
@@ -232,7 +258,7 @@ export const shuffleSlice = createSlice({
         state.categories = action.payload
         state.isLoading = false
 
-        if(state.selectedCategory.data) {
+        if(state.selectedCategory.data && state.selectedCategory.lang !== action.payload.lang) {
           const sameCategory = action.payload.data.find(category => category.id === state.selectedCategory.data!.id)
           if (sameCategory) {
             state.selectedCategory = {data: sameCategory, lang: action.payload.lang}
@@ -250,6 +276,13 @@ export const shuffleSlice = createSlice({
       .addCase(getTarotSpreads.fulfilled, (state, action: PayloadAction<{data: TarotCard[], lang: string}>) => {
         state.spreads = action.payload
         state.isLoading = false
+
+        if(state.selectedSpread.data && state.selectedSpread.lang !== action.payload.lang) {
+          const sameSpread = action.payload.data.find(spread => spread.id === state.selectedSpread.data!.id)
+          if (sameSpread) {
+            state.selectedSpread = {data: sameSpread, lang: action.payload.lang}
+          }
+        }
       })
       .addCase(getTarotSpreads.rejected, (state, action) => {
         state.isLoading = false
@@ -289,6 +322,13 @@ export const shuffleSlice = createSlice({
       .addCase(getTarotSpeaker.fulfilled, (state, action) => {
         state.speakers = action.payload
         state.isLoading = false
+
+        if(state.readerStyle.data && state.readerStyle.lang !== action.payload.lang) {
+          const sameSpeaker = action.payload.data.find(speaker => speaker.id === state.readerStyle.data!.id)
+          if (sameSpeaker) {
+            state.readerStyle = {data: sameSpeaker, lang: action.payload.lang}
+          }
+        }
       })
       .addCase(getTarotSpeaker.rejected, (state, action) => {
         state.isLoading = false
@@ -343,6 +383,7 @@ export const {
   setSelectedCategory,
   clearSelectedCategory,
   setSelectedSpread,
+  clearSelectedSpread,
   setReaderStyle,
   resetShuffleResponse,
   resetShuffleState,

@@ -19,6 +19,9 @@ import CookieSettings from "./cookie/settings";
 import Questionnaire from "./questionnaire";
 import TestModal from "./testModal";
 import ModalSubscribe from "./modal_subscribe";
+import TarotCategorySection from "./tarot_category";
+import Loader from "./loader";
+import Chart from "./chart";
 
 export { 
   Header, 
@@ -42,4 +45,7 @@ export {
   Questionnaire,
   TestModal,
   ModalSubscribe,
+  Loader,
+  TarotCategorySection,
+  Chart,
 };

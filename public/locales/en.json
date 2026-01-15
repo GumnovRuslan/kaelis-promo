@@ -947,6 +947,18 @@
   },
   "CategoriesPage": {
     "title": "Tarot Categories",
-    "subtitle": "From love to career — let us guide you through your cosmic journey."
+    "subtitle": "From love to career — let us guide you on your cosmic journey.",
+    "speaker": {
+      "title": "Choose a reading style"
+    },
+    "chat": {
+      "title": "Ask your question",
+      "placeholder": "Enter your question..."
+    },
+    "buttons": {
+      "select": "Select",
+      "back": "Back",
+      "chat_get_reading": "Get a reading"
+    }
   }
 }

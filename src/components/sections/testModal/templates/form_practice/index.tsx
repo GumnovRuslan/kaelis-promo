@@ -18,8 +18,6 @@ export default function SubscribeForm() {
     submit,
   } = useSubscribe();
 
-  console.log(status)
-
   const closeModalStatus = () => {
     setStatus(null)
   }

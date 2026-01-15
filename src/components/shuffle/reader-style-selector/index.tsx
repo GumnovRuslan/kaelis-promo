@@ -4,26 +4,29 @@ import { shuffleActions, useAppDispatch, useAppSelector } from '@/store'
 import { TarotSpeaker } from '@/lib/types/shuffle'
 import { useEffect } from 'react'
 import styles from './styles.module.scss'
+import { useTranslations, useLocale } from 'next-intl'
+import { SpeakerCard } from '@/components/ui'
 
 type ReaderStyleSelectorProps = {
   isVisible?: boolean
 }
 
 export function ReaderStyleSelector({ isVisible = true }: ReaderStyleSelectorProps) {
-  const selectedReaderStyle = useAppSelector(state => state.shuffle.readerStyle)
-  const speakers = useAppSelector(state => state.shuffle.speakers)
+  const {readerStyle, speakers} = useAppSelector(state => state.shuffle)
   const dispatch = useAppDispatch()
+  const t = useTranslations('CategoriesPage')
+  const locale = useLocale()
 
   useEffect(() => {
     const fetchTarotSpeaker = async () => {
-      if (speakers) return
-      await dispatch(shuffleActions.getTarotSpeaker())
+      if (speakers.data && speakers.lang === locale) return
+      await dispatch(shuffleActions.getTarotSpeaker({lang: locale}))
     }
     fetchTarotSpeaker()
-  }, [dispatch, speakers])
+  }, [dispatch, speakers.data, locale])
 
   const handleReaderStyleClick = (style: TarotSpeaker) => {
-    dispatch(shuffleActions.setReaderStyle(style))
+    dispatch(shuffleActions.setReaderStyle({data: style, lang: speakers.lang || ''}))
   }
 
   if (!isVisible || !speakers) {
@@ -32,24 +35,17 @@ export function ReaderStyleSelector({ isVisible = true }: ReaderStyleSelectorPro
 
   return (
     <div className={styles.container}>
-      <p className={styles.label}>Выберите стиль чтения</p>
+      <p className={styles.label}>{t('speaker.title')}</p>
       <div className={styles.grid}>
-        {speakers.map((speaker: TarotSpeaker) => {
-          const isSelected = selectedReaderStyle?.id === speaker.id
-          return (
-            <button
-              key={speaker.id}
-              className={`${styles.button} ${isSelected ? styles.selected : ''}`}
-              onClick={() => handleReaderStyleClick(speaker)}
-            >
-              <div
-                className={styles.icon}
-                dangerouslySetInnerHTML={{ __html: speaker.icon }}
-              />
-              <span className={styles.name}>{speaker.name}</span>
-            </button>
-          )
-        })}
+        {speakers.data?.map((speaker: TarotSpeaker) => (
+          <SpeakerCard 
+            name={speaker.name}
+            key={speaker.id}
+            icon={speaker.icon}
+            isSelected={readerStyle.data?.id === speaker.id}
+            onClick={() => handleReaderStyleClick(speaker)}
+          />
+        ))}
       </div>
     </div>
   )

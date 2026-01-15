@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector, shuffleActions } from '@/store'
 import { createSlug } from '@/utils/slug'
 import { TarotCategory, TarotCard } from '@/lib/types/shuffle'
 import styles from './styles.module.scss'
+import { useLocale } from 'next-intl'
 
 export function ShuffleSelector() {
   const router = useRouter()
@@ -41,29 +42,29 @@ export function ShuffleSelector() {
   }, [])
 
   useEffect(() => {
-    if (!categories || categories.length === 0) {
-      dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20 }))
+    if (!categories.data || categories.data.length === 0) {
+      dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20, lang: locale }))
     }
   }, [dispatch, categories])
 
   useEffect(() => {
     if (selectedCategory) {
-      dispatch(shuffleActions.getTarotSpreads(selectedCategory))
+      dispatch(shuffleActions.getTarotSpreads({selectedCategory: selectedCategory.data, lang: locale}))
     }
   }, [dispatch, selectedCategory])
 
   const handleCategorySelect = (category: TarotCategory) => {
-    dispatch(shuffleActions.setSelectedCategory(category))
-    dispatch(shuffleActions.setSelectedSpread(null))
+    dispatch(shuffleActions.setSelectedCategory({data: category, lang: locale}))
+    dispatch(shuffleActions.clearSelectedSpread())
     setIsCategoryOpen(false)
   }
 
-  const handleSpreadSelect = (spread: TarotCard) => {
-    dispatch(shuffleActions.setSelectedSpread(spread))
+  const handleSpreadSelect = (spread: TarotCard, lang: string) => {
+    dispatch(shuffleActions.setSelectedSpread({data: spread, lang}))
     setIsSpreadOpen(false)
     
-    if (selectedCategory) {
-      const categorySlug = createSlug(selectedCategory.name)
+    if (selectedCategory.data) {
+      const categorySlug = createSlug(selectedCategory.data.name)
       const spreadSlug = createSlug(spread.name)
       router.push(`/${locale}/shuffle-layout/${categorySlug}/${spreadSlug}`)
     }
@@ -80,17 +81,17 @@ export function ShuffleSelector() {
           }}
           disabled={isLoading}
         >
-          <span>{selectedCategory?.name || 'Категория'}</span>
+          <span>{selectedCategory.data?.name || 'Категория'}</span>
           <svg width="3" height="2" viewBox="0 0 12 8" fill="none">
             <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
-        {isCategoryOpen && categories && categories.length > 0 && (
+        {isCategoryOpen && categories.data && categories.data.length > 0 && (
           <div className={styles.dropdown}>
-            {categories.map((category) => (
+            {categories.data.map((category) => (
               <button
                 key={category.id}
-                className={`${styles.option} ${selectedCategory?.id === category.id ? styles.optionActive : ''}`}
+                className={`${styles.option} ${selectedCategory.data?.id === category.id ? styles.optionActive : ''}`}
                 onClick={() => handleCategorySelect(category)}
               >
                 {category.name}
@@ -109,18 +110,18 @@ export function ShuffleSelector() {
           }}
           disabled={isLoading || !selectedCategory}
         >
-          <span>{selectedSpread?.name || 'Расклад'}</span>
+          <span>{selectedSpread.data?.name || 'Расклад'}</span>
           <svg width="3" height="2" viewBox="0 0 12 8" fill="none">
             <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
-        {isSpreadOpen && spreads && spreads.length > 0 && (
+        {isSpreadOpen && spreads.data && spreads.lang && spreads.data.length > 0 && (
           <div className={styles.dropdown}>
-            {spreads.map((spread) => (
+            {spreads.data.map((spread) => (
               <button
                 key={spread.id}
-                className={`${styles.option} ${selectedSpread?.id === spread.id ? styles.optionActive : ''}`}
-                onClick={() => handleSpreadSelect(spread)}
+                className={`${styles.option} ${selectedSpread.data?.id === spread.id ? styles.optionActive : ''}`}
+                onClick={() => handleSpreadSelect(spread, spreads.lang!)}
               >
                 {spread.name}
               </button>
