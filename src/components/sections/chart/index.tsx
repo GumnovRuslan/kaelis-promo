@@ -4,9 +4,12 @@ import { useMemo, useState } from 'react';
 import styles from './styles.module.scss';
 import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
 import { ChartCanvas } from '@/components/shuffle/chart-canvas';
+import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui';
 
 export default function Chart() {
-    const {question,categories, selectedCategory, selectedSpread, isLoading, response} = useAppSelector(state => state.shuffle)
+  const t = useTranslations('CategoriesPage')
+    const {response} = useAppSelector(state => state.shuffle)
     const dispatch = useAppDispatch()
     const [expandedSections, setExpandedSections] = useState<{
       answer: boolean
@@ -55,7 +58,7 @@ export default function Chart() {
         )}
 
         {response && <div className={styles.learnMore}>
-          <span>Click the card to Learn More</span>
+          <span>{t('tarot.more')}</span>
         </div>}
 
 
@@ -120,16 +123,16 @@ export default function Chart() {
                 )}
               </div>
             )}
-
-            <button
-              type="button"
-              onClick={handleNewReading}
-              className={styles.newReadingButton}
-            >
-              Get a New Reading
-            </button>
           </div>
         )}
+
+        <Button
+          as='link'
+          href='/categories'
+          onClick={handleNewReading}
+          className={styles.newReadingButton}
+          text='Get a New Reading'
+        />
     </>
   )
 }

@@ -203,6 +203,7 @@ export const shuffleSlice = createSlice({
       state.readerStyle = { data: null, lang: null }
       state.selectedSpread = { data: null, lang: null }
       state.response = null
+      state.isFirstAnimationDone = false
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload
@@ -231,6 +232,7 @@ export const shuffleSlice = createSlice({
       state.readerStyle = action.payload
     },
     resetShuffleResponse: (state) => {
+      state.isFirstAnimationDone = false
       state.response = null
       state.error = null
     },

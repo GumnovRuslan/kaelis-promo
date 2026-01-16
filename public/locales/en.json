@@ -959,6 +959,14 @@
       "select": "Select",
       "back": "Back",
       "chat_get_reading": "Get a reading"
+    },
+    "loader": {
+      "load": "Loading...",
+      "categoryNotFound": "Category not found",
+      "spreadsNotFound": "Spreads not found"
+    },
+    "tarot": {
+      "more": "Click the card to Learn More"
     }
   }
 }

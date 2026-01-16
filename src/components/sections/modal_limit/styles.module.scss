@@ -1,0 +1,13 @@
+.modal_limit {
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px 50px;
+
+  &__title {
+    margin-bottom: fluid-size(15, 35); 
+    text-align: center;
+    font-size: fluid-size(16, 32);
+    font-weight: 700;
+    color: var(--color-title-primary-100);
+  }
+}

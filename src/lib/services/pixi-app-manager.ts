@@ -24,7 +24,7 @@ export class PixiAppManager {
     if (this.appInstances.has(containerId)) {
       this.removeApp(containerId)
     }
-    
+
     this.appInstances.set(containerId, app)
     this.containerRefs.set(containerId, containerRef)
   }
@@ -32,41 +32,51 @@ export class PixiAppManager {
   removeApp(containerId: string): void {
     const app = this.appInstances.get(containerId)
     const container = this.containerRefs.get(containerId)
-    
-    if (app) {
-      try {
-        const canvas = (app as any).canvas || (app as any)?.view
-        
-        if (canvas && container && container.contains(canvas)) {
-          container.removeChild(canvas)
-        }
-        
-        if (app.stage) {
-          app.stage.destroy({ children: true })
-        }
-        
-        if ((app as any)._destroyed) {
-          return
-        }
-        
-        const appAny = app as any
-        if (appAny._cancelResize && typeof appAny._cancelResize === 'function') {
-          try {
-            appAny._cancelResize()
-          } catch (e) {
-            console.warn('Error canceling resize:', e)
-          }
-        }
-        
-        app.destroy({
-          removeView: false
-        })
-      } catch (e) {
-        console.error('Error destroying PIXI app:', e)
-      } finally {
-        this.appInstances.delete(containerId)
-        this.containerRefs.delete(containerId)
+
+    if (!app) {
+      this.appInstances.delete(containerId)
+      this.containerRefs.delete(containerId)
+      return
+    }
+
+    try {
+      // 1. Безопасно получаем canvas / view (Pixi v7 + старые версии)
+      const view =
+        (app as any)?.canvas ||
+        (app as any)?.view ||
+        (app as any)?.renderer?.view ||
+        null
+
+      // 2. Удаляем canvas из DOM только если он реально есть
+      if (view && container && container.contains(view)) {
+        container.removeChild(view)
       }
+
+      // 3. Чистим сцену (без повторного destroy)
+      if (app.stage && !app.stage.destroyed) {
+        app.stage.removeChildren()
+      }
+
+      // 4. Отменяем resize listener (если он есть)
+      const appAny = app as any
+      if (typeof appAny._cancelResize === 'function') {
+        try {
+          appAny._cancelResize()
+        } catch (e) {
+          console.warn('[PixiAppManager] cancelResize error:', e)
+        }
+      }
+
+      // 5. Уничтожаем Pixi App (идемпотентно)
+      if (!appAny._destroyed) {
+        app.destroy(true)
+      }
+    } catch (e) {
+      console.warn('[PixiAppManager] safe removeApp error:', e)
+    } finally {
+      // 6. ВСЕГДА чистим ссылки
+      this.appInstances.delete(containerId)
+      this.containerRefs.delete(containerId)
     }
   }
 
@@ -75,10 +85,11 @@ export class PixiAppManager {
   }
 
   cleanup(): void {
-    this.appInstances.forEach((app, id) => {
+    Array.from(this.appInstances.keys()).forEach((id) => {
       this.removeApp(id)
     })
   }
 }
+
 
 

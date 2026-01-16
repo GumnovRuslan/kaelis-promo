@@ -22,6 +22,7 @@ import ModalSubscribe from "./modal_subscribe";
 import TarotCategorySection from "./tarot_category";
 import Loader from "./loader";
 import Chart from "./chart";
+import ModalLimit from "./modal_limit";
 
 export { 
   Header, 
@@ -48,4 +49,5 @@ export {
   Loader,
   TarotCategorySection,
   Chart,
+  ModalLimit,
 };

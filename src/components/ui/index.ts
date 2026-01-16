@@ -11,7 +11,7 @@ import Burger from "./burger";
 import Background from "./background";
 import Input from "./input";
 import Tag from './tag';
-import ModalWrapper from "./modal";
+import ModalWrapper from "./modal_wrapper";
 import Breadcrumbs from "./breadcrumbs";
 import ButtonShare from "./button_share";
 import Question from "./question";
@@ -28,7 +28,6 @@ import Title from "./title";
 import Text from "./text";
 import Animation from "./animation";
 import LoopVideo from "./gif";
-import { ShuffleSelector } from "./shuffle-selector";
 import ButtonBack from "./button_back";
 import SpeakerCard from "./cards/speaker_card";
 
@@ -63,7 +62,6 @@ export {
   Text,
   Animation,
   LoopVideo,
-  ShuffleSelector,
   ButtonBack,
   SpeakerCard,
 };
