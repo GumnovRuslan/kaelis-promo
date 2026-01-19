@@ -1,20 +1,46 @@
-const DAILY_LIMIT = 3
+const DAILY_LIMIT = 1
+const ONE_DAY = 24 * 60 * 60 * 1000
+
+type TarotLimitData = {
+  count: number
+  expiresAt: number
+}
 
 export const checkTarotLimit = (guestId: string) => {
-  const today = new Date().toISOString().slice(0, 10)
-  const key = `tarot_limit_${guestId}_${today}`
+  if (!guestId || typeof window === 'undefined') {
+    return { allowed: false, used: 0, limit: DAILY_LIMIT, key: null }
+  }
 
-  const used = Number(localStorage.getItem(key) || 0)
+  const key = `tarot_limit_${guestId}`
+  const raw = localStorage.getItem(key)
+
+  let data: TarotLimitData | null = raw ? JSON.parse(raw) : null
+
+  // если нет данных или срок истёк — сбрасываем
+  if (!data || Date.now() > data.expiresAt) {
+    data = {
+      count: 0,
+      expiresAt: Date.now() + ONE_DAY,
+    }
+    localStorage.setItem(key, JSON.stringify(data))
+  }
 
   return {
-    allowed: used < DAILY_LIMIT,
-    used,
+    allowed: data.count < DAILY_LIMIT,
+    used: data.count,
     limit: DAILY_LIMIT,
     key,
   }
 }
 
 export const incrementTarotLimit = (key: string) => {
-  const current = Number(localStorage.getItem(key) || 0)
-  localStorage.setItem(key, String(current + 1))
+  if (!key) return
+
+  const raw = localStorage.getItem(key)
+  if (!raw) return
+
+  const data: TarotLimitData = JSON.parse(raw)
+  data.count += 1
+
+  localStorage.setItem(key, JSON.stringify(data))
 }

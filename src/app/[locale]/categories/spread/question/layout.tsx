@@ -1,6 +1,6 @@
 'use client'
 
-import PreloadingContext from "@/contexts/animation";
+import PreloadingContext from "@/context/animation";
 import { initGuest } from "@/utils/tarot/initializeGuest";
 import { useEffect } from "react";
 import { useAppDispatch } from "@/store"

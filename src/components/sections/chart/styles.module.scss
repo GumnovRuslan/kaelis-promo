@@ -126,24 +126,10 @@
 }
 
 .newReadingButton {
-  margin-top: fluid-size(20, 30);
-  padding: fluid-size(12, 18) fluid-size(20, 30);
-  width: 100%;
-  background: linear-gradient(90deg, #959FD8 0%, #D5A2F2 100%);
-  color: var(--color-text-black);
-  border: none;
-  border-radius: fluid-size(10, 15);
-  cursor: pointer;
+  margin: fluid-size(20, 30) auto 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  font-weight: 600;
-  font-size: fluid-size(16, 20);
 
   &:hover {
-    opacity: 0.9;
     transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
   }
 }

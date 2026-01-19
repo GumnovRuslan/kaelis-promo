@@ -131,7 +131,7 @@ export default function Chart() {
           href='/categories'
           onClick={handleNewReading}
           className={styles.newReadingButton}
-          text='Get a New Reading'
+          text={t('buttons.new_reading')}
         />
     </>
   )

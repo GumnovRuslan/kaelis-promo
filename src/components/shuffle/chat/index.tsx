@@ -6,18 +6,20 @@ import styles from './styles.module.scss'
 import { Button } from '@/components/ui'
 import { checkTarotLimit, incrementTarotLimit } from '@/utils/tarot/checkTarotLimit'
 import { useRouter } from 'next/navigation'
+import { useModalLimitContext } from '@/context/modalLimit'
 
 type ChatProps = {
-  isVisible?: boolean
+  isVisible?: boolean;
 }
 
-export function Chat({ isVisible = true }: ChatProps) {
+export function Chat({ isVisible = true}: ChatProps) {
   const t = useTranslations('CategoriesPage')
   const question = useAppSelector(state => state.shuffle.question)
   const { selectedCategory, selectedSpread, readerStyle, guestId } = useAppSelector(state => state.shuffle)
   const isDisabled = !selectedCategory || !selectedSpread || !readerStyle || !question
   const dispatch = useAppDispatch()
   const { allowed, key, used, limit } = checkTarotLimit(guestId || '')
+  const { openModal} = useModalLimitContext()
   const router = useRouter()
 
   const handleQuestionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -30,18 +32,13 @@ export function Chat({ isVisible = true }: ChatProps) {
       return
     }
 
-    const { allowed, key, limit } = checkTarotLimit(guestId)
-
     if (!allowed) {
-      alert(`Лимит раскладов (${limit}) на сегодня исчерпан`)
+      openModal()
       return
     }
 
     // увеличиваем лимит
-    incrementTarotLimit(key)
-
-    alert(`Расклад доступен!!!`)
-    return
+    incrementTarotLimit(key!)
 
     // можно делать запрос
     try {

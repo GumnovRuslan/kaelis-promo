@@ -958,7 +958,8 @@
     "buttons": {
       "select": "Select",
       "back": "Back",
-      "chat_get_reading": "Get a reading"
+      "chat_get_reading": "Get a reading",
+      "new_reading": "Make a new layout"
     },
     "loader": {
       "load": "Loading...",
@@ -967,6 +968,12 @@
     },
     "tarot": {
       "more": "Click the card to Learn More"
+    },
+    "modal": {
+      "title": "Daily Spread Limit Reached",
+      "description_1": "You have used all available free spreads for today.",
+      "description_2": "In the app, you will be able to get more spreads, save results and return to them at any time.",
+      "description_3": "Scan the code or follow the link"
     }
   }
 }

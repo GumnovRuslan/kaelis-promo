@@ -14,8 +14,7 @@ export default function SpreadDetailPage() {
   const locale = useLocale()
   const dispatch = useAppDispatch()
   const {categories, selectedCategory, selectedSpread, isLoading} = useAppSelector(state => state.shuffle)
-
-  const breadcrumbsData = [
+  const BREADCRUMBS_DATA = [
     {
       label: selectedCategory.data?.name ?? '',
       url: '/categories'
@@ -26,27 +25,9 @@ export default function SpreadDetailPage() {
     }
   ]
 
-  // useEffect(() => {
-  //   const initializeGuest = async () => {
-  //     const guestToken = typeof window !== 'undefined' ? localStorage.getItem('guestToken') : null
-  //     const guestId = typeof window !== 'undefined' ? localStorage.getItem('guestId') : null
-
-  //     if (!guestToken || !guestId) {
-  //       const result = await dispatch(shuffleActions.authenticateGuest())
-  //       if (shuffleActions.authenticateGuest.fulfilled.match(result)) {
-  //         if (result.payload) {
-  //           dispatch(shuffleActions.setGuestAuth(result.payload))
-  //         }
-  //       }
-  //     } else {
-  //       dispatch(shuffleActions.setGuestAuth({ guestId, token: guestToken }))
-  //     }
-  //   }
-
-  //   initializeGuest()
-  // }, [dispatch])
-
   useEffect(() => {
+    dispatch(shuffleActions.resetShuffleResponse())
+
     if (!selectedCategory.data || selectedCategory.lang !== locale) {
       dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20, lang: locale }))
     }
@@ -54,12 +35,6 @@ export default function SpreadDetailPage() {
       dispatch(shuffleActions.getTarotSpreads({selectedCategory: selectedCategory.data, lang: locale}))
     }
   }, [dispatch, locale])
-
-  useEffect(() => {
-    return () => {
-      dispatch(shuffleActions.resetShuffleResponse())
-    }
-  }, [dispatch])
 
   if (isLoading && !categories || !selectedCategory || !selectedSpread) {
     return (
@@ -73,7 +48,7 @@ export default function SpreadDetailPage() {
         
         <div className={styles.section__header}>
           <ButtonBack  href={`/categories/spread`} text={t('buttons.back')}/>
-          <Breadcrumbs data={breadcrumbsData} lastActive/>
+          <Breadcrumbs data={BREADCRUMBS_DATA} lastActive/>
         </div>
 
         {/* {selectedSpread.data?.description && (

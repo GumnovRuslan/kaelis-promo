@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Background } from "@/components/ui";
 import { ModalProvider } from "@/context/modal";
-import { Header, Footer, Modal } from "@/components/sections";
+import { Header, Footer, Modal, ModalLimit } from "@/components/sections";
 import { NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import { getTranslations } from "next-intl/server";
@@ -12,8 +12,7 @@ import { CookieConsentProvider } from "@/context/CookieConsentContext";
 import Cookie from "@/components/sections/cookie";
 import AnalyticsManager from "@/components/sections/analytics_manager/AnalyticsManager";
 import { SubscribeProvider } from "@/context/SubscribeContext";
-import { ReduxProvider } from "@/providers/redux-provider";
-import WebsocketProvider from "@/providers/websocket-provider";
+import { ModalLimitProvider } from "@/context/modalLimit";
 
 const geistInter = Inter({
   variable: "--font-geist-sans",
@@ -79,13 +78,16 @@ export default async function RootLayout({
           <NextIntlClientProvider>
             <SubscribeProvider>
               <ModalProvider>
-                <Modal />
-                <Background />
-                <Header />
-                <main>
-                  {children}
-                </main>
-                <Footer />
+                <ModalLimitProvider>
+                  <ModalLimit />
+                  <Modal />
+                  <Background />
+                  <Header />
+                  <main>
+                    {children}
+                  </main>
+                  <Footer />
+                </ModalLimitProvider>
               </ModalProvider>
               <Cookie lang={locale} />
             </SubscribeProvider>
