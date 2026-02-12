@@ -12,7 +12,7 @@ export default function DropDownList({ className, items }: TProps) {
     <div className={`${styles.list} ${className}`}>
       <div className={styles.list__items}>
         {items.map((el, i) => (
-          <Link href={`/categories/spread?id=${el.id}`} className={styles.list__item} key={i}>{el.name}</Link>
+          <Link href={`/tarot/spread?id=${el.id}`} className={styles.list__item} key={i}>{el.name}</Link>
         ))}
       </div>
     </div>
