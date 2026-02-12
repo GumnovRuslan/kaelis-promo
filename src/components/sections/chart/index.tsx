@@ -58,7 +58,7 @@ export default function Chart() {
         )}
 
         {response && <div className={styles.learnMore}>
-          <span>{t('tarot.more')}</span>
+          <span className={styles.learnMore__text}>{t('tarot.more')}</span>
         </div>}
 
 

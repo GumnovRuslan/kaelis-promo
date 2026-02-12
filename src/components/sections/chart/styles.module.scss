@@ -116,13 +116,18 @@
 
 .learnMore {
   width: 100%;
-  font-weight: 400;
+  
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: fluid-size(20, 14);
-  color: var(--color-text-white);
-  opacity: 0.75;
+  
+
+  &__text {
+    font-size: fluid-size(12, 14);
+    font-weight: 400;
+    color: var(--color-text-white);
+    opacity: 0.75;
+  }
 }
 
 .newReadingButton {

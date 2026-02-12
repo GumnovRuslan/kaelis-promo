@@ -1,5 +1,7 @@
 User-agent: *
+
 Allow: /
+
 Disallow: /en/privacy-policy
 Disallow: /ru/privacy-policy
 Disallow: /ua/privacy-policy

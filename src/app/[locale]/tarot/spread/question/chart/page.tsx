@@ -30,9 +30,9 @@ export default function ChartPage() {
           {question && (<p className={styles.userQuestion}>{question}</p>)}
         </div>
 
-        {/* {selectedSpread.data?.description && (
+        {selectedSpread.data?.description && (
           <p className={styles.description}>{selectedSpread.data?.description}</p>
-        )} */}
+        )}
 
         <Chart/>
       </div>

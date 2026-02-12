@@ -51,9 +51,11 @@ export default function SpreadDetailPage() {
           <Breadcrumbs data={BREADCRUMBS_DATA} lastActive/>
         </div>
 
-        {/* {selectedSpread.data?.description && (
-          <p className={styles.description}>{selectedSpread.data?.description}</p>
-        )} */}
+        {selectedSpread.data?.description && (
+          <p className={styles.description}>
+            {selectedSpread.data?.description}
+          </p>
+        )}
 
         <ReaderStyleSelector />
         <Chat />

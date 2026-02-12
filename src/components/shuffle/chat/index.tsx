@@ -57,7 +57,7 @@ export function Chat({ isVisible = true}: ChatProps) {
         setError(result.payload as string)
       } else {
         incrementTarotLimit(key!)
-        router.push('/categories/spread/question/chart')
+        router.push('/tarot/spread/question/chart')
       }
     } catch (error) {
       console.error('Error fetching tarot cards:', error)

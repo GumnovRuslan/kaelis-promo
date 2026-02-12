@@ -55,7 +55,6 @@
         flex-direction: column;
         justify-content: space-between;
         flex: 1;
-        max-width: 60%;    
         min-height: 0;
     }
 
@@ -73,16 +72,12 @@
     }
 
     &__description {
-        color: var(--color-white);
+        color: rgb(255, 255, 255, 0.7);
         font-size: fluid-size(14, 18, 375, 1920);
         text-wrap:wrap;
-        opacity: 0.9;
     }
 
     &__select {
-        position: absolute;
-        bottom: fluid-size(8, 8, 375, 1920);
-        right: fluid-size(8, 8, 375, 1920);
         border-radius: fluid-size(20, 30, 375, 1920);
         color: var(--color-text-black);
         align-self: flex-end;
