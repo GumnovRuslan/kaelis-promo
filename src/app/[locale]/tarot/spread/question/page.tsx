@@ -17,11 +17,11 @@ export default function SpreadDetailPage() {
   const BREADCRUMBS_DATA = [
     {
       label: selectedCategory.data?.name ?? '',
-      url: '/categories'
+      url: '/tarot'
     },
     {
       label: selectedSpread.data?.name ?? '',
-      url: '/categories/spread'
+      url: '/tarot/spread'
     }
   ]
 
@@ -47,7 +47,7 @@ export default function SpreadDetailPage() {
       <div className={styles.container}>
         
         <div className={styles.section__header}>
-          <ButtonBack  href={`/categories/spread`} text={t('buttons.back')}/>
+          <ButtonBack  href={`/tarot/spread`} text={t('buttons.back')}/>
           <Breadcrumbs data={BREADCRUMBS_DATA} lastActive/>
         </div>
 

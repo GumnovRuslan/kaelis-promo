@@ -31,12 +31,12 @@ export default function SpreadsPage() {
   }, [locale, selectedCategory.data])
 
   useEffect(() => {
-    if(firstRender.current || !spreads.data) {
+    if(firstRender.current || !spreads.data || categoryId) {
       dispatch(shuffleActions.getTarotSpreads({selectedCategory: selectedCategory.data, lang: locale}))
     }
 
     firstRender.current = false
-  }, [])
+  }, [categoryId])
 
   useEffect(() => {
     if(!categoryId || !categories.data) return
@@ -54,7 +54,7 @@ export default function SpreadsPage() {
   return (
     <CategoryDetailContainer>
       <div className={styles.header}>
-        <ButtonBack href={"/categories"} text={t('buttons.back')}/>
+        <ButtonBack href={"/tarot"} text={t('buttons.back')}/>
         {selectedCategory.data?.name && <h1 className={styles.header__title}>{selectedCategory.data.name}</h1>}
         {selectedCategory.data?.description && <p className={styles.heder__description}>{selectedCategory.data.description}</p>}
       </div>
@@ -71,7 +71,7 @@ export default function SpreadsPage() {
                 name={spread.name}
                 description={spread.description}
                 image={spread.image}
-                href={`/categories/spread/question`}
+                href={`/tarot/spread/question`}
                 onClick={() => {handleSelectSpread(spread)}}
               />
             ))}
