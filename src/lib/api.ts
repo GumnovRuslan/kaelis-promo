@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
+import { TarotCategory } from './types/shuffle'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://app.kaelisai.com/api' 
 
@@ -32,6 +33,16 @@ export const setGuestAuth = (token: string, guestId: string): void => {
     localStorage.setItem(GUEST_ID_KEY, guestId)
   }
 }
+
+export const getCategories = async (): Promise<TarotCategory[]> => {
+  try {
+    const response = await api.get('/tarot/category');
+    return response.data.data;
+  } catch (error) {
+    console.error('Ошибка получения категорий:', error);
+    return [];
+  }
+};
 
 const getLanguage = (): string => {
   if (typeof window !== 'undefined') {

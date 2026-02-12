@@ -5,7 +5,7 @@ export interface TarotSpeaker {
 }
 
 export interface TarotCategory {
-  id: string
+  id: number
   name: string
   image?: string
   description?: string

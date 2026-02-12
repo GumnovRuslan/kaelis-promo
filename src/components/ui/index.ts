@@ -30,6 +30,7 @@ import Animation from "./animation";
 import LoopVideo from "./gif";
 import ButtonBack from "./button_back";
 import SpeakerCard from "./cards/speaker_card";
+import DropDownList from "./dropdown_list";
 
 export { 
   Button, 
@@ -64,4 +65,5 @@ export {
   LoopVideo,
   ButtonBack,
   SpeakerCard,
+  DropDownList,
 };

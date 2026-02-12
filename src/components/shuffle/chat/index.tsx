@@ -7,6 +7,7 @@ import { Button } from '@/components/ui'
 import { checkTarotLimit, incrementTarotLimit } from '@/utils/tarot/checkTarotLimit'
 import { useRouter } from 'next/navigation'
 import { useModalLimitContext } from '@/context/modalLimit'
+import { useEffect, useState } from 'react'
 
 type ChatProps = {
   isVisible?: boolean;
@@ -21,12 +22,16 @@ export function Chat({ isVisible = true}: ChatProps) {
   const { allowed, key, used, limit } = checkTarotLimit(guestId || '')
   const { openModal} = useModalLimitContext()
   const router = useRouter()
+  const [error, setError] = useState('')
 
   const handleQuestionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setError('')
     dispatch(shuffleActions.setQuestion(e.target.value))
   }
 
   const handleGetReading = async () => {
+    setError('')
+
     if (!guestId) {
       alert('Пользователь не инициализирован')
       return
@@ -36,27 +41,34 @@ export function Chat({ isVisible = true}: ChatProps) {
       openModal()
       return
     }
-
-    // увеличиваем лимит
-    incrementTarotLimit(key!)
-
-    // можно делать запрос
     try {
+    if(!selectedCategory.data?.id || !selectedSpread.data?.id || !readerStyle.data?.id) return
+      
       const data = {
         question: question || '',
-        category_id: selectedCategory.data?.id || '',
-        tarot_id: selectedSpread.data?.id || '',
-        speaker_id: readerStyle.data?.id || '',
+        category_id: String(selectedCategory.data.id),
+        tarot_id: selectedSpread.data?.id,
+        speaker_id: readerStyle.data?.id,
       }
 
-      await dispatch(shuffleActions.getTarotResponse(data))
+      const result = await dispatch(shuffleActions.getTarotResponse(data))
 
-      // и только теперь переходим
-      router.push('/categories/spread/question/chart')
+      if(result.meta.requestStatus === "rejected") {
+        setError(result.payload as string)
+      } else {
+        incrementTarotLimit(key!)
+        router.push('/categories/spread/question/chart')
+      }
     } catch (error) {
       console.error('Error fetching tarot cards:', error)
     }
   }
+
+  useEffect(() => {
+    if(question) {
+      dispatch(shuffleActions.setQuestion(''))
+    }
+  }, [])
 
   if (!isVisible) {
     return null
@@ -72,6 +84,7 @@ export function Chat({ isVisible = true}: ChatProps) {
         className={styles.textarea}
         style={{ lineHeight: '1.5' }}
       />
+      <p className={`${styles.error} ${error && styles.error_hidden}`}>{error}</p>
 
       <Button 
         as='button' 

@@ -54,7 +54,8 @@
     "menu": {
       "home": "Home",
       "articles": "Articles",
-      "contacts": "Contacts"
+      "contacts": "Contacts",
+      "tarot": "Tarot spreads"
     }
   },
   "Modal": {

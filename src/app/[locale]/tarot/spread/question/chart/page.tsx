@@ -19,6 +19,7 @@ export default function ChartPage() {
       url: '/categories/spread'
     }
   ]
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
