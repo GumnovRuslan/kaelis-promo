@@ -25,7 +25,7 @@ const TarotCategorySection = ({categories}: TProps) => {
         {categories?.map((category: TarotCategory) => (
           <CategoryCard
             key={category.id}
-            id={category.id}
+            id={String(category.id)}
             name={category.name}
             description={category.description}
             image={category.image}
