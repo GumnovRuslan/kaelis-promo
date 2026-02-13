@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector, shuffleActions } from '@/store'
 import { CategoryCard, CategoriesGrid, CategoryDetailContainer, CategoriesContainer } from '@/components/categories'
 import styles from './styles.module.scss'
@@ -17,7 +17,6 @@ export default function SpreadsPage() {
   const {selectedCategory, categories, spreads, isLoading} = useAppSelector(state => state.shuffle)
   const searchParams = useSearchParams();
   const categoryId = searchParams.get('id');
-  const firstRender = useRef(true)
 
   const handleSelectSpread = (spread: TarotCard) => {
     if(!spreads.data || !spreads.lang) return
@@ -28,15 +27,11 @@ export default function SpreadsPage() {
     if(!selectedCategory.data || selectedCategory.lang !== locale) {
       dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20, lang: locale }))
     }
-  }, [locale, selectedCategory.data])
+  }, [locale])
 
   useEffect(() => {
-    if(firstRender.current || !spreads.data || categoryId) {
-      dispatch(shuffleActions.getTarotSpreads({selectedCategory: selectedCategory.data, lang: locale}))
-    }
-
-    firstRender.current = false
-  }, [categoryId])
+    dispatch(shuffleActions.getTarotSpreads({selectedCategory: selectedCategory.data, lang: locale}))
+  }, [selectedCategory.data])
 
   useEffect(() => {
     if(!categoryId || !categories.data) return
