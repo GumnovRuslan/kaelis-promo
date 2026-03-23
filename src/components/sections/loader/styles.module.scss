@@ -1,0 +1,9 @@
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 50vh;
+  color: var(--color-text-primary);
+  font-size: fluid-size(12, 24);
+}

@@ -1,0 +1,735 @@
+'use client'
+
+import { useEffect, useRef, useState, useCallback } from 'react'
+import { Application, Container, Sprite, Assets, Texture } from 'pixi.js'
+import { Spine } from '@pixi/spine-pixi'
+import { shuffleActions, useAppDispatch, useAppSelector } from '@/store'
+import { PixiAppManager } from '@/lib/services/pixi-app-manager'
+import { usePreloadingContext } from '@/context/animation'
+import { ChartCanvasProps, CardInfo } from './types'
+import styles from './styles.module.scss'
+import { flipCardPerspective } from './flip_card'
+
+const CARD_PADDING = 80
+
+const getCardSize = () => {
+  if (typeof window === 'undefined') {
+    return { width: 220, height: 320 }
+  }
+  
+  const minWidth = 415
+  const maxWidth = 1920
+  const minCardWidth = 100
+  const maxCardWidth = 220
+  const minCardHeight = 145
+  const maxCardHeight = 320
+  
+  const viewportWidth = window.innerWidth
+  const clampedWidth = Math.max(minWidth, Math.min(maxWidth, viewportWidth))
+  
+  const width = minCardWidth + (maxCardWidth - minCardWidth) * 
+    ((clampedWidth - minWidth) / (maxWidth - minWidth))
+  const height = minCardHeight + (maxCardHeight - minCardHeight) * 
+    ((clampedWidth - minWidth) / (maxWidth - minWidth))
+  
+  return { width: Math.round(width), height: Math.round(height) }
+}
+
+export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
+  const [cardSize, setCardSize] = useState(() => getCardSize())
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setCardSize(getCardSize())
+    }
+    
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+  
+  const MIN_CARD_WIDTH = cardSize.width
+  const MIN_CARD_HEIGHT = cardSize.height
+  const containerRef = useRef<HTMLDivElement>(null)
+  const appRef = useRef<Application | null>(null)
+  const cardsContainerRef = useRef<Container | null>(null)
+  const [selectedCard, setSelectedCard] = useState<CardInfo | null>(null)
+  const [showCards, setShowCards] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+  const [isAppReady, setIsAppReady] = useState(false)
+  const [isCardsLoading, setIsCardsLoading] = useState(true)
+  const [shufflePosition, setShufflePosition] = useState({ x: 0, y: 0 })
+  const isFirstAnimationDone = useAppSelector(state => state.shuffle.isFirstAnimationDone)
+  const dispatch = useAppDispatch()
+  const containerIdRef = useRef<string>('')
+  const shuffleRef = useRef<Spine | null>(null)
+  const reading = useAppSelector(state => state.shuffle.response?.reading)
+  const { atlasArray, skeletonArray, isPreloadingFinish } = usePreloadingContext()
+
+  useEffect(() => {
+    if (containerRef.current && !containerIdRef.current) {
+      containerIdRef.current = `chart-canvas-${Date.now()}-${Math.random().toString(36)}`
+    }
+  }, [])
+
+  const calculateMaxCoordinates = useCallback(() => {
+    let maxX = 0
+    let maxY = 0
+    let minX = 0
+    let minY = 0
+
+    matrix.forEach((cardPos) => {
+      const cardPosX = cardPos.x * (MIN_CARD_WIDTH + CARD_PADDING)
+      const cardPosY = cardPos.y * (MIN_CARD_HEIGHT + CARD_PADDING)
+
+      maxX = Math.max(maxX, cardPosX)
+      maxY = Math.max(maxY, cardPosY)
+      minX = Math.min(minX, cardPosX)
+      minY = Math.min(minY, cardPosY)
+    })
+    return { maxX, maxY, minX, minY }
+  }, [matrix, MIN_CARD_WIDTH, MIN_CARD_HEIGHT])
+
+  const calculateOptimalView = useCallback(() => {
+    if (!containerRef.current) return { scale: 1, offsetX: 0, offsetY: 0 }
+
+    const containerWidth = containerRef.current.clientWidth
+    const containerHeight = containerRef.current.clientHeight
+
+    const { maxX, maxY, minX, minY } = calculateMaxCoordinates()
+
+    const totalWidth = maxX - minX + MIN_CARD_WIDTH
+    const totalHeight = maxY - minY + MIN_CARD_HEIGHT
+
+    const padding = 40
+    const scaleX = (containerWidth - padding) / totalWidth
+    const scaleY = (containerHeight - padding) / totalHeight
+    const optimalScale = Math.min(scaleX, scaleY, 1)
+
+    const centerX = containerWidth / 2
+    const centerY = containerHeight / 2
+    const spreadCenterX = (maxX + minX) / 2
+    const spreadCenterY = (maxY + minY) / 2
+
+    const offsetX = centerX - spreadCenterX * optimalScale
+    const offsetY = centerY - spreadCenterY * optimalScale
+
+    return { scale: optimalScale, offsetX, offsetY }
+  }, [calculateMaxCoordinates])
+
+  const initPixiApp = useCallback(async () => {
+    if (!containerRef.current || !containerIdRef.current) return
+    if (appRef.current) return
+
+    const pixiManager = PixiAppManager.getInstance()
+
+    if (pixiManager.hasApp(containerIdRef.current)) {
+      const existingApp = pixiManager.getApp(containerIdRef.current)
+      if (existingApp) {
+        appRef.current = existingApp
+        setIsAppReady(true)
+        return
+      }
+    }
+
+    if (containerRef.current.children.length > 0) {
+      containerRef.current.innerHTML = ''
+    }
+
+    const app = new Application()
+    await app.init({
+      width: containerRef.current.clientWidth,
+      height: containerRef.current.clientHeight,
+      backgroundAlpha: 0,
+      resolution: window.devicePixelRatio || 1,
+      autoDensity: true,
+    })
+
+    const cardsC = new Container()
+    cardsC.label = 'cardsContainer'
+    cardsC.visible = false
+    app.stage.addChild(cardsC)
+
+    containerRef.current.appendChild((app as any).canvas || (app as any).view)
+    appRef.current = app
+    cardsContainerRef.current = cardsC
+
+    pixiManager.setApp(containerIdRef.current, app, containerRef.current)
+
+    setIsAppReady(true)
+  }, [])
+
+  const getCardPosition = useCallback((x: number, y: number) => {
+    const cardPosX = x * (MIN_CARD_WIDTH + CARD_PADDING)
+    const cardPosY = y * (MIN_CARD_HEIGHT + CARD_PADDING)
+    return { x: cardPosX, y: cardPosY }
+  }, [MIN_CARD_WIDTH, MIN_CARD_HEIGHT])
+
+  const createCard = useCallback(async (cardKey: string) => {
+    if (!cardsContainerRef.current) return
+
+    const cardGraphics = new Container()
+
+    try {
+      const cardData = cards[cardKey]
+      if (!cardData) {
+        throw new Error(`Card data not found for key: ${cardKey}`)
+      }
+
+      const cardTexture = await Assets.load(cardData.image)
+      const backCardPath = '/images/cards/card_back.png'
+      const backTexture = await Assets.load(backCardPath)
+
+      const cardSprite = new Sprite(cardTexture)
+      const backSprite = new Sprite(backTexture)
+
+      const scaleX = MIN_CARD_WIDTH / cardTexture.width
+      const scaleY = MIN_CARD_HEIGHT / cardTexture.height
+      const scale = Math.min(scaleX, scaleY)
+
+      const backScaleX = MIN_CARD_WIDTH / backTexture.width
+      const backScaleY = MIN_CARD_HEIGHT / backTexture.height
+      const backScale = Math.min(backScaleX, backScaleY)
+
+      cardSprite.scale.set(scale)
+      backSprite.scale.set(backScale)
+
+      cardSprite.anchor.set(0.5)
+      backSprite.anchor.set(0.5)
+
+      cardGraphics.addChild(backSprite)
+      cardGraphics.addChild(cardSprite)
+
+      cardSprite.visible = false
+
+      cardsContainerRef.current.addChild(cardGraphics)
+
+      const handleClickOnCard = () => {
+        const selectedCard = reading?.cards?.find(card => card.position.toString() == cardKey)
+
+        setSelectedCard({
+          image: cardData.image,
+          label: selectedCard?.label || cardData.name || '',
+          description: cardData.description || selectedCard?.description || ''
+        })
+      }
+
+      cardSprite.eventMode = 'static'
+      cardSprite.cursor = 'pointer'
+      cardSprite.on('pointertap', handleClickOnCard)
+
+      return { container: cardGraphics, front: cardSprite, back: backSprite }
+    } catch (error) {
+      console.error(`Error creating card ${cardKey}:`, error)
+      
+      let backSprite: Sprite
+      try {
+        const backCardPath = '/images/cards/card_back.png'
+        const backTexture = await Assets.load(backCardPath)
+        backSprite = new Sprite(backTexture)
+        const backScaleX = MIN_CARD_WIDTH / backTexture.width
+        const backScaleY = MIN_CARD_HEIGHT / backTexture.height
+        const backScale = Math.min(backScaleX, backScaleY)
+        backSprite.scale.set(backScale)
+        backSprite.anchor.set(0.5)
+      } catch (backError) {
+        backSprite = new Sprite(Texture.WHITE)
+        backSprite.width = MIN_CARD_WIDTH
+        backSprite.height = MIN_CARD_HEIGHT
+        backSprite.tint = 0x4A4A4A
+        backSprite.anchor.set(0.5)
+      }
+
+      const cardSprite = new Sprite(Texture.WHITE)
+      cardSprite.width = MIN_CARD_WIDTH
+      cardSprite.height = MIN_CARD_HEIGHT
+      cardSprite.tint = 0x8B4513
+      cardSprite.anchor.set(0.5)
+
+      cardGraphics.addChild(backSprite)
+      cardGraphics.addChild(cardSprite)
+
+      cardSprite.visible = false
+
+      cardsContainerRef.current.addChild(cardGraphics)
+      return { container: cardGraphics, front: cardSprite, back: backSprite }
+    }
+  }, [cards, reading, MIN_CARD_WIDTH, MIN_CARD_HEIGHT])
+
+  const createCardsInstant = useCallback(async () => {
+    if (!cardsContainerRef.current || !appRef.current) return
+
+    cardsContainerRef.current.visible = true
+    cardsContainerRef.current.alpha = 1
+    cardsContainerRef.current.removeChildren()
+
+    const { scale, offsetX, offsetY } = calculateOptimalView()
+    cardsContainerRef.current.scale.set(scale)
+    cardsContainerRef.current.position.set(offsetX, offsetY)
+
+    for (let index = 0; index < matrix.length; index++) {
+      const cardKeys = Object.keys(cards)
+      const cardKey = cardKeys[index] || index.toString()
+
+      const cardData = await createCard(cardKey)
+      if (!cardData) continue
+
+      const { container, front, back } = cardData
+      const pos = matrix[index]
+      const finalPos = getCardPosition(pos.x, pos.y)
+
+      container.position.set(finalPos.x, finalPos.y)
+      container.alpha = 1
+      front.visible = true
+      back.visible = false
+    }
+
+    setShowCards(true)
+  }, [
+    cards,
+    matrix,
+    createCard,
+    calculateOptimalView,
+    getCardPosition
+  ])
+
+  const createCardsReveal = useCallback(async () => {
+    if (!cardsContainerRef.current || !appRef.current) return
+
+    cardsContainerRef.current.visible = true
+    cardsContainerRef.current.alpha = 1
+    cardsContainerRef.current.removeChildren()
+
+    const { scale, offsetX, offsetY } = calculateOptimalView()
+    cardsContainerRef.current.scale.set(scale)
+    cardsContainerRef.current.position.set(offsetX, offsetY)
+
+    const revealDelay = 120
+    const flipDelay = 250
+
+    for (let index = 0; index < matrix.length; index++) {
+      const cardKeys = Object.keys(cards)
+      const cardKey = cardKeys[index] || index.toString()
+
+      const cardData = await createCard(cardKey)
+      if (!cardData) continue
+
+      const { container, front, back } = cardData
+      const pos = matrix[index]
+      const finalPos = getCardPosition(pos.x, pos.y)
+
+      container.position.set(finalPos.x, finalPos.y)
+      container.alpha = 0
+
+      front.visible = false
+      back.visible = true
+
+      // ⏳ Появление
+      setTimeout(() => {
+        const fadeStart = Date.now()
+        const fadeDuration = 300
+
+        const fadeIn = () => {
+          const progress = Math.min((Date.now() - fadeStart) / fadeDuration, 1)
+          container.alpha = progress
+          if (progress < 1) requestAnimationFrame(fadeIn)
+        }
+
+        requestAnimationFrame(fadeIn)
+      }, revealDelay * index)
+
+      setTimeout(() => {
+        flipCardPerspective(container, front, back, 600)
+      }, revealDelay * index + flipDelay)
+    }
+
+    setShowCards(true)
+  }, [
+    cards,
+    matrix,
+    createCard,
+    calculateOptimalView,
+    getCardPosition
+  ])
+
+  const loadShuffle = useCallback(async (retryCount = 0) => {
+    if (retryCount > 5) {
+      console.warn('Max retry attempts reached for shuffle animation')
+      return
+    }
+
+    if (!skeletonArray || !atlasArray || skeletonArray.length === 0 || atlasArray.length === 0) {
+      console.warn('Skeleton or atlas arrays are not ready')
+      return
+    }
+
+    if (!appRef.current || shuffleRef.current) {
+      return
+    }
+
+    if (!appRef.current.stage || !appRef.current.renderer) {
+      console.warn('PIXI app is not fully initialized yet')
+      return
+    }
+
+    const skeletonItem = skeletonArray.find(item => item.alias === 'shuffle')
+    const atlasItem = atlasArray.find(item => item.alias === 'shuffle_atlas')
+
+    if (!skeletonItem || !atlasItem) {
+      console.warn('Required skeleton or atlas not found for shuffle animation')
+      return
+    }
+
+    const skeletonAlias = skeletonItem.alias
+    const atlasAlias = atlasItem.alias
+
+    if (!skeletonAlias || !atlasAlias) {
+      console.warn('Skeleton or atlas aliases are undefined')
+      return
+    }
+
+    try {
+      if (!skeletonAlias || !atlasAlias) {
+        console.warn('Skeleton or atlas aliases are not ready yet, retrying in 100ms')
+        setTimeout(() => {
+          if (!shuffleRef.current) {
+            loadShuffle(retryCount + 1)
+          }
+        }, 100)
+        return
+      }
+
+      const preloadCards = async () => {
+        if (!cards) return
+
+        const cardKeys = Object.keys(cards)
+        const preloadPromises = cardKeys.map(async (cardKey) => {
+          try {
+            const cardData = cards[cardKey]
+            if (cardData?.image) {
+              await Assets.load(cardData.image)
+            }
+          } catch (error) {
+            console.warn(`Failed to preload card ${cardKey}:`, error)
+          }
+        })
+
+        await Promise.all(preloadPromises)
+        setIsCardsLoading(false)
+      }
+
+      preloadCards()
+
+      const { scale } = calculateOptimalView()
+
+      if (!skeletonAlias || !atlasAlias) return
+
+      const shuffleScaleMultiplier = MIN_CARD_WIDTH / 60
+      const shuffleScale = scale * shuffleScaleMultiplier
+
+      const spine = Spine.from({
+        skeleton: skeletonAlias,
+        atlas: atlasAlias,
+        scale: shuffleScale,
+      })
+
+      shuffleRef.current = spine
+
+      const startTime = Date.now()
+      const duration = 1000
+
+      const animateZoomOut = () => {
+        const elapsed = Date.now() - startTime
+        const progress = Math.min(elapsed / duration, 1)
+
+        if (shuffleRef.current) {
+          shuffleRef.current.scale.set(shuffleScale * progress)
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(animateZoomOut)
+        }
+      }
+
+      if (shuffleRef.current && shuffleRef.current.skeleton) {
+        if (appRef.current) {
+          const shuffleX = appRef.current.screen.width / 2
+          const shuffleY = appRef.current.screen.height / 2
+          shuffleRef.current.x = shuffleX
+          shuffleRef.current.y = shuffleY
+          setShufflePosition({
+            x: shuffleX,
+            y: shuffleY
+          })
+        }
+
+        shuffleRef.current.skeleton.setSlotsToSetupPose()
+        shuffleRef.current.visible = true
+
+        if (appRef.current?.stage) {
+          appRef.current.stage.addChild(shuffleRef.current)
+
+          if (shuffleRef.current.state) {
+            shuffleRef.current.state.setAnimation(0, 'animation3', false)
+
+            const animationDuration = 2900
+
+            setTimeout(() => {
+              dispatch(shuffleActions.setIsFirstAnimationDone(true))
+            }, animationDuration)
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error creating spine animation:', error)
+
+      if (cards) {
+        const preloadCards = async () => {
+          const cardKeys = Object.keys(cards)
+          const preloadPromises = cardKeys.map(async (cardKey) => {
+            try {
+              const cardData = cards[cardKey]
+              if (cardData?.image) {
+                await Assets.load(cardData.image)
+              }
+            } catch (error) {
+              console.warn(`Failed to preload card ${cardKey}:`, error)
+            }
+          })
+
+          await Promise.all(preloadPromises)
+          setIsCardsLoading(false)
+        }
+        preloadCards()
+      }
+    }
+  }, [skeletonArray, atlasArray, dispatch, cards, calculateOptimalView, MIN_CARD_WIDTH])
+
+  useEffect(() => {
+    if (!isAppReady) {
+      const initializeApp = async () => {
+        await initPixiApp()
+      }
+      initializeApp()
+    }
+  }, [isAppReady, initPixiApp])
+
+  useEffect(() => {
+    setShowCards(false)
+    setIsCardsLoading(true)
+    setIsAppReady(false)
+
+    if (shuffleRef.current && appRef.current?.stage) {
+      try {
+        if (appRef.current.stage.children.includes(shuffleRef.current)) {
+          appRef.current.stage.removeChild(shuffleRef.current)
+        }
+        shuffleRef.current.destroy()
+        shuffleRef.current = null
+      } catch (err) {
+        console.error('Error cleaning up shuffle:', err)
+      }
+    }
+
+    if (cardsContainerRef.current) {
+      try {
+        cardsContainerRef.current.removeChildren()
+      } catch (err) {
+        console.error('Error cleaning up cards container:', err)
+      }
+    }
+
+    const pixiManager = PixiAppManager.getInstance()
+    if (containerIdRef.current) {
+      pixiManager.removeApp(containerIdRef.current)
+      containerIdRef.current = ''
+    }
+
+    if (containerRef.current) {
+      containerRef.current.innerHTML = ''
+    }
+
+    appRef.current = null
+    cardsContainerRef.current = null
+
+    const initializeApp = async () => {
+      await initPixiApp()
+    }
+    initializeApp()
+  }, [matrix, cards, initPixiApp])
+
+  useEffect(() => {
+    if (isPreloadingFinish && isAppReady && !isFirstAnimationDone && !shuffleRef.current) {
+      const timeout = setTimeout(() => {
+        if (!shuffleRef.current) {
+          loadShuffle(0)
+        }
+      }, 100)
+
+      return () => clearTimeout(timeout)
+    }
+  }, [isPreloadingFinish, isAppReady, isFirstAnimationDone, loadShuffle])
+
+  useEffect(() => {
+    if (isFirstAnimationDone && shuffleRef.current && appRef.current?.stage) {
+      const fadeOutDuration = 250
+      const startTime = Date.now()
+
+      const fadeOut = () => {
+        const elapsed = Date.now() - startTime
+        const progress = Math.min(elapsed / fadeOutDuration, 1)
+
+        if (shuffleRef.current) {
+          shuffleRef.current.alpha = 1 - progress
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(fadeOut)
+        } else {
+          if (shuffleRef.current && appRef.current?.stage) {
+            appRef.current.stage.removeChild(shuffleRef.current)
+            shuffleRef.current.destroy()
+            shuffleRef.current = null
+          }
+        }
+      }
+
+      requestAnimationFrame(fadeOut)
+    }
+  }, [isFirstAnimationDone])
+
+  useEffect(() => {
+    if (!isAppReady) return
+    if (!matrix.length) return
+    if (!cards || Object.keys(cards).length === 0) return
+
+    if (isFirstAnimationDone && !showCards) {
+      // createCardsInstant()
+      createCardsReveal()
+      return
+    }
+  }, [
+    isAppReady,
+    matrix,
+    cards,
+    isFirstAnimationDone,
+    isCardsLoading,
+    showCards,
+    createCardsReveal,
+  ])
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (appRef.current && containerRef.current) {
+        appRef.current.renderer.resize(
+          containerRef.current.clientWidth,
+          containerRef.current.clientHeight
+        )
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+
+  // useEffect(() => {
+  //   return () => {
+  //     if (shuffleRef.current) {
+  //       try {
+  //         if (appRef.current?.stage) {
+  //           appRef.current.stage.removeChild(shuffleRef.current)
+  //         }
+  //         shuffleRef.current.destroy()
+  //         shuffleRef.current = null
+  //       } catch (e) {
+  //         console.error(e)
+  //       }
+  //     }
+
+  //     if (appRef.current) {
+  //       try {
+  //         if (appRef.current.stage) {
+  //           appRef.current.stage.removeChildren()
+  //         }
+  //         appRef.current.destroy(false)
+  //       } catch (err) {
+  //         console.error('Error destroying Pixi app', err)
+  //       }
+  //       appRef.current = null
+  //     }
+  //     cardsContainerRef.current = null
+  //     shuffleRef.current = null
+  //     setShowCards(false)
+  //   }
+  // }, [])
+
+  useEffect(() => {
+    return () => {
+      const pixiManager = PixiAppManager.getInstance()
+
+      if (containerIdRef.current) {
+        pixiManager.removeApp(containerIdRef.current)
+        containerIdRef.current = ''
+      }
+
+      appRef.current = null
+      cardsContainerRef.current = null
+      shuffleRef.current = null
+      setShowCards(false)
+    }
+  }, [])
+
+  const handleCloseCard = () => {
+    setSelectedCard(null)
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      className={`${styles.container} ${isDragging ? styles.dragging : styles.grab}`}
+      onMouseDown={(e) => {
+        setIsDragging(true)
+        if (cardsContainerRef.current) {
+          setDragStart({
+            x: e.clientX - cardsContainerRef.current.position.x,
+            y: e.clientY - cardsContainerRef.current.position.y
+          })
+        }
+      }}
+      onMouseMove={(e) => {
+        if (isDragging && cardsContainerRef.current) {
+          const newX = e.clientX - dragStart.x
+          const newY = e.clientY - dragStart.y
+          cardsContainerRef.current.position.set(newX, newY)
+        }
+      }}
+      onMouseUp={() => {
+        setIsDragging(false)
+      }}
+      onMouseLeave={() => {
+        setIsDragging(false)
+      }}
+      style={{
+        touchAction: 'none',
+        WebkitUserSelect: 'none',
+        userSelect: 'none',
+      }}
+    >
+      {selectedCard && (
+        <div className={styles.modal} onClick={handleCloseCard}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.close} onClick={handleCloseCard}>X</button>
+            <img src={selectedCard.image} alt={selectedCard.label} />
+            <h3>{selectedCard.label}</h3>
+            <p>{selectedCard.description}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+

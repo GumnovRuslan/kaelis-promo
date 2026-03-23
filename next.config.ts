@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         hostname: 'https://kaelisai.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'app.kaelisai.com',
+        pathname: '/image/**',
+      },
     ],
   },
   sassOptions: {

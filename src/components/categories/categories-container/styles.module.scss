@@ -1,0 +1,41 @@
+.container {
+    padding: fluid-size(20, 60, 375, 1920);
+    min-height: 100vh;
+    max-width: 1920px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+    @include media-down('sm') {
+        padding: fluid-size(16, 20, 375, 576);
+    }
+}
+
+.title {
+    color: var(--color-white);
+    font-size: fluid-size(24, 96, 375, 1920);
+    font-weight: 700;
+    margin-bottom: fluid-size(14, 36, 375, 1920);
+    text-align: center;
+
+    @include media-down('sm') {
+        font-size: fluid-size(20, 24, 375, 576);
+        margin-bottom: fluid-size(12, 14, 375, 576);
+    }
+}
+
+.description {
+    color: var(--color-text-white);
+    font-size: fluid-size(16, 24, 375, 1920);
+    line-height: 150%;
+    margin-bottom: fluid-size(30, 60, 375, 1920);
+    text-align: center;
+
+    @include media-down('sm') {
+        font-size: fluid-size(14, 16, 375, 576);
+        margin-bottom: fluid-size(20, 30, 375, 576);
+    }
+}
+
