@@ -11,10 +11,11 @@ import Animation from '../animation';
 type TProps = {
   children?: React.ReactNode;
   isShow: boolean;
+  className?: string;
   handlerClose: () => void;
 }
 
-const ModalWrapper = ({children, isShow = false, handlerClose} : TProps) => {
+const ModalWrapper = ({children, isShow = false, handlerClose, className} : TProps) => {
 
   useEffect(() => {
     disableBodyScroll({isDisabled: isShow, target: 'html'})
@@ -41,7 +42,7 @@ const ModalWrapper = ({children, isShow = false, handlerClose} : TProps) => {
                 exit={{ opacity: 0, y: 50 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
-                <div className={styles.modal}>
+                <div className={`${styles.modal} ${className}`}>
                   <div className={styles.modal__head}>
                     <CloseButton onClick={handlerClose} label={'Close modal'}/>
                   </div>
