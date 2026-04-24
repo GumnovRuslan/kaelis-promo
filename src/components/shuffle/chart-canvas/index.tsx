@@ -9,8 +9,11 @@ import { usePreloadingContext } from '@/context/animation'
 import { ChartCanvasProps, CardInfo } from './types'
 import styles from './styles.module.scss'
 import { flipCardPerspective } from './flip_card'
+import Image from 'next/image'
+import { CloseButton } from '@/components/ui'
+import { AnimatePresence, motion } from 'motion/react'
 
-const CARD_PADDING = 80
+const CARD_PADDING = 60
 
 const getCardSize = () => {
   if (typeof window === 'undefined') {
@@ -719,17 +722,36 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
         userSelect: 'none',
       }}
     >
-      {selectedCard && (
-        <div className={styles.modal} onClick={handleCloseCard}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.close} onClick={handleCloseCard}>X</button>
-            <img src={selectedCard.image} alt={selectedCard.label} />
-            <h3>{selectedCard.label}</h3>
-            <p>{selectedCard.description}</p>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {selectedCard && (
+          <ModalCard card={selectedCard} onClose={handleCloseCard} />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
 
+const ModalCard = ({ card, onClose }: { card: CardInfo, onClose: () => void }) => {
+  return (
+    <motion.div 
+      initial={{opacity: 0}} 
+      animate={{opacity: 1}} 
+      exit={{opacity: 0}} 
+      className={styles.modal} 
+      onClick={onClose}
+    >
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <CloseButton className={styles.close} onClick={onClose} label={'Close modal'}/>
+        <Image 
+          src={card.image} 
+          width={200} 
+          height={320} 
+          alt={card.label} 
+          priority
+        />
+        <h3>{card.label}</h3>
+        <p>{card.description}</p>
+      </div>
+    </motion.div>
+  )
+}

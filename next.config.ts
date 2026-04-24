@@ -3,7 +3,7 @@ import path from 'path';
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     formats: ['image/webp', 'image/avif'],
     remotePatterns: [

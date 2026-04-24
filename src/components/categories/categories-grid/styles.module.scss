@@ -8,11 +8,8 @@
     gap: fluid-size(12, 24, 375, 1920);
     margin-bottom: fluid-size(30, 60, 375, 1920);
 
-    @include media-down('xl') {
-        grid-template-columns: 1fr;
-    }
-
     @include media-down('sm') {
+        grid-template-columns: 1fr;
         gap: fluid-size(10, 12, 375, 576);
         margin-bottom: fluid-size(20, 30, 375, 576);
     }

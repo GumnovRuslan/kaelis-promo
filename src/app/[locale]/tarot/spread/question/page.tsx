@@ -57,8 +57,11 @@ export default function SpreadDetailPage() {
           </p>
         )}
 
-        <ReaderStyleSelector />
-        <Chat />
+        <div className={styles.content} >
+          <ReaderStyleSelector />
+          <Chat />
+        </div>
+        
       </div>
     </section>
   )

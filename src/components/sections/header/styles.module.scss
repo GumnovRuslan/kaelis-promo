@@ -24,12 +24,15 @@
 
   &__menu {
     display: flex;
-    align-items: center;
-    gap: 8px;
     list-style: none;
     padding: 0;
     margin: 0;
     transition: left 0.3s linear;
+
+    @include media-up('md') {
+      align-items: center;
+      gap: 8px;
+    }
 
     @include media_down('md') {
       position: fixed;
@@ -41,7 +44,7 @@
       height: 100vh;
       background: linear-gradient(180deg, #999FDA 0%, #CFA2F0 100%);
       flex-direction: column;
-      gap: 10px;
+      gap: 26px;
       padding: 90px 30px 30px;
     }
 
@@ -75,6 +78,7 @@
     color: var(--color-text-primary);
 
     @include media_down('md') {
+      font-weight: 600;
       color: var(--color-text-primary-700);
       font-size: 24px;
     }

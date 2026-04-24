@@ -9,6 +9,7 @@ export interface TarotCategory {
   name: string
   image?: string
   description?: string
+  site_description?: string
 }
 
 export interface TarotCard {
