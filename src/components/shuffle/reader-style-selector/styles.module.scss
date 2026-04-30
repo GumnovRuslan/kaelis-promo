@@ -1,34 +1,26 @@
 .container {
   display: flex;
   flex-direction: column;
+  gap: fluid-size(12, 20);
   width: 100%;
-  max-width: 100%;
-  gap: fluid-size(0.75rem, 1rem, 375, 1920);
-  margin-top: fluid-size(0.5rem, 0.75rem, 375, 1920);
-  box-sizing: border-box;
 
   @include media-down('sm') {
-    gap: fluid-size(0.5rem, 0.75rem, 375, 576);
+    width: 100%;
   }
 }
 
 .label {
   color: white;
-  font-size: fluid-size(14, 28, 375, 1920);
-  font-weight: 400;
-  margin-bottom: 12px;
-
-  @include media-down('sm') {
-    font-size: fluid-size(12, 14, 375, 576);
-  }
+  font-weight: 300;
+  font-size: fluid-size(12, 28);
 }
 
 .grid {
   display: flex;
-  gap: fluid-size(8, 16, 375, 1920);
+  // max-width: 1000px;
+  margin: 0 auto;
+  gap: fluid-size(8, 16);
   width: 100%;
-  height: fluid-size(80,240);
-  box-sizing: border-box;
   justify-items: center;
   justify-content: space-between;
 }

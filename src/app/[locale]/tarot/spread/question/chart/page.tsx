@@ -27,12 +27,11 @@ export default function ChartPage() {
         <div className={styles.section__header}>
           <ButtonBack  href={`/tarot/spread/question`} text={t('buttons.back')}/>
           <Breadcrumbs data={breadcrumbsData} lastActive/>
-          {question && (<p className={styles.userQuestion}>{question}</p>)}
+          {selectedSpread.data?.description && (
+            <p className={styles.description}>{selectedSpread.data?.description}</p>
+          )}
+          {question && (<p className={styles.userQuestion}>Вопрос: {question}</p>)}
         </div>
-
-        {selectedSpread.data?.description && (
-          <p className={styles.description}>{selectedSpread.data?.description}</p>
-        )}
 
         <Chart/>
       </div>

@@ -17,7 +17,7 @@ import { ModalLimitProvider } from "@/context/modalLimit";
 const geistInter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["300", "400", "600", "700"],
 });
 
 export function generateStaticParams() {

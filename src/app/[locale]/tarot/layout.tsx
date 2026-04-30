@@ -13,9 +13,9 @@ const  LayoutCategories = ({children}: {children: React.ReactNode}) => {
   return (
     <Provider store={store}>
       <PersistGate loading={<Loader text={t('load')}/>} persistor={persistor}>
-      <WebsocketProvider>
+      {/* <WebsocketProvider> */}
         {children}
-      </WebsocketProvider>
+      {/* </WebsocketProvider> */}
       </PersistGate>
     </Provider>
   )

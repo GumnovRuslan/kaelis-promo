@@ -62,18 +62,21 @@
         display: flex;
         max-width: 100%;
         flex-direction: column;
+        gap: fluid-size(8, 12, 375, 1920);
     }
 
     &__title {
         color: var(--color-white);
-        font-size: fluid-size(16, 36, 375, 1920);
-        font-weight: 700;
-        margin-bottom: fluid-size(8, 12, 375, 1920);
+        line-height: 120%;
+        font-size: fluid-size(14, 32);
+        font-weight: 600;
+        hyphens: auto;
     }
 
     &__description {
         color: rgb(255, 255, 255, 0.7);
-        font-size: fluid-size(14, 18, 375, 1920);
+        line-height: 130%;
+        font-size: fluid-size(12, 20, 375, 1920);
         text-wrap:wrap;
     }
 

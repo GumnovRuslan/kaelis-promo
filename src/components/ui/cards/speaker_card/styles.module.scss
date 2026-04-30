@@ -7,16 +7,16 @@
   gap: fluid-size(5, 10);
   background: #1F1D2E;
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid #D4A2F240;
   cursor: pointer;
   transition: all 0.3s;
   border-radius: fluid-size(10, 15, 375, 1920);
   overflow: hidden;
   flex: 1;
+  width: fluid-size(100, 200);
+  aspect-ratio: 1/1;
 
   @include media-down('sm') {
-    max-width: 80px;
-    max-height: 80px;
     padding: fluid-size(6, 8, 375, 576);
     font-size: fluid-size(9, 10, 375, 576);
   }

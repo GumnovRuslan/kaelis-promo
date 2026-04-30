@@ -128,7 +128,7 @@ export default function Chart() {
 
         <Button
           as='link'
-          href='/categories'
+          href='/tarot'
           onClick={handleNewReading}
           className={styles.newReadingButton}
           text={t('buttons.new_reading')}

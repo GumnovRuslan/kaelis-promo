@@ -77,21 +77,28 @@ export function Chat({ isVisible = true}: ChatProps) {
   return (
     <div className={styles.container}>
       <label className={styles.label}>{t('chat.title')}</label>
-      <textarea
-        value={question || ''}
-        onChange={handleQuestionChange}
-        placeholder={t('chat.placeholder')}
-        className={styles.textarea}
-        style={{ lineHeight: '1.5' }}
-      />
-      <p className={`${styles.error} ${error && styles.error_hidden}`}>{error}</p>
+      <div className={styles.chatContainer}>
+        <textarea
+          value={question || ''}
+          onChange={handleQuestionChange}
+          placeholder={t('chat.placeholder')}
+          className={styles.textarea}
+          style={{ lineHeight: '1.5' }}
+        />
 
-      <Button 
-        as='button' 
-        onClick={handleGetReading}
-        className={`${styles.button} ${isDisabled ? styles.disabled : ''}`} 
-        text={t('buttons.chat_get_reading')} 
-      />
+        {error && (
+          <p className={`${styles.error} ${error && styles.error_hidden}`}>{error}</p>
+        )}
+
+        <Button 
+          as='button' 
+          onClick={handleGetReading}
+          className={`${styles.button} ${isDisabled ? styles.disabled : ''}`} 
+          text={t('buttons.chat_get_reading')} 
+          disabled={isDisabled}
+        />
+      </div>
+      
     </div>
   )
 }

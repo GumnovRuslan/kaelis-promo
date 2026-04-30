@@ -32,7 +32,7 @@ export function CategoryCard({ id, name, description, image, href, onClick }: Ca
             )}
           </div>
 
-          <Button className={styles.card__select} text={t('buttons.select')}/>
+          {/* <Button className={styles.card__select} text={t('buttons.select')}/> */}
         </div>
       </div>
     </Link>

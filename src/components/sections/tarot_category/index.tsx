@@ -27,7 +27,7 @@ const TarotCategorySection = ({categories}: TProps) => {
             key={category.id}
             id={String(category.id)}
             name={category.name}
-            description={category.description}
+            description={category.site_description}
             image={category.image}
             href={`/tarot/spread`}
             onClick={() => onClickSelectCategory(category)}
