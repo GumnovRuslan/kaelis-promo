@@ -37,10 +37,10 @@ export function Chat({ isVisible = true}: ChatProps) {
       return
     }
 
-    if (!allowed) {
-      openModal()
-      return
-    }
+    // if (!allowed) {
+    //   openModal()
+    //   return
+    // }
     try {
     if(!selectedCategory.data?.id || !selectedSpread.data?.id || !readerStyle.data?.id) return
       
@@ -56,7 +56,7 @@ export function Chat({ isVisible = true}: ChatProps) {
       if(result.meta.requestStatus === "rejected") {
         setError(result.payload as string)
       } else {
-        incrementTarotLimit(key!)
+        // incrementTarotLimit(key!)
         router.push('/tarot/spread/question/chart')
       }
     } catch (error) {
