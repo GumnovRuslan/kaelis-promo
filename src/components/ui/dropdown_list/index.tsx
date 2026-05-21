@@ -1,5 +1,5 @@
 import styles from './styles.module.scss'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation';
 import type { TarotCategory } from '@/lib/types/shuffle';
 
 type TProps = {

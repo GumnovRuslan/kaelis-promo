@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCookieConsent } from "@/context/CookieConsentContext";
-import { useEnableAnalytics } from "@/hooks/useEnableAnalytics";
+// import { useEnableAnalytics } from "@/hooks/useEnableAnalytics";
 import { useDynamicScript } from "@/hooks/useDynamicScript";
 import { GA_ID, pageview } from "@/lib/analytics/ga";
 
@@ -17,7 +17,15 @@ export default function AnalyticsManager() {
   const marketingEnabled = Boolean(consent?.marketing);
 
   // --- Google Analytics ---
-  useEnableAnalytics(analyticsEnabled, { gaId: GA_ID });
+  // useEnableAnalytics(analyticsEnabled, { gaId: GA_ID });
+  useDynamicScript(Boolean(analyticsEnabled && GA_ID),
+  'ga-script', 
+  `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`, 
+  `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${GA_ID}', { page_path: window.location.pathname });`
+    )
 
   // --- Microsoft Clarity ---
   const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;

@@ -1,36 +1,13 @@
 import { ArticlePage } from "@/components/pages";
 import { getArticle, getArticleSeo } from "@/graphql/queries/articles";
 import { fetchGraphQL } from "@/lib/graphql";
+import { TPageProps } from "@/types";
 import { TArticle, TArticleSeo } from "@/types/articles";
+import { parseSlug } from "@/utils/parseSlug";
 import seoToMetadata from "@/utils/seoToMetadata";
 import { redirect } from 'next/navigation'
 
-type PageProps = {
-  params: Promise<{ slug: string, locale: string }>
-}
-
-const LOCALES = ['ru', 'en', 'ua'] as const
-
-type Locale = typeof LOCALES[number]
-
-const parseSlug = (slug: string) => {
-  const parts = slug.split('-')
-  const lastPart = parts.at(-1)
-
-  if (LOCALES.includes(lastPart as Locale)) {
-    return {
-      baseSlug: parts.slice(0, -1).join('-'),
-      lang: lastPart as Locale
-    }
-  }
-
-  return {
-    baseSlug: slug,
-    lang: null
-  }
-}
-
-export const generateMetadata = async ({ params }: PageProps) => {
+export const generateMetadata = async ({ params }: TPageProps) => {
   const { slug, locale } = await params
   const { lang } = parseSlug(slug)
 
@@ -41,7 +18,7 @@ export const generateMetadata = async ({ params }: PageProps) => {
   if (seo) return seoToMetadata(seo, `articles/${slug}`)
 }
 
-const Article = async ({params}: PageProps) =>  {
+const Article = async ({params}: TPageProps) =>  {
   const { slug, locale } = await params;
   const {baseSlug, lang} = parseSlug(slug)
   let article: TArticle | null = null

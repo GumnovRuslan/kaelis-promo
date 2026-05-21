@@ -1,3 +1,13 @@
+export const getArticlesSlug = (lang: string = 'en') => `
+  query {
+  allArticlesItem(where: { language: { eq: "${lang}" } }) {
+    slug { current }
+    _createdAt
+    _updatedAt
+  }
+}
+`;
+
 export const getArticles = (lang: string = 'en') => `
   query {
   allArticlesItem(where: { language: { eq: "${lang}" } }) {

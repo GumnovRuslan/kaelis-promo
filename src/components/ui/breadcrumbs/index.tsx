@@ -16,7 +16,7 @@ const Breadcrumbs = ({data, className, lastActive = false}: TProps) => {
     <div className={`${styles.bread} ${className}`}>
       {data.map((item, i) => (
         <Fragment key={i}>
-          <Link href={item?.url ?? ''} className={`${styles.bread__link} ${!lastActive && styles[`bread__link--disable`]}`} >
+          <Link href={item?.url ?? ''} className={`${styles.bread__link} ${(!lastActive && data.length-1 == i) && styles[`bread__link--disable`]}`} >
             {item?.label}
           </Link>
           {i+1 < data.length && (

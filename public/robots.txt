@@ -34,4 +34,4 @@ Disallow: /en/download-from-store
 Disallow: /ru/download-from-store
 Disallow: /ua/download-from-store
 
-Sitemap: https://www.kaelisai.com
+Sitemap: https://kaelisai.com/sitemap.xml

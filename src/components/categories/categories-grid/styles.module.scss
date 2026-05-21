@@ -7,6 +7,7 @@
     max-width: fluid-size(380, 1660, 375, 1920);
     gap: fluid-size(12, 24, 375, 1920);
     margin-bottom: fluid-size(30, 60, 375, 1920);
+    margin: 0 auto;
 
     @include media-down('sm') {
         grid-template-columns: 1fr;

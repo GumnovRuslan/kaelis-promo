@@ -16,37 +16,50 @@
     font-size: 24px;
 }
 
-.header {
+.spreads {
+  padding: fluid-size(20, 60, 375, 1920);
+  max-width: 1920px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-bottom: 20px;
+  margin: 0 auto;
 
-  &__title {
+  @include media-down('sm') {
+    padding: fluid-size(16, 20, 375, 576);
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  &__header_title {
     color: var(--color-white);
     font-size: fluid-size(16, 36);
     font-weight: 700;
-    text-align: center;
 
     @include media-down('sm') {
-        font-size: fluid-size(20, 24, 375, 576);
-        margin-bottom: fluid-size(4, 6, 375, 576);
+      font-size: fluid-size(20, 24, 375, 576);
     }
   }
 
-  &__description {
+  &__header_description {
     color: var(--color-text-white);
     font-size: fluid-size(14, 32, 375, 1920);
     line-height: 150%;
-    margin-bottom: fluid-size(20, 60, 375, 1920);
-    text-align: start;
 
     @include media-down('sm') {
-        font-size: fluid-size(12, 14, 375, 576);
-        margin-bottom: fluid-size(16, 20, 375, 576);
+      font-size: fluid-size(12, 14, 375, 576);
     }
   }
+
+  &__content {
+    
+  }
 }
+
+
 
 
 

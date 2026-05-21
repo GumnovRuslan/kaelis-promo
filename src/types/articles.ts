@@ -30,6 +30,14 @@ export type TArticlePreview = {
   coverImage: TImage
 }
 
+export type TArticlesSlug = {
+  slug: {
+    current: string
+  };
+  _createdAt: string;
+  _updatedAt: string;
+}
+
 export type TArticle = {
   title: string;
   desc: string;

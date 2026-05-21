@@ -58,7 +58,10 @@ export const generateMetadata = async ({ params }: { params: Promise<{ locale: s
         'ru': `${baseUrl}/ru`,
       }
     },
-    category: "Lifestyle"
+    category: "Lifestyle",
+    verification: {
+      google: 'g-jH6mhfzaLWhtC-UJdgtCxQA1kFZ06dp-Vqyn5w5zQ'
+    }
   }
 }
 

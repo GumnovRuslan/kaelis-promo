@@ -11,17 +11,26 @@ import { ButtonBack, Breadcrumbs } from '@/components/ui'
 
 export default function SpreadDetailPage() {
   const t = useTranslations('CategoriesPage')
+  const b = useTranslations('breadcrumbs')
   const locale = useLocale()
   const dispatch = useAppDispatch()
   const {categories, selectedCategory, selectedSpread, isLoading} = useAppSelector(state => state.shuffle)
   const BREADCRUMBS_DATA = [
     {
-      label: selectedCategory.data?.name ?? '',
+      label: b('home'),
+      url: '/'
+    },
+    {
+      label: b('tarot'),
       url: '/tarot'
     },
     {
-      label: selectedSpread.data?.name ?? '',
+      label: selectedCategory.data?.name ?? '',
       url: '/tarot/spread'
+    },
+    {
+      label: selectedSpread.data?.name ?? '',
+      url: '/tarot/spread/question'
     }
   ]
 
@@ -48,7 +57,7 @@ export default function SpreadDetailPage() {
         
         <div className={styles.section__header}>
           <ButtonBack  href={`/tarot/spread`} text={t('buttons.back')}/>
-          <Breadcrumbs data={BREADCRUMBS_DATA} lastActive/>
+          <Breadcrumbs data={BREADCRUMBS_DATA} />
         </div>
 
         {selectedSpread.data?.description && (

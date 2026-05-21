@@ -2,15 +2,22 @@ import { fetchGraphQL } from "@/lib/graphql";
 import { getPolicy } from "@/graphql/queries/policy";
 import { TPolicy } from "@/types/policy";
 import { NotFoundPage, PolicyPage } from "@/components/pages";
+import { parseSlug } from "@/utils/parseSlug";
+import { redirect } from 'next/navigation'
+import { TPageProps } from "@/types";
 
-type PageProps = {
-  params: Promise<{ slug: string }>
-}
+const Policy = async ({params}: TPageProps) =>  {
+  const { slug, locale } = await params;
+  const {baseSlug, lang} = parseSlug(slug[0])
 
-const Policy = async ({params}: PageProps) =>  {
-  const { slug } = await params;
-  const { data, errors } = await fetchGraphQL(getPolicy(slug[0]));
-  const policy: TPolicy | null = data?.allPolicy?.[0] || null
+  let policy: TPolicy | null = null
+
+  if(lang !== locale) {
+    redirect(`/policy/${baseSlug}-${locale}`)
+  } else {
+    const { data, errors } = await fetchGraphQL(getPolicy(`${baseSlug}-${locale}`));
+    policy = data?.allPolicy?.[0] || null
+  }
 
   if(!policy) return <NotFoundPage />
   

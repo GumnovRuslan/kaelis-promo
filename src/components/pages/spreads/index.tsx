@@ -1,22 +1,40 @@
 'use client'
 
+import styles from './styles.module.scss'
+
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector, shuffleActions } from '@/store'
-import { CategoryCard, CategoriesGrid, CategoryDetailContainer, CategoriesContainer } from '@/components/categories'
-import styles from './styles.module.scss'
+import { CategoryCard, CategoriesGrid } from '@/components/categories'
 import { useLocale, useTranslations } from 'next-intl'
 import { TarotCard } from '@/lib/types/shuffle'
-import { ButtonBack } from '@/components/ui'
+import { Breadcrumbs, ButtonBack } from '@/components/ui'
 import { Loader } from '@/components/sections'
 import { useSearchParams } from 'next/navigation'
+import { TBreadcrumbs } from '@/types/breadcrumbs'
 
 export default function SpreadsPage() {
   const locale = useLocale()
   const t = useTranslations('CategoriesPage')
+  const b = useTranslations('breadcrumbs')
   const dispatch = useAppDispatch()
   const {selectedCategory, categories, spreads, isLoading} = useAppSelector(state => state.shuffle)
   const searchParams = useSearchParams();
   const categoryId = searchParams.get('id');
+
+  const breadcrumbsData: TBreadcrumbs[] = [
+      {
+        label: b('home'),
+        url: '/'
+      },
+      {
+        label: b('tarot'),
+        url: '/tarot'
+      },
+      {
+        label: selectedCategory.data?.name ?? '',
+        url: '/tarot/spread'
+      }
+    ]
 
   const handleSelectSpread = (spread: TarotCard) => {
     if(!spreads.data || !spreads.lang) return
@@ -47,12 +65,15 @@ export default function SpreadsPage() {
   }
 
   return (
-    <CategoryDetailContainer>
-      <div className={styles.header}>
+    <section className={styles.spreads}>
+
+      <div className={styles.spreads__header}>
+        <Breadcrumbs data={breadcrumbsData} className={styles.spreads__breadcrumbs}/>
         <ButtonBack href={"/tarot"} text={t('buttons.back')}/>
-        {selectedCategory.data?.name && <h1 className={styles.header__title}>{selectedCategory.data.name}</h1>}
-        {selectedCategory.data?.description && <p className={styles.heder__description}>{selectedCategory.data.description}</p>}
+        {selectedCategory.data?.name && <h1 className={styles.spreads__header_title}>{selectedCategory.data.name}</h1>}
+        {selectedCategory.data?.description && <p className={styles.spreads__heder_description}>{selectedCategory.data.description}</p>}
       </div>
+
       {!selectedCategory.data 
         ? <Loader text={t('loader.categoryNotFound')}/> 
         : (!spreads.data || !spreads.data.length) 
@@ -72,6 +93,6 @@ export default function SpreadsPage() {
             ))}
           </CategoriesGrid>
        )}
-    </CategoryDetailContainer>
+    </section>
   )
 }
