@@ -1,13 +1,12 @@
+import "@/styles/index.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Background } from "@/components/ui";
 import { ModalProvider } from "@/context/modal";
 import { Header, Footer, Modal, ModalLimit } from "@/components/sections";
 import { NextIntlClientProvider } from 'next-intl';
-import { routing } from '@/i18n/routing';
+import { locales } from '@/i18n/routing';
 import { getTranslations } from "next-intl/server";
-import "@/styles/index.scss";
-import '@/styles/root.scss';
 import { CookieConsentProvider } from "@/context/CookieConsentContext";
 import Cookie from "@/components/sections/cookie";
 import AnalyticsManager from "@/components/sections/analytics_manager/AnalyticsManager";
@@ -21,7 +20,7 @@ const geistInter = Inter({
 });
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return locales.map((locale) => ({ locale }));
 }
 
 export const generateMetadata = async ({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> => {

@@ -1,12 +1,11 @@
 import { InstagramIcon, TikTokIcon, TwitterIcon } from '@/components/icons';
+import { locales } from '@/i18n/routing';
+
+type Locale = (typeof locales)[number];
 
 type TNetworkItem = {
   name: string;
-  href: {
-    en: string;
-    ru: string;
-    ua: string;
-  };
+  href: Record<Locale, string>;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
@@ -29,19 +28,10 @@ const NETWORK: TNetworkItem[] = [
     },
     icon: TikTokIcon
   },
-  // {
-  //   name: 'Twitter',
-  //   href: {
-  //     en: '/',
-  //     ru: '/',
-  //     ua: '/',
-  //   },
-  //   icon: TwitterIcon
-  // }
 ]
 
 type TSocialProps = {
-  lang: 'en' | 'ru' | 'ua'
+  lang: Locale
 }
 
 export const getSocialData = ({lang}: TSocialProps) => {

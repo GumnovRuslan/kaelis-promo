@@ -17,7 +17,7 @@
 }
 
 .spreads {
-  padding: fluid-size(20, 60, 375, 1920);
+  padding: fluid-size(20, 60) fluid-size(20, 130);
   max-width: 1920px;
   display: flex;
   flex-direction: column;

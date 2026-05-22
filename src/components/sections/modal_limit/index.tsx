@@ -39,17 +39,26 @@ export default function ModalLimit() {
   )
 }
 
-function AppStoreQR({name, platform, qr_code_src, link}: TStores) {
+function AppStoreQR({name, platform, qr_code, link}: TStores) {
   const buttonType = 
   (platform === 'ios') ? 'app' : 
   (platform === 'android') ? 'google' : null
   return (
     <div className={styles.store}>
       <span className={styles.store__title}>{name}</span>
-      <span className={styles.store__qr_image}></span>
-      {/* <Image src={qr_code_src}/> */}
+
+      {qr_code ? (
+        <Image className={styles.store__qr_image} src={qr_code.src} width={500} height={500} alt={qr_code.alt}/>
+      ) : (
+        <span className={styles.store__qr_image}></span>
+      )}
+      
       <div className={styles.store__link_container}>
-        {/* <Link className={styles.store__link} target='_blank' href={link.href}>{link.href}</Link> */}
+        {/* {link && (
+          <Link className={styles.store__link} target='_blank' href={link.href}>
+            {link.href}
+          </Link>
+        )} */}
         {buttonType && <ButtonStore type={buttonType}/>}
       </div>
     </div>

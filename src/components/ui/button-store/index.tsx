@@ -3,9 +3,9 @@
 import styles from './styles.module.scss';
 
 import Button from '../button';
-import { AppleStoreIcon, GooglePlayIcon } from '@/components/icons';
 import React from 'react';
 import { useModalContext } from '@/context/modal';
+import { STORES } from '@/lib/config/stores';
 
 type StoreType = 'app' | 'google';
 
@@ -13,20 +13,22 @@ type TButton = {
   icon: React.ReactNode;
   text: string;
   title: string;
-  href?: string;
+  href?: string | null;
 };
 
 const BUTTONS_DATA: Record<StoreType, TButton> = {
   app: {
-    icon: <AppleStoreIcon />,
+    icon: STORES.ios?.icon,
     text: 'Download on',
     title: 'App Store',
+    href: STORES.ios?.link?.href,
   },
+
   google: {
-    icon: <GooglePlayIcon />,
+    icon: STORES.android?.icon,
     text: 'Get on',
     title: 'Google Play',
-    // href: 'https://play.google.com/store/search?q=Kaelis&c=apps&hl=ru',
+    href: STORES.android?.link?.href,
   },
 };
 
@@ -52,7 +54,7 @@ const ButtonStore = ({ type, className }: TProps) => {
   };
 
   return button?.href ? (
-    <Button as={'link'} href={button.href} className={`${styles.button} ${className}`} onClick={handleClick}>
+    <Button as={'link'} href={button.href} target='_blank' className={`${styles.button} ${className}`} onClick={handleClick}>
       <InnerButton {...button}/>
     </Button>
   ) : (

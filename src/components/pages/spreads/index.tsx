@@ -68,8 +68,8 @@ export default function SpreadsPage() {
     <section className={styles.spreads}>
 
       <div className={styles.spreads__header}>
-        <Breadcrumbs data={breadcrumbsData} className={styles.spreads__breadcrumbs}/>
         <ButtonBack href={"/tarot"} text={t('buttons.back')}/>
+        <Breadcrumbs data={breadcrumbsData} className={styles.spreads__breadcrumbs}/>
         {selectedCategory.data?.name && <h1 className={styles.spreads__header_title}>{selectedCategory.data.name}</h1>}
         {selectedCategory.data?.description && <p className={styles.spreads__heder_description}>{selectedCategory.data.description}</p>}
       </div>

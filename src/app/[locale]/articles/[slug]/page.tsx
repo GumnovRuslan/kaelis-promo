@@ -1,7 +1,7 @@
 import { ArticlePage } from "@/components/pages";
 import { getArticle, getArticleSeo } from "@/graphql/queries/articles";
 import { fetchGraphQL } from "@/lib/graphql";
-import { TPageProps } from "@/types";
+import { TPageProps } from "@/types/page";
 import { TArticle, TArticleSeo } from "@/types/articles";
 import { parseSlug } from "@/utils/parseSlug";
 import seoToMetadata from "@/utils/seoToMetadata";

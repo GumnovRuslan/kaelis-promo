@@ -9,4 +9,5 @@ export type TPolicy = {
   }
   language: string
   contentRaw: PortableTextBlock[]
+  _updatedAt: string;
 }

@@ -4,7 +4,7 @@ import { TPolicy } from "@/types/policy";
 import { NotFoundPage, PolicyPage } from "@/components/pages";
 import { parseSlug } from "@/utils/parseSlug";
 import { redirect } from 'next/navigation'
-import { TPageProps } from "@/types";
+import { TPageProps } from "@/types/page";
 
 const Policy = async ({params}: TPageProps) =>  {
   const { slug, locale } = await params;

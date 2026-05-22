@@ -2,8 +2,9 @@ import { getArticlesSlug } from "@/graphql/queries/articles";
 import { fetchGraphQL } from "@/lib/graphql";
 import { MetadataRoute } from "next";
 import { locales } from "@/i18n/routing";
-import { TArticlesSlug } from "@/types/articles";
 import { parseSlug } from "@/utils/parseSlug";
+import { getPolicies } from "@/graphql/queries/policy";
+import type { TArticlesSlug, TPolicy } from "@/types";
 
 const baseUrl = "https://kaelisai.com";
 
@@ -12,6 +13,8 @@ const staticRoutes = [
   "/tarot",
   "/articles",
   "/contacts",
+  "/faq",
+  "/download-from-store",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -21,6 +24,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       fetchGraphQL(getArticlesSlug(locale))
     )
   );
+
+  // Загрузка политик и правил для всех языков
+  const policyResponses = await Promise.all(
+    locales.map((locale) => 
+      fetchGraphQL(getPolicies(locale))
+    )
+  )
 
   const sitemap: MetadataRoute.Sitemap = [];
 
@@ -61,6 +71,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           //     uk: `${baseUrl}/ua/articles${baseSlug}-ua`,
           //   },
           // },
+        });
+      });
+  });
+
+  // Политики и правила
+  policyResponses.forEach((response, id) => {
+    const locale = locales[id];
+    const articles: TPolicy[] = response?.data?.allPolicy ?? [];
+
+    articles
+      .filter((policy) => policy?.slug?.current)
+      .forEach((policy) => {
+        sitemap.push({
+          url: `${baseUrl}/${locale}/policy/${policy.slug.current}`,
+          lastModified: policy?._updatedAt
+            ? new Date(policy._updatedAt)
+            : new Date(),
+          changeFrequency: "weekly",
+          priority: 0.8,
         });
       });
   });
