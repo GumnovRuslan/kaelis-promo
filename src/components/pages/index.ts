@@ -6,6 +6,7 @@ import ArticlePage from "./article";
 import ContactsPage from "./contact";
 import CategoriesPage from "./categories";
 import SpreadsPage from "./spreads";
+import ChartPage from "./chart";
 
 export { 
   HomePage, 
@@ -16,4 +17,5 @@ export {
   ContactsPage,
   CategoriesPage,
   SpreadsPage,
+  ChartPage,
 };

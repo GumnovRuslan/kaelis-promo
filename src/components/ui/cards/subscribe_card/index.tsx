@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { getLocale } from 'next-intl/server';
-import { getSocialData } from '@/lib/social_data';
+import { getSocialData } from '@/lib/config/social_links';
 
 const SubscribeCard = async () => {
   const t = useTranslations('HomePage.aboutApp.cards.subscribe');

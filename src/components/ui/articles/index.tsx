@@ -18,7 +18,7 @@ const Articles = ({ articles, mirror = false, categoryIsShow = false}: TProps) =
         const isImage = article.coverImage?.image?.asset.url
         return (
         <Link 
-          href={'articles'+ article.slug?.current || '#'} 
+          href={'/articles'+ article.slug?.current || '#'} 
           className={`${styles.article} ${isImage ? styles["article--image"] : ''}`} 
           key={i}
         >

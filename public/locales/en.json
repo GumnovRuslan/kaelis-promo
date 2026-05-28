@@ -284,16 +284,28 @@
   "footer": {
     "desc": "Mobile app for receiving personalized predictions from AI, studying Tarot and astrology. Unlock the secrets of the Universe right on your phone",
     "nav": {
-      "home": "Home",
-      "articles": "Articles",
-      "contacts": "Contacts",
-      "faq": "FAQ",
-      "privacy-policy": "Privacy Policy",
-      "subscription-policy": "Refund & Subscription Policy",
-      "end-user-license-agreement": "End-User License Agreement",
-      "content-policy": "Content Policy",
-      "terms-of-use": "Terms of Use",
-      "children-privacy-policy": "Children’s Privacy Policy"
+      "main": [
+        {
+          "label": "Home",
+          "href": "/"
+        },
+        {
+          "label": "Articles",
+          "href": "/articles"
+        },
+        {
+          "label": "Contacts",
+          "href": "/contacts"
+        },
+        {
+          "label": "FAQ",
+          "href": "/faq"
+        },
+        {
+          "label":"Tarot spreads",
+          "href": "/tarot"
+        }
+      ]
     }
   },
   "DownloadFromStore" : {
@@ -976,5 +988,9 @@
       "description_2": "In the app, you will be able to get more spreads, save results and return to them at any time.",
       "description_3": "Scan the code or follow the link"
     }
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "tarot": "Categories"
   }
 }

@@ -7,16 +7,25 @@ import { useAppSelector } from '@/store';
 
 export default function ChartPage() {
   const t = useTranslations('CategoriesPage')
+  const b = useTranslations('breadcrumbs')
   const {question, selectedCategory, selectedSpread} = useAppSelector(state => state.shuffle)
 
   const breadcrumbsData = [
     {
-      label: selectedCategory.data?.name ?? '',
+      label: b('home'),
+      url: '/'
+    },
+    {
+      label: b('tarot'),
       url: '/tarot'
     },
     {
-      label: selectedSpread.data?.name ?? '',
+      label: selectedCategory.data?.name ?? '',
       url: '/tarot/spread'
+    },
+    {
+      label: selectedSpread.data?.name ?? '',
+      url: '/tarot/spread/question'
     }
   ]
 

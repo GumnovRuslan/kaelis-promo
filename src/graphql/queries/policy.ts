@@ -5,6 +5,7 @@ export const getPolicies = (lang: string = 'en') => `
       title
       slug {current}
       language
+      _updatedAt
     }
   }
 `;

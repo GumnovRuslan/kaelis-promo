@@ -38,6 +38,7 @@
 .store {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: fluid-size(10, 15);
 
   &__title {

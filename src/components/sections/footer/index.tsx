@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { ButtonStore } from '@/components/ui';
 import { getLocale, getTranslations } from 'next-intl/server';
-import { getSocialData } from '@/lib/social_data';
+import { getSocialData } from '@/lib/config/social_links';
 import { TPolicy } from '@/types/policy';
 import { fetchGraphQL } from '@/lib/graphql';
 import { getPolicies } from '@/graphql/queries/policy';
@@ -13,21 +13,10 @@ const Footer = async () => {
   const locale = await getLocale()
   const social = getSocialData({lang: locale as 'en' | 'ru' | 'ua'});
   const t = await getTranslations('footer')
+
   const { data, errors } = await fetchGraphQL(getPolicies(locale));
   const policies: TPolicy[] | null = data?.allPolicy || null
-
-  const navKeysLeft = [
-    'home', 
-    'articles', 
-    'contacts', 
-    'faq', 
-  ] as const;
-
-  const navItemsLeft = navKeysLeft.map((key) => ({
-    key,
-    label: t(`nav.${key}`),
-    href: `/${key === 'home' ? '' : key}`
-  }));
+  const navItemsMain = t.raw('nav.main')
 
   return (
     <footer className={styles.footer}>
@@ -42,16 +31,24 @@ const Footer = async () => {
             <ButtonStore type='google'/>
           </div>
         </div>
+
         <div className={styles.footer__nav_columns}>
-          <nav className={styles.footer__nav}>
-            {navItemsLeft.map((item, i) => (
-              <Link href={item.href} className={styles.footer__nav_link} key={i}>{item.label}</Link>
-            ))}
-          </nav>
+          {navItemsMain?.length && (
+            <nav className={styles.footer__nav}>
+              {navItemsMain.map((nav: {label: string; href: string}, i: number) => (
+                <Link href={nav.href} className={styles.footer__nav_link} key={i}>
+                  {nav.label}
+                </Link>
+              ))}
+            </nav>
+          )}
+
           {policies?.length && (
             <nav className={styles.footer__nav}>
               {policies.map(item => (
-                <Link href={'/policy/' + item.slug.current} className={styles.footer__nav_link} key={item._id}>{item.title}</Link>
+                <Link href={'/policy/' + item.slug.current} className={styles.footer__nav_link} key={item._id}>
+                  {item.title}
+                </Link>
               ))}
             </nav>
           )}

@@ -3,12 +3,24 @@ import { TArticle } from '@/types/articles';
 import { ButtonShare, Breadcrumbs, ArticleCategory } from '@/components/ui';
 import { ptComponents } from '@/utils/portableTextComponents';
 import { PortableText } from '@portabletext/react';
+import type { TBreadcrumbs } from '@/types';
 
 type TProps = {
   data: TArticle
 } 
 
+// последнемму элементу добавляем /articles
+const updatedBreadcrumbs = (breadcrumbs: TBreadcrumbs[]) => {
+  return breadcrumbs.map((item, index) =>
+    index === breadcrumbs.length - 1
+      ? { ...item, url: `/articles${item.url}` }
+      : item
+  );
+}
+
 const Article = ({data}: TProps) => {
+  const breadcrumbs = updatedBreadcrumbs(data.breadcrumbs)
+
   return (
     <section className={styles.article}>
       <div className={styles.article__inner}>
@@ -32,7 +44,7 @@ const Article = ({data}: TProps) => {
           </div>
         </div>
         {data?.breadcrumbs && (
-          <Breadcrumbs data={data.breadcrumbs} className={styles.article__breadcrumbs}/>
+          <Breadcrumbs data={breadcrumbs} className={styles.article__breadcrumbs}/>
         )}
         {data?.contentRaw && (
           <div className={styles.article__content}>
