@@ -1,7 +1,9 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
 import { TarotCategory } from './types/shuffle'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://app.kaelisai.com/api' 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 
+'https://stagtest.kaelisai.com/api'
+// 'https://app.kaelisai.com/api'  
 
 const GUEST_TOKEN_KEY = 'guestToken'
 const GUEST_ID_KEY = 'guestId'
@@ -40,6 +42,16 @@ export const getCategories = async (): Promise<TarotCategory[]> => {
     return response.data.data;
   } catch (error) {
     console.error('Ошибка получения категорий:', error);
+    return [];
+  }
+};
+
+export const getSpreads = async (category_id: number): Promise<TarotCategory[]> => {
+  try {
+    const response = await api.get('/tarot', { params: { category_id } });
+    return response.data.data;
+  } catch (error) {
+    console.error('Ошибка получения типа расклада:', error);
     return [];
   }
 };

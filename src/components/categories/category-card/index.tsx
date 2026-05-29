@@ -2,7 +2,6 @@ import { Link } from '@/i18n/navigation'
 import styles from './styles.module.scss'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { Button } from '@/components/ui'
 
 type CategoryCardProps = {
   id: string

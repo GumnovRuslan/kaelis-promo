@@ -8,6 +8,7 @@ import styles from './styles.module.scss'
 import { useLocale, useTranslations } from 'next-intl'
 import { Loader } from '@/components/sections'
 import { ButtonBack, Breadcrumbs } from '@/components/ui'
+import { TarotCategory } from '@/lib/types/shuffle'
 
 export default function ChartPage() {
   const t = useTranslations('CategoriesPage')
@@ -27,11 +28,11 @@ export default function ChartPage() {
     },
     {
       label: selectedCategory.data?.name ?? '',
-      url: '/tarot/spread'
+      url: `/tarot/${selectedCategory.data?.slug}`
     },
     {
       label: selectedSpread.data?.name ?? '',
-      url: '/tarot/spread/question'
+      url: `/tarot/${selectedCategory.data?.slug}/${selectedSpread.data?.slug}`
     }
   ]
 
@@ -57,7 +58,7 @@ export default function ChartPage() {
       <div className={styles.container}>
         
         <div className={styles.section__header}>
-          <ButtonBack  href={`/tarot/spread`} text={t('buttons.back')}/>
+          <ButtonBack as='link' href={BREADCRUMBS_DATA.at(-2)?.url ?? ""} text={t('buttons.back')}/>
           <Breadcrumbs data={BREADCRUMBS_DATA} />
         </div>
 

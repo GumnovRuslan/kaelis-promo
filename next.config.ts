@@ -19,7 +19,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'https://kaelisai.com',
+        hostname: 'kaelisai.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'stagtest.kaelisai.com',
         pathname: '/**',
       },
       {

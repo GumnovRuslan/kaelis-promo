@@ -6,6 +6,7 @@ import {
   useEffect,
   useRef,
   PropsWithChildren,
+  useCallback,
 } from 'react'
 import { useRouter } from 'next/navigation'
 import Echo from 'laravel-echo'
@@ -28,59 +29,22 @@ const WebsocketProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter()
 
   const echoRef = useRef<any>(null)
-  const isClosingRef = useRef(false)
 
-  const close = async (): Promise<void> => {
-    if (!echoRef.current || isClosingRef.current) return
-
-    isClosingRef.current = true
-
-    return new Promise(resolve => {
-      try {
-        const echo = echoRef.current
-        const connector = echo?.connector as any
-        const connection = connector?.pusher?.connection
-
-        // fallback если нет connection
-        if (!connection) {
-          echoRef.current = null
-          isClosingRef.current = false
-          return resolve()
-        }
-
-        const handleDisconnected = () => {
-          connection.unbind('disconnected', handleDisconnected)
-          echoRef.current = null
-          isClosingRef.current = false
-          resolve()
-        }
-
-        connection.bind('disconnected', handleDisconnected)
-
-        try {
-          echo.leaveAllChannels?.()
-        } catch (e) {
-          console.warn('Leave channels error', e)
-        }
-
-        connector?.pusher?.disconnect()
-
-        // fallback если событие не пришло
-        setTimeout(() => {
-          if (isClosingRef.current) {
-            echoRef.current = null
-            isClosingRef.current = false
-            resolve()
-          }
-        }, 1000)
-      } catch (e) {
-        console.warn('Close socket error', e)
-        echoRef.current = null
-        isClosingRef.current = false
-        resolve()
+  const close = useCallback(async () => {
+    try {
+      if (!echoRef.current) {
+        return;
       }
-    })
-  }
+
+      console.log('%c[WS] disconnect', 'color: red;');
+
+      echoRef.current.disconnect();
+
+      echoRef.current = null;
+    } catch (error) {
+      console.error('[WS] close error', error);
+    }
+  }, []);
 
   const initializeSocket = async () => {
     await close()
@@ -95,18 +59,20 @@ const WebsocketProvider = ({ children }: PropsWithChildren) => {
       const config = configuration.data.web_socket
       const token = getGuestToken()
 
+      console.log(`%cInitializing WebSocket with config:`, 'color: yellow;', config)
+
       if (!token || typeof window === 'undefined') return
 
       ;(window as any).Pusher = Pusher
 
-      const wsPort = Number(config.port) || 6001
+      const wsPort = Number(config.port ?? 443) || 6001
 
       const echo = new Echo({
         broadcaster: 'reverb',
-        key: config.key,
-        wsHost: config.host,
+        key: config.key ?? 'wljqnbllbgh3lebept8s',
+        wsHost: config.host ?? 'stagtest.kaelisai.com', 
         withCredentials: true,
-        authEndpoint: config.auth,
+        authEndpoint: config.auth ?? 'https://stagtest.kaelisai.com/broadcasting/auth',
         wsPort,
         wssPort: wsPort,
         forceTLS: true,
