@@ -47,7 +47,7 @@ const TarotCategorySection = () => {
           <CategoryCard
             key={category.id}
             id={String(category.id)}
-            name={category.name}
+            name={category.name + 1}
             description={category.site_description}
             image={category.image}
             href={`/tarot/${category.slug}`}
