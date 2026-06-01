@@ -1,25 +1,25 @@
-'use client'
+'use client';
 
 import { ArrowLeftIcon } from '@/components/icons';
 import styles from './styles.module.scss';
-import { Link } from '@/i18n/navigation'
+import { Link } from '@/i18n/navigation';
 import { useRouter } from 'next/navigation';
 
 type BaseProps = {
-  text: string
-}
+  text: string;
+};
 
 type LinkProps = BaseProps & {
-  as: 'link'
-  href: string
-}
+  as: 'link';
+  href: string;
+};
 
 type ButtonProps = BaseProps & {
-  as: 'button'
-  onClick?: () => void
-}
+  as: 'button';
+  onClick?: () => void;
+};
 
-type TProps = LinkProps | ButtonProps
+type TProps = LinkProps | ButtonProps;
 
 const ButtonBack = (props: TProps) => {
   const router = useRouter();
@@ -29,29 +29,27 @@ const ButtonBack = (props: TProps) => {
         <ArrowLeftIcon />
       </span>
 
-      <span className={styles.button__text}>
-        {props.text}
-      </span>
+      <span className={styles.button__text}>{props.text}</span>
     </span>
-  )
+  );
 
   if (props.as === 'link') {
     return (
       <Link href={props.href} className={styles.button}>
         {content}
       </Link>
-    )
+    );
   }
 
   return (
     <button
-      type="button"
+      type='button'
       onClick={props.onClick ? props.onClick : router.back}
       className={styles.button}
     >
       {content}
     </button>
-  )
-}
+  );
+};
 
-export default ButtonBack
+export default ButtonBack;

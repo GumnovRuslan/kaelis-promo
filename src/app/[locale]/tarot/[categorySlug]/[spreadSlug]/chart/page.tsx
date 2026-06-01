@@ -1,49 +1,66 @@
-'use client'
+'use client';
 import { Breadcrumbs, ButtonBack } from '@/components/ui';
-import styles from './styles.module.scss'
-import { Chart } from "@/components/sections";
-import { useTranslations } from 'next-intl';
-import { useAppSelector } from '@/store';
+import styles from './styles.module.scss';
+import { Chart } from '@/components/sections';
+import { useLocale, useTranslations } from 'next-intl';
+import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
+import { useEffect } from 'react';
 
 export default function ChartPage() {
-  const t = useTranslations('CategoriesPage')
-  const b = useTranslations('breadcrumbs')
-  const {question, selectedCategory, selectedSpread} = useAppSelector(state => state.shuffle)
+  const t = useTranslations('CategoriesPage');
+  const b = useTranslations('breadcrumbs');
+  const { question, selectedCategory, selectedSpread } = useAppSelector((state) => state.shuffle);
+  const dispatch = useAppDispatch();
+  const locale = useLocale();
 
-  const breadcrumbsData = [
+  const BREADCRUMBS_DATA = [
     {
       label: b('home'),
-      url: '/'
+      url: '/',
     },
     {
       label: b('tarot'),
-      url: '/tarot'
+      url: '/tarot',
     },
     {
       label: selectedCategory.data?.name ?? '',
-      url: '/tarot/spread'
+      url: `/tarot/${selectedCategory.data?.slug}`,
     },
     {
       label: selectedSpread.data?.name ?? '',
-      url: '/tarot/spread/question'
+      url: `/tarot/${selectedCategory.data?.slug}/${selectedSpread.data?.slug}`,
+    },
+  ];
+
+  useEffect(() => {
+    if (!selectedCategory.data || selectedCategory.lang !== locale) {
+      dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20, lang: locale }));
     }
-  ]
+    if (!selectedSpread.data || selectedSpread.lang !== locale) {
+      dispatch(
+        shuffleActions.getTarotSpreads({ selectedCategory: selectedCategory.data, lang: locale }),
+      );
+    }
+  }, [locale]);
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        
         <div className={styles.section__header}>
-          <ButtonBack  href={`/tarot/spread/question`} text={t('buttons.back')}/>
-          <Breadcrumbs data={breadcrumbsData} lastActive/>
+          <ButtonBack
+            as='link'
+            href={BREADCRUMBS_DATA.at(-2)?.url ?? ''}
+            text={t('buttons.back')}
+          />
+          <Breadcrumbs data={BREADCRUMBS_DATA} lastActive />
           {selectedSpread.data?.description && (
             <p className={styles.description}>{selectedSpread.data?.description}</p>
           )}
-          {question && (<p className={styles.userQuestion}>Вопрос: {question}</p>)}
+          {question && <p className={styles.userQuestion}>Вопрос: {question}</p>}
         </div>
 
-        <Chart/>
+        <Chart />
       </div>
     </section>
-  )
+  );
 }
