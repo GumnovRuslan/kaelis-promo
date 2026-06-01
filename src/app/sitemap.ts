@@ -5,6 +5,7 @@ import { locales } from "@/i18n/routing";
 import { parseSlug } from "@/utils/parseSlug";
 import { getPolicies } from "@/graphql/queries/policy";
 import type { TArticlesSlug, TPolicy } from "@/types";
+import { getCategories, getSpreads } from "@/lib/api";
 
 const baseUrl = "https://kaelisai.com";
 
@@ -54,8 +55,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     articles
       .filter((article) => article?.slug?.current)
       .forEach((article) => {
-        // const {baseSlug, lang} = parseSlug(article.slug.current)
-
         sitemap.push({
           url: `${baseUrl}/${locale}/articles${article.slug.current}`,
           lastModified: article?._updatedAt
@@ -63,14 +62,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             : new Date(),
           changeFrequency: "weekly",
           priority: 0.8,
-          
-          // alternates: {
-          //   languages: {
-          //     en: `${baseUrl}/en/articles${baseSlug}-en`,
-          //     ru: `${baseUrl}/ru/articles${baseSlug}-ru`,
-          //     uk: `${baseUrl}/ua/articles${baseSlug}-ua`,
-          //   },
-          // },
         });
       });
   });
@@ -93,6 +84,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         });
       });
   });
+
+  // получение всех категорий и спредов для генерации URL
+  const categories = await getCategories();
+
+  for (const category of categories) {
+    for (const locale of locales) {
+      sitemap.push({
+        url: `${baseUrl}/${locale}/tarot/${category.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      });
+    }
+      
+
+    const spreads = await getSpreads(category.id);
+
+    for (const spread of spreads) {
+      for (const locale of locales) {
+        sitemap.push({
+          url: `${baseUrl}/${locale}/tarot/${category.slug}/${spread.slug}`,
+          lastModified: new Date(),
+          changeFrequency: 'weekly',
+          priority: 0.7,
+        });
+      }
+    }
+  }
 
   return sitemap;
 }

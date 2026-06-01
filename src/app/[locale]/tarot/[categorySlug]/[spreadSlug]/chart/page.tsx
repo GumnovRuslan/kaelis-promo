@@ -1,25 +1,17 @@
 'use client';
-
-import { useEffect } from 'react';
-import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
-import { ReaderStyleSelector } from '@/components/shuffle/reader-style-selector';
-import { Chat } from '@/components/shuffle/chat';
+import { Breadcrumbs, ButtonBack } from '@/components/ui';
 import styles from './styles.module.scss';
+import { Chart } from '@/components/sections';
 import { useLocale, useTranslations } from 'next-intl';
-import { Chart, Loader } from '@/components/sections';
-import { ButtonBack, Breadcrumbs } from '@/components/ui';
-import { TarotCategory } from '@/lib/types/shuffle';
-import { useRouter } from 'next/navigation';
+import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
+import { useEffect } from 'react';
 
 export default function ChartPage() {
-  const router = useRouter();
   const t = useTranslations('CategoriesPage');
   const b = useTranslations('breadcrumbs');
-  const locale = useLocale();
+  const { question, selectedCategory, selectedSpread } = useAppSelector((state) => state.shuffle);
   const dispatch = useAppDispatch();
-  const { categories, selectedCategory, selectedSpread, isLoading } = useAppSelector(
-    (state) => state.shuffle,
-  );
+  const locale = useLocale();
 
   const BREADCRUMBS_DATA = [
     {
@@ -41,8 +33,6 @@ export default function ChartPage() {
   ];
 
   useEffect(() => {
-    dispatch(shuffleActions.resetShuffleResponse());
-
     if (!selectedCategory.data || selectedCategory.lang !== locale) {
       dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20, lang: locale }));
     }
@@ -51,11 +41,7 @@ export default function ChartPage() {
         shuffleActions.getTarotSpreads({ selectedCategory: selectedCategory.data, lang: locale }),
       );
     }
-  }, [dispatch, locale]);
-
-  if ((isLoading && !categories) || !selectedCategory || !selectedSpread) {
-    return <Loader text={t('loader.load')} />;
-  }
+  }, [locale]);
 
   return (
     <section className={styles.section}>
@@ -66,17 +52,14 @@ export default function ChartPage() {
             href={BREADCRUMBS_DATA.at(-2)?.url ?? ''}
             text={t('buttons.back')}
           />
-          <Breadcrumbs data={BREADCRUMBS_DATA} />
+          <Breadcrumbs data={BREADCRUMBS_DATA} lastActive />
+          {selectedSpread.data?.description && (
+            <p className={styles.description}>{selectedSpread.data?.description}</p>
+          )}
+          {question && <p className={styles.userQuestion}>Вопрос: {question}</p>}
         </div>
 
-        {selectedSpread.data?.description && (
-          <p className={styles.description}>{selectedSpread.data?.description}</p>
-        )}
-
-        <div className={styles.content}>
-          <ReaderStyleSelector />
-          <Chat />
-        </div>
+        <Chart />
       </div>
     </section>
   );
