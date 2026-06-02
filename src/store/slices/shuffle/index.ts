@@ -6,6 +6,7 @@ import {
   TarotSpeaker,
   TarotRequest,
   Matrix,
+  TReadingResponse,
 } from '@/lib/types/shuffle';
 import { Pagination } from './types';
 import { setGuestAuth as setGuestAuthStorage } from '@/lib/api';
@@ -25,9 +26,7 @@ export const getTarotResponse = createAsyncThunk(
       });
       return response.data;
     } catch (error: any) {
-      return rejectWithValue(
-        error.response?.data?.message || 'Failed to get tarot response',
-      );
+      return rejectWithValue(error.response?.data?.message || 'Failed to get tarot response');
     }
   },
 );
@@ -42,19 +41,14 @@ export const getTarotSpeaker = createAsyncThunk(
         lang,
       };
     } catch (error: any) {
-      return rejectWithValue(
-        error.response?.data?.message || 'Failed to get tarot speaker',
-      );
+      return rejectWithValue(error.response?.data?.message || 'Failed to get tarot speaker');
     }
   },
 );
 
 export const getTarotCategories = createAsyncThunk(
   'shuffle/getTarotCategories',
-  async (
-    { page, per_page, lang }: Pagination & { lang: string },
-    { rejectWithValue },
-  ) => {
+  async ({ page, per_page, lang }: Pagination & { lang: string }, { rejectWithValue }) => {
     try {
       const response = await shuffleApiService.getTarotCategories({
         params: { page: page || 1, per_page: per_page || 20 },
@@ -65,9 +59,7 @@ export const getTarotCategories = createAsyncThunk(
       };
       return data;
     } catch (error: any) {
-      return rejectWithValue(
-        error.response?.data?.message || 'Failed to get categories',
-      );
+      return rejectWithValue(error.response?.data?.message || 'Failed to get categories');
     }
   },
 );
@@ -75,10 +67,7 @@ export const getTarotCategories = createAsyncThunk(
 export const getTarotSpreads = createAsyncThunk(
   'shuffle/getTarotSpreads',
   async (
-    {
-      selectedCategory,
-      lang,
-    }: { selectedCategory: TarotCategory | null; lang: string },
+    { selectedCategory, lang }: { selectedCategory: TarotCategory | null; lang: string },
     { rejectWithValue },
   ) => {
     try {
@@ -91,9 +80,7 @@ export const getTarotSpreads = createAsyncThunk(
       };
       return data;
     } catch (error: any) {
-      return rejectWithValue(
-        error.response?.data?.message || 'Failed to get spreads',
-      );
+      return rejectWithValue(error.response?.data?.message || 'Failed to get spreads');
     }
   },
 );
@@ -130,20 +117,19 @@ export const authenticateGuest = createAsyncThunk(
   },
 );
 
-export const getTarotAnswerFromChat = createAsyncThunk(
-  'shuffle/getTarotAnswerFromChat',
-  async (urlMessage: string, { rejectWithValue }) => {
-    try {
-      const response =
-        await shuffleApiService.getTarotAnswerFromChat(urlMessage);
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(
-        error.response?.data?.message || 'Failed to get tarot answer',
-      );
-    }
-  },
-);
+export const getTarotAnswerFromChat = createAsyncThunk<
+  TReadingResponse,
+  string,
+  { rejectValue: string }
+>('shuffle/getTarotAnswerFromChat', async (urlMessage, { rejectWithValue }) => {
+  try {
+    const response = await shuffleApiService.getTarotAnswerFromChat(urlMessage);
+    console.log('Response from getTarotAnswerFromChat:', response.data);
+    return response.data;
+  } catch (error: any) {
+    return rejectWithValue(error.response?.data?.message || 'Failed to get tarot answer');
+  }
+});
 
 export interface ShuffleState {
   layout: {
@@ -229,10 +215,7 @@ export const shuffleSlice = createSlice({
     clearShuffleSpreads: (state) => {
       state.spreads = { data: null, lang: null };
     },
-    setCategories: (
-      state,
-      action: PayloadAction<{ data: TarotCategory[]; lang: string }>,
-    ) => {
+    setCategories: (state, action: PayloadAction<{ data: TarotCategory[]; lang: string }>) => {
       state.categories = action.payload;
     },
     setIsFirstAnimationDone: (state, action: PayloadAction<boolean>) => {
@@ -265,20 +248,14 @@ export const shuffleSlice = createSlice({
       state.selectedCategory = { lang: null, data: null };
     },
 
-    setSelectedSpread: (
-      state,
-      action: PayloadAction<{ data: TarotCard | null; lang: string }>,
-    ) => {
+    setSelectedSpread: (state, action: PayloadAction<{ data: TarotCard | null; lang: string }>) => {
       state.selectedSpread = action.payload;
     },
     clearSelectedSpread: (state) => {
       state.selectedSpread = { data: null, lang: null };
     },
 
-    setReaderStyle: (
-      state,
-      action: PayloadAction<{ data: TarotSpeaker | null; lang: string }>,
-    ) => {
+    setReaderStyle: (state, action: PayloadAction<{ data: TarotSpeaker | null; lang: string }>) => {
       state.readerStyle = action.payload;
     },
     resetShuffleResponse: (state) => {
@@ -296,10 +273,7 @@ export const shuffleSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
-    setGuestAuth: (
-      state,
-      action: PayloadAction<{ guestId: string; token: string }>,
-    ) => {
+    setGuestAuth: (state, action: PayloadAction<{ guestId: string; token: string }>) => {
       state.guestId = action.payload.guestId;
       state.guestToken = action.payload.token;
     },
@@ -311,17 +285,11 @@ export const shuffleSlice = createSlice({
       })
       .addCase(
         getTarotCategories.fulfilled,
-        (
-          state,
-          action: PayloadAction<{ data: TarotCategory[]; lang: string }>,
-        ) => {
+        (state, action: PayloadAction<{ data: TarotCategory[]; lang: string }>) => {
           state.categories = action.payload;
           state.isLoading = false;
 
-          if (
-            state.selectedCategory.data &&
-            state.selectedCategory.lang !== action.payload.lang
-          ) {
+          if (state.selectedCategory.data && state.selectedCategory.lang !== action.payload.lang) {
             const sameSpread = action.payload.data.find(
               (category) => category.id === state.selectedCategory.data!.id,
             );
@@ -348,10 +316,7 @@ export const shuffleSlice = createSlice({
           state.spreads = action.payload;
           state.isLoading = false;
 
-          if (
-            state.selectedSpread.data &&
-            state.selectedSpread.lang !== action.payload.lang
-          ) {
+          if (state.selectedSpread.data && state.selectedSpread.lang !== action.payload.lang) {
             const sameSpread = action.payload.data.find(
               (spread) => spread.id === state.selectedSpread.data!.id,
             );
@@ -368,6 +333,7 @@ export const shuffleSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload as string;
       })
+
       .addCase(getTarotResponse.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -377,9 +343,7 @@ export const shuffleSlice = createSlice({
         state.isLoading = false;
 
         if (state.response?.tarot?.matrix) {
-          const matrixArray: Matrix = Object.keys(
-            state.response.tarot.matrix,
-          ).map((key) => {
+          const matrixArray: Matrix = Object.keys(state.response.tarot.matrix).map((key) => {
             const [x, y] = state.response!.tarot.matrix[key];
             return { x, y };
           });
@@ -398,6 +362,7 @@ export const shuffleSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload as string;
       })
+
       .addCase(getTarotSpeaker.pending, (state) => {
         state.isLoading = true;
       })
@@ -405,10 +370,7 @@ export const shuffleSlice = createSlice({
         state.speakers = action.payload;
         state.isLoading = false;
 
-        if (
-          state.readerStyle.data &&
-          state.readerStyle.lang !== action.payload.lang
-        ) {
+        if (state.readerStyle.data && state.readerStyle.lang !== action.payload.lang) {
           const sameSpeaker = action.payload.data.find(
             (speaker) => speaker.id === state.readerStyle.data!.id,
           );
@@ -436,26 +398,28 @@ export const shuffleSlice = createSlice({
         state.error = null;
       })
       .addCase(getTarotAnswerFromChat.fulfilled, (state, action) => {
-        state.response = action.payload;
+        // state.response = action.payload;
         state.isLoading = false;
+        state.response = {
+          ...state.response,
+          reading: action.payload.message,
+        } as TarotRequest['response'];
 
-        if (state.response?.tarot?.matrix) {
-          const matrixArray: Matrix = Object.keys(
-            state.response.tarot.matrix,
-          ).map((key) => {
-            const [x, y] = state.response!.tarot.matrix[key];
-            return { x, y };
-          });
-          state.layout = { matrix: matrixArray };
-        }
+        // if (state.response?.tarot?.matrix) {
+        //   const matrixArray: Matrix = Object.keys(state.response.tarot.matrix).map((key) => {
+        //     const [x, y] = state.response!.tarot.matrix[key];
+        //     return { x, y };
+        //   });
+        //   state.layout = { matrix: matrixArray };
+        // }
 
-        if (state.response?.cards) {
-          Object.keys(state.response.cards).forEach((key) => {
-            if (state.response?.cards?.[key]?.image) {
-              state.response.cards[key].image = state.response.cards[key].image;
-            }
-          });
-        }
+        // if (state.response?.cards) {
+        //   Object.keys(state.response.cards).forEach((key) => {
+        //     if (state.response?.cards?.[key]?.image) {
+        //       state.response.cards[key].image = state.response.cards[key].image;
+        //     }
+        //   });
+        // }
       })
       .addCase(getTarotAnswerFromChat.rejected, (state, action) => {
         state.isLoading = false;

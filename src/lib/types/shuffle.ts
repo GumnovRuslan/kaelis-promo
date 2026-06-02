@@ -40,28 +40,34 @@ export interface TarotRequest {
     cards: Record<string, TarotCard>;
     back_card: string;
     chat_id: number;
-    reading: ReadingType;
+    reading: TReadingMessage | null;
   };
 }
 
-export type ReadingType = {
-  cards?: ReadingCardType[];
-  final_question: string;
-  interpretation: InterpretationType | null;
-  suggestion?: string;
+export type TReadingResponse = {
+  id: number;
+  message: TReadingMessage;
+  message_type: string;
+  sender: string;
+};
+
+export type TReadingMessage = {
+  cards?: TReadingCard[];
+  final_question: string | null;
+  interpretation: TInterpretation[] | null;
   status: string;
 };
 
-type InterpretationType = {
-  analysis: string;
-  final: string;
-  intro: string;
+type TInterpretation = {
+  id: number;
+  title: string;
+  text: string;
 };
 
-type ReadingCardType = {
-  position: number;
-  label: string;
-  description: string;
+type TReadingCard = {
+  id: number;
+  position: string;
+  text: string;
 };
 
 export interface ApiResponse<T> {

@@ -10,50 +10,33 @@ import { Button } from '@/components/ui';
 export default function Chart() {
   const t = useTranslations('CategoriesPage');
   const { response } = useAppSelector((state) => state.shuffle);
+  const cards = response?.cards;
+  const matrix = response?.tarot?.matrix;
   const dispatch = useAppDispatch();
-  const [expandedSections, setExpandedSections] = useState<{
-    answer: boolean;
-    synthesis: boolean;
-    conclusion: boolean;
-  }>({
-    answer: false,
-    synthesis: false,
-    conclusion: false,
-  });
 
-  const matrix = useMemo(() => {
-    if (!response?.tarot?.matrix) return null;
+  console.log('Chart response:', response);
+
+  const memoizedMatrix = useMemo(() => {
+    if (!matrix) return null;
     return Object.keys(response.tarot.matrix).map((key) => {
       const [x, y] = response.tarot.matrix[key];
       return { x, y };
     });
-  }, [response]);
+  }, [matrix]);
 
-  const cards = useMemo(() => {
+  const memoizedCards = useMemo(() => {
     return response?.cards || {};
-  }, [response]);
-
-  const toggleSection = (section: 'answer' | 'synthesis' | 'conclusion') => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
-  };
+  }, [cards]);
 
   const handleNewReading = () => {
     dispatch(shuffleActions.clearChart());
-    setExpandedSections({
-      answer: false,
-      synthesis: false,
-      conclusion: false,
-    });
   };
 
   return (
     <>
-      {response && matrix && Object.keys(cards).length > 0 && (
+      {response && memoizedMatrix && Object.keys(memoizedCards).length > 0 && (
         <div className={styles.chartContainer}>
-          <ChartCanvas matrix={matrix} cards={cards} />
+          <ChartCanvas matrix={memoizedMatrix} cards={memoizedCards} />
         </div>
       )}
 
@@ -63,69 +46,12 @@ export default function Chart() {
         </div>
       )}
 
-      {/* {response?.reading?.interpretation && (
-          <div className={styles.readingContainer}>
-            {response.reading.interpretation.intro && (
-              <div className={styles.readingSection}>
-                <button
-                  type="button"
-                  className={styles.readingSection__header}
-                  onClick={() => toggleSection('answer')}
-                >
-                  <span>Answer</span>
-                  <span className={`${styles.readingSection__icon} ${expandedSections.answer ? styles['readingSection__icon--open'] : ''}`} />
-                </button>
-                {expandedSections.answer && (
-                  <div className={styles.readingSection__content}>
-                    <div className={styles.readingSection__content_inner}>
-                      <p>{response.reading.interpretation.intro}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {response.reading.interpretation.analysis && (
-              <div className={styles.readingSection}>
-                <button
-                  type="button"
-                  className={styles.readingSection__header}
-                  onClick={() => toggleSection('synthesis')}
-                >
-                  <span>Synthesis</span>
-                  <span className={`${styles.readingSection__icon} ${expandedSections.synthesis ? styles['readingSection__icon--open'] : ''}`} />
-                </button>
-                {expandedSections.synthesis && (
-                  <div className={styles.readingSection__content}>
-                    <div className={styles.readingSection__content_inner}>
-                      <p>{response.reading.interpretation.analysis}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {response.reading.interpretation.final && (
-              <div className={styles.readingSection}>
-                <button
-                  type="button"
-                  className={styles.readingSection__header}
-                  onClick={() => toggleSection('conclusion')}
-                >
-                  <span>Conclusion</span>
-                  <span className={`${styles.readingSection__icon} ${expandedSections.conclusion ? styles['readingSection__icon--open'] : ''}`} />
-                </button>
-                {expandedSections.conclusion && (
-                  <div className={styles.readingSection__content}>
-                    <div className={styles.readingSection__content_inner}>
-                      <p>{response.reading.interpretation.final}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
+      {/* {response?.reading?.interpretation &&
+        response?.reading?.interpretation.map((item, index) => (
+          <div key={index} className={styles.readingSection}>
+            <h3 className={styles.readingSection__header}>{item.title}</h3>
           </div>
-        )} */}
+        ))} */}
 
       <Button
         as='link'
