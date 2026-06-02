@@ -17,5 +17,9 @@ export default function CategoriesPage() {
     }
   }, [dispatch, categories.data, locale]);
 
-  return isLoading || !categories.data ? <Loader text={t('load')} /> : <TarotCategorySection />;
+  return isLoading || !categories.data ? (
+    <Loader text={t('load')} />
+  ) : (
+    <TarotCategorySection categories={categories.data} />
+  );
 }

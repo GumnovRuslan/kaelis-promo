@@ -1,5 +1,7 @@
 'use client';
 
+import styles from './styles.module.scss';
+
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Application, Container, Sprite, Assets, Texture } from 'pixi.js';
 import { Spine } from '@pixi/spine-pixi';
@@ -7,7 +9,6 @@ import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
 import { PixiAppManager } from '@/lib/services/pixi-app-manager';
 import { usePreloadingContext } from '@/context/animation';
 import { ChartCanvasProps, CardInfo } from './types';
-import styles from './styles.module.scss';
 import { flipCardPerspective } from './flip_card';
 import Image from 'next/image';
 import { CloseButton } from '@/components/ui';
@@ -72,6 +73,10 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
   const shuffleRef = useRef<Spine | null>(null);
   const reading = useAppSelector((state) => state.shuffle.response?.reading);
   const { atlasArray, skeletonArray, isPreloadingFinish } = usePreloadingContext();
+  const timeoutsRef = useRef<number[]>([]);
+  const backTextureRef = useRef<Texture | null>(null);
+
+  console.log();
 
   useEffect(() => {
     if (containerRef.current && !containerIdRef.current) {
@@ -124,44 +129,113 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
     return { scale: optimalScale, offsetX, offsetY };
   }, [calculateMaxCoordinates]);
 
+  // const initPixiApp = useCallback(async () => {
+  //   if (!containerRef.current || !containerIdRef.current) return;
+  //   if (appRef.current) {
+  //     setIsAppReady(true);
+  //     return;
+  //   }
+
+  //   const pixiManager = PixiAppManager.getInstance();
+
+  //   if (pixiManager.hasApp(containerIdRef.current)) {
+  //     const existingApp = pixiManager.getApp(containerIdRef.current);
+  //     if (existingApp) {
+  //       if ((existingApp as any).renderer?.destroyed) {
+  //         pixiManager.removeApp?.(containerIdRef.current);
+  //       } else {
+  //         appRef.current = existingApp;
+  //         const found = appRef.current.stage.children.find(
+  //           (c) => (c as any).label === 'cardsContainer',
+  //         ) as Container | undefined;
+  //         if (found) {
+  //           cardsContainerRef.current = found;
+  //         } else {
+  //           const newC = new Container();
+  //           (newC as any).label = 'cardsContainer';
+  //           newC.visible = false;
+  //           appRef.current.stage.addChild(newC);
+  //           cardsContainerRef.current = newC;
+  //         }
+
+  //         const appCanvas = (appRef.current as any).canvas || (appRef.current as any).view;
+  //         if (containerRef.current && appCanvas && !containerRef.current.contains(appCanvas)) {
+  //           containerRef.current.innerHTML = '';
+  //           containerRef.current.appendChild(appCanvas);
+  //         }
+
+  //         setIsAppReady(true);
+  //         return;
+  //       }
+  //     }
+  //   }
+
+  //   if (containerRef.current.children.length > 0) {
+  //     containerRef.current.innerHTML = '';
+  //   }
+
+  //   const app = new Application();
+  //   await app.init({
+  //     width: containerRef.current.clientWidth,
+  //     height: containerRef.current.clientHeight,
+  //     backgroundAlpha: 0,
+  //     resolution: window.devicePixelRatio || 1,
+  //     autoDensity: true,
+  //   });
+
+  //   const cardsC = new Container();
+  //   (cardsC as any).label = 'cardsContainer';
+  //   cardsC.visible = false;
+  //   app.stage.addChild(cardsC);
+
+  //   const canvas = app.view as unknown as HTMLElement;
+  //   containerRef.current.appendChild(canvas);
+  //   appRef.current = app;
+  //   cardsContainerRef.current = cardsC;
+
+  //   pixiManager.setApp(containerIdRef.current, app, containerRef.current);
+
+  //   setIsAppReady(true);
+  // }, []);
+
   const initPixiApp = useCallback(async () => {
-    if (!containerRef.current || !containerIdRef.current) return;
+    const container = containerRef.current;
+
+    if (!container) return;
     if (appRef.current) return;
 
-    const pixiManager = PixiAppManager.getInstance();
-
-    if (pixiManager.hasApp(containerIdRef.current)) {
-      const existingApp = pixiManager.getApp(containerIdRef.current);
-      if (existingApp) {
-        appRef.current = existingApp;
-        setIsAppReady(true);
-        return;
-      }
-    }
-
-    if (containerRef.current.children.length > 0) {
-      containerRef.current.innerHTML = '';
-    }
-
     const app = new Application();
+
     await app.init({
-      width: containerRef.current.clientWidth,
-      height: containerRef.current.clientHeight,
+      width: container.clientWidth,
+      height: container.clientHeight,
       backgroundAlpha: 0,
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
     });
 
-    const cardsC = new Container();
-    cardsC.label = 'cardsContainer';
-    cardsC.visible = false;
-    app.stage.addChild(cardsC);
+    if (!containerRef.current) {
+      app.destroy(true);
+      return;
+    }
 
-    containerRef.current.appendChild((app as any).canvas || (app as any).view);
+    const cardsContainer = new Container();
+    cardsContainer.label = 'cardsContainer';
+    cardsContainer.visible = false;
+
+    app.stage.addChild(cardsContainer);
+
+    const view = (app as any).canvas || (app as any).view;
+
+    if (!view) {
+      app.destroy(true);
+      return;
+    }
+
+    containerRef.current.appendChild(view);
+
     appRef.current = app;
-    cardsContainerRef.current = cardsC;
-
-    pixiManager.setApp(containerIdRef.current, app, containerRef.current);
+    cardsContainerRef.current = cardsContainer;
 
     setIsAppReady(true);
   }, []);
@@ -220,8 +294,8 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
 
           setSelectedCard({
             image: cardData.image,
-            label: selectedCard?.label || cardData.name || '',
-            description: cardData.description || selectedCard?.description || '',
+            label: cardData.name || '',
+            description: cardData.description || '',
           });
         };
 
@@ -332,7 +406,7 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
       back.visible = true;
 
       // ⏳ Появление
-      setTimeout(() => {
+      const id = window.setTimeout(() => {
         const fadeStart = Date.now();
         const fadeDuration = 300;
 
@@ -345,16 +419,26 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
         requestAnimationFrame(fadeIn);
       }, revealDelay * index);
 
-      setTimeout(
+      timeoutsRef.current.push(id);
+
+      const id2 = window.setTimeout(
         () => {
           flipCardPerspective(container, front, back, 600);
         },
         revealDelay * index + flipDelay,
       );
+      timeoutsRef.current.push(id2);
     }
 
     setShowCards(true);
   }, [cards, matrix, createCard, calculateOptimalView, getCardPosition]);
+
+  useEffect(() => {
+    return () => {
+      timeoutsRef.current.forEach(clearTimeout);
+      timeoutsRef.current = [];
+    };
+  }, []);
 
   const loadShuffle = useCallback(
     async (retryCount = 0) => {
@@ -522,48 +606,18 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
   }, [isAppReady, initPixiApp]);
 
   useEffect(() => {
+    if (!cardsContainerRef.current) return;
+
     setShowCards(false);
-    setIsCardsLoading(true);
-    setIsAppReady(false);
+
+    cardsContainerRef.current.removeChildren();
 
     if (shuffleRef.current && appRef.current?.stage) {
-      try {
-        if (appRef.current.stage.children.includes(shuffleRef.current)) {
-          appRef.current.stage.removeChild(shuffleRef.current);
-        }
-        shuffleRef.current.destroy();
-        shuffleRef.current = null;
-      } catch (err) {
-        console.error('Error cleaning up shuffle:', err);
-      }
+      appRef.current.stage.removeChild(shuffleRef.current);
+      shuffleRef.current.destroy();
+      shuffleRef.current = null;
     }
-
-    if (cardsContainerRef.current) {
-      try {
-        cardsContainerRef.current.removeChildren();
-      } catch (err) {
-        console.error('Error cleaning up cards container:', err);
-      }
-    }
-
-    const pixiManager = PixiAppManager.getInstance();
-    if (containerIdRef.current) {
-      pixiManager.removeApp(containerIdRef.current);
-      containerIdRef.current = '';
-    }
-
-    if (containerRef.current) {
-      containerRef.current.innerHTML = '';
-    }
-
-    appRef.current = null;
-    cardsContainerRef.current = null;
-
-    const initializeApp = async () => {
-      await initPixiApp();
-    };
-    initializeApp();
-  }, [matrix, cards, initPixiApp]);
+  }, [matrix, cards]);
 
   useEffect(() => {
     if (isPreloadingFinish && isAppReady && !isFirstAnimationDone && !shuffleRef.current) {
@@ -676,13 +730,11 @@ export const ChartCanvas = ({ matrix, cards }: ChartCanvasProps) => {
 
       if (containerIdRef.current) {
         pixiManager.removeApp(containerIdRef.current);
-        containerIdRef.current = '';
       }
 
       appRef.current = null;
       cardsContainerRef.current = null;
       shuffleRef.current = null;
-      setShowCards(false);
     };
   }, []);
 

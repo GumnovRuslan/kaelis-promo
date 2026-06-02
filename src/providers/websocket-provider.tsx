@@ -87,8 +87,6 @@ const WebsocketProvider = ({ children }: PropsWithChildren) => {
         sendWebsocketMessages({ type: event, payload: data }, dispatch, router);
       });
 
-      // const connector = echo.connector as any;
-      // const connection = connector?.pusher?.connection;
       const connection = (echo.connector as any)?.pusher?.connection;
 
       connection?.bind('connected', () => {
