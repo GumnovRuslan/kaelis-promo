@@ -124,7 +124,6 @@ export const getTarotAnswerFromChat = createAsyncThunk<
 >('shuffle/getTarotAnswerFromChat', async (urlMessage, { rejectWithValue }) => {
   try {
     const response = await shuffleApiService.getTarotAnswerFromChat(urlMessage);
-    console.log('Response from getTarotAnswerFromChat:', response.data);
     return response.data;
   } catch (error: any) {
     return rejectWithValue(error.response?.data?.message || 'Failed to get tarot answer');
@@ -339,8 +338,9 @@ export const shuffleSlice = createSlice({
         state.error = null;
       })
       .addCase(getTarotResponse.fulfilled, (state, action) => {
-        state.response = action.payload;
         state.isLoading = false;
+        state.isFirstAnimationDone = false;
+        state.response = action.payload;
 
         if (state.response?.tarot?.matrix) {
           const matrixArray: Matrix = Object.keys(state.response.tarot.matrix).map((key) => {
@@ -349,14 +349,6 @@ export const shuffleSlice = createSlice({
           });
           state.layout = { matrix: matrixArray };
         }
-
-        // if (state.response?.cards) {
-        //   Object.keys(state.response.cards).forEach((key) => {
-        //     if (state.response?.cards?.[key]?.image) {
-        //       state.response.cards[key].image = state.response.cards[key].image;
-        //     }
-        //   });
-        // }
       })
       .addCase(getTarotResponse.rejected, (state, action) => {
         state.isLoading = false;
@@ -386,6 +378,7 @@ export const shuffleSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload as string;
       })
+
       .addCase(authenticateGuest.fulfilled, (state, action) => {
         state.guestId = action.payload.guestId;
         state.guestToken = action.payload.token;
@@ -393,33 +386,17 @@ export const shuffleSlice = createSlice({
       .addCase(authenticateGuest.rejected, (state, action) => {
         state.error = action.payload as string;
       })
+
       .addCase(getTarotAnswerFromChat.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
       .addCase(getTarotAnswerFromChat.fulfilled, (state, action) => {
-        // state.response = action.payload;
         state.isLoading = false;
         state.response = {
           ...state.response,
           reading: action.payload.message,
         } as TarotRequest['response'];
-
-        // if (state.response?.tarot?.matrix) {
-        //   const matrixArray: Matrix = Object.keys(state.response.tarot.matrix).map((key) => {
-        //     const [x, y] = state.response!.tarot.matrix[key];
-        //     return { x, y };
-        //   });
-        //   state.layout = { matrix: matrixArray };
-        // }
-
-        // if (state.response?.cards) {
-        //   Object.keys(state.response.cards).forEach((key) => {
-        //     if (state.response?.cards?.[key]?.image) {
-        //       state.response.cards[key].image = state.response.cards[key].image;
-        //     }
-        //   });
-        // }
       })
       .addCase(getTarotAnswerFromChat.rejected, (state, action) => {
         state.isLoading = false;

@@ -977,7 +977,8 @@
     "loader": {
       "load": "Loading...",
       "categoryNotFound": "Category not found",
-      "spreadsNotFound": "Spreads not found"
+      "spreadsNotFound": "Spreads not found",
+      "chartNotFound": "Chart not found"
     },
     "tarot": {
       "more": "Click the card to Learn More"

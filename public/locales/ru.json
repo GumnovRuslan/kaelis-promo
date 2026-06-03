@@ -976,7 +976,8 @@
     "loader": {
       "load": "Загрузка...",
       "categoryNotFound": "Категория не найдена",
-      "spreadsNotFound": "Спреды не найдены"
+      "spreadsNotFound": "Спреды не найдены",
+      "chartNotFound": "Расклад не найден"
     },
     "tarot": {
       "more": "Нажмите на карточку, чтобы узнать больше"

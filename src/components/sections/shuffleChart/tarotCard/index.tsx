@@ -4,6 +4,7 @@ import cn from 'classnames';
 import Image from 'next/image';
 import type { TTarotCards } from '@/lib/types/shuffle';
 import { motion } from 'framer-motion';
+import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
 
 type TProps = {
   card: TTarotCards;
@@ -24,6 +25,8 @@ export const TarotCard = ({
   style,
   className,
 }: TProps) => {
+  const { isFirstAnimationDone, response } = useAppSelector((state) => state.shuffle);
+  const dispatch = useAppDispatch();
   return (
     <button
       type='button'
@@ -32,9 +35,24 @@ export const TarotCard = ({
       onClick={onClick}
     >
       <motion.div
-        initial={{ opacity: 0, scale: 1.2 }}
-        animate={{ rotateY: flipped ? 180 : 0, opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: id / 3 }}
+        initial={{
+          opacity: 0,
+          scale: 1.2,
+          rotateY: isFirstAnimationDone ? 180 : 0,
+        }}
+        animate={{
+          rotateY: flipped ? 180 : 0,
+          opacity: 1,
+          scale: 1,
+        }}
+        transition={{
+          duration: isFirstAnimationDone ? 0 : 0.3,
+          delay: isFirstAnimationDone ? 0 : id / 3,
+        }}
+        onAnimationComplete={() => {
+          if (response?.cards && response?.cards?.length - 1 !== id) return;
+          dispatch(shuffleActions.setIsFirstAnimationDone(true));
+        }}
         className={styles.tarotCard__inner}
       >
         {/* FRONT */}

@@ -35,38 +35,6 @@
       max-width: 50%;
     }
   }
-
-  &__loading {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    gap: 20px;
-    height: 100%;
-
-    &_text {
-      color: white;
-    }
-
-    &_spin {
-      display: block;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      box-shadow: 2px 2px 1px white;
-      animation: spin 1s linear infinite;
-
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-
-        to {
-          transform: rotate(360deg);
-        }
-      }
-    }
-  }
 }
 
 .learnMore {

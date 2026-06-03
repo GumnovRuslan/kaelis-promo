@@ -8,11 +8,11 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui';
 import { ShuffleCart } from '@/components/sections/shuffleChart';
 import { Question } from '@/components/ui';
+import Loader from '../loader';
 
 export default function Chart() {
   const t = useTranslations('CategoriesPage');
-  const { response } = useAppSelector((state) => state.shuffle);
-  const cards = response?.cards;
+  const { response, isLoading } = useAppSelector((state) => state.shuffle);
   const matrix = response?.tarot?.matrix;
   const [idOpen, setIdOpen] = useState<number | null>(null);
   const dispatch = useAppDispatch();
@@ -25,13 +25,17 @@ export default function Chart() {
     });
   }, [matrix]);
 
-  const memoizedCards = useMemo(() => {
-    return response?.cards || {};
-  }, [cards]);
-
   const handleNewReading = () => {
     dispatch(shuffleActions.clearChart());
   };
+
+  if (isLoading && !response) {
+    return <Loader isSpin text={t('loader.load')} />;
+  }
+
+  if (!response) {
+    return <Loader text={t('loader.chartNotFound')} />;
+  }
 
   return (
     <div className={styles.chart}>
@@ -71,10 +75,7 @@ export default function Chart() {
               />
             ))
           ) : (
-            <div className={styles.chart__loading}>
-              <span className={styles.chart__loading_spin}></span>
-              <span className={styles.chart__loading_text}>Loading</span>
-            </div>
+            <Loader isSpin text={t('loader.load')} />
           )}
         </div>
       </div>

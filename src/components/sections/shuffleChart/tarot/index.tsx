@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import type { TTarotCards } from '@/lib/types/shuffle';
 import { TarotCard } from '../tarotCard';
 import { useState, useEffect, useRef } from 'react';
+import { useAppSelector } from '@/store';
 
 type TProps = {
   cards: TTarotCards[];
@@ -12,9 +13,10 @@ type TProps = {
 };
 
 export const Tarot = ({ cards, matrix, backCard, setSelectCard }: TProps) => {
-  const [flipped, setFlipped] = useState(false);
   const preloadedImages = useRef(new Set<string>());
   const [isPreloadCards, setIsPreloadCards] = useState(false);
+  const { isFirstAnimationDone } = useAppSelector((state) => state.shuffle);
+  const [flipped, setFlipped] = useState(isFirstAnimationDone);
 
   const preloadImages = async () => {
     if (!cards?.length) return;
@@ -54,7 +56,7 @@ export const Tarot = ({ cards, matrix, backCard, setSelectCard }: TProps) => {
   }, [cards, backCard]);
 
   useEffect(() => {
-    if (!isPreloadCards) return;
+    if (!isPreloadCards || isFirstAnimationDone) return;
     const timer = setTimeout(() => {
       setFlipped(true);
     }, 1000);
