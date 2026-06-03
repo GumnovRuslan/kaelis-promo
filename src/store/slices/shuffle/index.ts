@@ -350,13 +350,13 @@ export const shuffleSlice = createSlice({
           state.layout = { matrix: matrixArray };
         }
 
-        if (state.response?.cards) {
-          Object.keys(state.response.cards).forEach((key) => {
-            if (state.response?.cards?.[key]?.image) {
-              state.response.cards[key].image = state.response.cards[key].image;
-            }
-          });
-        }
+        // if (state.response?.cards) {
+        //   Object.keys(state.response.cards).forEach((key) => {
+        //     if (state.response?.cards?.[key]?.image) {
+        //       state.response.cards[key].image = state.response.cards[key].image;
+        //     }
+        //   });
+        // }
       })
       .addCase(getTarotResponse.rejected, (state, action) => {
         state.isLoading = false;

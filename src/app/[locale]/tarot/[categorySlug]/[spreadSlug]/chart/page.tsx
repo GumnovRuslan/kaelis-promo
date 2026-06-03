@@ -5,6 +5,7 @@ import { Chart } from '@/components/sections';
 import { useLocale, useTranslations } from 'next-intl';
 import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
 import { useEffect } from 'react';
+import { label } from 'motion/react-client';
 
 export default function ChartPage() {
   const t = useTranslations('CategoriesPage');
@@ -30,6 +31,10 @@ export default function ChartPage() {
       label: selectedSpread.data?.name ?? '',
       url: `/tarot/${selectedCategory.data?.slug}/${selectedSpread.data?.slug}`,
     },
+    {
+      label: b('chart'),
+      url: `/tarot/${selectedCategory.data?.slug}/${selectedSpread.data?.slug}/chart`,
+    },
   ];
 
   useEffect(() => {
@@ -52,7 +57,7 @@ export default function ChartPage() {
             href={BREADCRUMBS_DATA.at(-2)?.url ?? ''}
             text={t('buttons.back')}
           />
-          <Breadcrumbs data={BREADCRUMBS_DATA} lastActive />
+          <Breadcrumbs data={BREADCRUMBS_DATA} />
           {selectedSpread.data?.description && (
             <p className={styles.description}>{selectedSpread.data?.description}</p>
           )}

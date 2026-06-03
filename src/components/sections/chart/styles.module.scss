@@ -1,114 +1,69 @@
-.description {
-  color: var(--color-text-white);
-  font-size: fluid-size(14, 32);
-  line-height: 150%;
-  margin-bottom: fluid-size(30, 60);
-  text-align: start;
-}
-
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  color: var(--color-text-primary);
-  font-size: 24px;
-}
-
-.error {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  color: var(--color-text-primary);
-  font-size: 24px;
-}
-
-.chartContainer {
-  width: 100%;
-  margin: fluid-size(20, 40) 0;
-}
-
-.readingContainer {
-  width: 100%;
-  margin-top: fluid-size(20, 40);
+.chart {
   display: flex;
   flex-direction: column;
-  gap: fluid-size(12, 20);
-}
-
-.readingSection {
+  align-items: center;
   width: 100%;
-  background: #1F1D2E;
-  border: 1px solid #D4A2F240;
-  border-radius: fluid-size(10, 20);
-  overflow: hidden;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: fluid-size(15, 25);
-    width: 100%;
-    background: #1F1D2E;
-    color: var(--color-white);
-    font-size: fluid-size(18, 24);
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-
-    span:first-child {
-      color: var(--color-white);
-    }
-  }
-
-  &__icon {
-    display: inline-block;
-    position: relative;
-    min-width: fluid-size(16, 24);
-    height: fluid-size(16, 24);
-    transition: 0.3s;
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--color-white);
-      transition: 0.3s;
-    }
-
-    &::before {
-      transform: translateY(-50%) rotate(90deg);
-    }
-
-    &::after {
-      transform: translateY(-50%);
-    }
-
-    &--open {
-      &::before {
-        transform: translateY(-50%);
-      }
-    }
-  }
 
   &__content {
-    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: fluid-size(10, 50);
 
-    &_inner {
-      padding: fluid-size(15, 25);
-      color: var(--color-white);
-      font-size: fluid-size(14, 18);
-      line-height: 1.6;
+    @include media-down('md') {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 
-      p {
-        margin: 0;
-        opacity: 0.75;
-        color: var(--color-white);
+  &__tarot {
+    height: min-content;
+
+    @include media-down('md') {
+      max-width: 400px;
+    }
+  }
+
+  &__interpretation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include media-up('md') {
+      max-width: 50%;
+    }
+  }
+
+  &__loading {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100%;
+
+    &_text {
+      color: white;
+    }
+
+    &_spin {
+      display: block;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      box-shadow: 2px 2px 1px white;
+      animation: spin 1s linear infinite;
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
       }
     }
   }
@@ -116,13 +71,14 @@
 
 .learnMore {
   width: 100%;
-  
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  margin-top: 15px;
 
   &__text {
+    text-align: center;
+    line-height: 130%;
     font-size: fluid-size(12, 14);
     font-weight: 400;
     color: var(--color-text-white);
@@ -131,8 +87,10 @@
 }
 
 .newReadingButton {
-  margin: fluid-size(20, 30) auto 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin: fluid-size(30, 50) auto 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);

@@ -37,12 +37,20 @@ export interface TarotRequest {
       matrix: Record<string, [number, number]>;
     };
     question: string;
-    cards: Record<string, TarotCard>;
+    cards: TTarotCards[];
     back_card: string;
     chat_id: number;
     reading: TReadingMessage | null;
   };
 }
+
+export type TTarotCards = {
+  name: string;
+  image: string;
+  description: string;
+  orientation: number;
+  position: string | number;
+};
 
 export type TReadingResponse = {
   id: number;
