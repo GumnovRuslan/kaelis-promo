@@ -1,25 +1,23 @@
 'use client';
 
-import { useEffect } from 'react';
 import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
 import { ReaderStyleSelector } from '@/components/shuffle/reader-style-selector';
 import { Chat } from '@/components/shuffle/chat';
 import styles from './styles.module.scss';
-import { useLocale, useTranslations } from 'next-intl';
-import { Chart, Loader } from '@/components/sections';
+import { useTranslations } from 'next-intl';
+import { Loader } from '@/components/sections';
 import { ButtonBack, Breadcrumbs } from '@/components/ui';
-import { TarotCategory } from '@/lib/types/shuffle';
-import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function ChartPage() {
-  const router = useRouter();
   const t = useTranslations('CategoriesPage');
   const b = useTranslations('breadcrumbs');
-  const locale = useLocale();
+  const { selectedCategory, selectedSpread, isLoading } = useAppSelector((state) => state.shuffle);
+  const params = useParams();
+  const spreadSlug = params.spreadSlug;
+  const categorySlug = params.categorySlug;
   const dispatch = useAppDispatch();
-  const { categories, selectedCategory, selectedSpread, isLoading } = useAppSelector(
-    (state) => state.shuffle,
-  );
 
   const BREADCRUMBS_DATA = [
     {
@@ -32,29 +30,22 @@ export default function ChartPage() {
     },
     {
       label: selectedCategory.data?.name ?? '',
-      url: `/tarot/${selectedCategory.data?.slug}`,
+      url: `/tarot/${categorySlug}`,
     },
     {
       label: selectedSpread.data?.name ?? '',
-      url: `/tarot/${selectedCategory.data?.slug}/${selectedSpread.data?.slug}`,
+      url: `/tarot/${categorySlug}/${spreadSlug}`,
     },
   ];
 
   useEffect(() => {
     dispatch(shuffleActions.resetShuffleResponse());
+  }, []);
 
-    if (!selectedCategory.data || selectedCategory.lang !== locale) {
-      dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20, lang: locale }));
-    }
-    if (!selectedSpread.data || selectedSpread.lang !== locale) {
-      dispatch(
-        shuffleActions.getTarotSpreads({ selectedCategory: selectedCategory.data, lang: locale }),
-      );
-    }
-  }, [dispatch, locale]);
-
-  if ((isLoading && !categories) || !selectedCategory || !selectedSpread) {
-    return <Loader text={t('loader.load')} />;
+  if (!selectedCategory.data) {
+    return <Loader text={t('loader.categoryNotFound')} />;
+  } else if (!selectedSpread.data) {
+    return <Loader text={t('loader.spreadsNotFound')} />;
   }
 
   return (

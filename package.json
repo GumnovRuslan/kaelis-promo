@@ -16,6 +16,7 @@
     "@sanity/image-url": "^1.2.0",
     "@upstash/redis": "^1.35.3",
     "axios": "^1.13.2",
+    "classnames": "^2.5.1",
     "graphql": "^16.11.0",
     "graphql-request": "^7.2.0",
     "laravel-echo": "^2.2.6",
@@ -27,6 +28,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-redux": "^9.2.0",
+    "react-zoom-pan-pinch": "^4.0.3",
     "redux-persist": "^6.0.0",
     "resend": "^6.0.1"
   },

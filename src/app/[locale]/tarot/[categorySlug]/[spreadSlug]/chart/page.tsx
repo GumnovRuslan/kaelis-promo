@@ -2,16 +2,16 @@
 import { Breadcrumbs, ButtonBack } from '@/components/ui';
 import styles from './styles.module.scss';
 import { Chart } from '@/components/sections';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
-import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ChartPage() {
   const t = useTranslations('CategoriesPage');
   const b = useTranslations('breadcrumbs');
   const { question, selectedCategory, selectedSpread } = useAppSelector((state) => state.shuffle);
+  const route = useRouter();
   const dispatch = useAppDispatch();
-  const locale = useLocale();
 
   const BREADCRUMBS_DATA = [
     {
@@ -30,29 +30,25 @@ export default function ChartPage() {
       label: selectedSpread.data?.name ?? '',
       url: `/tarot/${selectedCategory.data?.slug}/${selectedSpread.data?.slug}`,
     },
+    {
+      label: b('chart'),
+      url: `/tarot/${selectedCategory.data?.slug}/${selectedSpread.data?.slug}/chart`,
+    },
   ];
-
-  useEffect(() => {
-    if (!selectedCategory.data || selectedCategory.lang !== locale) {
-      dispatch(shuffleActions.getTarotCategories({ page: 1, per_page: 20, lang: locale }));
-    }
-    if (!selectedSpread.data || selectedSpread.lang !== locale) {
-      dispatch(
-        shuffleActions.getTarotSpreads({ selectedCategory: selectedCategory.data, lang: locale }),
-      );
-    }
-  }, [locale]);
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.section__header}>
           <ButtonBack
-            as='link'
-            href={BREADCRUMBS_DATA.at(-2)?.url ?? ''}
+            as='button'
             text={t('buttons.back')}
+            onClick={() => {
+              dispatch(shuffleActions.resetShuffleResponse());
+              route.push(BREADCRUMBS_DATA.at(-2)?.url ?? '/tarot');
+            }}
           />
-          <Breadcrumbs data={BREADCRUMBS_DATA} lastActive />
+          <Breadcrumbs data={BREADCRUMBS_DATA} />
           {selectedSpread.data?.description && (
             <p className={styles.description}>{selectedSpread.data?.description}</p>
           )}

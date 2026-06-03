@@ -6,15 +6,16 @@ import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
 import { ChartCanvas } from '@/components/shuffle/chart-canvas';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui';
+import { ShuffleCart } from '@/components/sections/shuffleChart';
+import { Question } from '@/components/ui';
+import Loader from '../loader';
 
 export default function Chart() {
   const t = useTranslations('CategoriesPage');
-  const { response } = useAppSelector((state) => state.shuffle);
-  const cards = response?.cards;
+  const { response, isLoading } = useAppSelector((state) => state.shuffle);
   const matrix = response?.tarot?.matrix;
+  const [idOpen, setIdOpen] = useState<number | null>(null);
   const dispatch = useAppDispatch();
-
-  console.log('Chart response:', response);
 
   const memoizedMatrix = useMemo(() => {
     if (!matrix) return null;
@@ -24,34 +25,60 @@ export default function Chart() {
     });
   }, [matrix]);
 
-  const memoizedCards = useMemo(() => {
-    return response?.cards || {};
-  }, [cards]);
-
   const handleNewReading = () => {
     dispatch(shuffleActions.clearChart());
   };
 
+  if (isLoading && !response) {
+    return <Loader isSpin text={t('loader.load')} />;
+  }
+
+  if (!response) {
+    return <Loader text={t('loader.chartNotFound')} />;
+  }
+
   return (
-    <>
-      {response && memoizedMatrix && Object.keys(memoizedCards).length > 0 && (
+    <div className={styles.chart}>
+      {/* {response && memoizedMatrix && Object.keys(memoizedCards).length > 0 && (
         <div className={styles.chartContainer}>
           <ChartCanvas matrix={memoizedMatrix} cards={memoizedCards} />
         </div>
-      )}
+      )} */}
 
-      {response && (
-        <div className={styles.learnMore}>
-          <span className={styles.learnMore__text}>{t('tarot.more')}</span>
+      <div className={styles.chart__content}>
+        <div className={styles.chart__tarot}>
+          {response?.cards && memoizedMatrix && (
+            <ShuffleCart
+              matrix={memoizedMatrix}
+              cards={response.cards}
+              backCard={response.back_card}
+            />
+          )}
+
+          {response && (
+            <div className={styles.learnMore}>
+              <span className={styles.learnMore__text}>{t('tarot.more')}</span>
+            </div>
+          )}
         </div>
-      )}
 
-      {/* {response?.reading?.interpretation &&
-        response?.reading?.interpretation.map((item, index) => (
-          <div key={index} className={styles.readingSection}>
-            <h3 className={styles.readingSection__header}>{item.title}</h3>
-          </div>
-        ))} */}
+        <div className={styles.chart__interpretation}>
+          {response?.reading?.interpretation ? (
+            response?.reading?.interpretation.map((item, i) => (
+              <Question
+                data={{ question: item.title, answer: item.text }}
+                isOpen={i === idOpen}
+                setIsOpen={() => {
+                  i === idOpen ? setIdOpen(null) : setIdOpen(i);
+                }}
+                key={i}
+              />
+            ))
+          ) : (
+            <Loader isSpin text={t('loader.load')} />
+          )}
+        </div>
+      </div>
 
       <Button
         as='link'
@@ -60,6 +87,6 @@ export default function Chart() {
         className={styles.newReadingButton}
         text={t('buttons.new_reading')}
       />
-    </>
+    </div>
   );
 }

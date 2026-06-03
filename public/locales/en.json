@@ -76,7 +76,7 @@
       "policy": {
         "text": "By clicking “Send”, you agree to the",
         "link": "Privacy Policy"
-      } 
+      }
     },
     "subscription": {
       "title": "We'll send your 7-day practice and later — a promo code",
@@ -174,8 +174,8 @@
       "description": "Read expert materials on Tarot, astrology, numerology, and mystical practices — articles, spreads, and tutorials on Kaelis.",
       "keywords": "Tarot spreads, Astrology, Numerology, Mystical practices, Tarot learning, Spreads, Kaelis articles",
       "openGraph": {
-          "title": "Articles on Tarot, Astrology, Numerology — Kaelis",
-          "description": "Explore mystical practices: Tarot spreads, astrology, numerology, and expert tutorials on Kaelis."
+        "title": "Articles on Tarot, Astrology, Numerology — Kaelis",
+        "description": "Explore mystical practices: Tarot spreads, astrology, numerology, and expert tutorials on Kaelis."
       }
     },
     "title": "Articles",
@@ -204,8 +204,8 @@
       "description": "Frequently asked questions about the Kaelis app: astrology, Tarot, natal chart, destiny matrix, affirmations, subscription, and support.",
       "keywords": "Kaelis FAQ, Kaelis questions and answers, Kaelis support, astrology questions, online Tarot help, natal chart app, Kaelis subscription",
       "openGraph": {
-          "title": "Questions & Answers — Kaelis",
-          "description": "Answers to common questions about Kaelis: how to use the app, what Tarot, astrology, destiny matrix, and affirmations include."
+        "title": "Questions & Answers — Kaelis",
+        "description": "Answers to common questions about Kaelis: how to use the app, what Tarot, astrology, destiny matrix, and affirmations include."
       }
     },
     "title": "F.A.Q.",
@@ -241,8 +241,8 @@
       "title": "Page Not Found — Kaelis",
       "description": "Unfortunately, the page was not found. Try going to the Kaelis homepage or use the menu.",
       "openGraph": {
-          "title": "Page Not Found — Kaelis",
-          "description": "Error 404. Page not found. Return to the Kaelis website to continue."
+        "title": "Page Not Found — Kaelis",
+        "description": "Error 404. Page not found. Return to the Kaelis website to continue."
       }
     },
     "title": "Page not found",
@@ -302,13 +302,13 @@
           "href": "/faq"
         },
         {
-          "label":"Tarot spreads",
+          "label": "Tarot spreads",
           "href": "/tarot"
         }
       ]
     }
   },
-  "DownloadFromStore" : {
+  "DownloadFromStore": {
     "text": "Hi, the Kaelis app is now available for download. You can download it here."
   },
   "TestSection": {
@@ -977,7 +977,8 @@
     "loader": {
       "load": "Loading...",
       "categoryNotFound": "Category not found",
-      "spreadsNotFound": "Spreads not found"
+      "spreadsNotFound": "Spreads not found",
+      "chartNotFound": "Chart not found"
     },
     "tarot": {
       "more": "Click the card to Learn More"
@@ -991,6 +992,7 @@
   },
   "breadcrumbs": {
     "home": "Home",
-    "tarot": "Tarot"
+    "tarot": "Tarot",
+    "chart": "Layout"
   }
 }
