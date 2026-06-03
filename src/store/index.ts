@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import shuffleReducer, {
   setSelectedCategory,
   clearSelectedCategory,
@@ -21,26 +21,28 @@ import shuffleReducer, {
   authenticateGuest,
   setGuestAuth,
   getTarotAnswerFromChat,
-  resetShuffleResponse
-} from './slices/shuffle'
+  resetShuffleResponse,
+} from './slices/shuffle';
 
-import storage from 'redux-persist/lib/storage'
-import { persistReducer, persistStore } from 'redux-persist'
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
 
 // --- объединяем редьюсеры ---
 const rootReducer = combineReducers({
   shuffle: shuffleReducer,
-})
+});
 
 // --- конфигурация persist ---
 const persistConfig = {
-  key: 'categories',        // ключ в localStorage
-  storage,                  // localStorage
-  whitelist: ['shuffle'],   // сохраняем только shuffle
-}
+  key: 'categories', // ключ в localStorage
+  storage, // localStorage
+  whitelist: ['shuffle'], // сохраняем только shuffle
+  version: 1,
+  migrate: () => Promise.resolve(undefined),
+};
 
 // --- оборачиваем reducer в persistReducer ---
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // --- создаём store ---
 export const store = configureStore({
@@ -50,17 +52,17 @@ export const store = configureStore({
       serializableCheck: false, // нужно для redux-persist
     }),
   devTools: process.env.NODE_ENV !== 'production',
-})
+});
 
 // --- создаём persistor для PersistGate ---
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);
 
 // --- типы и хуки ---
-export type AppState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type AppState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
-export const useAppDispatch = (): AppDispatch => useDispatch<AppDispatch>()
-export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector
+export const useAppDispatch = (): AppDispatch => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
 
 // --- экшены shuffle ---
 export const shuffleActions = {
@@ -82,5 +84,5 @@ export const shuffleActions = {
   authenticateGuest,
   setGuestAuth,
   getTarotAnswerFromChat,
-  resetShuffleResponse
-}
+  resetShuffleResponse,
+};
