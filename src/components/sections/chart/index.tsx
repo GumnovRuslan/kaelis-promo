@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import styles from './styles.module.scss';
 import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
-import { ChartCanvas } from '@/components/shuffle/chart-canvas';
+// import { ChartCanvas } from '@/components/shuffle/chart-canvas';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui';
 import { ShuffleCart } from '@/components/sections/shuffleChart';
