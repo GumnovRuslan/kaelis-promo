@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { shuffleActions, useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/navigation';
 
-export default function ChartPage() {
+export default function QuestionPage() {
   const t = useTranslations('CategoriesPage');
   const b = useTranslations('breadcrumbs');
   const { question, selectedCategory, selectedSpread } = useAppSelector((state) => state.shuffle);
