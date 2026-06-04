@@ -1,21 +1,15 @@
 'use client';
 
-import PreloadingContext from '@/context/animation';
-import { initGuest } from '@/utils/tarot/initializeGuest';
-import { useEffect } from 'react';
-import { useAppDispatch } from '@/store';
+// import PreloadingContext from '@/context/animation';
 import WebsocketProvider from '@/providers/websocket-provider';
+import useInitGuest from '@/hooks/useInitGuest';
 
 export default function LayoutQuestion({ children }: { children: React.ReactNode }) {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    initGuest(dispatch);
-  }, []);
+  useInitGuest();
 
   return (
-    <PreloadingContext>
-      <WebsocketProvider>{children}</WebsocketProvider>
-    </PreloadingContext>
+    // <PreloadingContext>
+    <WebsocketProvider>{children}</WebsocketProvider>
+    // </PreloadingContext>
   );
 }

@@ -21,7 +21,6 @@ export function Chat({ isVisible = true }: ChatProps) {
   );
   const isDisabled =
     !selectedCategory.data || !selectedSpread.data || !readerStyle.data || !question;
-  console.log(isDisabled);
   const dispatch = useAppDispatch();
   const { allowed, key, used, limit } = checkTarotLimit(guestId || '');
   const { openModal } = useModalLimitContext();

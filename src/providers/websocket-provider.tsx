@@ -124,10 +124,7 @@ const WebsocketProvider = ({ children }: PropsWithChildren) => {
   }, [dispatch, router, close]);
 
   useEffect(() => {
-    const storedGuestId = getGuestId();
-    const currentGuestId = guestId || storedGuestId;
-
-    if (currentGuestId) {
+    if (guestId) {
       initializeSocket();
     }
 
