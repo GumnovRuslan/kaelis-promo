@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 export default function ChartPage() {
   const t = useTranslations('CategoriesPage');
   const b = useTranslations('breadcrumbs');
-  const { selectedCategory, selectedSpread, isLoading, speakers } = useAppSelector(
+  const { selectedCategory, selectedSpread, isLoading, readerStyle } = useAppSelector(
     (state) => state.shuffle,
   );
   const params = useParams();
@@ -44,10 +44,6 @@ export default function ChartPage() {
     dispatch(shuffleActions.resetShuffleResponse());
   }, []);
 
-  if (isLoading) {
-    return <Loader text={t('loader.load')} />;
-  }
-
   if (!selectedCategory.data && !isLoading) {
     return <Loader text={t('loader.categoryNotFound')} />;
   } else if (!selectedSpread.data && !isLoading) {
@@ -72,7 +68,8 @@ export default function ChartPage() {
 
         <div className={styles.content}>
           <ReaderStyleSelector />
-          <Chat />
+
+          {readerStyle.data && <Chat />}
         </div>
       </div>
     </section>
