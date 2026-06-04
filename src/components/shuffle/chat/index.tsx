@@ -19,7 +19,9 @@ export function Chat({ isVisible = true }: ChatProps) {
   const { selectedCategory, selectedSpread, readerStyle, guestId } = useAppSelector(
     (state) => state.shuffle,
   );
-  const isDisabled = !selectedCategory || !selectedSpread || !readerStyle || !question;
+  const isDisabled =
+    !selectedCategory.data || !selectedSpread.data || !readerStyle.data || !question;
+  console.log(isDisabled);
   const dispatch = useAppDispatch();
   const { allowed, key, used, limit } = checkTarotLimit(guestId || '');
   const { openModal } = useModalLimitContext();
@@ -40,8 +42,8 @@ export function Chat({ isVisible = true }: ChatProps) {
     }
 
     // if (!allowed) {
-    //   openModal()
-    //   return
+    //   openModal();
+    //   return;
     // }
 
     try {

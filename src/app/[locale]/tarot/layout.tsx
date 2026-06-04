@@ -28,13 +28,20 @@ function Wrapper({ children }: { children: React.ReactNode }) {
   const params = useParams();
   const categorySlug = params.categorySlug as string | undefined;
   const spreadSlug = params.spreadSlug as string | undefined;
-  const { categories, spreads } = useAppSelector((state) => state.shuffle);
+  const { categories, spreads, speakers } = useAppSelector((state) => state.shuffle);
 
   //  Загружаем данные при смене языка
   useEffect(() => {
     if (!categories || locale === categories.lang) return;
 
     dispatch(shuffleActions.getTarotCategories({ lang: locale }));
+  }, [dispatch, locale]);
+
+  //  Загружаем данные при смене языка
+  useEffect(() => {
+    if (!speakers || locale === speakers.lang) return;
+
+    dispatch(shuffleActions.getTarotSpeaker({ lang: locale }));
   }, [dispatch, locale]);
 
   // Выбираем категорию по slug

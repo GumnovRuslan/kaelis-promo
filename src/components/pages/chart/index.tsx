@@ -13,7 +13,9 @@ import { useEffect } from 'react';
 export default function ChartPage() {
   const t = useTranslations('CategoriesPage');
   const b = useTranslations('breadcrumbs');
-  const { selectedCategory, selectedSpread, isLoading } = useAppSelector((state) => state.shuffle);
+  const { selectedCategory, selectedSpread, isLoading, speakers } = useAppSelector(
+    (state) => state.shuffle,
+  );
   const params = useParams();
   const spreadSlug = params.spreadSlug;
   const categorySlug = params.categorySlug;
@@ -42,9 +44,13 @@ export default function ChartPage() {
     dispatch(shuffleActions.resetShuffleResponse());
   }, []);
 
-  if (!selectedCategory.data) {
+  if (isLoading) {
+    return <Loader text={t('loader.load')} />;
+  }
+
+  if (!selectedCategory.data && !isLoading) {
     return <Loader text={t('loader.categoryNotFound')} />;
-  } else if (!selectedSpread.data) {
+  } else if (!selectedSpread.data && !isLoading) {
     return <Loader text={t('loader.spreadsNotFound')} />;
   }
 

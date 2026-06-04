@@ -1,11 +1,24 @@
+'use client';
+
 import styles from './styles.module.scss';
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { CloseButton } from '@/components/ui';
 import type { TTarotCards } from '@/lib/types/shuffle';
+import { useAppSelector } from '@/store';
 
-export const TarotModalCard = ({ card, onClose }: { card: TTarotCards; onClose: () => void }) => {
+type TProps = {
+  card: TTarotCards;
+  onClose: () => void;
+};
+
+export const TarotModalCard = ({ card, onClose }: TProps) => {
+  const { response } = useAppSelector((state) => state.shuffle);
+
+  const readingCards = response?.reading?.cards;
+  const description = readingCards?.find((el) => el.position == card.position)?.text;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -30,6 +43,7 @@ export const TarotModalCard = ({ card, onClose }: { card: TTarotCards; onClose: 
         />
         <h3 className={styles.tarotModalCard__title}>{card.name}</h3>
         <p className={styles.tarotModalCard__description}>{card.description}</p>
+        {description && <p className={styles.tarotModalCard__description}>{description}</p>}
       </div>
     </motion.div>
   );
