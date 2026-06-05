@@ -60,12 +60,6 @@ export default function Chart() {
               backCard={response.back_card}
             />
           )}
-
-          {response && (
-            <div className={styles.learnMore}>
-              <span className={styles.learnMore__text}>{t('tarot.more')}</span>
-            </div>
-          )}
         </div>
 
         <div className={styles.chart__interpretations}>
