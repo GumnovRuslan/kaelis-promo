@@ -6,6 +6,7 @@ import { Tarot } from './tarot';
 import { TarotModalCard } from './tarotModal';
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 type TProps = {
   matrix: { x: number; y: number }[];
@@ -14,11 +15,17 @@ type TProps = {
 };
 
 export const ShuffleCart = ({ matrix, cards, backCard }: TProps) => {
+  const t = useTranslations();
   const [selectedCard, setSelectCard] = useState<TTarotCards | null>(null);
 
   return (
     <>
       <div className={styles.tarotShuffle}>
+        <div className={styles.learnMore}>
+          <span className={styles.learnMore__sign}>i</span>
+          <span className={styles.learnMore__text}>{t('CategoriesPage.tarot.more')}</span>
+        </div>
+
         <TransformWrapper
           initialScale={1}
           minScale={1}
