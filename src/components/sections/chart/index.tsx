@@ -14,8 +14,14 @@ export default function Chart() {
   const t = useTranslations('CategoriesPage');
   const { response, isLoading } = useAppSelector((state) => state.shuffle);
   const matrix = response?.tarot?.matrix;
-  const [idOpen, setIdOpen] = useState<number | null>(null);
+  const [idOpenInterpretation, setIdOpenInterpretation] = useState<number[]>([]);
   const dispatch = useAppDispatch();
+
+  const handleIdOpenInterpretation = (key: number) => {
+    setIdOpenInterpretation((prev) =>
+      prev.includes(key) ? prev.filter((id) => id !== key) : [...prev, key],
+    );
+  };
 
   const memoizedMatrix = useMemo(() => {
     if (!matrix) return null;
@@ -62,15 +68,14 @@ export default function Chart() {
           )}
         </div>
 
-        <div className={styles.chart__interpretation}>
+        <div className={styles.chart__interpretations}>
           {response?.reading?.interpretation ? (
             response?.reading?.interpretation.map((item, i) => (
               <Question
+                classNameTitle={styles.interpretation__title}
                 data={{ question: item.title, answer: item.text }}
-                isOpen={i === idOpen}
-                setIsOpen={() => {
-                  i === idOpen ? setIdOpen(null) : setIdOpen(i);
-                }}
+                isOpen={idOpenInterpretation.includes(i)}
+                setIsOpen={() => handleIdOpenInterpretation(i)}
                 key={i}
               />
             ))
