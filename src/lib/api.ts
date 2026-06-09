@@ -100,6 +100,8 @@ api.interceptors.request.use(
       config.headers['Accept-Language'] = language;
     }
 
+    config.headers['X-Platform'] = 'site';
+
     return config;
   },
   (error) => {
