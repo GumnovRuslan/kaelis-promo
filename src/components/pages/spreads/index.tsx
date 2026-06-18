@@ -11,7 +11,7 @@ import { useParams } from 'next/navigation';
 import { TBreadcrumbs } from '@/types/breadcrumbs';
 
 export default function SpreadsPage() {
-  const t = useTranslations('CategoriesPage');
+  const t = useTranslations();
   const b = useTranslations('breadcrumbs');
   const { selectedCategory, selectedSpread, spreads, isLoading } = useAppSelector(
     (state) => state.shuffle,
@@ -35,16 +35,20 @@ export default function SpreadsPage() {
   ];
 
   if (isLoading) {
-    return <Loader text={t('loader.load')} />;
+    return <Loader text={t('CategoriesPage.loader.load')} />;
   }
 
   return (
     <section className={styles.spreads}>
       <div className={styles.spreads__header}>
-        <ButtonBack as='link' href={BREADCRUMBS_DATA.at(-2)?.url ?? ''} text={t('buttons.back')} />
+        <ButtonBack
+          as='link'
+          href={BREADCRUMBS_DATA.at(-2)?.url ?? ''}
+          text={t('CategoriesPage.buttons.back')}
+        />
         <Breadcrumbs data={BREADCRUMBS_DATA} className={styles.spreads__breadcrumbs} />
         {selectedCategory.data?.name && (
-          <h1 className={styles.spreads__header_title}>{selectedCategory.data.name}</h1>
+          <h1 className={styles.spreads__header_title}>{t(`TarotSeo.category.${categorySlug}`)}</h1>
         )}
         {selectedCategory.data?.description && (
           <p className={styles.spreads__heder_description}>{selectedCategory.data.description}</p>
@@ -52,9 +56,9 @@ export default function SpreadsPage() {
       </div>
 
       {!selectedCategory.data ? (
-        <Loader text={t('loader.categoryNotFound')} />
+        <Loader text={t('CategoriesPage.loader.categoryNotFound')} />
       ) : !spreads.data || !spreads.data.length ? (
-        <Loader text={t('loader.spreadsNotFound')} />
+        <Loader text={t('CategoriesPage.loader.spreadsNotFound')} />
       ) : (
         <CategoriesGrid>
           {spreads.data.map((spread) => (
