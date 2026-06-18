@@ -35,7 +35,7 @@ const TarotCategorySection = ({ categories }: TProps) => {
     <section className={styles.tarot}>
       <div className={styles.tarot__header}>
         <Breadcrumbs data={breadcrumbsData} />
-        <h1 className={styles.tarot__title}>{t('CategoriesPage.title')}</h1>
+        <h1 className={styles.tarot__title}>{t('TarotSeo.tarot')}</h1>
         <p className={styles.tarot__description}>{t('CategoriesPage.subtitle')}</p>
       </div>
 

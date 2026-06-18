@@ -959,7 +959,7 @@
     }
   },
   "CategoriesPage": {
-    "title": "Tarot Categories",
+    "title": "Free AI Tarot Reading",
     "subtitle": "From love to career — let us guide you on your cosmic journey.",
     "speaker": {
       "title": "Choose a reading style"
@@ -994,5 +994,102 @@
     "home": "Home",
     "tarot": "Tarot",
     "chart": "Layout"
+  },
+  "TarotSeo": {
+    "descriptionTemplate": " — Daily Online Accurate Card Spreads by 🌑 Kaelis 🌑 Your AI Guide to the World of Tarot",
+    "tarot": "Free AI Tarot Reading",
+    "category": {
+      "dreams": "Dreams Tarot",
+      "personality": "Personality Tarot",
+      "education": "Education Tarot Reading",
+      "family": "Family Tarot Reading",
+      "trips": "Trips Tarot Reading",
+      "health": "Health Tarot Spread",
+      "money": "Money Tarot Spread",
+      "work": "Work Tarot Reading",
+      "decision": "Decision Making Tarot Spread",
+      "hidden": "Hidden Tarot Reading",
+      "love": "Free Love Tarot Reading",
+      "forecast": "Forecast Tarot Reading",
+      "soul-path": "Soul Path Tarot Reading",
+      "answer": "Instant Answer Tarot"
+    },
+    "spread": {
+      "dream": "Dream Tarot",
+
+      "state": "Personality State Tarot",
+      "take-off-the-mask": "Take Off The Mask Tarot",
+      "inner-child": "Inner Child Tarot",
+      "superconsciousness": "Superconsciousness Tarot",
+      "who-are-you": "Who Are You Tarot",
+
+      "opportunities": "Opportunities Tarot Reading",
+      "exam": "Exam Tarot Reading",
+      "talent": "Talent Tarot Reading",
+      "direction": "Direction Tarot Reading",
+
+      "my-family": "Family Tarot Reading",
+      "what-will-happen": "What Will Happen Tarot",
+      "pregnancy": "Pregnancy Tarot Reading",
+      "children": "Children Tarot Reading",
+
+      "trip": "Trips Tarot Card",
+      "emigration": "Emigration Tarot Reading",
+      "vacation": "Vacation Tarot Reading",
+      "invitation": "Invitation Tarot Reading",
+
+      "recovery": "Recovery Tarot Reading",
+      "course-of-illness": "Course Of Illness Tarot Reading",
+      "health": "Health Tarot Reading",
+      "surgery": "Surgery Tarot Reading",
+
+      "sale": "Sale Tarot Reading",
+      "purchase": "Purchase Tarot Reading",
+      "business": "Business Tarot Spread",
+      "investment": "Investment Tarot Reading",
+      "loss": "Loss Tarot Reading",
+
+      "my-job": "Job Tarot Spread",
+      "job-change": "Job Change Tarot Spread",
+      "getting-a-job": "Gettting A Job Tarot Reading",
+      "career": "Career Tarot Reading",
+
+      "path": "Path Tarot Reading",
+      "choice": "Choice Tarot Reading",
+      "consequences": "Consequences Tarot Reading",
+      "decision": "Decision Tarot Reading",
+      "problem": "Problem Tarot Reading",
+      "why": "Why Tarot Reading",
+      "yesno": "Yes No Tarot AI",
+
+      "secret": "Secret Tarot",
+
+      "between-us": "Between Us Tarot Reading",
+      "union": "Union Tarot Reading",
+      "breakup": "Breakup Tarot Spread",
+      "fate": "Fate Tarot Spread",
+      "choice-44": "Love Choice Tarot Spread",
+      "abuse": "Abuse Tarot Reading",
+      "quarrel": "Quarrel Tarot Reading",
+      "reciprocity": "Reciprocity Tarot Reading",
+      "cheating": "Cheating Tarot Reading",
+      "separation": "Separation Tarot Reading",
+      "compatibility": "Compatibility Tarot Spread",
+      "karma": "Karma Tarot Card Reading",
+
+      "predication": "Tarot Prediction Reading",
+      "month": "Month Tarot Spread",
+      "7-days": "7 days Tarot Spread",
+
+      "temple-of-fate": "Temple Of Fate Tarot Reading",
+      "what-inside": "Whats Inside Tarot Reading",
+      "karma-57": "Karma Tarot Card Spread",
+      "past-lives": "Past Lives Tarot Reading",
+      "key-incarnation": "Key Incarnation Tarot Reading",
+      "our-souls": "Our Souls Tarot Reading",
+
+      "celtic": "Celtic Cross Tarot",
+      "triplet": "Triplet Tarot Reading"
+    }
   }
 }

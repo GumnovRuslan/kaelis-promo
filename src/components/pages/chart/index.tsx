@@ -11,7 +11,7 @@ import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function ChartPage() {
-  const t = useTranslations('CategoriesPage');
+  const t = useTranslations();
   const b = useTranslations('breadcrumbs');
   const { selectedCategory, selectedSpread, isLoading, readerStyle } = useAppSelector(
     (state) => state.shuffle,
@@ -45,9 +45,9 @@ export default function ChartPage() {
   }, []);
 
   if (!selectedCategory.data && !isLoading) {
-    return <Loader text={t('loader.categoryNotFound')} />;
+    return <Loader text={t('CategoriesPage.loader.categoryNotFound')} />;
   } else if (!selectedSpread.data && !isLoading) {
-    return <Loader text={t('loader.spreadsNotFound')} />;
+    return <Loader text={t('CategoriesPage.loader.spreadsNotFound')} />;
   }
 
   return (
@@ -57,9 +57,10 @@ export default function ChartPage() {
           <ButtonBack
             as='link'
             href={BREADCRUMBS_DATA.at(-2)?.url ?? ''}
-            text={t('buttons.back')}
+            text={t('CategoriesPage.buttons.back')}
           />
           <Breadcrumbs data={BREADCRUMBS_DATA} />
+          {spreadSlug && <h1 className={styles.title}>{t(`TarotSeo.spread.${spreadSlug}`)}</h1>}
         </div>
 
         {selectedSpread.data?.description && (

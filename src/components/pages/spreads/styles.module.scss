@@ -1,19 +1,19 @@
 .loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    color: var(--color-white);
-    font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--color-white);
+  font-size: 24px;
 }
 
 .error {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    color: var(--color-white);
-    font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: var(--color-white);
+  font-size: 24px;
 }
 
 .spreads {
@@ -36,8 +36,11 @@
 
   &__header_title {
     color: var(--color-white);
-    font-size: fluid-size(16, 36);
     font-weight: 700;
+
+    @include media-up('sm') {
+      font-size: fluid-size(16, 36);
+    }
 
     @include media-down('sm') {
       font-size: fluid-size(20, 24, 375, 576);
@@ -55,11 +58,5 @@
   }
 
   &__content {
-    
   }
 }
-
-
-
-
-

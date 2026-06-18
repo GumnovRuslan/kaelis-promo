@@ -1,43 +1,49 @@
-import "@/styles/index.scss";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Background } from "@/components/ui";
-import { ModalProvider } from "@/context/modal";
-import { Header, Footer, Modal, ModalLimit } from "@/components/sections";
+import '@/styles/index.scss';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { Background } from '@/components/ui';
+import { ModalProvider } from '@/context/modal';
+import { Header, Footer, Modal, ModalLimit } from '@/components/sections';
 import { NextIntlClientProvider } from 'next-intl';
 import { locales } from '@/i18n/routing';
-import { getTranslations } from "next-intl/server";
-import { CookieConsentProvider } from "@/context/CookieConsentContext";
-import Cookie from "@/components/sections/cookie";
-import AnalyticsManager from "@/components/sections/analytics_manager/AnalyticsManager";
-import { SubscribeProvider } from "@/context/SubscribeContext";
-import { ModalLimitProvider } from "@/context/modalLimit";
+import { getTranslations } from 'next-intl/server';
+import { CookieConsentProvider } from '@/context/CookieConsentContext';
+import Cookie from '@/components/sections/cookie';
+import AnalyticsManager from '@/components/sections/analytics_manager/AnalyticsManager';
+import { SubscribeProvider } from '@/context/SubscribeContext';
+import { ModalLimitProvider } from '@/context/modalLimit';
 
 const geistInter = Inter({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "700"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  weight: ['300', '400', '600', '700'],
 });
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export const generateMetadata = async ({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> => {
   const { locale } = await params;
-  const t = await getTranslations('Seo')
+  const t = await getTranslations('Seo');
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.kaelisai.com';
 
   return {
     title: {
       default: 'Kaelis',
-      template: `%s | ${t('title')}`,
+      template: `%s | Kaelis`,
     },
     description: t('description'),
-    keywords: t('keywords').split(',').map(item => item.trim()),
+    keywords: t('keywords')
+      .split(',')
+      .map((item) => item.trim()),
     icons: {
-      icon: "/images/favicon.svg",
+      icon: '/images/favicon.svg',
     },
     openGraph: {
       siteName: 'Kaelis',
@@ -46,27 +52,27 @@ export const generateMetadata = async ({ params }: { params: Promise<{ locale: s
       url: `${baseUrl}/${locale}`,
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
     },
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: {
-        "x-default": `${baseUrl}/`,
-        'en': `${baseUrl}/en`,
+        'x-default': `${baseUrl}/`,
+        en: `${baseUrl}/en`,
         'uk-UA': `${baseUrl}/ua`,
-        'ru': `${baseUrl}/ru`,
-      }
+        ru: `${baseUrl}/ru`,
+      },
     },
-    category: "Lifestyle",
+    category: 'Lifestyle',
     verification: {
-      google: 'g-jH6mhfzaLWhtC-UJdgtCxQA1kFZ06dp-Vqyn5w5zQ'
-    }
-  }
-}
+      google: 'g-jH6mhfzaLWhtC-UJdgtCxQA1kFZ06dp-Vqyn5w5zQ',
+    },
+  };
+};
 
 export default async function RootLayout({
   children,
-  params
+  params,
 }: Readonly<{
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -85,9 +91,7 @@ export default async function RootLayout({
                   <Modal />
                   <Background />
                   <Header />
-                  <main>
-                    {children}
-                  </main>
+                  <main>{children}</main>
                   <Footer />
                 </ModalLimitProvider>
               </ModalProvider>
