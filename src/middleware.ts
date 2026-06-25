@@ -1,6 +1,7 @@
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 import { NextResponse, NextRequest } from 'next/server';
+import { STORES } from './lib/config/stores';
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -15,10 +16,10 @@ export default function middleware(req: NextRequest) {
     const isAndroid = /android/.test(ua);
 
     if (isIOS) {
-      return NextResponse.redirect('https://your-ios-link.com');
+      return NextResponse.redirect(STORES.ios?.link?.href ?? 'https://your-ios-link.com');
     }
     if (isAndroid) {
-      return NextResponse.redirect('https://your-android-link.com');
+      return NextResponse.redirect(STORES.android?.link?.href!);
     }
   }
 
